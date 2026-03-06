@@ -1,0 +1,19 @@
+{
+    "id": "multilingual",
+    "name": "Voxar Multilingual Pro",
+    "description": "Enhanced accent and pronunciation for Indian languages and code-mixed text.",
+    "temperature": 0.5,
+    "length_penalty": 1.0,
+    "repetition_penalty": 8.0,
+    "top_k": 50,
+    "top_p": 0.85,
+    "speed": 1.0,
+    "max_chunk_size": 300,
+    "enable_text_splitting": true,
+    "credit_multiplier": 1.3,
+    "post_processing": {
+        "eq_preset": "clarity",
+        "compression": true,
+        "reverb": false
+    }
+}

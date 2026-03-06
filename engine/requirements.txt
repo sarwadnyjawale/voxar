@@ -1,0 +1,13 @@
+# VOXAR Engine Requirements
+# Python 3.10.x required
+
+# === ALREADY INSTALLED (do not reinstall) ===
+# torch (with CUDA)
+# TTS (Coqui TTS with XTTS v2)
+# numpy
+# scipy
+# pydub
+# noisereduce
+
+# === INSTALL IF MISSING ===
+soundfile>=0.12.0

@@ -1,0 +1,19 @@
+{
+    "id": "longform",
+    "name": "Voxar Longform",
+    "description": "Stable pacing for long narrations. Ideal for audiobooks and podcasts.",
+    "temperature": 0.5,
+    "length_penalty": 1.0,
+    "repetition_penalty": 8.0,
+    "top_k": 50,
+    "top_p": 0.85,
+    "speed": 1.0,
+    "max_chunk_size": 400,
+    "enable_text_splitting": true,
+    "credit_multiplier": 1.0,
+    "post_processing": {
+        "eq_preset": "clarity",
+        "compression": true,
+        "reverb": false
+    }
+}

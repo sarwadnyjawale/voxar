@@ -1,0 +1,159 @@
+{
+  "english": [
+    {
+      "characters": 50,
+      "duration": 4.87,
+      "generation_time": 4.1,
+      "total_time": 4.17,
+      "chunks_used": 1,
+      "file_size_kb": 228.1,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 12.2,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 100,
+      "duration": 9.55,
+      "generation_time": 6.01,
+      "total_time": 6.14,
+      "chunks_used": 1,
+      "file_size_kb": 447.6,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 16.6,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 250,
+      "duration": 18.4,
+      "generation_time": 11.61,
+      "total_time": 11.83,
+      "chunks_used": 1,
+      "file_size_kb": 862.7,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 21.5,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 500,
+      "duration": 36.94,
+      "generation_time": 22.03,
+      "total_time": 22.1,
+      "chunks_used": 2,
+      "file_size_kb": 1731.5,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 22.7,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 750,
+      "duration": 59.58,
+      "generation_time": 35.26,
+      "total_time": 35.38,
+      "chunks_used": 3,
+      "file_size_kb": 2792.8,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 21.3,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 1000,
+      "duration": 78.4,
+      "generation_time": 45.68,
+      "total_time": 45.78,
+      "chunks_used": 3,
+      "file_size_kb": 3674.9,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 21.9,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 1500,
+      "duration": 114.27,
+      "generation_time": 66.79,
+      "total_time": 66.98,
+      "chunks_used": 5,
+      "file_size_kb": 5356.5,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 22.5,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 2000,
+      "duration": 152.85,
+      "generation_time": 116.33,
+      "total_time": 116.56,
+      "chunks_used": 6,
+      "file_size_kb": 7164.9,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 17.2,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 3000,
+      "duration": 222.31,
+      "generation_time": 127.65,
+      "total_time": 127.9,
+      "chunks_used": 9,
+      "file_size_kb": 10421.1,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 23.5,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 5000,
+      "duration": 373.81,
+      "generation_time": 215.45,
+      "total_time": 216.08,
+      "chunks_used": 15,
+      "file_size_kb": 17522.5,
+      "vram_used_gb": 1.92,
+      "chars_per_second": 23.2,
+      "status": "SUCCESS"
+    }
+  ],
+  "hindi": [
+    {
+      "characters": 50,
+      "duration": 5.38,
+      "generation_time": 3.25,
+      "chunks_used": 1,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 100,
+      "duration": 8.31,
+      "generation_time": 4.93,
+      "chunks_used": 1,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 250,
+      "duration": 16.8,
+      "generation_time": 9.95,
+      "chunks_used": 1,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 500,
+      "duration": 30.35,
+      "generation_time": 17.87,
+      "chunks_used": 2,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 1000,
+      "duration": 63.35,
+      "generation_time": 37.01,
+      "chunks_used": 3,
+      "status": "SUCCESS"
+    },
+    {
+      "characters": 2000,
+      "duration": 109.9,
+      "generation_time": 63.3,
+      "chunks_used": 6,
+      "status": "SUCCESS"
+    }
+  ],
+  "timestamp": "2026-02-27 02:01:32"
+}

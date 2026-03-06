@@ -1,0 +1,19 @@
+{
+    "id": "cinematic",
+    "name": "Voxar Cinematic",
+    "description": "Studio-quality output with rich, dramatic delivery. Perfect for ads and trailers.",
+    "temperature": 0.3,
+    "length_penalty": 1.0,
+    "repetition_penalty": 10.0,
+    "top_k": 30,
+    "top_p": 0.8,
+    "speed": 0.95,
+    "max_chunk_size": 250,
+    "enable_text_splitting": true,
+    "credit_multiplier": 1.2,
+    "post_processing": {
+        "eq_preset": "warm",
+        "compression": true,
+        "reverb": true
+    }
+}

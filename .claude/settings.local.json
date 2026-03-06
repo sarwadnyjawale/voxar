@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(PYTHONIOENCODING=utf-8 python:*)",
+      "Bash(python:*)",
+      "Bash(mkdir:*)",
+      "WebSearch",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Bash(pip install:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest:*)",
+      "Bash(npx next:*)",
+      "Bash(npm run:*)",
+      "WebFetch(domain:elevenlabs.io)",
+      "Bash(npm create:*)",
+      "Bash(npx vite:*)",
+      "Bash(start:*)"
+    ]
+  }
+}

@@ -1,0 +1,946 @@
+[
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day4_en_long_flash.wav",
+    "file_name": "day4_en_long_flash.wav",
+    "file_size_kb": 2385.0,
+    "duration_seconds": 50.88,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.2,
+    "loudness_deviation": -0.2,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.4,
+    "dynamic_range_db": 101.4,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.21,
+    "noise_floor_db": -76.3,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day4_en_long_longform.wav",
+    "file_name": "day4_en_long_longform.wav",
+    "file_size_kb": 2340.4,
+    "duration_seconds": 49.93,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.3,
+    "loudness_deviation": -0.3,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.5,
+    "dynamic_range_db": 101.0,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.18,
+    "noise_floor_db": -70.7,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day4_hi_long_flash.wav",
+    "file_name": "day4_hi_long_flash.wav",
+    "file_size_kb": 1563.9,
+    "duration_seconds": 33.36,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.4,
+    "loudness_deviation": -0.4,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.8,
+    "dynamic_range_db": 101.4,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 590,
+    "silence_ratio": 0.2,
+    "noise_floor_db": -69.4,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "590ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day4_hi_long_longform.wav",
+    "file_name": "day4_hi_long_longform.wav",
+    "file_size_kb": 929.2,
+    "duration_seconds": 19.82,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -17.5,
+    "loudness_deviation": -1.5,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -17.8,
+    "dynamic_range_db": 101.4,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 610,
+    "silence_ratio": 0.21,
+    "noise_floor_db": -72.2,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "610ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day5_cross_sample_en.wav",
+    "file_name": "day5_cross_sample_en.wav",
+    "file_size_kb": 210.6,
+    "duration_seconds": 4.49,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.4,
+    "loudness_deviation": 0.6,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.2,
+    "dynamic_range_db": 98.7,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 540,
+    "silence_ratio": 0.4,
+    "noise_floor_db": -97.1,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "540ms dead air at end"
+      },
+      {
+        "type": "high_silence",
+        "severity": 3,
+        "description": "Silence: 40% (max 30%)"
+      }
+    ],
+    "problem_count": 3,
+    "score": 55,
+    "severity": "moderate"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day5_cross_sample_es.wav",
+    "file_name": "day5_cross_sample_es.wav",
+    "file_size_kb": 256.6,
+    "duration_seconds": 5.47,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.6,
+    "loudness_deviation": -0.6,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -17.2,
+    "dynamic_range_db": 99.6,
+    "is_clipping": true,
+    "leading_silence_ms": 30,
+    "trailing_silence_ms": 630,
+    "silence_ratio": 0.4,
+    "noise_floor_db": -93.1,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "630ms dead air at end"
+      },
+      {
+        "type": "high_silence",
+        "severity": 3,
+        "description": "Silence: 40% (max 30%)"
+      }
+    ],
+    "problem_count": 3,
+    "score": 55,
+    "severity": "moderate"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day5_cross_sample_fr.wav",
+    "file_name": "day5_cross_sample_fr.wav",
+    "file_size_kb": 215.1,
+    "duration_seconds": 4.59,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.4,
+    "loudness_deviation": 0.6,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.3,
+    "dynamic_range_db": 98.3,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 570,
+    "silence_ratio": 0.39,
+    "noise_floor_db": -98.6,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "570ms dead air at end"
+      },
+      {
+        "type": "high_silence",
+        "severity": 3,
+        "description": "Silence: 39% (max 30%)"
+      }
+    ],
+    "problem_count": 3,
+    "score": 55,
+    "severity": "moderate"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day5_cross_sample_hi.wav",
+    "file_name": "day5_cross_sample_hi.wav",
+    "file_size_kb": 254.6,
+    "duration_seconds": 5.43,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.9,
+    "loudness_deviation": 0.1,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -15.9,
+    "dynamic_range_db": 97.5,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.26,
+    "noise_floor_db": -85.0,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\day5_voice_sample_en.wav",
+    "file_name": "day5_voice_sample_en.wav",
+    "file_size_kb": 378.1,
+    "duration_seconds": 8.07,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.7,
+    "loudness_deviation": 0.3,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.1,
+    "dynamic_range_db": 103.5,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.24,
+    "noise_floor_db": -80.7,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\marathi_devanagari_hi.wav",
+    "file_name": "marathi_devanagari_hi.wav",
+    "file_size_kb": 252.1,
+    "duration_seconds": 5.38,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.8,
+    "loudness_deviation": 0.2,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.0,
+    "dynamic_range_db": 98.5,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 600,
+    "silence_ratio": 0.26,
+    "noise_floor_db": -84.1,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "600ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\marathi_devanagari_para_hi.wav",
+    "file_name": "marathi_devanagari_para_hi.wav",
+    "file_size_kb": 515.6,
+    "duration_seconds": 11.0,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -17.4,
+    "loudness_deviation": -1.4,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -17.3,
+    "dynamic_range_db": 100.5,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 620,
+    "silence_ratio": 0.12,
+    "noise_floor_db": -65.4,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "620ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\marathi_romanized_en.wav",
+    "file_name": "marathi_romanized_en.wav",
+    "file_size_kb": 269.6,
+    "duration_seconds": 5.75,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -17.0,
+    "loudness_deviation": -1.0,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -17.4,
+    "dynamic_range_db": 99.8,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 540,
+    "silence_ratio": 0.36,
+    "noise_floor_db": -84.7,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "540ms dead air at end"
+      },
+      {
+        "type": "high_silence",
+        "severity": 3,
+        "description": "Silence: 36% (max 30%)"
+      }
+    ],
+    "problem_count": 3,
+    "score": 55,
+    "severity": "moderate"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_100.wav",
+    "file_name": "stress_en_100.wav",
+    "file_size_kb": 447.6,
+    "duration_seconds": 9.55,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.9,
+    "loudness_deviation": 0.1,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.0,
+    "dynamic_range_db": 98.1,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.14,
+    "noise_floor_db": -67.7,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_1000.wav",
+    "file_name": "stress_en_1000.wav",
+    "file_size_kb": 3674.9,
+    "duration_seconds": 78.4,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.3,
+    "loudness_deviation": -0.3,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.5,
+    "dynamic_range_db": 108.1,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 560,
+    "silence_ratio": 0.17,
+    "noise_floor_db": -57.1,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "560ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_1500.wav",
+    "file_name": "stress_en_1500.wav",
+    "file_size_kb": 5356.5,
+    "duration_seconds": 114.27,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.9,
+    "loudness_deviation": 0.1,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.2,
+    "dynamic_range_db": 100.5,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 590,
+    "silence_ratio": 0.18,
+    "noise_floor_db": -61.2,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "590ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_2000.wav",
+    "file_name": "stress_en_2000.wav",
+    "file_size_kb": 7164.9,
+    "duration_seconds": 152.85,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.1,
+    "loudness_deviation": -0.1,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.4,
+    "dynamic_range_db": 108.4,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.19,
+    "noise_floor_db": -65.8,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_250.wav",
+    "file_name": "stress_en_250.wav",
+    "file_size_kb": 862.7,
+    "duration_seconds": 18.4,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.5,
+    "loudness_deviation": -0.5,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.9,
+    "dynamic_range_db": 100.5,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 600,
+    "silence_ratio": 0.18,
+    "noise_floor_db": -69.4,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "600ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_3000.wav",
+    "file_name": "stress_en_3000.wav",
+    "file_size_kb": 10421.1,
+    "duration_seconds": 222.31,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.3,
+    "loudness_deviation": -0.3,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.6,
+    "dynamic_range_db": 110.4,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.18,
+    "noise_floor_db": -59.8,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_50.wav",
+    "file_name": "stress_en_50.wav",
+    "file_size_kb": 228.1,
+    "duration_seconds": 4.87,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.6,
+    "loudness_deviation": 0.4,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.0,
+    "dynamic_range_db": 97.4,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 570,
+    "silence_ratio": 0.27,
+    "noise_floor_db": -89.3,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "570ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_500.wav",
+    "file_name": "stress_en_500.wav",
+    "file_size_kb": 1731.5,
+    "duration_seconds": 36.94,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.6,
+    "loudness_deviation": 0.4,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -15.9,
+    "dynamic_range_db": 100.4,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 590,
+    "silence_ratio": 0.18,
+    "noise_floor_db": -60.0,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "590ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_5000.wav",
+    "file_name": "stress_en_5000.wav",
+    "file_size_kb": 17522.5,
+    "duration_seconds": 373.81,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.2,
+    "loudness_deviation": -0.2,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.5,
+    "dynamic_range_db": 107.0,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 570,
+    "silence_ratio": 0.18,
+    "noise_floor_db": -58.7,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "570ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_en_750.wav",
+    "file_name": "stress_en_750.wav",
+    "file_size_kb": 2792.8,
+    "duration_seconds": 59.58,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -15.4,
+    "loudness_deviation": 0.6,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -15.8,
+    "dynamic_range_db": 99.9,
+    "is_clipping": true,
+    "leading_silence_ms": 10,
+    "trailing_silence_ms": 560,
+    "silence_ratio": 0.18,
+    "noise_floor_db": -57.7,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "560ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_hi_100.wav",
+    "file_name": "stress_hi_100.wav",
+    "file_size_kb": 389.6,
+    "duration_seconds": 8.31,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.4,
+    "loudness_deviation": -0.4,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.4,
+    "dynamic_range_db": 96.7,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 580,
+    "silence_ratio": 0.17,
+    "noise_floor_db": -81.0,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "580ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_hi_1000.wav",
+    "file_name": "stress_hi_1000.wav",
+    "file_size_kb": 2969.4,
+    "duration_seconds": 63.35,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -17.5,
+    "loudness_deviation": -1.5,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -17.9,
+    "dynamic_range_db": 100.6,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 560,
+    "silence_ratio": 0.21,
+    "noise_floor_db": -70.8,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "560ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_hi_2000.wav",
+    "file_name": "stress_hi_2000.wav",
+    "file_size_kb": 5151.6,
+    "duration_seconds": 109.9,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -17.7,
+    "loudness_deviation": -1.7,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -17.8,
+    "dynamic_range_db": 103.0,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 600,
+    "silence_ratio": 0.17,
+    "noise_floor_db": -67.1,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "600ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_hi_250.wav",
+    "file_name": "stress_hi_250.wav",
+    "file_size_kb": 787.6,
+    "duration_seconds": 16.8,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -17.5,
+    "loudness_deviation": -1.5,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -17.6,
+    "dynamic_range_db": 99.3,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 590,
+    "silence_ratio": 0.15,
+    "noise_floor_db": -61.2,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "590ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_hi_50.wav",
+    "file_name": "stress_hi_50.wav",
+    "file_size_kb": 252.1,
+    "duration_seconds": 5.38,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -16.1,
+    "loudness_deviation": -0.1,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -16.2,
+    "dynamic_range_db": 99.0,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 560,
+    "silence_ratio": 0.2,
+    "noise_floor_db": -72.0,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "560ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  },
+  {
+    "file_path": "D:\\My Projects\\VOXAR1\\output\\stress_hi_500.wav",
+    "file_name": "stress_hi_500.wav",
+    "file_size_kb": 1422.7,
+    "duration_seconds": 30.35,
+    "sample_rate": 24000,
+    "channels": 1,
+    "loudness_lufs": -18.1,
+    "loudness_deviation": -2.1,
+    "peak_dbfs": -0.0,
+    "rms_dbfs": -18.2,
+    "dynamic_range_db": 102.1,
+    "is_clipping": true,
+    "leading_silence_ms": 0,
+    "trailing_silence_ms": 570,
+    "silence_ratio": 0.19,
+    "noise_floor_db": -69.7,
+    "problems": [
+      {
+        "type": "clipping",
+        "severity": 4,
+        "description": "Clipping detected (peak: -0.0 dBFS)"
+      },
+      {
+        "type": "trailing_silence",
+        "severity": 2,
+        "description": "570ms dead air at end"
+      }
+    ],
+    "problem_count": 2,
+    "score": 70,
+    "severity": "minor"
+  }
+]

@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOXAR | Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-base: #030008;
+            --bg-elevated: #0a0710;
+            --bg-surface: #0d0a14;
+            --bg-card: rgba(255,255,255,0.02);
+            --cube-face-bg: #05010a;
+            --cube-border: rgba(255, 255, 255, 0.02);
+            --accent-primary: #8B5CF6;
+            --accent-secondary: #A78BFA;
+            --accent-tertiary: #C4B5FD;
+            --accent-glow: #8B5CF6;
+            --accent-glow-dim: rgba(139, 92, 246, 0.15);
+            --accent-glow-bright: rgba(139, 92, 246, 0.4);
+            --accent-green: #22c55e;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --text-main: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --text-dim: rgba(255, 255, 255, 0.15);
+            --nav-bg: rgba(3, 0, 8, 0.88);
+            --line-color: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-border-hover: rgba(255, 255, 255, 0.12);
+            --input-bg: rgba(255,255,255,0.04);
+            --input-border: rgba(255,255,255,0.08);
+            --input-focus: rgba(139, 92, 246, 0.5);
+            --sidebar-width: 260px;
+            --topbar-height: 60px;
+            --transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        ::selection { background: var(--accent-primary); color: white; }
+
+        /* ============================================
+           SHARED: CUBE WALL BACKGROUND
+           ============================================ */
+        #cube-scene-shared {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0; display: grid; perspective: 1200px;
+            mask-image: radial-gradient(circle at center, black 5%, transparent 75%);
+            -webkit-mask-image: radial-gradient(circle at center, black 5%, transparent 75%);
+            pointer-events: none; opacity: 0.6;
+        }
+        .s-cube { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; will-change: transform; }
+        .s-cube-face {
+            position: absolute; width: 100%; height: 100%; background: var(--cube-face-bg);
+            border: 1px solid var(--cube-border); backface-visibility: hidden;
+        }
+        .s-cube-face--front  { transform: translateZ(var(--half-size)); }
+        .s-cube-face--back   { transform: rotateY(180deg) translateZ(var(--half-size)); }
+        .s-cube-face--right  { transform: rotateY(90deg) translateZ(var(--half-size)); }
+        .s-cube-face--left   { transform: rotateY(-90deg) translateZ(var(--half-size)); }
+        .s-cube-face--top    { transform: rotateX(90deg) translateZ(var(--half-size)); }
+        .s-cube-face--bottom { transform: rotateX(-90deg) translateZ(var(--half-size)); }
+
+        /* Ambient orb */
+        .ambient-orb-shared {
+            position: fixed; width: 900px; height: 900px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
+            top: 30%; left: 50%; transform: translate(-50%, -50%);
+            animation: orbFloatShared 20s ease-in-out infinite;
+        }
+        @keyframes orbFloatShared {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-48%, -52%) scale(1.05); }
+        }
+
+        /* ============================================
+           PAGE ROUTER — Show/Hide Views
+           ============================================ */
+        .page-view {
+            display: none;
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+        }
+        .page-view.active {
+            display: block;
+        }
+        .page-view.active-flex {
+            display: flex;
+        }
+
+        /* ============================================
+           SHARED NAV (for Pricing & Login)
+           ============================================ */
+        .shared-nav {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 48px; background: var(--nav-bg);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid var(--line-color);
+            transition: all 0.4s var(--transition-smooth);
+        }
+        .shared-nav.scrolled { padding: 14px 48px; box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+
+        .nav-logo { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; }
+        .nav-logo svg { transition: filter 0.3s ease; }
+        .nav-logo:hover svg { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)); }
+        .nav-logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.04em; color: var(--text-main); }
+
+        .nav-controls { display: flex; align-items: center; gap: 8px; }
+
+        .nav-link {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--text-muted); cursor: pointer;
+            transition: color 0.3s ease; padding: 8px 16px; border-radius: 8px;
+            text-decoration: none; position: relative;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: var(--accent-primary); transform: scaleX(0);
+            transition: transform 0.3s var(--transition-smooth);
+        }
+        .nav-link:hover { color: var(--text-main); }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .nav-link.active-link { color: var(--text-main); }
+        .nav-link.active-link::after { transform: scaleX(1); }
+
+        .nav-divider { width: 1px; height: 20px; background: var(--line-color); margin: 0 8px; }
+
+        .icon-btn {
+            background: transparent; border: 1px solid transparent; color: var(--text-muted);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; width: 40px; height: 40px; border-radius: 10px;
+        }
+        .icon-btn:hover { color: var(--text-main); background: var(--glass-bg); border-color: var(--glass-border); }
+
+        .electric-btn {
+            position: relative; padding: 11px 28px; border-radius: 12px; background: transparent;
+            color: var(--text-main); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px;
+            cursor: pointer; border: none; overflow: hidden; display: inline-flex;
+            align-items: center; justify-content: center; gap: 8px; z-index: 1;
+        }
+        .electric-btn::before {
+            content: ''; position: absolute; width: 300%; height: 300%;
+            background: conic-gradient(transparent, transparent, transparent, var(--accent-primary));
+            animation: rotateBorder 4s linear infinite; z-index: -2;
+        }
+        .electric-btn::after {
+            content: ''; position: absolute; inset: 1.5px; background: var(--bg-base);
+            border-radius: 11px; z-index: -1;
+        }
+        @keyframes rotateBorder { 100% { transform: rotate(360deg); } }
+
+        .btn-pulse { width: 6px; height: 6px; background: var(--accent-primary); border-radius: 50%; animation: pulse 2s infinite; box-shadow: 0 0 8px var(--accent-primary); }
+        @keyframes pulse { 0%,100% { opacity:1; transform: scale(1); } 50% { opacity:0.5; transform:scale(0.7); } }
+
+        /* Section utility */
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-primary);
+            text-transform: uppercase; letter-spacing: 0.2em; display: inline-flex;
+            align-items: center; gap: 16px;
+        }
+        .section-tag::after { content: ''; width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.5; }
+
+        /* ============================================
+           PAGE 1: PRICING
+           ============================================ */
+        #pricing-page {
+            padding-top: 140px;
+            padding-bottom: 120px;
+        }
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .pricing-badge {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-primary);
+            letter-spacing: 0.2em; margin-bottom: 24px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(139,92,246,0.04) 100%);
+            padding: 10px 24px; border-radius: 100px; display: inline-flex; align-items: center; gap: 10px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.08);
+        }
+        .pricing-title {
+            font-size: clamp(36px, 6vw, 64px); font-weight: 900;
+            letter-spacing: -0.05em; line-height: 1; margin-bottom: 16px;
+        }
+        .pricing-subtitle {
+            font-size: 16px; color: var(--text-muted); max-width: 480px; margin: 0 auto; line-height: 1.6;
+        }
+
+        /* Toggle */
+        .pricing-toggle-wrap {
+            display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 64px;
+        }
+        .toggle-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+            cursor: pointer; transition: color 0.3s ease;
+        }
+        .toggle-label.active-toggle { color: var(--text-main); }
+        .toggle-track {
+            width: 52px; height: 28px; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 100px;
+            cursor: pointer; position: relative; transition: all 0.3s ease;
+        }
+        .toggle-track.yearly { background: rgba(139, 92, 246, 0.15); border-color: rgba(139,92,246,0.3); }
+        .toggle-thumb {
+            width: 22px; height: 22px; background: var(--text-main); border-radius: 50%;
+            position: absolute; top: 2px; left: 2px; transition: all 0.3s var(--transition-smooth);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .toggle-track.yearly .toggle-thumb {
+            left: 26px; background: var(--accent-primary);
+            box-shadow: 0 0 12px var(--accent-primary);
+        }
+        .save-badge {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            background: rgba(34, 197, 94, 0.15); color: var(--accent-green);
+            padding: 4px 10px; border-radius: 100px; border: 1px solid rgba(34,197,94,0.3);
+            letter-spacing: 0.08em; opacity: 0; transform: translateX(-8px);
+            transition: all 0.3s var(--transition-smooth);
+        }
+        .save-badge.visible { opacity: 1; transform: translateX(0); }
+
+        /* Cards Grid */
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+            border-radius: 20px; overflow: hidden; background: var(--line-color);
+        }
+
+        .pricing-card {
+            background: var(--bg-base); padding: 48px 36px;
+            position: relative; overflow: hidden;
+            transition: all 0.5s var(--transition-smooth);
+        }
+        /* TrueFocus */
+        .pricing-grid:hover .pricing-card {
+            filter: blur(3px) saturate(0.4); opacity: 0.35;
+        }
+        .pricing-grid .pricing-card:hover {
+            filter: blur(0) saturate(1); opacity: 1;
+        }
+
+        .pricing-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px; background: var(--line-color); transition: all 0.4s ease;
+        }
+        .pricing-card:hover::before { background: var(--accent-primary); box-shadow: 0 0 20px var(--accent-glow-dim); }
+
+        /* Highlighted Card */
+        .pricing-card.highlighted {
+            background: rgba(139, 92, 246, 0.04);
+        }
+        .pricing-card.highlighted::before {
+            background: var(--accent-primary); height: 3px;
+            box-shadow: 0 0 30px var(--accent-glow-dim);
+        }
+        .pricing-card.highlighted::after {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .popular-tag {
+            position: absolute; top: 16px; right: 16px;
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            background: var(--accent-primary); color: white; padding: 5px 12px;
+            border-radius: 100px; box-shadow: 0 0 20px var(--accent-glow-dim);
+            z-index: 2;
+        }
+
+        .card-tier-icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 24px; color: var(--text-muted); transition: all 0.3s ease;
+        }
+        .pricing-card:hover .card-tier-icon {
+            color: var(--accent-primary); border-color: rgba(139,92,246,0.3);
+            background: rgba(139,92,246,0.08); box-shadow: 0 0 20px var(--accent-glow-dim);
+        }
+        .pricing-card.highlighted .card-tier-icon {
+            color: var(--accent-primary); border-color: rgba(139,92,246,0.3);
+            background: rgba(139,92,246,0.1);
+        }
+
+        .card-tier-name {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .card-tier-title {
+            font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;
+        }
+        .card-price {
+            display: flex; align-items: baseline; gap: 4px; margin-bottom: 8px;
+        }
+        .price-amount {
+            font-size: 48px; font-weight: 900; letter-spacing: -0.04em;
+            background: linear-gradient(135deg, var(--text-main), var(--accent-secondary));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .price-period { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+        .price-note { font-size: 12px; color: var(--text-dim); margin-bottom: 32px; }
+
+        .card-cta {
+            width: 100%; padding: 14px 24px; border-radius: 12px; font-family: 'Inter', sans-serif;
+            font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.3s var(--transition-smooth);
+            margin-bottom: 32px; border: none; letter-spacing: 0.01em;
+        }
+        .card-cta-outline {
+            background: transparent; color: var(--text-main);
+            border: 1px solid var(--glass-border);
+        }
+        .card-cta-outline:hover {
+            border-color: var(--accent-primary); background: rgba(139,92,246,0.06);
+            transform: translateY(-2px); box-shadow: 0 4px 20px var(--accent-glow-dim);
+        }
+        .card-cta-filled {
+            background: var(--accent-primary); color: white;
+            box-shadow: 0 4px 20px rgba(139,92,246,0.4);
+        }
+        .card-cta-filled:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,92,246,0.5);
+        }
+        .card-cta-enterprise {
+            background: transparent; color: var(--text-main);
+            border: 1px solid var(--glass-border);
+        }
+        .card-cta-enterprise:hover {
+            border-color: var(--text-muted); background: var(--glass-bg);
+            transform: translateY(-2px);
+        }
+
+        .features-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+        .feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .feature-item {
+            display: flex; align-items: center; gap: 12px; font-size: 13px;
+            color: var(--text-secondary); line-height: 1.4;
+        }
+        .feature-icon {
+            width: 18px; height: 18px; min-width: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(34,197,94,0.1); color: var(--accent-green);
+        }
+        .feature-icon.pro { background: rgba(139,92,246,0.1); color: var(--accent-primary); }
+
+        /* Pricing Footer */
+        .pricing-footer {
+            text-align: center; margin-top: 64px; padding-top: 40px;
+            border-top: 1px solid var(--line-color);
+        }
+        .pricing-footer p {
+            font-size: 13px; color: var(--text-muted); line-height: 1.6;
+        }
+        .pricing-footer a {
+            color: var(--accent-primary); text-decoration: none;
+            border-bottom: 1px solid rgba(139,92,246,0.3);
+            transition: border-color 0.2s ease;
+        }
+        .pricing-footer a:hover { border-color: var(--accent-primary); }
+
+        /* ============================================
+           PAGE 2: LOGIN / AUTH
+           ============================================ */
+        #login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        #login-page.active-flex { display: flex; }
+
+        .login-card {
+            width: 100%; max-width: 420px;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 48px 40px;
+            backdrop-filter: blur(40px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            position: relative; overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 0 var(--accent-glow-dim);
+            transition: box-shadow 0.4s ease;
+        }
+        .login-card:hover {
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 60px var(--accent-glow-dim);
+        }
+        .login-card::before {
+            content: ''; position: absolute; top: -1px; left: 20%; right: 20%;
+            height: 2px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            border-radius: 4px;
+        }
+        .login-card::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 50% -20%, rgba(139,92,246,0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .login-logo {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            margin-bottom: 40px; position: relative; z-index: 1;
+        }
+        .login-logo svg { filter: drop-shadow(0 0 16px rgba(139,92,246,0.4)); }
+        .login-logo-text { font-size: 24px; font-weight: 900; letter-spacing: -0.04em; }
+
+        .login-heading {
+            text-align: center; margin-bottom: 8px; font-size: 22px; font-weight: 700;
+            letter-spacing: -0.02em; position: relative; z-index: 1;
+        }
+        .login-subheading {
+            text-align: center; font-size: 13px; color: var(--text-muted);
+            margin-bottom: 36px; position: relative; z-index: 1; line-height: 1.5;
+        }
+
+        .login-form { position: relative; z-index: 1; }
+
+        .input-group { margin-bottom: 20px; }
+        .input-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted);
+            margin-bottom: 8px; display: block;
+        }
+        .input-field {
+            width: 100%; padding: 14px 16px; background: var(--input-bg);
+            border: 1px solid var(--input-border); border-radius: 12px;
+            color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 14px;
+            outline: none; transition: all 0.3s var(--transition-smooth);
+        }
+        .input-field::placeholder { color: var(--text-dim); }
+        .input-field:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow-dim), 0 0 20px rgba(139,92,246,0.1);
+            background: rgba(139,92,246,0.04);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+        .input-with-icon .input-field { padding-left: 44px; }
+        .input-with-icon .input-icon-left {
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            color: var(--text-dim); pointer-events: none; transition: color 0.3s ease;
+        }
+        .input-with-icon:focus-within .input-icon-left { color: var(--accent-primary); }
+
+        .input-with-icon .input-icon-right {
+            position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+            color: var(--text-dim); cursor: pointer; transition: color 0.3s ease;
+            background: none; border: none;
+        }
+        .input-with-icon .input-icon-right:hover { color: var(--text-muted); }
+
+        .forgot-link {
+            display: block; text-align: right; font-size: 12px; color: var(--accent-primary);
+            text-decoration: none; margin-top: -12px; margin-bottom: 24px;
+            transition: color 0.2s ease;
+        }
+        .forgot-link:hover { color: var(--accent-secondary); }
+
+        .login-btn {
+            width: 100%; padding: 15px 24px; background: var(--accent-primary);
+            color: white; border: none; border-radius: 12px; font-family: 'Inter', sans-serif;
+            font-weight: 700; font-size: 14px; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(139,92,246,0.4);
+            transition: all 0.3s var(--transition-smooth);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            position: relative; overflow: hidden;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139,92,246,0.5);
+        }
+        .login-btn:active { transform: translateY(0) scale(0.98); }
+        .login-btn::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.08), transparent);
+            transform: rotate(45deg) translateX(-100%); transition: transform 0.6s;
+        }
+        .login-btn:hover::after { transform: rotate(45deg) translateX(100%); }
+
+        .divider-row {
+            display: flex; align-items: center; gap: 16px;
+            margin: 28px 0;
+        }
+        .divider-line { flex: 1; height: 1px; background: var(--line-color); }
+        .divider-text {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase;
+        }
+
+        .social-btn {
+            width: 100%; padding: 13px 24px; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 12px;
+            color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 13px;
+            font-weight: 600; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; gap: 10px; transition: all 0.3s var(--transition-smooth);
+            margin-bottom: 12px;
+        }
+        .social-btn:hover {
+            border-color: var(--glass-border-hover); background: rgba(255,255,255,0.05);
+            transform: translateY(-1px);
+        }
+        .social-btn svg { width: 18px; height: 18px; }
+
+        .login-footer {
+            text-align: center; margin-top: 32px; font-size: 12px; color: var(--text-dim);
+        }
+        .login-footer a {
+            color: var(--accent-primary); text-decoration: none;
+            border-bottom: 1px solid transparent; transition: border-color 0.2s ease;
+        }
+        .login-footer a:hover { border-bottom-color: var(--accent-primary); }
+
+        .login-terms {
+            text-align: center; margin-top: 20px; font-size: 10px; color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .login-terms a { color: var(--text-muted); text-decoration: none; }
+        .login-terms a:hover { color: var(--text-main); }
+
+        /* ============================================
+           PAGE 3: DASHBOARD
+           ============================================ */
+        #dashboard-page {
+            min-height: 100vh;
+        }
+        #dashboard-page.active-flex { display: flex; }
+
+        .dash-layout {
+            display: flex; width: 100%; min-height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .dash-sidebar {
+            width: var(--sidebar-width); min-height: 100vh; background: rgba(5,1,10,0.95);
+            border-right: 1px solid var(--line-color);
+            display: flex; flex-direction: column; position: fixed; left: 0; top: 0;
+            z-index: 100; backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .sidebar-header {
+            padding: 20px 24px; display: flex; align-items: center; gap: 12px;
+            border-bottom: 1px solid var(--line-color); cursor: pointer;
+        }
+        .sidebar-header svg { filter: drop-shadow(0 0 10px rgba(139,92,246,0.3)); }
+        .sidebar-brand { font-size: 18px; font-weight: 900; letter-spacing: -0.04em; }
+
+        .sidebar-section {
+            padding: 24px 16px 8px; display: flex; flex-direction: column; gap: 2px;
+        }
+        .sidebar-section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim);
+            padding: 0 12px; margin-bottom: 8px;
+        }
+        .sidebar-item {
+            display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+            border-radius: 10px; cursor: pointer; transition: all 0.2s ease;
+            color: var(--text-muted); font-size: 13px; font-weight: 500;
+            position: relative;
+        }
+        .sidebar-item:hover { background: var(--glass-bg); color: var(--text-main); }
+        .sidebar-item.active-item {
+            background: rgba(139,92,246,0.08); color: var(--text-main);
+            border: 1px solid rgba(139,92,246,0.15);
+        }
+        .sidebar-item.active-item::before {
+            content: ''; position: absolute; left: -16px; top: 50%; transform: translateY(-50%);
+            width: 3px; height: 20px; background: var(--accent-primary); border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 10px var(--accent-glow-dim);
+        }
+        .sidebar-item i { width: 18px; height: 18px; }
+
+        .sidebar-item-badge {
+            margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            padding: 2px 8px; border-radius: 100px; letter-spacing: 0.05em;
+        }
+        .badge-new { background: rgba(139,92,246,0.15); color: var(--accent-primary); }
+        .badge-count { background: var(--glass-bg); color: var(--text-dim); border: 1px solid var(--glass-border); }
+
+        .sidebar-footer {
+            margin-top: auto; padding: 16px; border-top: 1px solid var(--line-color);
+        }
+        .sidebar-credits {
+            display: flex; align-items: center; gap: 12px; padding: 12px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 12px; margin-bottom: 12px;
+        }
+        .credits-icon {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(139,92,246,0.05));
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent-primary);
+        }
+        .credits-info { flex: 1; }
+        .credits-label { font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+        .credits-value { font-size: 14px; font-weight: 700; margin-top: 2px; }
+        .credits-bar-track {
+            width: 100%; height: 3px; background: var(--glass-bg); border-radius: 4px;
+            margin-top: 6px; overflow: hidden;
+        }
+        .credits-bar-fill {
+            height: 100%; width: 68%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 4px; box-shadow: 0 0 8px var(--accent-glow-dim);
+        }
+
+        .sidebar-user {
+            display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+            border-radius: 10px; cursor: pointer; transition: background 0.2s ease;
+        }
+        .sidebar-user:hover { background: var(--glass-bg); }
+        .sidebar-avatar {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, #a78bfa, #6d28d9, #4c1d95);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 14px; color: white;
+            border: 1px solid rgba(139,92,246,0.3);
+        }
+        .sidebar-user-info { flex: 1; }
+        .sidebar-user-name { font-size: 13px; font-weight: 600; }
+        .sidebar-user-plan {
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            color: var(--accent-primary); letter-spacing: 0.1em; text-transform: uppercase;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .dash-main {
+            flex: 1; margin-left: var(--sidebar-width);
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* TOPBAR */
+        .dash-topbar {
+            height: var(--topbar-height); display: flex; align-items: center;
+            justify-content: space-between; padding: 0 32px;
+            border-bottom: 1px solid var(--line-color); background: rgba(3,0,8,0.6);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            position: sticky; top: 0; z-index: 50;
+        }
+        .topbar-left { display: flex; align-items: center; gap: 16px; }
+        .topbar-breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            color: var(--text-muted); letter-spacing: 0.05em;
+        }
+        .breadcrumb-sep { color: var(--text-dim); }
+        .breadcrumb-current { color: var(--text-main); }
+
+        .topbar-right { display: flex; align-items: center; gap: 12px; }
+        .topbar-status {
+            display: flex; align-items: center; gap: 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 6px 14px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 100px;
+        }
+        .status-dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); animation: pulse 2s infinite; }
+        .status-dot.warning { background: var(--accent-amber); box-shadow: 0 0 8px var(--accent-amber); }
+
+        /* --- WORKSPACE --- */
+        .dash-workspace {
+            flex: 1; display: flex; overflow: hidden;
+        }
+
+        /* LEFT: Editor + Waveform */
+        .workspace-editor {
+            flex: 1; display: flex; flex-direction: column;
+            border-right: 1px solid var(--line-color);
+        }
+
+        /* Editor Header */
+        .editor-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 24px; border-bottom: 1px solid var(--line-color);
+        }
+        .editor-tabs { display: flex; gap: 2px; }
+        .editor-tab {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            padding: 8px 16px; border-radius: 8px 8px 0 0; cursor: pointer;
+            color: var(--text-muted); transition: all 0.2s ease;
+            border: 1px solid transparent; border-bottom: none;
+            letter-spacing: 0.05em;
+        }
+        .editor-tab:hover { color: var(--text-main); background: var(--glass-bg); }
+        .editor-tab.active-tab {
+            color: var(--text-main); background: var(--bg-base);
+            border-color: var(--line-color);
+        }
+        .editor-actions { display: flex; gap: 8px; }
+
+        .action-btn {
+            padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 600;
+            cursor: pointer; display: flex; align-items: center; gap: 6px;
+            transition: all 0.2s var(--transition-smooth); border: none;
+            font-family: 'Inter', sans-serif;
+        }
+        .action-btn-ghost {
+            background: transparent; color: var(--text-muted);
+            border: 1px solid var(--glass-border);
+        }
+        .action-btn-ghost:hover {
+            color: var(--text-main); border-color: var(--glass-border-hover);
+            background: var(--glass-bg);
+        }
+        .action-btn-primary {
+            background: var(--accent-primary); color: white;
+            box-shadow: 0 2px 12px rgba(139,92,246,0.3);
+        }
+        .action-btn-primary:hover {
+            transform: translateY(-1px); box-shadow: 0 4px 20px rgba(139,92,246,0.4);
+        }
+
+        /* Text Editor */
+        .editor-body {
+            flex: 1; display: flex; flex-direction: column;
+        }
+        .code-editor {
+            flex: 1; display: flex; padding: 0;
+            font-family: 'JetBrains Mono', monospace; font-size: 14px;
+            line-height: 1.8; min-height: 280px;
+        }
+        .line-numbers {
+            width: 56px; padding: 24px 0; text-align: right;
+            color: var(--text-dim); font-size: 12px; line-height: 1.8;
+            border-right: 1px solid var(--line-color); user-select: none;
+            display: flex; flex-direction: column; padding-right: 16px;
+        }
+        .line-num {
+            transition: color 0.2s ease;
+        }
+        .text-area-wrap {
+            flex: 1; position: relative;
+        }
+        .text-area-wrap textarea {
+            width: 100%; height: 100%; padding: 24px; background: transparent;
+            border: none; outline: none; color: var(--text-main); resize: none;
+            font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.8;
+            caret-color: var(--accent-primary);
+        }
+        .text-area-wrap textarea::placeholder { color: var(--text-dim); }
+
+        .editor-status {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 24px; border-top: 1px solid var(--line-color);
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            color: var(--text-dim); letter-spacing: 0.08em;
+        }
+        .editor-status-left, .editor-status-right { display: flex; gap: 16px; align-items: center; }
+        .status-indicator {
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* Waveform Section */
+        .waveform-section {
+            border-top: 1px solid var(--line-color);
+            background: rgba(0,0,0,0.3);
+        }
+        .waveform-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 24px; border-bottom: 1px solid var(--line-color);
+        }
+        .waveform-title-area {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .waveform-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted);
+        }
+        .waveform-time {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            color: var(--accent-primary); padding: 3px 10px;
+            background: rgba(139,92,246,0.08); border-radius: 6px;
+            border: 1px solid rgba(139,92,246,0.15);
+        }
+        .waveform-controls {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .wave-ctrl-btn {
+            width: 32px; height: 32px; border-radius: 8px; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); color: var(--text-muted);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .wave-ctrl-btn:hover { color: var(--text-main); border-color: var(--glass-border-hover); }
+        .wave-ctrl-btn.play-btn {
+            background: var(--accent-primary); border-color: var(--accent-primary);
+            color: white; box-shadow: 0 0 16px var(--accent-glow-dim);
+        }
+        .wave-ctrl-btn.play-btn:hover { box-shadow: 0 0 24px var(--accent-glow-bright); }
+
+        .waveform-canvas {
+            height: 100px; padding: 16px 24px; display: flex; align-items: center;
+            gap: 1.5px; overflow: hidden; cursor: pointer;
+        }
+        .wave-bar {
+            flex: 1; min-width: 2px; background: var(--line-color); border-radius: 2px;
+            transition: background 0.15s ease, height 0.3s ease;
+        }
+        .wave-bar.active { background: var(--accent-primary); box-shadow: 0 0 4px var(--accent-glow-dim); }
+        .wave-bar:hover { background: var(--accent-secondary); }
+
+        /* Timeline */
+        .timeline-ruler {
+            display: flex; justify-content: space-between; padding: 0 24px 12px;
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            color: var(--text-dim); letter-spacing: 0.08em;
+        }
+
+        /* --- RIGHT PANEL: Engine Select + HUD --- */
+        .workspace-panel {
+            width: 320px; display: flex; flex-direction: column;
+            background: rgba(5,1,10,0.4);
+        }
+
+        .panel-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--line-color);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .panel-title {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+        }
+
+        /* Engine Selector */
+        .engine-selector {
+            padding: 16px; display: flex; flex-direction: column; gap: 4px;
+        }
+        .engine-option {
+            display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+            border-radius: 10px; cursor: pointer; transition: all 0.2s ease;
+            border: 1px solid transparent; position: relative;
+        }
+        .engine-option:hover { background: var(--glass-bg); }
+        .engine-option.selected {
+            background: rgba(139,92,246,0.06);
+            border-color: rgba(139,92,246,0.2);
+        }
+        .engine-option.selected::before {
+            content: ''; position: absolute; left: -1px; top: 20%; bottom: 20%;
+            width: 2px; background: var(--accent-primary); border-radius: 0 2px 2px 0;
+            box-shadow: 0 0 8px var(--accent-glow-dim);
+        }
+        .engine-opt-icon {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); transition: all 0.2s ease;
+        }
+        .engine-option.selected .engine-opt-icon {
+            background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.3);
+            color: var(--accent-primary); box-shadow: 0 0 12px var(--accent-glow-dim);
+        }
+        .engine-opt-info { flex: 1; }
+        .engine-opt-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .engine-opt-desc { font-size: 10px; color: var(--text-dim); }
+        .engine-opt-status {
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            color: var(--accent-green); letter-spacing: 0.08em;
+        }
+
+        /* HUD in Panel */
+        .panel-hud-section {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            padding: 24px; position: relative;
+        }
+        .panel-hud {
+            width: 200px; height: 200px; position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .p-hud-ring {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            border-radius: 50%; border: 1px solid var(--line-color);
+        }
+        .p-ring-1 {
+            width: 100%; height: 100%;
+            border-top: 2px solid var(--accent-primary);
+            border-right: 1px solid rgba(139,92,246,0.3);
+            animation: spinHud 10s linear infinite;
+            box-shadow: 0 0 20px var(--accent-glow-dim);
+        }
+        .p-ring-2 {
+            width: 70%; height: 70%;
+            border-bottom: 2px solid var(--accent-secondary);
+            animation: spinHud reverse 7s linear infinite;
+        }
+        .p-ring-3 {
+            width: 42%; height: 42%;
+            border-left: 1px dashed rgba(139,92,246,0.4);
+            animation: spinHud 16s linear infinite;
+        }
+        @keyframes spinHud { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+        .p-hud-core {
+            width: 60px; height: 60px; border-radius: 50%; z-index: 2;
+            background: radial-gradient(circle, rgba(139,92,246,0.15), rgba(139,92,246,0.05));
+            border: 1px solid rgba(139,92,246,0.25);
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px var(--accent-glow-dim);
+        }
+        .p-hud-inner {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: var(--accent-primary); display: flex;
+            align-items: center; justify-content: center;
+            box-shadow: 0 0 20px var(--accent-glow-bright);
+        }
+        .p-hud-inner i { color: var(--bg-base); }
+
+        .panel-hud-readout {
+            position: absolute; font-family: 'JetBrains Mono', monospace;
+            font-size: 8px; color: var(--text-dim); letter-spacing: 0.1em;
+        }
+        .phr-tl { top: 8px; left: 8px; }
+        .phr-tr { top: 8px; right: 8px; }
+        .phr-bl { bottom: 8px; left: 8px; }
+        .phr-br { bottom: 8px; right: 8px; }
+
+        /* Voice Config */
+        .panel-config {
+            padding: 16px 20px; border-top: 1px solid var(--line-color);
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .config-row { display: flex; flex-direction: column; gap: 6px; }
+        .config-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim);
+            display: flex; justify-content: space-between;
+        }
+        .config-label span { color: var(--accent-primary); font-weight: 700; }
+        .config-slider-track {
+            width: 100%; height: 4px; background: var(--glass-bg);
+            border-radius: 4px; position: relative; cursor: pointer;
+            border: 1px solid var(--glass-border);
+        }
+        .config-slider-fill {
+            height: 100%; border-radius: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            position: relative;
+        }
+        .config-slider-thumb {
+            width: 14px; height: 14px; border-radius: 50%;
+            background: white; position: absolute; right: -7px; top: 50%;
+            transform: translateY(-50%); box-shadow: 0 0 8px rgba(0,0,0,0.3), 0 0 12px var(--accent-glow-dim);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .voice-select {
+            width: 100%; padding: 10px 14px; background: var(--input-bg);
+            border: 1px solid var(--input-border); border-radius: 10px;
+            color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 13px;
+            outline: none; cursor: pointer; appearance: none;
+            -webkit-appearance: none; -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            transition: border-color 0.3s ease;
+        }
+        .voice-select:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow-dim);
+        }
+        .voice-select option { background: var(--bg-base); color: var(--text-main); }
+
+        /* ============================================
+           RESPONSIVE DASHBOARD
+           ============================================ */
+        @media (max-width: 1200px) {
+            .workspace-panel { width: 280px; }
+        }
+        @media (max-width: 1024px) {
+            .workspace-panel { display: none; }
+        }
+        @media (max-width: 768px) {
+            .dash-sidebar { display: none; }
+            .dash-main { margin-left: 0; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+            .shared-nav { padding: 16px 20px; }
+            .pricing-container { padding: 0 20px; }
+        }
+
+        /* ============================================
+           GLOBAL PAGE NAVIGATION TABS
+           ============================================ */
+        .page-switcher {
+            position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+            z-index: 10000; display: flex; gap: 2px;
+            background: rgba(5,1,10,0.9); border: 1px solid var(--glass-border);
+            border-radius: 16px; padding: 6px;
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+        }
+        .page-switch-btn {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px;
+            border-radius: 12px; cursor: pointer; border: none; background: transparent;
+            color: var(--text-muted); transition: all 0.3s var(--transition-smooth);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .page-switch-btn:hover { color: var(--text-main); background: var(--glass-bg); }
+        .page-switch-btn.active-switch {
+            background: var(--accent-primary); color: white;
+            box-shadow: 0 0 20px var(--accent-glow-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SHARED BACKGROUND ===== -->
+    <div class="ambient-orb-shared"></div>
+    <div id="cube-scene-shared"></div>
+
+    <!-- ===== PAGE SWITCHER (Fixed Bottom Bar) ===== -->
+    <div class="page-switcher">
+        <button class="page-switch-btn active-switch" data-page="pricing">
+            <i data-lucide="credit-card" style="width:14px;height:14px;"></i> Pricing
+        </button>
+        <button class="page-switch-btn" data-page="login">
+            <i data-lucide="log-in" style="width:14px;height:14px;"></i> Login
+        </button>
+        <button class="page-switch-btn" data-page="dashboard">
+            <i data-lucide="layout-dashboard" style="width:14px;height:14px;"></i> Dashboard
+        </button>
+    </div>
+
+
+    <!-- ==========================================================
+         PAGE 1: PRICING
+         ========================================================== -->
+    <div class="page-view active" id="pricing-page">
+
+        <!-- Shared Nav for Pricing -->
+        <nav class="shared-nav" id="pricing-nav">
+            <a class="nav-logo" href="#">
+                <svg viewBox="0 0 100 50" style="width: 48px; height: auto; color: var(--text-main); filter: drop-shadow(0 0 12px rgba(139,92,246,0.4));" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+                    <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+                </svg>
+                <span class="nav-logo-text">VOXAR</span>
+            </a>
+            <div class="nav-controls">
+                <a class="nav-link" href="#">Engines</a>
+                <a class="nav-link" href="#">Voices</a>
+                <a class="nav-link active-link" href="#">Pricing</a>
+                <div class="nav-divider"></div>
+                <button class="electric-btn">
+                    <span class="btn-pulse"></span> Start Creating
+                </button>
+            </div>
+        </nav>
+
+        <div class="pricing-container">
+            <div class="pricing-header">
+                <div class="pricing-badge gs-reveal">
+                    <span class="btn-pulse"></span> SIMPLE PRICING
+                </div>
+                <h1 class="pricing-title gs-reveal">Choose your<br>voice engine.</h1>
+                <p class="pricing-subtitle gs-reveal">No hidden fees. No credit card upfront. Scale when you're ready.</p>
+            </div>
+
+            <!-- Monthly / Yearly Toggle -->
+            <div class="pricing-toggle-wrap gs-reveal">
+                <span class="toggle-label active-toggle" id="monthly-label">Monthly</span>
+                <div class="toggle-track" id="billing-toggle">
+                    <div class="toggle-thumb"></div>
+                </div>
+                <span class="toggle-label" id="yearly-label">Yearly</span>
+                <span class="save-badge" id="save-badge">SAVE 20%</span>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="pricing-grid gs-reveal">
+
+                <!-- CREATOR -->
+                <div class="pricing-card" id="card-creator">
+                    <div class="card-tier-icon"><i data-lucide="mic" size="22"></i></div>
+                    <div class="card-tier-name">Tier 01</div>
+                    <div class="card-tier-title">Creator</div>
+                    <div class="card-price">
+                        <span class="price-amount" data-monthly="19" data-yearly="15">$19</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <div class="price-note">For individual creators getting started</div>
+                    <button class="card-cta card-cta-outline">Get Started</button>
+                    <div class="features-label">What's included</div>
+                    <ul class="feature-list">
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> 50,000 characters/mo</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> VXR-Core engine access</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> 30 premium voices</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> Standard quality export</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> Email support</li>
+                    </ul>
+                </div>
+
+                <!-- STUDIO (Highlighted) -->
+                <div class="pricing-card highlighted" id="card-studio">
+                    <span class="popular-tag">MOST POPULAR</span>
+                    <div class="card-tier-icon"><i data-lucide="audio-waveform" size="22"></i></div>
+                    <div class="card-tier-name">Tier 02</div>
+                    <div class="card-tier-title">Studio</div>
+                    <div class="card-price">
+                        <span class="price-amount" data-monthly="79" data-yearly="63">$79</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <div class="price-note">For professional creators & studios</div>
+                    <button class="card-cta card-cta-filled">Start Free Trial</button>
+                    <div class="features-label">Everything in Creator, plus</div>
+                    <ul class="feature-list">
+                        <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> 500,000 characters/mo</li>
+                        <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> All 5 VXR engines</li>
+                        <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> 240 premium voices</li>
+                        <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> Voice cloning (VXR-Replica)</li>
+                        <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> Studio-grade 48kHz export</li>
+                        <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> API access + webhooks</li>
+                        <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> Priority support</li>
+                    </ul>
+                </div>
+
+                <!-- ENTERPRISE -->
+                <div class="pricing-card" id="card-enterprise">
+                    <div class="card-tier-icon"><i data-lucide="building-2" size="22"></i></div>
+                    <div class="card-tier-name">Tier 03</div>
+                    <div class="card-tier-title">Enterprise</div>
+                    <div class="card-price">
+                        <span class="price-amount">Custom</span>
+                    </div>
+                    <div class="price-note">For teams and organizations at scale</div>
+                    <button class="card-cta card-cta-enterprise">Contact Sales</button>
+                    <div class="features-label">Everything in Studio, plus</div>
+                    <ul class="feature-list">
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> Unlimited characters</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> Custom voice training</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> On-premise deployment</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> SLA & uptime guarantee</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> Dedicated account manager</li>
+                        <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> SSO & team management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pricing-footer gs-reveal">
+                <p>All plans include a <strong>14-day free trial</strong>. No credit card required.<br>
+                Need something specific? <a href="#">Talk to our team →</a></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================
+         PAGE 2: LOGIN
+         ========================================================== -->
+    <div class="page-view" id="login-page">
+
+        <!-- Shared Nav for Login -->
+        <nav class="shared-nav">
+            <a class="nav-logo" href="#">
+                <svg viewBox="0 0 100 50" style="width: 48px; height: auto; color: var(--text-main); filter: drop-shadow(0 0 12px rgba(139,92,246,0.4));" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+                    <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+                </svg>
+                <span class="nav-logo-text">VOXAR</span>
+            </a>
+            <div class="nav-controls">
+                <a class="nav-link" href="#">Pricing</a>
+                <div class="nav-divider"></div>
+                <button class="electric-btn">
+                    <span class="btn-pulse"></span> Sign Up
+                </button>
+            </div>
+        </nav>
+
+        <!-- Login Card -->
+        <div class="login-card">
+
+            <div class="login-logo">
+                <svg viewBox="0 0 100 50" style="width: 44px; height: auto; color: var(--accent-primary);" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+                    <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+                </svg>
+                <span class="login-logo-text">VOXAR</span>
+            </div>
+
+            <h2 class="login-heading">Welcome back</h2>
+            <p class="login-subheading">Sign in to your account to continue creating.</p>
+
+            <form class="login-form" onsubmit="return false;">
+                <div class="input-group">
+                    <label class="input-label">Email Address</label>
+                    <div class="input-with-icon">
+                        <i data-lucide="mail" size="16" class="input-icon-left"></i>
+                        <input type="email" class="input-field" placeholder="you@example.com" autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Password</label>
+                    <div class="input-with-icon">
+                        <i data-lucide="lock" size="16" class="input-icon-left"></i>
+                        <input type="password" class="input-field" placeholder="Enter your password" id="password-field" autocomplete="current-password">
+                        <button class="input-icon-right" type="button" id="toggle-pw" aria-label="Toggle password visibility">
+                            <i data-lucide="eye" size="16" id="pw-eye-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <a href="#" class="forgot-link">Forgot password?</a>
+
+                <button type="submit" class="login-btn">
+                    Continue with Email
+                    <i data-lucide="arrow-right" size="16"></i>
+                </button>
+            </form>
+
+            <div class="divider-row">
+                <div class="divider-line"></div>
+                <span class="divider-text">or continue with</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <button class="social-btn" type="button">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                Continue with Google
+            </button>
+
+            <button class="social-btn" type="button">
+                <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                Continue with GitHub
+            </button>
+
+            <div class="login-footer">
+                Don't have an account? <a href="#">Create one →</a>
+            </div>
+            <div class="login-terms">
+                By continuing, you agree to VOXAR's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================
+         PAGE 3: DASHBOARD
+         ========================================================== -->
+    <div class="page-view" id="dashboard-page">
+        <div class="dash-layout">
+
+            <!-- SIDEBAR -->
+            <aside class="dash-sidebar">
+                <div class="sidebar-header">
+                    <svg viewBox="0 0 100 50" style="width: 36px; height: auto; color: var(--text-main); filter: drop-shadow(0 0 8px rgba(139,92,246,0.3));" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+                        <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+                    </svg>
+                    <span class="sidebar-brand">VOXAR</span>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Workspace</div>
+                    <div class="sidebar-item active-item"><i data-lucide="mic" size="18"></i> Studio <span class="sidebar-item-badge badge-new">NEW</span></div>
+                    <div class="sidebar-item"><i data-lucide="folder" size="18"></i> Projects <span class="sidebar-item-badge badge-count">12</span></div>
+                    <div class="sidebar-item"><i data-lucide="users" size="18"></i> Voice Library</div>
+                    <div class="sidebar-item"><i data-lucide="git-branch" size="18"></i> Clones</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Developer</div>
+                    <div class="sidebar-item"><i data-lucide="key" size="18"></i> API Keys</div>
+                    <div class="sidebar-item"><i data-lucide="webhook" size="18"></i> Webhooks</div>
+                    <div class="sidebar-item"><i data-lucide="file-code" size="18"></i> Documentation</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Account</div>
+                    <div class="sidebar-item"><i data-lucide="settings" size="18"></i> Settings</div>
+                    <div class="sidebar-item"><i data-lucide="credit-card" size="18"></i> Billing</div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="sidebar-credits">
+                        <div class="credits-icon"><i data-lucide="zap" size="16"></i></div>
+                        <div class="credits-info">
+                            <div class="credits-label">Compute Credits</div>
+                            <div class="credits-value">342,100 <span style="font-size: 10px; color: var(--text-dim); font-weight: 400;">/ 500K</span></div>
+                            <div class="credits-bar-track"><div class="credits-bar-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="sidebar-user">
+                        <div class="sidebar-avatar">A</div>
+                        <div class="sidebar-user-info">
+                            <div class="sidebar-user-name">Aarav M.</div>
+                            <div class="sidebar-user-plan">Studio Plan</div>
+                        </div>
+                        <i data-lucide="chevron-right" size="14" style="color: var(--text-dim);"></i>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- MAIN -->
+            <div class="dash-main">
+
+                <!-- TOPBAR -->
+                <div class="dash-topbar">
+                    <div class="topbar-left">
+                        <div class="topbar-breadcrumb">
+                            Studio <span class="breadcrumb-sep">/</span>
+                            <span class="breadcrumb-current">New Generation</span>
+                        </div>
+                    </div>
+                    <div class="topbar-right">
+                        <div class="topbar-status">
+                            <span class="status-dot"></span> All engines online
+                        </div>
+                        <button class="icon-btn"><i data-lucide="bell" size="18"></i></button>
+                        <button class="icon-btn"><i data-lucide="command" size="18"></i></button>
+                    </div>
+                </div>
+
+                <!-- WORKSPACE -->
+                <div class="dash-workspace">
+
+                    <!-- Editor Side -->
+                    <div class="workspace-editor">
+
+                        <div class="editor-header">
+                            <div class="editor-tabs">
+                                <div class="editor-tab active-tab">Script.vxr</div>
+                                <div class="editor-tab">Notes.md</div>
+                                <div class="editor-tab">+ New</div>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="action-btn action-btn-ghost"><i data-lucide="save" size="14"></i> Save</button>
+                                <button class="action-btn action-btn-ghost"><i data-lucide="history" size="14"></i> History</button>
+                                <button class="action-btn action-btn-primary" id="generate-btn"><i data-lucide="sparkles" size="14"></i> Generate</button>
+                            </div>
+                        </div>
+
+                        <div class="editor-body">
+                            <div class="code-editor">
+                                <div class="line-numbers">
+                                    <span class="line-num">1</span>
+                                    <span class="line-num">2</span>
+                                    <span class="line-num">3</span>
+                                    <span class="line-num">4</span>
+                                    <span class="line-num">5</span>
+                                    <span class="line-num">6</span>
+                                    <span class="line-num">7</span>
+                                    <span class="line-num">8</span>
+                                    <span class="line-num">9</span>
+                                    <span class="line-num">10</span>
+                                    <span class="line-num">11</span>
+                                    <span class="line-num">12</span>
+                                </div>
+                                <div class="text-area-wrap">
+                                    <textarea id="script-editor" spellcheck="false" placeholder="Start writing your script here...
+
+Example:
+Welcome to VOXAR — the most advanced neural voice synthesis platform ever built.
+
+Every word. Every pause. Every breath — engineered to perfection.
+
+[pause: 1.5s]
+
+This is the future of audio.">Welcome to VOXAR — the most advanced neural voice synthesis platform ever built.
+
+Every word. Every pause. Every breath — engineered to perfection.
+
+[pause: 1.5s]
+
+This is the future of audio. Whether you're building a podcast, narrating a documentary, or crafting an immersive audiobook experience — VOXAR delivers studio-grade voice in milliseconds.
+
+[voice: Aarav, emotion: confident]
+
+Let's create something extraordinary.</textarea>
+                                </div>
+                            </div>
+                            <div class="editor-status">
+                                <div class="editor-status-left">
+                                    <span class="status-indicator"><span class="status-dot" style="width:5px;height:5px;"></span> Ready</span>
+                                    <span>UTF-8</span>
+                                    <span>LF</span>
+                                </div>
+                                <div class="editor-status-right">
+                                    <span id="char-count">247 chars</span>
+                                    <span>Ln 12, Col 44</span>
+                                    <span>VXR Script</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Waveform -->
+                        <div class="waveform-section">
+                            <div class="waveform-header">
+                                <div class="waveform-title-area">
+                                    <span class="waveform-label">Output Waveform</span>
+                                    <span class="waveform-time" id="wave-time">00:00 / 00:34</span>
+                                </div>
+                                <div class="waveform-controls">
+                                    <button class="wave-ctrl-btn"><i data-lucide="skip-back" size="14"></i></button>
+                                    <button class="wave-ctrl-btn play-btn" id="play-wave-btn"><i data-lucide="play" size="14"></i></button>
+                                    <button class="wave-ctrl-btn"><i data-lucide="skip-forward" size="14"></i></button>
+                                    <button class="wave-ctrl-btn"><i data-lucide="download" size="14"></i></button>
+                                </div>
+                            </div>
+                            <div class="waveform-canvas" id="waveform-canvas"></div>
+                            <div class="timeline-ruler">
+                                <span>0:00</span><span>0:05</span><span>0:10</span><span>0:15</span><span>0:20</span><span>0:25</span><span>0:30</span><span>0:34</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT PANEL -->
+                    <div class="workspace-panel">
+                        <div class="panel-header">
+                            <span class="panel-title">Engine Control</span>
+                            <button class="icon-btn" style="width:28px;height:28px;"><i data-lucide="settings-2" size="14"></i></button>
+                        </div>
+
+                        <div class="engine-selector">
+                            <div class="engine-option selected" data-engine="cpu">
+                                <div class="engine-opt-icon"><i data-lucide="cpu" size="16"></i></div>
+                                <div class="engine-opt-info">
+                                    <div class="engine-opt-name">VXR-Core</div>
+                                    <div class="engine-opt-desc">Neural TTS synthesis</div>
+                                </div>
+                                <div class="engine-opt-status">● LIVE</div>
+                            </div>
+                            <div class="engine-option" data-engine="copy">
+                                <div class="engine-opt-icon"><i data-lucide="copy" size="16"></i></div>
+                                <div class="engine-opt-info">
+                                    <div class="engine-opt-name">VXR-Replica</div>
+                                    <div class="engine-opt-desc">Voice cloning</div>
+                                </div>
+                                <div class="engine-opt-status">● LIVE</div>
+                            </div>
+                            <div class="engine-option" data-engine="globe">
+                                <div class="engine-opt-icon"><i data-lucide="globe" size="16"></i></div>
+                                <div class="engine-opt-info">
+                                    <div class="engine-opt-name">VXR-Native</div>
+                                    <div class="engine-opt-desc">Regional dialects</div>
+                                </div>
+                                <div class="engine-opt-status">● LIVE</div>
+                            </div>
+                            <div class="engine-option" data-engine="file-audio">
+                                <div class="engine-opt-icon"><i data-lucide="file-audio" size="16"></i></div>
+                                <div class="engine-opt-info">
+                                    <div class="engine-opt-name">VXR-Scribe</div>
+                                    <div class="engine-opt-desc">Transcription</div>
+                                </div>
+                                <div class="engine-opt-status">● LIVE</div>
+                            </div>
+                            <div class="engine-option" data-engine="languages">
+                                <div class="engine-opt-icon"><i data-lucide="languages" size="16"></i></div>
+                                <div class="engine-opt-info">
+                                    <div class="engine-opt-name">VXR-Omnix</div>
+                                    <div class="engine-opt-desc">Multi-lang intelligence</div>
+                                </div>
+                                <div class="engine-opt-status">● LIVE</div>
+                            </div>
+                        </div>
+
+                        <!-- Mini HUD -->
+                        <div class="panel-hud-section">
+                            <div class="panel-hud">
+                                <div class="p-hud-ring p-ring-1"></div>
+                                <div class="p-hud-ring p-ring-2"></div>
+                                <div class="p-hud-ring p-ring-3"></div>
+                                <div class="p-hud-core">
+                                    <div class="p-hud-inner">
+                                        <i data-lucide="cpu" size="18" id="panel-hud-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-hud-readout phr-tl">LAT: 0.3ms</div>
+                            <div class="panel-hud-readout phr-tr">THR: 98.2%</div>
+                            <div class="panel-hud-readout phr-bl">QPS: 12.4K</div>
+                            <div class="panel-hud-readout phr-br">STA: ACTIVE</div>
+                        </div>
+
+                        <!-- Voice Config -->
+                        <div class="panel-config">
+                            <div class="config-row">
+                                <div class="config-label">Voice <span>Aarav</span></div>
+                                <select class="voice-select">
+                                    <option selected>Aarav — Hindi (Cinematic)</option>
+                                    <option>Priya — Hinglish (Conversational)</option>
+                                    <option>Marcus — English US (Narrative)</option>
+                                    <option>Kavya — Telugu (Audiobook)</option>
+                                    <option>David — English UK (Corporate)</option>
+                                </select>
+                            </div>
+                            <div class="config-row">
+                                <div class="config-label">Speed <span>1.0×</span></div>
+                                <div class="config-slider-track">
+                                    <div class="config-slider-fill" style="width: 50%;">
+                                        <div class="config-slider-thumb"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-row">
+                                <div class="config-label">Stability <span>72%</span></div>
+                                <div class="config-slider-track">
+                                    <div class="config-slider-fill" style="width: 72%;">
+                                        <div class="config-slider-thumb"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-row">
+                                <div class="config-label">Clarity <span>85%</span></div>
+                                <div class="config-slider-track">
+                                    <div class="config-slider-fill" style="width: 85%;">
+                                        <div class="config-slider-thumb"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================
+         JAVASCRIPT
+         ========================================================== -->
+    <script>
+        lucide.createIcons();
+        gsap.registerPlugin(ScrollTrigger);
+
+        // =============================================
+        // PAGE ROUTER
+        // =============================================
+        const pages = document.querySelectorAll('.page-view');
+        const switchBtns = document.querySelectorAll('.page-switch-btn');
+        const sharedNav = document.querySelectorAll('.shared-nav');
+        const cubeSceneShared = document.getElementById('cube-scene-shared');
+        const ambientOrb = document.querySelector('.ambient-orb-shared');
+
+        function showPage(pageId) {
+            pages.forEach(p => {
+                p.classList.remove('active', 'active-flex');
+            });
+            const target = document.getElementById(pageId + '-page');
+            if (pageId === 'login') {
+                target.classList.add('active-flex');
+            } else if (pageId === 'dashboard') {
+                target.classList.add('active-flex');
+            } else {
+                target.classList.add('active');
+            }
+
+            switchBtns.forEach(b => b.classList.remove('active-switch'));
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active-switch');
+
+            // Show/hide cube wall & orb
+            if (pageId === 'dashboard') {
+                cubeSceneShared.style.display = 'none';
+                ambientOrb.style.display = 'none';
+            } else {
+                cubeSceneShared.style.display = 'grid';
+                ambientOrb.style.display = 'block';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        switchBtns.forEach(btn => {
+            btn.addEventListener('click', () => showPage(btn.dataset.page));
+        });
+
+        // =============================================
+        // CUBE WALL (Shared)
+        // =============================================
+        const scene = cubeSceneShared;
+        let cellW, cellH;
+        const cubeSize = 85;
+
+        function initCubeGrid() {
+            scene.innerHTML = '';
+            const w = window.innerWidth, h = window.innerHeight;
+            const cols = Math.ceil(w / cubeSize), rows = Math.ceil(h / cubeSize);
+            scene.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            scene.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+            cellW = w / cols; cellH = h / rows;
+            const half = Math.min(cellW, cellH) / 2;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const cube = document.createElement('div');
+                    cube.className = 's-cube'; cube.dataset.row = r; cube.dataset.col = c;
+                    cube.style.setProperty('--half-size', `${half}px`);
+                    ['front','back','right','left','top','bottom'].forEach(f => {
+                        const face = document.createElement('div');
+                        face.className = `s-cube-face s-cube-face--${f}`;
+                        cube.appendChild(face);
+                    });
+                    scene.appendChild(cube);
+                }
+            }
+        }
+        initCubeGrid();
+        let resizeTimer;
+        window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(initCubeGrid, 300); });
+
+        // Magnetic tilt
+        window.addEventListener('mousemove', (e) => {
+            if (cubeSceneShared.style.display === 'none') return;
+            const cx = e.clientX / cellW, cy = e.clientY / cellH;
+            document.querySelectorAll('.s-cube').forEach(cube => {
+                const r = +cube.dataset.row, c = +cube.dataset.col;
+                const dist = Math.hypot(r - cy, c - cx);
+                if (dist <= 3.5) {
+                    gsap.to(cube, { duration: 0.5, rotateX: (r - cy) * 10, rotateY: -(c - cx) * 10, ease: 'power2.out', overwrite: true });
+                } else {
+                    gsap.to(cube, { duration: 1, rotateX: 0, rotateY: 0, ease: 'power2.out', overwrite: true });
+                }
+            });
+        });
+
+        // Shockwave
+        window.addEventListener('click', (e) => {
+            if (cubeSceneShared.style.display === 'none') return;
+            if (e.target.closest('nav, button, a, input, textarea, select, .page-switcher, .engine-option, .sidebar-item, .pricing-card')) return;
+            const ch = Math.floor(e.clientX / cellW), rh = Math.floor(e.clientY / cellH);
+            const glow = '#8B5CF6';
+            const base = '#05010a';
+            const rings = {};
+            document.querySelectorAll('.s-cube').forEach(cube => {
+                const r = +cube.dataset.row, c = +cube.dataset.col;
+                const ring = Math.round(Math.hypot(r - rh, c - ch));
+                if (!rings[ring]) rings[ring] = [];
+                rings[ring].push(cube);
+            });
+            Object.keys(rings).forEach(ring => {
+                const delay = ring * 0.03;
+                const faces = rings[ring].map(c => c.querySelector('.s-cube-face--front'));
+                gsap.to(faces, { backgroundColor: glow, boxShadow: `0 0 15px ${glow}`, duration: 0.1, delay, ease: 'power2.out' });
+                gsap.to(faces, { backgroundColor: base, boxShadow: 'none', duration: 0.6, delay: delay + 0.1, ease: 'power2.inOut', clearProps: 'all' });
+            });
+        });
+
+        // =============================================
+        // PRICING: Billing Toggle
+        // =============================================
+        const billingToggle = document.getElementById('billing-toggle');
+        const monthlyLabel = document.getElementById('monthly-label');
+        const yearlyLabel = document.getElementById('yearly-label');
+        const saveBadge = document.getElementById('save-badge');
+        let isYearly = false;
+
+        billingToggle.addEventListener('click', () => {
+            isYearly = !isYearly;
+            billingToggle.classList.toggle('yearly', isYearly);
+            monthlyLabel.classList.toggle('active-toggle', !isYearly);
+            yearlyLabel.classList.toggle('active-toggle', isYearly);
+            saveBadge.classList.toggle('visible', isYearly);
+
+            document.querySelectorAll('.price-amount[data-monthly]').forEach(el => {
+                const val = isYearly ? el.dataset.yearly : el.dataset.monthly;
+                gsap.to(el, {
+                    opacity: 0, y: -10, duration: 0.2,
+                    onComplete: () => {
+                        el.textContent = `$${val}`;
+                        gsap.to(el, { opacity: 1, y: 0, duration: 0.3, ease: 'back.out(2)' });
+                    }
+                });
+            });
+        });
+
+        // =============================================
+        // LOGIN: Password Toggle
+        // =============================================
+        const togglePw = document.getElementById('toggle-pw');
+        const pwField = document.getElementById('password-field');
+        const pwEyeIcon = document.getElementById('pw-eye-icon');
+        let showPw = false;
+
+        if (togglePw) {
+            togglePw.addEventListener('click', () => {
+                showPw = !showPw;
+                pwField.type = showPw ? 'text' : 'password';
+                pwEyeIcon.setAttribute('data-lucide', showPw ? 'eye-off' : 'eye');
+                lucide.createIcons();
+            });
+        }
+
+        // =============================================
+        // DASHBOARD: Waveform Generator
+        // =============================================
+        const waveformCanvas = document.getElementById('waveform-canvas');
+        const totalBars = 180;
+        const activeBars = Math.floor(totalBars * 0.45);
+
+        function generateWaveform() {
+            if (!waveformCanvas) return;
+            waveformCanvas.innerHTML = '';
+            for (let i = 0; i < totalBars; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'wave-bar';
+                if (i < activeBars) bar.classList.add('active');
+
+                // Generate natural waveform heights
+                let h;
+                const pos = i / totalBars;
+                const envelope = Math.sin(pos * Math.PI);
+                const noise = Math.random();
+                h = 8 + (envelope * noise * 75);
+
+                bar.style.height = h + 'px';
+                waveformCanvas.appendChild(bar);
+            }
+        }
+        generateWaveform();
+
+        // Play button interaction
+        const playWaveBtn = document.getElementById('play-wave-btn');
+        let isPlaying = false;
+        let playInterval;
+
+        if (playWaveBtn) {
+            playWaveBtn.addEventListener('click', () => {
+                isPlaying = !isPlaying;
+                const icon = playWaveBtn.querySelector('i');
+
+                if (isPlaying) {
+                    icon.setAttribute('data-lucide', 'pause');
+                    lucide.createIcons();
+
+                    let currentBar = 0;
+                    const bars = waveformCanvas.querySelectorAll('.wave-bar');
+                    bars.forEach(b => b.classList.remove('active'));
+
+                    playInterval = setInterval(() => {
+                        if (currentBar < bars.length) {
+                            bars[currentBar].classList.add('active');
+
+                            // Animate bar
+                            const envelope = Math.sin((currentBar / bars.length) * Math.PI);
+                            const newH = 8 + (envelope * Math.random() * 80);
+                            gsap.to(bars[currentBar], { height: newH, duration: 0.15 });
+
+                            // Update time
+                            const sec = Math.floor((currentBar / bars.length) * 34);
+                            const timeStr = `00:${sec.toString().padStart(2, '0')} / 00:34`;
+                            document.getElementById('wave-time').textContent = timeStr;
+
+                            currentBar++;
+                        } else {
+                            clearInterval(playInterval);
+                            isPlaying = false;
+                            icon.setAttribute('data-lucide', 'play');
+                            lucide.createIcons();
+                        }
+                    }, 50);
+                } else {
+                    clearInterval(playInterval);
+                    icon.setAttribute('data-lucide', 'play');
+                    lucide.createIcons();
+                }
+            });
+        }
+
+        // Generate button
+        const generateBtn = document.getElementById('generate-btn');
+        if (generateBtn) {
+            generateBtn.addEventListener('click', () => {
+                // Reset waveform
+                const bars = waveformCanvas.querySelectorAll('.wave-bar');
+                bars.forEach(b => b.classList.remove('active'));
+
+                // Animate generation
+                gsap.to(generateBtn, {
+                    scale: 0.95, duration: 0.1,
+                    onComplete: () => {
+                        gsap.to(generateBtn, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
+                    }
+                });
+
+                // Ripple through waveform bars
+                bars.forEach((bar, i) => {
+                    setTimeout(() => {
+                        bar.classList.add('active');
+                        const envelope = Math.sin((i / bars.length) * Math.PI);
+                        const newH = 8 + (envelope * Math.random() * 80);
+                        gsap.fromTo(bar, { height: 4 }, { height: newH, duration: 0.4, ease: 'power2.out' });
+                    }, i * 12);
+                });
+            });
+        }
+
+        // Engine selector interaction
+        const engineOptions = document.querySelectorAll('.engine-option');
+        const panelHudIcon = document.getElementById('panel-hud-icon');
+
+        engineOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                engineOptions.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+
+                const iconName = opt.dataset.engine;
+                gsap.to('.p-hud-inner', {
+                    scale: 0.4, opacity: 0, duration: 0.2,
+                    onComplete: () => {
+                        panelHudIcon.setAttribute('data-lucide', iconName);
+                        lucide.createIcons();
+                        gsap.to('.p-hud-inner', { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' });
+                    }
+                });
+            });
+        });
+
+        // Character counter
+        const scriptEditor = document.getElementById('script-editor');
+        const charCount = document.getElementById('char-count');
+        if (scriptEditor && charCount) {
+            scriptEditor.addEventListener('input', () => {
+                charCount.textContent = scriptEditor.value.length + ' chars';
+            });
+        }
+
+        // =============================================
+        // SCROLL REVEALS (for Pricing page)
+        // =============================================
+        gsap.utils.toArray('.gs-reveal').forEach(elem => {
+            gsap.fromTo(elem,
+                { autoAlpha: 0, y: 40 },
+                {
+                    duration: 0.9, autoAlpha: 1, y: 0, ease: 'power3.out',
+                    scrollTrigger: { trigger: elem, start: 'top 90%', toggleActions: 'play none none none' }
+                }
+            );
+        });
+
+        // Nav scroll behavior
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.shared-nav').forEach(nav => {
+                nav.classList.toggle('scrolled', window.scrollY > 50);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+from this above take only the priceing styles the cards used and colour pattern
+
+and from this below code take the login pages style take the all code its very nice
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOXAR | Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg: #020005;
+            --bg-elevated: #0a0710;
+            --bg-card: rgba(255,255,255,0.02);
+            --accent: #8B5CF6;
+            --accent-light: #A78BFA;
+            --accent-dark: #7C3AED;
+            --accent-glow: rgba(139,92,246,0.15);
+            --accent-glow-md: rgba(139,92,246,0.25);
+            --accent-glow-bright: rgba(139,92,246,0.4);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.65);
+            --text-muted: rgba(255,255,255,0.35);
+            --text-dim: rgba(255,255,255,0.15);
+            --border: rgba(255,255,255,0.08);
+            --border-light: rgba(255,255,255,0.04);
+            --border-accent: rgba(139,92,246,0.3);
+            --glass: rgba(255,255,255,0.03);
+            --input-bg: rgba(255,255,255,0.04);
+            --input-focus: rgba(139,92,246,0.12);
+            --danger: #ef4444;
+            --success: #22c55e;
+            --font-sans: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+            --font-mono: 'JetBrains Mono',monospace;
+            --ease-smooth: cubic-bezier(0.2,0.8,0.2,1);
+            --ease-bounce: cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+        html{height:100%}
+        body{background:var(--bg);color:var(--text-primary);font-family:var(--font-sans);min-height:100vh;display:flex;overflow:hidden;position:relative}
+        ::selection{background:var(--accent);color:#fff}
+
+        /* ========== GRAIN ========== */
+        .grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px}
+
+        /* ========== LEFT PANEL (BRAND) ========== */
+        .auth-brand{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px;position:relative;overflow:hidden}
+
+        /* Aurora Background */
+        .aurora{position:absolute;inset:0;overflow:hidden}
+        .aurora-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4;animation:auroraFloat 12s ease-in-out infinite}
+        .aurora-blob:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,rgba(139,92,246,.5),transparent 70%);top:-10%;left:-10%;animation-delay:0s}
+        .aurora-blob:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,rgba(167,139,250,.4),transparent 70%);bottom:-10%;right:-10%;animation-delay:-4s}
+        .aurora-blob:nth-child(3){width:350px;height:350px;background:radial-gradient(circle,rgba(124,58,237,.3),transparent 70%);top:40%;left:30%;animation-delay:-8s}
+        @keyframes auroraFloat{
+            0%,100%{transform:translate(0,0) scale(1)}
+            25%{transform:translate(30px,-40px) scale(1.1)}
+            50%{transform:translate(-20px,30px) scale(.9)}
+            75%{transform:translate(40px,20px) scale(1.05)}
+        }
+
+        /* Grid overlay */
+        .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(var(--border-light) 1px,transparent 1px),linear-gradient(90deg,var(--border-light) 1px,transparent 1px);background-size:60px 60px;opacity:.5}
+
+        /* Brand content */
+        .brand-content{position:relative;z-index:2;text-align:center;max-width:400px}
+        .brand-logo{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:48px}
+        .brand-logo svg{filter:drop-shadow(0 0 20px var(--accent-glow-md))}
+        .brand-logo-text{font-size:28px;font-weight:900;letter-spacing:-.05em}
+        .brand-headline{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px;background:linear-gradient(135deg,rgba(255,255,255,.5),#fff 30%,var(--accent-light) 60%,#fff 90%);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shinyText 5s linear infinite}
+        @keyframes shinyText{to{background-position:300% center}}
+        .brand-sub{font-size:15px;color:var(--text-secondary);line-height:1.7;margin-bottom:48px}
+
+        /* Floating stats */
+        .brand-stats{display:flex;gap:32px;justify-content:center}
+        .brand-stat{text-align:center}
+        .brand-stat-value{font-size:24px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--text-primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+        .brand-stat-label{font-family:var(--font-mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.15em;margin-top:4px}
+
+        /* Decorative elements */
+        .floating-badge{position:absolute;font-family:var(--font-mono);font-size:10px;color:var(--text-dim);letter-spacing:.1em;background:var(--glass);border:1px solid var(--border-light);padding:8px 16px;border-radius:8px;backdrop-filter:blur(12px);z-index:2}
+        .floating-badge:nth-child(1){top:15%;right:10%;animation:floatBadge 6s ease-in-out infinite}
+        .floating-badge:nth-child(2){bottom:20%;left:8%;animation:floatBadge 7s ease-in-out 2s infinite}
+        .floating-badge:nth-child(3){top:60%;right:15%;animation:floatBadge 8s ease-in-out 4s infinite}
+        @keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+        .badge-dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px}
+        .badge-dot--green{background:#22c55e;box-shadow:0 0 8px #22c55e}
+        .badge-dot--purple{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+        .badge-dot--blue{background:#3b82f6;box-shadow:0 0 8px #3b82f6}
+
+        /* ========== RIGHT PANEL (FORM) ========== */
+        .auth-form-panel{width:520px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:60px 64px;background:var(--bg-elevated);border-left:1px solid var(--border);position:relative;z-index:10}
+
+        .auth-header{margin-bottom:40px}
+        .auth-title{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+        .auth-subtitle{font-size:14px;color:var(--text-muted)}
+        .auth-subtitle a{color:var(--accent);font-weight:500;transition:opacity .2s;text-decoration:none}
+        .auth-subtitle a:hover{opacity:.8}
+
+        /* Tab switcher */
+        .auth-tabs{display:flex;gap:4px;background:var(--input-bg);border-radius:12px;padding:4px;margin-bottom:32px;border:1px solid var(--border-light)}
+        .auth-tab{flex:1;padding:10px;text-align:center;font-size:13px;font-weight:600;color:var(--text-muted);border-radius:9px;cursor:pointer;transition:all .3s var(--ease-smooth);position:relative;z-index:1}
+        .auth-tab.active{color:var(--text-primary);background:var(--glass);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+        /* Form groups */
+        .form-group{margin-bottom:20px}
+        .form-label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;letter-spacing:.02em}
+        .form-label svg{color:var(--text-muted)}
+
+        .form-input-wrap{position:relative}
+        .form-input{width:100%;padding:14px 16px;padding-left:44px;background:var(--input-bg);border:1px solid var(--border);border-radius:12px;color:var(--text-primary);font-family:var(--font-sans);font-size:14px;outline:none;transition:all .3s var(--ease-smooth)}
+        .form-input::placeholder{color:var(--text-dim)}
+        .form-input:focus{border-color:var(--accent);background:var(--input-focus);box-shadow:0 0 0 3px var(--accent-glow),0 0 20px var(--accent-glow)}
+        .form-input:focus + .input-icon{color:var(--accent)}
+        .input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-dim);transition:color .3s ease;pointer-events:none}
+
+        .form-input-wrap .toggle-password{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-dim);cursor:pointer;padding:4px;transition:color .3s}
+        .form-input-wrap .toggle-password:hover{color:var(--text-secondary)}
+
+        /* Checkbox */
+        .form-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+        .form-checkbox{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text-secondary)}
+        .form-checkbox input{display:none}
+        .checkbox-custom{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);background:var(--input-bg);display:flex;align-items:center;justify-content:center;transition:all .2s ease;flex-shrink:0}
+        .form-checkbox input:checked + .checkbox-custom{background:var(--accent);border-color:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+        .form-checkbox input:checked + .checkbox-custom svg{opacity:1}
+        .checkbox-custom svg{opacity:0;transition:opacity .2s}
+        .form-link{font-size:13px;color:var(--accent);font-weight:500;text-decoration:none;transition:opacity .2s}
+        .form-link:hover{opacity:.8}
+
+        /* Primary button */
+        .btn-primary{width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-family:var(--font-sans);font-weight:700;font-size:14px;cursor:pointer;position:relative;overflow:hidden;transition:all .3s var(--ease-smooth);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px var(--accent-glow-md)}
+        .btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 30px var(--accent-glow-bright)}
+        .btn-primary:active{transform:translateY(0) scale(.99)}
+        .btn-primary::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(transparent,rgba(255,255,255,.1),transparent);transform:rotate(45deg) translateX(-100%);transition:transform .6s}
+        .btn-primary:hover::after{transform:rotate(45deg) translateX(100%)}
+
+        /* Loading state */
+        .btn-primary.loading{pointer-events:none;opacity:.8}
+        .btn-primary.loading .btn-text{opacity:0}
+        .btn-primary.loading .btn-loader{opacity:1}
+        .btn-loader{position:absolute;opacity:0;transition:opacity .3s}
+        .spinner{width:20px;height:20px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* Divider */
+        .auth-divider{display:flex;align-items:center;gap:16px;margin:28px 0}
+        .auth-divider-line{flex:1;height:1px;background:var(--border)}
+        .auth-divider-text{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase}
+
+        /* Social buttons */
+        .social-btns{display:flex;flex-direction:column;gap:10px}
+        .btn-social{width:100%;padding:13px;background:var(--input-bg);border:1px solid var(--border);border-radius:12px;color:var(--text-primary);font-family:var(--font-sans);font-weight:600;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .3s var(--ease-smooth)}
+        .btn-social:hover{background:var(--glass);border-color:var(--border-accent);transform:translateY(-1px)}
+        .btn-social svg{flex-shrink:0}
+
+        /* Terms */
+        .auth-terms{margin-top:28px;font-size:11px;color:var(--text-dim);text-align:center;line-height:1.7}
+        .auth-terms a{color:var(--text-muted);text-decoration:underline;text-decoration-color:var(--border)}
+
+        /* Error state */
+        .form-error{font-size:12px;color:var(--danger);margin-top:6px;display:none;align-items:center;gap:6px}
+        .form-error.visible{display:flex}
+        .form-input.error{border-color:var(--danger);background:rgba(239,68,68,.06)}
+
+        /* Success notification */
+        .toast{position:fixed;top:24px;right:24px;padding:14px 20px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;font-size:13px;font-weight:500;color:var(--text-primary);display:flex;align-items:center;gap:10px;z-index:99999;transform:translateX(120%);transition:transform .5s var(--ease-bounce);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+        .toast.visible{transform:translateX(0)}
+        .toast-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .toast-icon--success{background:rgba(34,197,94,.15);color:#22c55e}
+        .toast-icon--error{background:rgba(239,68,68,.15);color:#ef4444}
+
+        /* ========== FORGOT PASSWORD MODAL ========== */
+        .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:9998;opacity:0;pointer-events:none;transition:opacity .3s ease}
+        .modal-backdrop.active{opacity:1;pointer-events:all}
+        .modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);z-index:9999;background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;padding:40px;width:420px;max-width:90vw;opacity:0;pointer-events:none;transition:all .4s var(--ease-bounce)}
+        .modal.active{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:all}
+        .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:var(--glass);border:1px solid var(--border-light);color:var(--text-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+        .modal-close:hover{color:var(--text-primary);border-color:var(--border)}
+        .modal-title{font-size:22px;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+        .modal-desc{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:24px}
+
+        /* ========== RESPONSIVE ========== */
+        @media(max-width:1024px){
+            .auth-brand{display:none}
+            .auth-form-panel{width:100%;border-left:none;max-width:480px;margin:0 auto}
+            body{justify-content:center}
+        }
+        @media(max-width:480px){
+            .auth-form-panel{padding:40px 24px}
+            .brand-headline{font-size:32px}
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <!-- ========== LEFT BRAND PANEL ========== -->
+    <div class="auth-brand">
+        <div class="aurora">
+            <div class="aurora-blob"></div>
+            <div class="aurora-blob"></div>
+            <div class="aurora-blob"></div>
+        </div>
+        <div class="grid-overlay"></div>
+
+        <!-- Floating badges -->
+        <div class="floating-badge"><span class="badge-dot badge-dot--green"></span>240+ Voice Models</div>
+        <div class="floating-badge"><span class="badge-dot badge-dot--purple"></span>12 Languages</div>
+        <div class="floating-badge"><span class="badge-dot badge-dot--blue"></span>99.7% Accuracy</div>
+
+        <div class="brand-content">
+            <div class="brand-logo">
+                <svg viewBox="0 0 100 50" width="56" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22"/>
+                    <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25"/>
+                </svg>
+                <span class="brand-logo-text">VOXAR</span>
+            </div>
+
+            <h1 class="brand-headline">Your words.<br>Studio sound.</h1>
+            <p class="brand-sub">Neural voice synthesis, instant cloning, and precision transcription — engineered for creators who refuse to compromise.</p>
+
+            <div class="brand-stats">
+                <div class="brand-stat">
+                    <div class="brand-stat-value">20+</div>
+                    <div class="brand-stat-label">Neural Voices</div>
+                </div>
+                <div class="brand-stat">
+                    <div class="brand-stat-value">12</div>
+                    <div class="brand-stat-label">Languages</div>
+                </div>
+                <div class="brand-stat">
+                    <div class="brand-stat-value">&lt;0.3s</div>
+                    <div class="brand-stat-label">Latency</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== RIGHT FORM PANEL ========== -->
+    <div class="auth-form-panel">
+        <div class="auth-header">
+            <h2 class="auth-title" id="auth-title">Welcome back</h2>
+            <p class="auth-subtitle" id="auth-subtitle">New to VOXAR? <a href="#" id="switch-to-signup">Create an account</a></p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login" id="tab-login">Sign In</div>
+            <div class="auth-tab" data-tab="signup" id="tab-signup">Sign Up</div>
+        </div>
+
+        <!-- ===== LOGIN FORM ===== -->
+        <form id="login-form" autocomplete="on">
+            <div class="form-group">
+                <label class="form-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 4L12 13 2 4"/></svg>
+                    Email
+                </label>
+                <div class="form-input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 4L12 13 2 4"/></svg>
+                    <input class="form-input" type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+                <div class="form-error" id="login-email-error">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Please enter a valid email
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="3"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    Password
+                </label>
+                <div class="form-input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="3"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    <input class="form-input" type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password" required>
+                    <button type="button" class="toggle-password" data-target="login-password" aria-label="Toggle password">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                </div>
+                <div class="form-error" id="login-password-error">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Password is required
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label class="form-checkbox">
+                    <input type="checkbox" id="remember-me">
+                    <span class="checkbox-custom">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    Remember me
+                </label>
+                <a class="form-link" href="#" id="forgot-link">Forgot password?</a>
+            </div>
+
+            <button class="btn-primary" type="submit" id="login-btn">
+                <span class="btn-text">Sign In</span>
+                <div class="btn-loader"><div class="spinner"></div></div>
+            </button>
+        </form>
+
+        <!-- ===== SIGNUP FORM (hidden) ===== -->
+        <form id="signup-form" style="display:none" autocomplete="on">
+            <div class="form-group">
+                <label class="form-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Full Name
+                </label>
+                <div class="form-input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <input class="form-input" type="text" id="signup-name" placeholder="John Doe" autocomplete="name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 4L12 13 2 4"/></svg>
+                    Email
+                </label>
+                <div class="form-input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 4L12 13 2 4"/></svg>
+                    <input class="form-input" type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="3"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    Password
+                </label>
+                <div class="form-input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="3"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    <input class="form-input" type="password" id="signup-password" placeholder="Min. 8 characters" autocomplete="new-password" required minlength="8">
+                    <button type="button" class="toggle-password" data-target="signup-password" aria-label="Toggle password">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                </div>
+                <!-- Password strength -->
+                <div style="display:flex;gap:4px;margin-top:8px" id="strength-bars">
+                    <div style="flex:1;height:3px;border-radius:3px;background:var(--border);transition:background .3s"></div>
+                    <div style="flex:1;height:3px;border-radius:3px;background:var(--border);transition:background .3s"></div>
+                    <div style="flex:1;height:3px;border-radius:3px;background:var(--border);transition:background .3s"></div>
+                    <div style="flex:1;height:3px;border-radius:3px;background:var(--border);transition:background .3s"></div>
+                </div>
+                <div style="font-size:11px;color:var(--text-dim);margin-top:4px;font-family:var(--font-mono)" id="strength-text"></div>
+            </div>
+
+            <button class="btn-primary" type="submit" id="signup-btn" style="margin-top:24px">
+                <span class="btn-text">Create Account</span>
+                <div class="btn-loader"><div class="spinner"></div></div>
+            </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="auth-divider">
+            <div class="auth-divider-line"></div>
+            <span class="auth-divider-text">or continue with</span>
+            <div class="auth-divider-line"></div>
+        </div>
+
+        <!-- Social -->
+        <div class="social-btns">
+            <button class="btn-social" type="button" id="google-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Continue with Google
+            </button>
+        </div>
+
+        <div class="auth-terms">
+            By continuing, you agree to VOXAR's<br>
+            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+
+    <!-- ========== FORGOT PASSWORD MODAL ========== -->
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal" id="forgot-modal">
+        <button class="modal-close" id="modal-close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <h3 class="modal-title">Reset password</h3>
+        <p class="modal-desc">Enter your email address and we'll send you a reset link.</p>
+        <div class="form-group" style="margin-bottom:24px">
+            <div class="form-input-wrap">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 4L12 13 2 4"/></svg>
+                <input class="form-input" type="email" id="reset-email" placeholder="you@example.com">
+            </div>
+        </div>
+        <button class="btn-primary" type="button" id="reset-btn">
+            <span class="btn-text">Send Reset Link</span>
+            <div class="btn-loader"><div class="spinner"></div></div>
+        </button>
+    </div>
+
+    <!-- ========== TOAST ========== -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toast-icon"></div>
+        <span id="toast-text"></span>
+    </div>
+
+    <script>
+        // ========== ENTRANCE ANIMATION ==========
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+            // Brand panel
+            tl.fromTo('.brand-logo', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 0.2)
+              .fromTo('.brand-headline', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1 }, 0.4)
+              .fromTo('.brand-sub', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 0.6)
+              .fromTo('.brand-stats', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 0.8)
+              .fromTo('.floating-badge', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, stagger: 0.15 }, 1);
+
+            // Form panel
+            tl.fromTo('.auth-header', { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.8 }, 0.3)
+              .fromTo('.auth-tabs', { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.6 }, 0.5)
+              .fromTo('#login-form .form-group', { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.1 }, 0.6)
+              .fromTo('.form-row', { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5 }, 0.9)
+              .fromTo('#login-btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, 1)
+              .fromTo('.auth-divider', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.1)
+              .fromTo('.social-btns', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, 1.2)
+              .fromTo('.auth-terms', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.3);
+        });
+
+        // ========== TAB SWITCHING ==========
+        const tabLogin = document.getElementById('tab-login');
+        const tabSignup = document.getElementById('tab-signup');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const authTitle = document.getElementById('auth-title');
+        const authSubtitle = document.getElementById('auth-subtitle');
+        const switchLink = document.getElementById('switch-to-signup');
+
+        function showLogin() {
+            tabLogin.classList.add('active');
+            tabSignup.classList.remove('active');
+            authTitle.textContent = 'Welcome back';
+            authSubtitle.innerHTML = 'New to VOXAR? <a href="#" id="switch-to-signup">Create an account</a>';
+            document.getElementById('switch-to-signup').addEventListener('click', (e) => { e.preventDefault(); showSignup(); });
+
+            gsap.to(signupForm, { opacity: 0, x: 20, duration: 0.2, onComplete: () => {
+                signupForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                gsap.fromTo(loginForm, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4 });
+            }});
+        }
+
+        function showSignup() {
+            tabSignup.classList.add('active');
+            tabLogin.classList.remove('active');
+            authTitle.textContent = 'Create account';
+            authSubtitle.innerHTML = 'Already have an account? <a href="#" id="switch-to-login">Sign in</a>';
+            document.getElementById('switch-to-login').addEventListener('click', (e) => { e.preventDefault(); showLogin(); });
+
+            gsap.to(loginForm, { opacity: 0, x: -20, duration: 0.2, onComplete: () => {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                gsap.fromTo(signupForm, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.4 });
+                gsap.fromTo(signupForm.querySelectorAll('.form-group'), { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 });
+            }});
+        }
+
+        tabLogin.addEventListener('click', showLogin);
+        tabSignup.addEventListener('click', showSignup);
+        switchLink.addEventListener('click', (e) => { e.preventDefault(); showSignup(); });
+
+        // ========== PASSWORD TOGGLE ==========
+        document.querySelectorAll('.toggle-password').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const input = document.getElementById(btn.dataset.target);
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                btn.innerHTML = isPassword
+                    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+                    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+            });
+        });
+
+        // ========== PASSWORD STRENGTH ==========
+        const signupPw = document.getElementById('signup-password');
+        const strengthBars = document.getElementById('strength-bars').children;
+        const strengthText = document.getElementById('strength-text');
+
+        signupPw.addEventListener('input', () => {
+            const val = signupPw.value;
+            let score = 0;
+            if (val.length >= 8) score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const colors = ['', '#ef4444', '#f59e0b', '#3b82f6', '#22c55e'];
+            const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+
+            Array.from(strengthBars).forEach((bar, i) => {
+                bar.style.background = i < score ? colors[score] : 'var(--border)';
+            });
+            strengthText.textContent = val ? labels[score] || '' : '';
+            strengthText.style.color = colors[score] || 'var(--text-dim)';
+        });
+
+        // ========== FORM SUBMISSION ==========
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toast-icon');
+            const toastText = document.getElementById('toast-text');
+
+            toastIcon.className = `toast-icon toast-icon--${type}`;
+            toastIcon.innerHTML = type === 'success'
+                ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>'
+                : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+            toastText.textContent = message;
+
+            toast.classList.add('visible');
+            setTimeout(() => toast.classList.remove('visible'), 4000);
+        }
+
+        // Login
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            btn.classList.add('loading');
+
+            setTimeout(() => {
+                btn.classList.remove('loading');
+                showToast('Signed in successfully');
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1000);
+            }, 1500);
+        });
+
+        // Signup
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('signup-btn');
+            btn.classList.add('loading');
+
+            setTimeout(() => {
+                btn.classList.remove('loading');
+                showToast('Account created successfully');
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1000);
+            }, 1500);
+        });
+
+        // ========== FORGOT PASSWORD MODAL ==========
+        const forgotLink = document.getElementById('forgot-link');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const forgotModal = document.getElementById('forgot-modal');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal() {
+            modalBackdrop.classList.add('active');
+            forgotModal.classList.add('active');
+        }
+        function closeModal() {
+            modalBackdrop.classList.remove('active');
+            forgotModal.classList.remove('active');
+        }
+
+        forgotLink.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+        modalBackdrop.addEventListener('click', closeModal);
+        modalClose.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            const btn = document.getElementById('reset-btn');
+            btn.classList.add('loading');
+            setTimeout(() => {
+                btn.classList.remove('loading');
+                closeModal();
+                showToast('Reset link sent to your email');
+            }, 1500);
+        });
+
+        // ========== INPUT FOCUS EFFECTS ==========
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', () => {
+                gsap.to(input.closest('.form-input-wrap'), { scale: 1.01, duration: 0.2, ease: 'power2.out' });
+            });
+            input.addEventListener('blur', () => {
+                gsap.to(input.closest('.form-input-wrap'), { scale: 1, duration: 0.3, ease: 'power2.out' });
+            });
+        });
+
+        // ========== GOOGLE BTN ==========
+        document.getElementById('google-btn').addEventListener('click', () => {
+            showToast('Google OAuth — connect your backend');
+        });
+    </script>
+</body>
+</html>
