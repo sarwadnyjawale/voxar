@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useState } from "react";
 import {
   Play,
@@ -187,9 +188,8 @@ export default function HistoryPage() {
             </thead>
             <tbody>
               {filtered.map((job) => (
-                <>
-                  <tr
-                    key={job.id}
+                <React.Fragment key={job.id}>
+                <tr
                     className="border-b border-voxar-border/20 last:border-0 hover:bg-voxar-surface/50 cursor-pointer"
                     onClick={() => setExpandedJob(expandedJob === job.id ? null : job.id)}
                   >
@@ -259,7 +259,7 @@ export default function HistoryPage() {
                       </td>
                     </tr>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </tbody>
           </table>

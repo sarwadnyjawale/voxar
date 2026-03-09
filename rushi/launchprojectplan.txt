@@ -1,0 +1,821 @@
+================================================================================
+VOXAR LAUNCH STRATEGY & PROJECT PLAN
+================================================================================
+Prepared: March 2026
+Status: Pre-Launch
+Document Version: 1.0
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+1.  Product Overview
+2.  Unique Value Proposition
+3.  Target Audience Segments
+4.  Pricing Strategy Validation
+5.  Content Marketing Strategy
+6.  Social Media Launch Strategy
+7.  YouTube Content Plan
+8.  Product Hunt Launch Plan
+9.  Influencer Outreach Strategy
+10. Community Building
+11. SEO Strategy
+12. Launch Day Timeline
+13. First 90-Day Growth Roadmap
+14. System Architecture Summary
+15. Local Development Run Guide
+16. Deployment Checklist
+17. Security Recommendations
+
+================================================================================
+1. PRODUCT OVERVIEW
+================================================================================
+
+VOXAR is an AI-powered voice platform built for the Indian market and beyond.
+It provides neural text-to-speech, voice cloning, speech-to-text transcription,
+and speaker diarization across 12 Indian languages.
+
+CORE CAPABILITIES:
+
+  VXR-Core     Text-to-Speech synthesis using XTTS v2 (English, Hindi, Marathi)
+  VXR-Native   Regional language TTS via MMS + OpenVoice voice conversion
+               (Tamil, Telugu, Bengali, Kannada, Malayalam, Gujarati, Punjabi, Odia)
+  VXR-Replica  Voice cloning from a single audio sample
+  VXR-Scribe   Speech-to-text transcription with Whisper + speaker diarization
+  VXR-Omnix    Intelligent text preprocessing (Hinglish, numbers, dates, currency)
+  VXR-Master   Audio post-processing and mastering pipeline
+
+SUPPORTED LANGUAGES: 12
+  English, Hindi, Marathi, Tamil, Telugu, Bengali, Kannada,
+  Malayalam, Gujarati, Punjabi, Odia, and more via MMS.
+
+TECHNOLOGY STACK:
+
+  Frontend    Next.js 16, custom dark glass CSS, GSAP animations, Zustand
+  Backend     Node.js Express, MongoDB, JWT auth, Razorpay payments
+  AI Engine   Python FastAPI, XTTS v2, MMS-TTS, OpenVoice, Whisper
+  Deployment  Vercel (frontend), Railway (backend), RunPod/Vast.ai (GPU)
+
+================================================================================
+2. UNIQUE VALUE PROPOSITION
+================================================================================
+
+"India's first AI voice platform with native support for 12 Indian languages."
+
+WHY VOXAR:
+
+  1. No other platform offers native TTS in Tamil, Telugu, Kannada, Malayalam,
+     Bengali, Gujarati, Punjabi, and Odia with voice cloning.
+  2. Hinglish-first preprocessing — handles code-mixed Hindi-English text
+     natively, which ElevenLabs, PlayHT, and others cannot do.
+  3. INR pricing — plans start at Rs. 199/month, making professional TTS
+     accessible to Indian creators who can't afford $22/month USD tools.
+  4. Voice marketplace — creators can upload voices and earn royalties
+     (70/30 split), building a community-driven voice library.
+  5. Full pipeline — TTS + STT + cloning + subtitles in one platform.
+     No need to juggle multiple tools.
+
+COMPETITIVE LANDSCAPE:
+
+  ElevenLabs      $5-99/mo USD, limited Indian language support
+  PlayHT          $39-99/mo USD, Hindi only, no regional languages
+  Murf.ai         $26-66/mo USD, Hindi and Tamil, no cloning for regional
+  Speechify       $139/yr USD, consumer-focused, no API
+  VOXAR           Rs. 199-4999/mo, 12 Indian languages, full API
+
+================================================================================
+3. TARGET AUDIENCE SEGMENTS
+================================================================================
+
+PRIMARY (Revenue Focus):
+
+  A. YouTube Creators (Hindi/Regional)
+     - 25M+ Indian YouTube channels
+     - Need voiceovers for faceless channels, dubbing, narration
+     - Pain: manual recording or expensive freelancers
+     - Value: instant voiceover in their native language
+
+  B. EdTech Companies
+     - Byju's, Unacademy, Physics Wallah, and 500+ smaller platforms
+     - Need course narration in multiple Indian languages
+     - Pain: hiring voice actors for each language is expensive
+     - Value: one voice, all 12 languages, instant turnaround
+
+  C. Podcast Creators
+     - 4M+ podcast listeners in India (growing 30% YoY)
+     - Need intro/outro generation, multilingual episodes
+     - Pain: limited Hindi/regional TTS options
+     - Value: studio-quality voice without recording
+
+SECONDARY (Growth & Virality):
+
+  D. Short-form Video Creators (Reels, Shorts)
+     - 200M+ short-form creators in India
+     - Need quick voiceovers for trending content
+     - Pain: CapCut/InShot TTS sounds robotic
+     - Value: cinematic voice quality, instant generation
+
+  E. Audiobook Publishers
+     - Indian audiobook market growing at 25% CAGR
+     - Need long-form narration in multiple voices
+     - Pain: recording 8-hour books is expensive
+     - Value: generate full audiobooks with consistent voice
+
+  F. Accessibility (NGOs, Government)
+     - Screen readers, government announcements, public services
+     - Need text-to-speech in regional languages
+     - Value: free tier enables basic accessibility use
+
+================================================================================
+4. PRICING STRATEGY VALIDATION
+================================================================================
+
+CURRENT PRICING (INR):
+
+  Free         Rs. 0      3 min TTS (lifetime), no STT, no cloning
+  Access       Rs. 199/mo   10 min TTS, 15 min STT, 1 clone
+  Starter      Rs. 499/mo   120 min TTS, 300 min STT, 3 clones
+  Creator      Rs. 1,499/mo 500 min TTS, 1,200 min STT, 10 clones
+  Pro          Rs. 4,999/mo 2,000 min TTS, 6,000 min STT, 25 clones, API
+  Enterprise   Custom       Unlimited everything, dedicated support
+
+  Annual discount: 20% off (billed yearly)
+
+VALIDATION:
+
+  The pricing is competitive for the Indian market:
+  - ElevenLabs Starter ($5/mo) gives 30 min TTS. VOXAR Access (Rs. 199) gives
+    10 min TTS + 15 min STT + 1 clone — more features at a lower price point.
+  - The Starter plan (Rs. 499 ~ $6) gives 120 min TTS, making it the best
+    value TTS platform for Indian creators.
+  - Creator and Pro plans target serious professionals and small businesses.
+  - Free tier (3 min lifetime) is intentionally limited to drive conversions
+    while allowing users to test quality.
+
+RECOMMENDATION:
+  - Consider a 7-day free trial of the Starter plan for new signups.
+  - Add a "Student" plan at Rs. 99/mo (30 min TTS, 30 min STT) to capture
+    the college creator demographic.
+
+================================================================================
+5. CONTENT MARKETING STRATEGY
+================================================================================
+
+BLOG (voxar.in/blog):
+
+  Launch with 10 SEO-optimized articles:
+
+  1. "How to Create a YouTube Channel Without Showing Your Face"
+     - Target: faceless YouTube creators
+     - Keywords: AI voiceover, YouTube automation, text to speech Hindi
+
+  2. "Best AI Voice Generators for Hindi Content in 2026"
+     - Target: comparison searchers
+     - Keywords: Hindi TTS, AI voice Hindi, text to speech Hindi
+
+  3. "How to Clone Your Voice with AI (Step-by-Step Guide)"
+     - Target: voice cloning curious users
+     - Keywords: voice cloning, AI voice clone, clone my voice
+
+  4. "AI Dubbing: Convert Your English Videos to Hindi Automatically"
+     - Target: existing English creators wanting Hindi audience
+     - Keywords: AI dubbing, translate video to Hindi
+
+  5. "The Complete Guide to AI Audiobook Creation"
+     - Target: authors and publishers
+     - Keywords: AI audiobook, text to audiobook, audiobook creator
+
+  6. "VOXAR vs ElevenLabs: Which AI Voice Tool is Better for Indian Creators?"
+     - Target: comparison searchers
+     - Keywords: ElevenLabs alternative India, best TTS India
+
+  7. "How EdTech Companies Use AI Voice for Course Content"
+     - Target: EdTech decision-makers
+     - Keywords: AI voice education, TTS for e-learning
+
+  8. "Create Professional Podcast Intros with AI Voice"
+     - Target: podcast creators
+     - Keywords: podcast intro maker, AI podcast voice
+
+  9. "Tamil/Telugu/Bengali AI Voice: How VOXAR Supports Regional Languages"
+     - Target: regional language creators
+     - Keywords: Tamil TTS, Telugu text to speech, Bengali AI voice
+
+  10. "API Guide: Integrate VOXAR TTS into Your App"
+      - Target: developers
+      - Keywords: TTS API India, text to speech API, voice API
+
+  Publishing cadence: 2 articles/week for 5 weeks, then 1/week ongoing.
+
+================================================================================
+6. SOCIAL MEDIA LAUNCH STRATEGY
+================================================================================
+
+HANDLES (Secure immediately):
+  Twitter/X     @VoxarAI
+  Instagram     @VoxarAI
+  YouTube       @VoxarAI
+  LinkedIn      VOXAR AI
+  Discord       discord.gg/voxar
+  Telegram      t.me/voxar
+
+PRE-LAUNCH (2 weeks before):
+
+  Week -2:
+    - Post teaser: "Something is coming for Indian creators..."
+    - Behind-the-scenes: "Building India's first 12-language AI voice platform"
+    - Show voice quality comparison (VOXAR vs competitors)
+
+  Week -1:
+    - Launch waitlist page
+    - Post demo videos: "Listen to AI speak Tamil/Telugu/Bengali"
+    - Creator testimonials from beta testers
+    - Countdown posts
+
+LAUNCH WEEK:
+
+  Day -1: "Tomorrow. 12 languages. One platform."
+  Day 0:  Launch announcement + Product Hunt + demo video
+  Day 1:  Voice quality showcase (side-by-side comparisons)
+  Day 2:  Voice cloning demo ("Clone your voice in 30 seconds")
+  Day 3:  Regional language showcase (one language per post)
+  Day 4:  Creator spotlight (first users and their use cases)
+  Day 5:  Behind the tech (how VOXAR works, architecture)
+  Day 6:  Marketplace announcement (earn money with your voice)
+  Day 7:  Week 1 recap + user count milestone
+
+POST-LAUNCH (ongoing):
+
+  Content pillars (rotate weekly):
+    Monday:    Product tip / feature spotlight
+    Wednesday: Creator showcase / use case
+    Friday:    Voice demo (new voice or language)
+    Weekend:   Meme / trending audio recreation with AI
+
+  Monthly:
+    - Monthly stats (users, minutes generated, languages used)
+    - Feature release announcements
+    - Creator earnings showcase (marketplace)
+
+================================================================================
+7. YOUTUBE CONTENT PLAN
+================================================================================
+
+CHANNEL: @VoxarAI
+
+  Launch Video (publish Day 0):
+    "VOXAR: AI Voice Platform for Indian Creators | 12 Languages"
+    - 2-3 minute product demo
+    - Show TTS in Hindi, English, Tamil, Telugu, Bengali
+    - Show voice cloning in action
+    - Pricing comparison with ElevenLabs
+    - CTA: Sign up for free
+
+  Tutorial Series (Week 1-4):
+    1. "How to Generate Your First AI Voice in 60 Seconds"
+    2. "Clone Your Voice with VOXAR (Complete Tutorial)"
+    3. "Create a Hindi YouTube Video with AI Voiceover"
+    4. "VOXAR API: Add TTS to Your App in 5 Minutes"
+
+  Comparison Videos:
+    1. "VOXAR vs ElevenLabs: Hindi Voice Quality Test"
+    2. "Best AI Voice Tools for Indian Creators (2026)"
+    3. "Can AI Replace Voice Actors? VOXAR Quality Test"
+
+  Weekly Shorts:
+    - 30-60 second demos of different voices and languages
+    - "AI speaks [language] | VOXAR Demo"
+    - Voice cloning before/after comparisons
+    - Famous quotes read by AI voices
+
+  Target: 50 videos in first 90 days, minimum 2 Shorts/week.
+
+================================================================================
+8. PRODUCT HUNT LAUNCH PLAN
+================================================================================
+
+TIMING:
+  - Launch on a Tuesday at 12:01 AM PT (most successful day)
+  - Avoid launches during major tech events or holidays
+
+PRE-LAUNCH PREPARATION:
+
+  1. Create Product Hunt maker profile 2 weeks before
+  2. Gather 20+ hunters/followers before launch
+  3. Prepare assets:
+     - Hero image: 1270x760px (dark theme, voice waveform, "12 Languages")
+     - Gallery: 5 screenshots (landing page, dashboard, TTS, cloning, voices)
+     - Demo video: 90 seconds max
+     - Logo: 240x240px
+  4. Write tagline: "AI voice platform with native support for 12 Indian languages"
+  5. Write description (300-500 words):
+     - What is VOXAR
+     - Why it exists (Indian creators need affordable, native-language TTS)
+     - Key features (TTS, cloning, STT, marketplace)
+     - Pricing (Free to Pro)
+     - Tech stack mention (shows credibility)
+
+LAUNCH DAY:
+
+  12:00 AM PT  Go live on Product Hunt
+  12:15 AM PT  Post on Twitter/X with PH link
+  12:30 AM PT  Send email to waitlist
+  01:00 AM PT  Post in Discord communities (Indie Hackers, SaaS)
+  08:00 AM IST Post on Indian tech communities (r/IndianStartups, YourStory)
+  10:00 AM IST Share in WhatsApp groups (tech, creator communities)
+  12:00 PM IST LinkedIn post
+  02:00 PM IST Respond to all PH comments
+  06:00 PM IST Thank you post with first-day stats
+  11:00 PM PT  Final push post
+
+TARGET: Top 5 Product of the Day
+
+POST-PH:
+  - Share badge on website
+  - Write "Our Product Hunt Launch Story" blog post
+  - Thank community with a special offer (extended free trial)
+
+================================================================================
+9. INFLUENCER OUTREACH STRATEGY
+================================================================================
+
+TIER 1 - Tech YouTubers (India):
+  - Ishan Sharma (1M+ subs) — AI/SaaS reviews
+  - Hitesh Choudhary (1M+ subs) — developer tools
+  - CodeWithHarry (18M+ subs) — tech tutorials
+  - Technical Guruji (22M+ subs) — tech reviews
+  Approach: Free Pro plan + sponsored review
+
+TIER 2 - Creator Economy YouTubers:
+  - Think School (5M+ subs) — business/creator content
+  - Sahil Joshi (500K+ subs) — creator economy
+  - Indian creators in EdTech niche
+  Approach: Free Creator plan + affiliate link (15% commission)
+
+TIER 3 - Regional Language Creators:
+  - Top 5 Tamil YouTube channels
+  - Top 5 Telugu YouTube channels
+  - Top 5 Bengali YouTube channels
+  Approach: Free access + "your language is now supported" pitch
+
+TIER 4 - Twitter/X Tech Community:
+  - Indian indie hackers and SaaS builders
+  - AI/ML community (10K+ followers)
+  Approach: Free access + RT/quote tweet agreement
+
+OUTREACH TEMPLATE:
+  Subject: "Your audience can now create content in [Language] with AI"
+  Body: Brief intro, 30-sec demo link, offer (free Pro for 3 months),
+        no obligation to post if they don't like it.
+
+================================================================================
+10. COMMUNITY BUILDING
+================================================================================
+
+DISCORD SERVER (discord.gg/voxar):
+
+  Channels:
+    #announcements    Product updates, new features
+    #showcase         Users share content made with VOXAR
+    #voice-requests   Request new voices or languages
+    #help             Support and troubleshooting
+    #feedback         Feature requests and bug reports
+    #marketplace      Voice creators discuss listings and earnings
+    #dev-api          API integration help
+
+  Growth tactics:
+    - "Show your creation" weekly contest (best VOXAR-generated audio wins
+      1 month free Creator plan)
+    - Early access to new features for active members
+    - Creator badges (verified marketplace voice creators)
+
+TELEGRAM GROUP (t.me/voxar):
+  - Quick updates and announcements
+  - Community polls for feature prioritization
+  - Target Indian users who prefer Telegram over Discord
+
+CREATOR PROGRAM:
+  - "VOXAR Creator" badge for marketplace voice publishers
+  - Monthly earnings spotlight (anonymized)
+  - Creator meetups (virtual, quarterly)
+
+================================================================================
+11. SEO STRATEGY
+================================================================================
+
+PRIMARY KEYWORDS (India-focused):
+
+  High Volume:
+    "text to speech"                    90K/mo
+    "text to speech Hindi"              12K/mo
+    "AI voice generator"                40K/mo
+    "voice cloning"                     22K/mo
+
+  Medium Volume:
+    "text to speech Tamil"              3K/mo
+    "text to speech Telugu"             2.5K/mo
+    "text to speech Bengali"            2K/mo
+    "AI dubbing"                        5K/mo
+    "AI audiobook creator"              3K/mo
+    "ElevenLabs alternative India"      1.5K/mo
+
+  Long Tail:
+    "best AI voice for YouTube Hindi"   800/mo
+    "clone voice AI free"               2K/mo
+    "text to speech API India"          500/mo
+    "AI voice generator for education"  1K/mo
+
+ON-PAGE SEO:
+
+  1. Landing page title: "VOXAR - AI Voice Platform | TTS in 12 Indian Languages"
+  2. Meta description: "Generate studio-quality voiceovers in Hindi, Tamil,
+     Telugu, Bengali & 8 more languages. Voice cloning, transcription & more.
+     Plans from Rs. 199/month."
+  3. H1 tags on each page optimized for primary keywords
+  4. Blog posts target long-tail keywords (see Content Marketing section)
+  5. Schema markup: SoftwareApplication, FAQ, Product
+
+TECHNICAL SEO:
+  - Sitemap.xml auto-generated by Next.js
+  - robots.txt allowing all crawlers
+  - Fast load time (Vercel CDN, image optimization)
+  - Mobile-first design
+
+LINK BUILDING:
+  - Product Hunt listing (DA 90+)
+  - Guest posts on Indian tech blogs (YourStory, Inc42, Entrackr)
+  - GitHub profile with open-source tools (voice quality checker, etc.)
+  - Quora answers for "best text to speech Hindi" queries
+
+================================================================================
+12. LAUNCH DAY TIMELINE
+================================================================================
+
+T-14 DAYS:
+  [ ] Secure all social media handles
+  [ ] Set up Discord server with channels
+  [ ] Create waitlist landing page
+  [ ] Begin pre-launch social media posts
+  [ ] Start outreach to Tier 1 influencers
+
+T-7 DAYS:
+  [ ] Prepare Product Hunt assets
+  [ ] Record demo video (90 seconds)
+  [ ] Write and schedule all launch day social posts
+  [ ] Send beta invites to 50 creators for early feedback
+  [ ] Final QA on all user flows
+
+T-3 DAYS:
+  [ ] Deploy frontend to Vercel (production)
+  [ ] Deploy backend to Railway (production)
+  [ ] Deploy engine to RunPod (production GPU)
+  [ ] Set up MongoDB Atlas (production cluster)
+  [ ] Configure production environment variables
+  [ ] Run Razorpay plan setup with LIVE keys
+  [ ] Smoke test: register, login, generate, clone, transcribe
+
+T-1 DAY:
+  [ ] Final deploy and smoke test
+  [ ] Queue Product Hunt submission
+  [ ] Notify beta users about launch
+  [ ] Prepare launch day monitoring (uptime, errors, load)
+
+LAUNCH DAY (T-0):
+  00:01 PT   Product Hunt goes live
+  00:15 PT   Twitter announcement with PH link
+  00:30 PT   Email blast to waitlist
+  01:00 PT   Reddit, Hacker News, Discord communities
+  06:00 IST  Indian morning push (Twitter, LinkedIn, WhatsApp)
+  10:00 IST  Monitor server load, respond to PH comments
+  14:00 IST  Mid-day stats update on social
+  18:00 IST  Evening push, thank early adopters
+  22:00 IST  Day 1 recap post
+
+T+1 TO T+7:
+  - Daily social posts with user milestones
+  - Respond to all feedback and bug reports
+  - Publish first blog post (launch story)
+  - Share PH badge on website
+
+================================================================================
+13. FIRST 90-DAY GROWTH ROADMAP
+================================================================================
+
+MONTH 1 (Days 1-30): LAUNCH & VALIDATE
+
+  Goals:
+    - 1,000 registered users
+    - 100 paying customers
+    - 50 voice generations/day
+    - Product Hunt Top 5
+
+  Actions:
+    - Launch on Product Hunt, social media, communities
+    - Publish 8 blog posts (SEO foundation)
+    - Release 10 YouTube videos (tutorials + demos)
+    - Onboard 5 influencers with free Pro accounts
+    - Set up analytics (GA4, Mixpanel)
+    - Collect user feedback for V2 features
+    - Fix critical bugs from real user testing
+
+MONTH 2 (Days 31-60): GROW & ITERATE
+
+  Goals:
+    - 3,000 registered users
+    - 300 paying customers
+    - 200 voice generations/day
+    - 10 marketplace voice listings
+
+  Actions:
+    - Launch referral program (invite friend, get 30 min free TTS)
+    - Publish 8 more blog posts
+    - Launch affiliate program (15% recurring commission)
+    - Add Google OAuth for faster signups
+    - Ship top 5 user-requested features
+    - Begin email drip campaigns for free-to-paid conversion
+    - First creator earnings payout on marketplace
+
+MONTH 3 (Days 61-90): SCALE & MONETIZE
+
+  Goals:
+    - 8,000 registered users
+    - 800 paying customers
+    - 500 voice generations/day
+    - 50 marketplace voice listings
+    - Rs. 2 lakh MRR (monthly recurring revenue)
+
+  Actions:
+    - Launch VOXAR API documentation portal
+    - Partner with 2-3 EdTech companies (B2B pilot)
+    - Launch "VOXAR for Teams" (5+ seats)
+    - Ship mobile-responsive improvements
+    - Begin paid ads (Google Ads for high-intent keywords)
+    - Submit to G2, Capterra for reviews
+    - Plan VOXAR 2.0 features (real-time streaming TTS, emotion control)
+
+KEY METRICS TO TRACK:
+
+  - MRR (Monthly Recurring Revenue)
+  - User signups (daily, weekly, monthly)
+  - Free-to-paid conversion rate (target: 5-8%)
+  - Daily active users (DAU)
+  - Minutes generated (TTS + STT)
+  - Churn rate (target: <5% monthly)
+  - Customer acquisition cost (CAC)
+  - Net Promoter Score (NPS)
+
+================================================================================
+14. SYSTEM ARCHITECTURE SUMMARY
+================================================================================
+
+THREE-LAYER ARCHITECTURE:
+
+  FRONTEND (Next.js 16)
+    Location:     frontend/hanu/
+    Deployment:   Vercel (bom1 - Mumbai region)
+    Domain:       voxar.in
+    Config:       vercel.json (API rewrites to backend + engine)
+
+  BACKEND (Node.js Express)
+    Location:     backend/
+    Deployment:   Railway (nixpacks builder)
+    Domain:       api.voxar.in
+    Port:         3001
+    Database:     MongoDB Atlas
+    Config:       railway.toml
+
+  AI ENGINE (Python FastAPI)
+    Location:     engine/ + api/
+    Deployment:   RunPod or Vast.ai (GPU instance)
+    Domain:       engine.voxar.in
+    Port:         8000
+    GPU:          NVIDIA A100 40GB (production) or RTX 4060 8GB (dev)
+    Config:       Dockerfile.engine
+
+DATA FLOW:
+
+  User -> Vercel (frontend) -> Railway (backend API)
+                                    |
+                                    v
+                              MongoDB Atlas (data)
+                                    |
+                                    v
+                              RunPod (GPU engine)
+
+BACKEND ROUTES (9 modules, 35+ endpoints):
+
+  /api/v1/auth          Register, login, profile
+  /api/v1/tts           Text-to-speech generation
+  /api/v1/voices        Voice catalog, cloning
+  /api/v1/history       Generation history
+  /api/v1/projects      Studio projects
+  /api/v1/user          Usage stats, API keys
+  /api/v1/billing       Razorpay subscriptions
+  /api/v1/webhooks      Payment webhooks
+  /api/v1/marketplace   Community voice marketplace
+
+RATE LIMITS:
+  Auth:    10 requests/minute
+  TTS:     30 requests/minute
+  General: 100 requests/minute
+
+================================================================================
+15. LOCAL DEVELOPMENT RUN GUIDE
+================================================================================
+
+PREREQUISITES:
+  - Node.js 20+
+  - Python 3.10+
+  - MongoDB (local or Atlas)
+  - NVIDIA GPU with CUDA (for engine, or skip engine for frontend/backend dev)
+
+TERMINAL 1 — Python AI Engine:
+
+  cd engine
+  # First time only:
+  python -m venv ../venv
+  source ../venv/Scripts/activate    # Windows: ../venv/Scripts/activate
+  pip install -r ../requirements.txt
+
+  # Start server:
+  cd ..
+  python run_server.py
+  # Engine runs on http://localhost:8000
+  # Takes 30-60 seconds for XTTS model loading
+
+TERMINAL 2 — Node.js Backend:
+
+  cd backend
+
+  # First time only:
+  npm install
+
+  # Create .env file (copy from .env template and fill in values):
+  # MONGODB_URI=mongodb+srv://... or mongodb://localhost:27017/voxar
+  # JWT_SECRET=your-secret-here
+  # PYTHON_ENGINE_URL=http://localhost:8000
+
+  # Start server:
+  npm run dev
+  # Backend runs on http://localhost:3001
+
+TERMINAL 3 — Next.js Frontend:
+
+  cd frontend/hanu
+
+  # First time only:
+  npm install
+
+  # Start dev server:
+  npm run dev
+  # Frontend runs on http://localhost:3000
+
+VERIFICATION:
+
+  1. Backend health:  curl http://localhost:3001/health
+  2. Engine health:   curl http://localhost:8000/api/v1/health
+  3. Frontend:        Open http://localhost:3000 in browser
+
+QUICK TEST (without engine):
+
+  If you only want to test auth/credits/billing (no GPU needed):
+  - Start only Terminal 2 (backend) and Terminal 3 (frontend)
+  - TTS generation will fail (engine offline) but auth, projects,
+    history, and billing will work
+
+================================================================================
+16. DEPLOYMENT CHECKLIST
+================================================================================
+
+PRE-DEPLOYMENT:
+
+  [ ] MongoDB Atlas cluster created (M10+ for production)
+  [ ] MongoDB user created with read/write access
+  [ ] Network access configured (allow Railway + RunPod IPs)
+
+  [ ] Razorpay LIVE keys obtained
+  [ ] Run: node scripts/setup-razorpay-plans.js (with LIVE keys)
+  [ ] Webhook URL configured in Razorpay dashboard:
+      https://api.voxar.in/api/v1/webhooks/razorpay
+
+  [ ] Domain DNS configured:
+      voxar.in       -> Vercel
+      api.voxar.in   -> Railway
+      engine.voxar.in -> RunPod instance IP
+
+DEPLOY GPU ENGINE (RunPod/Vast.ai):
+
+  1. Create GPU instance (A100 40GB recommended)
+  2. SSH into instance
+  3. Clone repo: git clone https://github.com/voxar/voxar.git
+  4. Build: docker build -f Dockerfile.engine -t voxar-engine .
+  5. Run: ./deploy-engine.sh
+  6. Verify: curl http://localhost:8000/api/v1/health
+  7. Set up domain: engine.voxar.in -> instance IP
+
+DEPLOY BACKEND (Railway):
+
+  1. Connect GitHub repo to Railway
+  2. Set root directory: backend/
+  3. Set environment variables:
+     PORT=3001
+     NODE_ENV=production
+     MONGODB_URI=mongodb+srv://...
+     JWT_SECRET=<64-char-random-string>
+     PYTHON_ENGINE_URL=https://engine.voxar.in
+     CORS_ORIGIN=https://voxar.in
+     RAZORPAY_KEY_ID=rzp_live_xxx
+     RAZORPAY_KEY_SECRET=xxx
+     RAZORPAY_WEBHOOK_SECRET=xxx
+  4. Deploy
+  5. Set custom domain: api.voxar.in
+  6. Verify: curl https://api.voxar.in/health
+
+DEPLOY FRONTEND (Vercel):
+
+  1. Connect GitHub repo to Vercel
+  2. Set root directory: frontend/hanu/
+  3. Set environment variables:
+     NEXT_PUBLIC_API_URL=https://engine.voxar.in
+     NEXT_PUBLIC_BACKEND_URL=https://api.voxar.in
+  4. Deploy
+  5. Set custom domain: voxar.in
+  6. Verify: open https://voxar.in
+
+POST-DEPLOYMENT:
+
+  [ ] Test registration flow (voxar.in -> api.voxar.in)
+  [ ] Test TTS generation (api.voxar.in -> engine.voxar.in)
+  [ ] Test Razorpay checkout (test transaction)
+  [ ] Test webhook delivery (Razorpay -> api.voxar.in/api/v1/webhooks/razorpay)
+  [ ] Set up uptime monitoring (UptimeRobot or similar)
+  [ ] Set up error tracking (Sentry)
+  [ ] Set up log aggregation
+
+================================================================================
+17. SECURITY RECOMMENDATIONS
+================================================================================
+
+CRITICAL (Fix before launch):
+
+  1. REMOVE JWT SECRET FALLBACK
+     File: backend/middleware/auth.js
+     Issue: Hardcoded fallback 'voxar-dev-secret-change-in-production'
+     Fix: Remove fallback, require JWT_SECRET env var, fail fast if missing
+
+  2. RESTRICT CORS IN PRODUCTION
+     File: frontend/hanu/vercel.json
+     Issue: Access-Control-Allow-Origin: * on API routes
+     Fix: Change to voxar.in only
+
+  3. ADD EMAIL VERIFICATION
+     Issue: Users can register with any email without verification
+     Fix: Send verification email on register, require click before full access
+
+  4. ADD PASSWORD RESET FLOW
+     Issue: No forgot-password backend endpoint
+     Fix: Add POST /api/v1/auth/forgot-password and /reset-password endpoints
+
+HIGH (Fix within first month):
+
+  5. SECURE STATIC UPLOADS
+     File: backend/server.js
+     Issue: /uploads served without authentication
+     Fix: Add auth middleware or serve via signed URLs with expiry
+
+  6. ADD MONGODB AUTH TO DOCKER
+     File: docker-compose.yml
+     Issue: MongoDB has no authentication in docker-compose
+     Fix: Add MONGO_INITDB_ROOT_USERNAME/PASSWORD environment variables
+
+  7. INPUT SANITIZATION
+     Issue: User inputs go directly into MongoDB queries ($regex)
+     Fix: Use mongo-sanitize package or escape special regex characters
+
+  8. FILE CLEANUP ON FAILURE
+     Issue: Failed voice cloning uploads remain on disk
+     Fix: Add cleanup in catch blocks and periodic cleanup cron job
+
+MEDIUM (Fix within first quarter):
+
+  9. ADD REQUEST LOGGING
+     Install morgan middleware for HTTP request logging
+
+  10. ADD SECURITY HEADERS
+      Install helmet middleware for security headers (CSP, HSTS, etc.)
+
+  11. IMPLEMENT API KEY ROTATION
+      Allow users to rotate API keys without downtime
+
+  12. ADD AUDIT LOG
+      Track sensitive actions (login, plan change, payout request)
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+
+Prepared by: VOXAR Engineering Team
+Last Updated: March 2026
+Next Review: Before public launch
+
+For questions: engineering@voxar.in

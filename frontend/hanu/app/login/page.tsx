@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
+import { useAuthStore } from '@/stores/authStore'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -48,16 +49,29 @@ export default function LoginPage() {
     setTimeout(() => setToast(null), 3000)
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login, register, isLoading: authLoading, error: authError, clearError } = useAuthStore()
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !password) { showToast('Please fill in all fields', 'error'); return }
     if (isSignUp && !name) { showToast('Please enter your name', 'error'); return }
     setLoading(true)
-    setTimeout(() => {
+    clearError()
+
+    try {
+      if (isSignUp) {
+        await register(name, email, password)
+        showToast('Account created!', 'success')
+      } else {
+        await login(email, password)
+        showToast('Welcome back!', 'success')
+      }
+      setTimeout(() => router.push('/dashboard'), 500)
+    } catch (err: any) {
+      showToast(err.message || 'Authentication failed', 'error')
+    } finally {
       setLoading(false)
-      showToast(isSignUp ? 'Account created!' : 'Welcome back!', 'success')
-      setTimeout(() => router.push('/dashboard'), 800)
-    }, 1500)
+    }
   }
 
   return (

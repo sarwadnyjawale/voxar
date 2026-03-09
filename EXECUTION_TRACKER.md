@@ -17,14 +17,16 @@
 
 - [x] Phase 8: Next.js Frontend Dashboard (v1.0.0)
 
+- [x] Phase 9: Node.js Backend & Credit System (v1.0.0)
+
+- [x] Phase 10: Razorpay Payments (v1.1.0)
+
 ## In Progress
 - [ ] Phase 4: Generate voice previews for all 20 voices (requires GPU)
 
 ## Pending
-- [ ] Phase 9: Node.js Backend & Credit System
-- [ ] Phase 10: Razorpay Payments
-- [ ] Phase 10.5: Voice Marketplace (community voice uploads, creator royalties)
-- [ ] Phase 11: Cloud Deployment
+- [x] Phase 10.5: Voice Marketplace (community voice uploads, creator royalties) (v1.2.0)
+- [x] Phase 11: Cloud Deployment (Docker, Vercel, Railway, RunPod)
 - [ ] Phase 12: Marketing & Launch
 
 ## Session Log
@@ -335,3 +337,225 @@ Built the complete VOXAR frontend with Next.js 14, TailwindCSS, shadcn/ui, and Z
 
 **Build:** All 15 routes compile successfully (Next.js 16.1.6 + Turbopack)
 **Frontend version:** 1.0.0
+
+### Session 9 (Frontend Rebuild -- Premium Dark Glass Theme)
+User rejected Phase 8 frontend. Rebuilt from scratch in `frontend/hanu/` with a premium dark glass theme.
+
+**Landing Page (`frontend/hanu/app/page.tsx`):**
+- Custom CSS design system (no Tailwind) with glass morphism
+- GSAP + ScrollTrigger animations (parallax hero, stagger reveals, 3D cube)
+- Full pricing cards component (6 tiers: Free/Access/Starter/Creator/Pro/Enterprise)
+- Interactive demo widget, voice preview carousel, FAQ accordion
+- Design tokens: --accent (#8B5CF6), --bg-primary (#020005), --bg-glass, --border
+
+**Dashboard (14 routes):**
+- Sidebar with navigation to all routes
+- Studio Editor (block-based, ElevenLabs-style) -- multi-voice, timeline, play simulation
+- TTS page, Voice Library (trending/handpicked horizontal scroll + grid), Cloning (3-step wizard)
+- History (filtered table with type badges), Settings (Profile/Billing/API tabs)
+- Transcribe (drag-drop, speaker diarization, subtitle export)
+- Projects (grid with create + existing), Future Tools (8 upcoming features)
+
+**Zustand Stores:** authStore, ttsStore, sttStore, voiceStore, usageStore
+**API Client:** `lib/api.ts` with dual-backend support (FastAPI + Node.js)
+
+### Session 10 (Phase 9 -- Node.js Backend & Credit System -- v1.0.0)
+Built the complete Node.js business backend for auth, credits, and project management.
+
+**23 files created in `backend/`:**
+
+**Models (Mongoose):**
+- `models/User.js` -- User with plan tiers, usage tracking, API keys, bcrypt password hashing
+- `models/Project.js` -- Studio projects with speech blocks and voice assignments
+- `models/History.js` -- Generation history (TTS/STT/Clone) with status tracking
+- `models/Voice.js` -- User-cloned voices with sample paths and quality scores
+
+**Auth System:**
+- `middleware/auth.js` -- JWT middleware (authMiddleware, optionalAuth, generateToken)
+- `controllers/authController.js` -- register, login, getMe, updateProfile
+- `routes/auth.js` -- POST /register, POST /login, GET /me, PATCH /me
+
+**Credit System (`services/creditService.js`):**
+- 6 plan tiers matching landing page pricing exactly:
+  - Free: 3 min TTS (lifetime), 0 STT, 0 clones
+  - Access: 10 min TTS/mo, 15 min STT, 1 clone
+  - Starter: 120 min TTS/mo, 300 min STT, 3 clones
+  - Creator: 500 min TTS/mo, 1200 min STT, 10 clones
+  - Pro: 2000 min TTS/mo, 6000 min STT, 25 clones, API access
+  - Enterprise: Unlimited everything
+- Character-to-minutes conversion (750 chars/min)
+- Check/deduct functions for TTS, STT, and clones
+- Auto-reset on 30-day billing cycle
+- Usage summary endpoint for dashboard display
+
+**Engine Bridge (`services/engineBridge.js`):**
+- HTTP bridge to Python FastAPI server (port 8000)
+- generateTTS(), transcribe(), cloneVoice(), getVoiceCatalog(), healthCheck()
+- Timeout handling (2min TTS, 5min STT)
+
+**API Routes:**
+- `routes/tts.js` -- POST /generate (with credit check + deduction)
+- `routes/voices.js` -- GET /catalog, GET /my, POST /clone (multer upload), DELETE /:id
+- `routes/history.js` -- GET / (paginated, filtered), GET /:id, DELETE /:id
+- `routes/projects.js` -- CRUD (GET /, GET /:id, POST /, PATCH /:id, DELETE /:id)
+- `routes/user.js` -- GET /usage, POST /api-keys, DELETE /api-keys/:keyId
+
+**Server (`server.js`):**
+- Express + MongoDB (Mongoose) + CORS
+- All routes mounted under /api/v1/
+- Health check endpoint with engine status
+- Static file serving for uploads
+
+**Dependencies:** express, mongoose, jsonwebtoken, bcryptjs, cors, dotenv, multer, axios, uuid
+**All 20 files pass Node.js syntax check (node --check)**
+**Backend version:** 1.0.0
+
+### Session 11 (Phase 10 -- Razorpay Payments -- v1.1.0)
+Built the complete Razorpay payment integration for subscription billing.
+
+**8 new files created in `backend/`:**
+
+**Models:**
+- `models/Subscription.js` -- Razorpay subscription tracking (plan, status, billing period, dates, paid_count)
+- `models/Payment.js` -- Payment records (razorpay IDs, amount in paise, method, status, errors)
+
+**Service Layer:**
+- `services/razorpayService.js` -- Complete Razorpay SDK wrapper
+  - Plan definitions matching landing page pricing exactly (INR paise):
+    - Access: ₹199/mo (19900 paise), ₹159/mo annual
+    - Starter: ₹499/mo (49900 paise), ₹399/mo annual
+    - Creator: ₹1,499/mo (149900 paise), ₹1,199/mo annual
+    - Pro: ₹4,999/mo (499900 paise), ₹3,999/mo annual
+  - createRazorpayPlan(), createSubscription(), cancelSubscription(), pauseSubscription(), resumeSubscription()
+  - verifyPaymentSignature() (HMAC SHA-256 for checkout callback)
+  - verifyWebhookSignature() (HMAC SHA-256 for webhook events)
+  - createCustomer(), fetchSubscription(), fetchPayments()
+
+**Controllers:**
+- `controllers/billingController.js` -- 6 actions:
+  - getPlans: list pricing tiers
+  - subscribe: create Razorpay subscription + customer, cancel existing if upgrading
+  - verifyPayment: verify signature, activate plan, reset credits, record payment
+  - getSubscription: current subscription status (synced with Razorpay)
+  - cancelCurrentSubscription: cancel at cycle end (user keeps access)
+  - getPayments: paginated payment history
+
+- `controllers/webhookController.js` -- Handles 9 Razorpay events:
+  - subscription.authenticated/activated: activate user plan + reset credits
+  - subscription.charged: new billing cycle, reset monthly credits, record payment
+  - subscription.completed/cancelled: downgrade to free (cancelled retains until period end)
+  - subscription.halted: payment failures, immediate downgrade
+  - subscription.pending: update status
+  - payment.captured/failed: record in Payment model
+
+**Routes:**
+- `routes/billing.js` -- GET /plans, POST /subscribe, POST /verify, GET /subscription, POST /cancel, GET /payments
+- `routes/webhooks.js` -- POST /razorpay (raw body for signature verification)
+
+**Setup Script:**
+- `scripts/setup-razorpay-plans.js` -- Run once to create Razorpay plans via API
+
+**Modified files:**
+- `models/User.js` -- Added razorpay_customer_id, active_subscription ref, billing_period
+- `server.js` -- v1.0 -> v1.1: Raw body middleware for webhooks, billing + webhook route mounting
+- `.env` -- Added RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET, plan ID placeholders
+- `package.json` -- Added razorpay dependency
+
+**Checkout Flow:**
+1. Frontend calls POST /billing/subscribe with plan + period + razorpay_plan_id
+2. Backend creates Razorpay subscription, returns subscription_id + razorpay_key
+3. Frontend opens Razorpay Checkout with those params
+4. User completes payment on Razorpay
+5. Frontend receives callback, calls POST /billing/verify with signature
+6. Backend verifies, activates plan, resets credits
+7. Webhook confirms asynchronously (subscription.activated/charged)
+
+**Recurring Billing:**
+- Razorpay auto-charges at cycle end
+- Webhook (subscription.charged) resets monthly credits automatically
+- If payment fails, subscription.halted webhook downgrades user to free
+
+**All 28 backend files pass Node.js syntax check (node --check)**
+**Backend version:** 1.0.0 -> 1.1.0
+
+### Session 12 (Phase 10.5 -- Voice Marketplace -- v1.2.0)
+Built the community voice marketplace with creator royalties and quality gate.
+
+**5 new files created in `backend/`:**
+
+**Models:**
+- `models/MarketplaceVoice.js` -- Voice listing with consent framework, quality gate (min score 80), reviews, royalty tiers
+  - 3 royalty tiers: Standard (₹0.50), Premium (₹0.75), Elite (₹1.00) per generation
+  - Consent: is_own_voice, allows_commercial, allows_modification flags
+  - Reviews with 1-5 rating, auto-calculated average
+  - Indexed on status, category, creator, tags
+
+- `models/CreatorEarnings.js` -- Monthly earnings tracking per creator
+  - 70/30 revenue split (creator/VOXAR)
+  - Auto-calculates platform_fee and creator_payout on save
+  - Minimum payout: ₹200 (20000 paise)
+  - Bank transfer fee: ₹10 (1000 paise)
+  - Unique index on {creator, period}
+
+**Service Layer:**
+- `services/marketplaceService.js` -- Marketplace business logic
+  - recordUsage(): increment voice stats + creator earnings for current month
+  - meetsQualityGate(): verify quality_score >= 80
+  - getUnpaidEarnings(): aggregate unpaid/eligible periods
+  - requestPayout(): validate minimum, mark periods as requested
+
+**Controller:**
+- `controllers/marketplaceController.js` -- 8 actions:
+  - browseVoices: filter by category/language/gender/search, sort by popular/newest/rating/featured
+  - getVoice: single listing with creator info
+  - publishVoice: quality gate + consent validation + duplicate check
+  - unpublishVoice: creator-only removal
+  - reviewVoice: 1-5 rating with comment (can't review own voice, updates existing)
+  - getMyListings: creator's published voices
+  - getEarnings: last 12 months + unpaid balance
+  - requestPayout: min ₹200, credits or bank transfer (₹10 fee)
+
+**Routes:**
+- `routes/marketplace.js` -- Public: GET /voices, GET /voices/:id. Auth'd: POST /publish, DELETE /voices/:id, POST /voices/:id/review, GET /my-voices, GET /earnings, POST /payout
+
+**Modified:**
+- `server.js` -- v1.1.0 -> v1.2.0: Mounted marketplace routes at /api/v1/marketplace
+
+**All 32 backend files pass Node.js syntax check (node --check)**
+**Backend version:** 1.1.0 -> 1.2.0
+
+### Session 12 (Phase 11 -- Cloud Deployment)
+Built the complete deployment infrastructure for all three services.
+
+**9 files created in project root + frontend:**
+
+**Docker (GPU Engine):**
+- `Dockerfile.engine` -- NVIDIA CUDA 12.1 base, Python 3.10, ffmpeg, copies engine/ + api/ + voices/, exposes 8000
+  - Health check with 120s start period (XTTS model loading)
+  - Non-root user approach skipped (GPU access needs root typically)
+
+- `requirements.txt` -- Python engine dependencies (TTS, torch, pydub, noisereduce, librosa, transformers, openvoice, faster-whisper, fastapi, uvicorn)
+
+**Docker (Node.js Backend):**
+- `Dockerfile.backend` -- Node 20 Alpine, npm ci --omit=dev, non-root user (voxar), exposes 3001
+
+**Docker Compose (Local Dev):**
+- `docker-compose.yml` -- 3 services:
+  - mongo (7): persistent volume, port 27017
+  - backend: depends on mongo, connects via mongodb://mongo:27017/voxar, port 3001
+  - engine: NVIDIA GPU reservation, port 8000, model/output/voice volumes
+
+**Frontend (Vercel):**
+- `frontend/hanu/vercel.json` -- Region bom1 (Mumbai), API rewrites:
+  - /api/engine/* -> engine.voxar.in
+  - /api/v1/* -> api.voxar.in
+
+**Backend (Railway):**
+- `backend/railway.toml` -- Nixpacks builder, health check on /health, port 3001
+
+**GPU Engine (RunPod/Vast.ai):**
+- `deploy-engine.sh` -- Bash script: build Docker image, stop existing, run with --gpus all, wait up to 120s for health
+
+**Environment:**
+- `.env.production` -- Production template with MongoDB Atlas, live Razorpay keys, CORS, engine URL
+- `.dockerignore` -- Excludes node_modules, venv, .env files, build artifacts, large binaries, tests, docs

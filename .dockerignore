@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Build artifacts
+frontend/hanu/.next/
+frontend/.next/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output
+output/
+logs/
+*.wav
+*.mp3
+
+# Large binaries
+*.exe
+ffmpeg.exe
+ffplay.exe
+ffprobe.exe
+
+# Git
+.git/
+.gitignore
+
+# Tests
+verify_*.py
+run_test.py
+
+# Docs (not needed in container)
+*.md
+docs/
+ideas/
+playground/
+rushi/

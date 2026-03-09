@@ -124,27 +124,13 @@
         html::-webkit-scrollbar{width:6px}
         html::-webkit-scrollbar-track{background:var(--bg-primary)}
         html::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
-        body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--font-sans);overflow-x:hidden;cursor:crosshair;transition:background-color .6s ease,color .6s ease;line-height:1.6}
+        body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--font-sans);overflow-x:hidden;transition:background-color .6s ease,color .6s ease;line-height:1.6}
         ::selection{background:var(--accent);color:#fff}
         img{max-width:100%;display:block}
         a{text-decoration:none;color:inherit}
         button{font-family:inherit}
 
-        /* ---------- PRELOADER ---------- */
-        .preloader{position:fixed;inset:0;z-index:99999;background:var(--bg-primary);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;transition:opacity .6s ease,visibility .6s ease}
-        .preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-        .preloader-logo svg{width:80px;height:auto;color:var(--text-primary);filter:drop-shadow(0 0 20px var(--accent-glow-md))}
-        .preloader-logo svg path{stroke-dasharray:300;stroke-dashoffset:300;animation:drawLogo 2s ease forwards}
-        @keyframes drawLogo{to{stroke-dashoffset:0}}
-        .preloader-text{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:.2em;text-transform:uppercase}
-        .preloader-bar-track{width:200px;height:2px;background:var(--border);border-radius:2px;overflow:hidden}
-        .preloader-bar-fill{width:0;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-light));border-radius:2px;animation:preloadFill 2.2s ease forwards;box-shadow:0 0 12px var(--accent-glow-md)}
-        @keyframes preloadFill{0%{width:0}60%{width:70%}100%{width:100%}}
-        .preloader-split{position:absolute;inset:0;display:flex;pointer-events:none}
-        .preloader-split-left,.preloader-split-right{flex:1;background:var(--bg-primary);transition:transform .8s var(--ease-expo)}
-        .preloader.reveal .preloader-split-left{transform:translateX(-100%)}
-        .preloader.reveal .preloader-split-right{transform:translateX(100%)}
-        .preloader.reveal .preloader-logo,.preloader.reveal .preloader-text,.preloader.reveal .preloader-bar-track{opacity:0;transition:opacity .3s ease}
+        /* ---------- PRELOADER (removed — instant load) ---------- */
 
         /* ---------- GRAIN OVERLAY ---------- */
         .grain-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px 128px}
@@ -343,10 +329,11 @@
         .voices-count{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);padding:6px 16px;border-radius:var(--radius-full);margin-top:16px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
         .count-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;animation:pulse 2s infinite}
         .roster-table{width:100%;display:flex;flex-direction:column}
-        .roster-row{display:grid;grid-template-columns:64px 1fr 120px 180px;align-items:center;padding:20px;border-bottom:1px solid var(--border);transition:all .4s var(--ease-smooth);border-left:0 solid var(--accent);border-radius:4px;cursor:pointer}
+        .roster-row{display:grid;grid-template-columns:40px 64px 1fr 120px 180px;align-items:center;padding:20px;border-bottom:1px solid var(--border);transition:all .4s var(--ease-smooth);border-left:0 solid var(--accent);border-radius:4px;cursor:pointer}
         .roster-row:first-child{border-top:1px solid var(--border)}
         .roster-table:hover .roster-row{filter:blur(3px) saturate(.3);opacity:.3}
         .roster-table .roster-row:hover{filter:blur(0) saturate(1);opacity:1;background:linear-gradient(90deg,var(--bg-card-hover) 0%,transparent 100%);border-left:3px solid var(--accent);padding-left:24px;border-radius:var(--radius-sm)}
+        .r-number{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:.05em}
         .track-avatar{width:44px;height:44px;border-radius:var(--radius-md);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:all .3s var(--ease-smooth)}
         .roster-row:hover .track-avatar{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);border-radius:14px}
         .av-1{background:linear-gradient(135deg,#ff6b6b,#ee5a24,#f9ca24)}
@@ -408,14 +395,19 @@
         .billing-switch.active .billing-switch-knob{left:26px;background:var(--accent);box-shadow:0 0 12px var(--accent)}
         .billing-save{font-family:var(--font-mono);font-size:10px;color:#22c55e;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);padding:4px 10px;border-radius:var(--radius-full);letter-spacing:.08em;opacity:0;transform:translateX(-8px);transition:all .3s var(--ease-smooth)}
         .billing-save.visible{opacity:1;transform:translateX(0)}
-        .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:2px}
-        .pricing-card{background:var(--bg-primary);padding:48px 36px;position:relative;overflow:hidden;transition:all .5s var(--ease-smooth)}
+        .pricing-grid{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 0 20px;scrollbar-width:none;scroll-behavior:smooth}
+        .pricing-grid::-webkit-scrollbar{display:none}
+        .pricing-card{background:var(--bg-primary);padding:48px 36px;position:relative;overflow:hidden;transition:all .5s var(--ease-smooth);min-width:360px;flex-shrink:0;scroll-snap-align:start;border:1px solid var(--border);border-radius:var(--radius-xl)}
         body.light-mode .pricing-card{background:var(--bg-secondary)}
-        /* TrueFocus blur effect */
+        /* TrueFocus blur effect — ALL cards */
         .pricing-grid:hover .pricing-card{filter:blur(3px) saturate(0.4);opacity:0.35}
         .pricing-grid .pricing-card:hover{filter:blur(0) saturate(1);opacity:1}
         .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border);transition:all .4s ease}
         .pricing-card:hover::before{background:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
+        /* Pricing scroll nav */
+        .pricing-scroll-nav{display:flex;justify-content:center;gap:12px;margin-top:24px}
+        .pricing-scroll-btn{width:44px;height:44px;border-radius:50%;background:var(--bg-glass);border:1px solid var(--border);color:var(--text-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease}
+        .pricing-scroll-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow);box-shadow:0 0 20px var(--accent-glow)}
         .pricing-card--featured{background:rgba(139,92,246,.04)}
         body.light-mode .pricing-card--featured{background:var(--bg-tertiary)}
         .pricing-card--featured::before{background:var(--accent)!important;height:3px;box-shadow:0 0 30px var(--accent-glow)}
@@ -482,7 +474,8 @@
         .coming-card{background:var(--bg-primary);padding:32px 24px;text-align:center;transition:all .4s var(--ease-smooth);position:relative;opacity:.6}
         body.light-mode .coming-card{background:var(--bg-secondary)}
         .coming-card:hover{opacity:1;background:var(--bg-card-hover)}
-        .coming-card-icon{font-size:28px;margin-bottom:16px}
+        .coming-card-icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--bg-glass);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--text-muted);transition:all .3s ease}
+        .coming-card:hover .coming-card-icon{color:var(--accent);border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.08);box-shadow:0 0 20px var(--accent-glow)}
         .coming-card-title{font-size:14px;font-weight:600;margin-bottom:8px}
         .coming-badge{font-family:var(--font-mono);font-size:9px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;background:var(--bg-glass);border:1px solid var(--border-light);padding:4px 10px;border-radius:var(--radius-full);display:inline-block;margin-top:8px}
 
@@ -518,7 +511,7 @@
         /* ---------- RESPONSIVE ---------- */
         @media(max-width:1200px){
             .engine-grid{grid-template-columns:repeat(3,1fr)}
-            .pricing-grid{grid-template-columns:repeat(3,1fr)}
+            .pricing-grid{gap:16px}
             .footer-top{grid-template-columns:1.5fr repeat(2,1fr);gap:32px}
         }
         @media(max-width:1024px){
@@ -551,12 +544,12 @@
             .bento-grid{grid-template-columns:1fr}
             .bento-card--lg{grid-column:span 1}
             .engine-grid{grid-template-columns:repeat(2,1fr)}
-            .roster-row{grid-template-columns:52px 1fr 80px}
+            .roster-row{grid-template-columns:32px 52px 1fr 80px}
             .r-type{display:none}
             .voices-title{font-size:32px}
             .hiw-grid{grid-template-columns:1fr;gap:48px}
             .hiw-line{display:none}
-            .pricing-grid{grid-template-columns:1fr}
+            .pricing-card{min-width:300px}
             .testimonials-grid{grid-template-columns:1fr}
             .coming-grid{grid-template-columns:repeat(2,1fr)}
             .footer-top{grid-template-columns:1fr 1fr;gap:32px}
@@ -573,23 +566,7 @@
 </head>
 <body>
 
-    <!-- ===== PRELOADER ===== -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-logo">
-            <svg viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
-                <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
-            </svg>
-        </div>
-        <span class="preloader-text">Initializing</span>
-        <div class="preloader-bar-track">
-            <div class="preloader-bar-fill"></div>
-        </div>
-        <div class="preloader-split">
-            <div class="preloader-split-left"></div>
-            <div class="preloader-split-right"></div>
-        </div>
-    </div>
+    <!-- Preloader removed — instant page load -->
 
     <!-- ===== GRAIN OVERLAY ===== -->
     <div class="grain-overlay"></div>
@@ -969,6 +946,7 @@
                 <div class="roster-table gs-fade-up">
                     <!-- Voice 1: Arjun -->
                     <div class="roster-row">
+                        <div class="r-number">01</div>
                         <div class="track-avatar av-1">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -991,6 +969,7 @@
 
                     <!-- Voice 2: Priya -->
                     <div class="roster-row">
+                        <div class="r-number">02</div>
                         <div class="track-avatar av-2">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -1013,6 +992,7 @@
 
                     <!-- Voice 3: Vikram -->
                     <div class="roster-row">
+                        <div class="r-number">03</div>
                         <div class="track-avatar av-3">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -1035,6 +1015,7 @@
 
                     <!-- Voice 4: Maya -->
                     <div class="roster-row">
+                        <div class="r-number">04</div>
                         <div class="track-avatar av-4">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -1057,6 +1038,7 @@
 
                     <!-- Voice 5: Kabir -->
                     <div class="roster-row">
+                        <div class="r-number">05</div>
                         <div class="track-avatar av-5">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -1079,6 +1061,7 @@
 
                     <!-- Voice 6: Kavya -->
                     <div class="roster-row">
+                        <div class="r-number">06</div>
                         <div class="track-avatar av-6">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -1101,6 +1084,7 @@
 
                     <!-- Voice 7: Aisha -->
                     <div class="roster-row">
+                        <div class="r-number">07</div>
                         <div class="track-avatar av-1">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -1123,6 +1107,7 @@
 
                     <!-- Voice 8: Sahil -->
                     <div class="roster-row">
+                        <div class="r-number">08</div>
                         <div class="track-avatar av-3">
                             <div class="avatar-overlay"></div>
                             <i data-lucide="play" size="16"></i>
@@ -1281,10 +1266,8 @@
                             <li class="feature-item"><span class="feature-icon pro"><i data-lucide="check" size="12"></i></span> All generation modes</li>
                         </ul>
                     </div>
-                </div>
 
-                <!-- Pricing Row 2: Creator, Pro, Enterprise -->
-                <div class="pricing-grid gs-fade-up" style="margin-top:2px">
+                    <!-- Creator, Pro, Enterprise continue in same row -->
                     <!-- CREATOR -->
                     <div class="pricing-card">
                         <div class="card-tier-icon"><i data-lucide="mic" size="22"></i></div>
@@ -1350,6 +1333,16 @@
                             <li class="feature-item"><span class="feature-icon"><i data-lucide="check" size="12"></i></span> SSO & team management</li>
                         </ul>
                     </div>
+                </div>
+
+                <!-- Pricing scroll navigation -->
+                <div class="pricing-scroll-nav gs-fade-up">
+                    <button class="pricing-scroll-btn" id="pricing-prev" aria-label="Previous">
+                        <i data-lucide="chevron-left" size="20"></i>
+                    </button>
+                    <button class="pricing-scroll-btn" id="pricing-next" aria-label="Next">
+                        <i data-lucide="chevron-right" size="20"></i>
+                    </button>
                 </div>
 
                 <div class="pricing-footer gs-fade-up" style="text-align:center;margin-top:64px;padding-top:40px;border-top:1px solid var(--border)">
@@ -1436,7 +1429,7 @@
             <div class="container">
                 <div class="testimonials-header gs-fade-up">
                     <div class="section-tag">// What Creators Say</div>
-                    <h2 class="testimonials-title">Loved by creators<br>who ship.</h2>
+                    <h2 class="testimonials-title">Loved by creators<br>worldwide.</h2>
                 </div>
 
                 <div class="testimonials-grid gs-fade-up">
@@ -1525,42 +1518,42 @@
 
                 <div class="coming-grid gs-fade-up">
                     <div class="coming-card">
-                        <div class="coming-card-icon">🎬</div>
+                        <div class="coming-card-icon"><i data-lucide="film" size="20"></i></div>
                         <div class="coming-card-title">AI Video Dubbing</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
                     <div class="coming-card">
-                        <div class="coming-card-icon">🎙️</div>
+                        <div class="coming-card-icon"><i data-lucide="podcast" size="20"></i></div>
                         <div class="coming-card-title">AI Podcast Generator</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
                     <div class="coming-card">
-                        <div class="coming-card-icon">✍️</div>
+                        <div class="coming-card-icon"><i data-lucide="pen-tool" size="20"></i></div>
                         <div class="coming-card-title">AI Script Writer</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
                     <div class="coming-card">
-                        <div class="coming-card-icon">📚</div>
+                        <div class="coming-card-icon"><i data-lucide="book-open" size="20"></i></div>
                         <div class="coming-card-title">AI Audiobook Creator</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
                     <div class="coming-card">
-                        <div class="coming-card-icon">🔄</div>
+                        <div class="coming-card-icon"><i data-lucide="repeat-2" size="20"></i></div>
                         <div class="coming-card-title">Content Repurposer</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
                     <div class="coming-card">
-                        <div class="coming-card-icon">🎭</div>
+                        <div class="coming-card-icon"><i data-lucide="theater" size="20"></i></div>
                         <div class="coming-card-title">Real-time Voice Changer</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
                     <div class="coming-card">
-                        <div class="coming-card-icon">🛒</div>
+                        <div class="coming-card-icon"><i data-lucide="store" size="20"></i></div>
                         <div class="coming-card-title">Voice Marketplace</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
                     <div class="coming-card">
-                        <div class="coming-card-icon">👄</div>
+                        <div class="coming-card-icon"><i data-lucide="scan-face" size="20"></i></div>
                         <div class="coming-card-title">AI Lip Sync</div>
                         <span class="coming-badge">Coming Soon</span>
                     </div>
@@ -1642,7 +1635,7 @@
                 </div>
 
                 <div class="footer-bottom">
-                    <span class="footer-copy">© 2025 VOXAR. All rights reserved.</span>
+                    <span class="footer-copy">© 2026 VOXAR. All rights reserved.</span>
                     <div class="footer-socials">
                         <a class="footer-social magnetic" href="#" aria-label="Twitter">
                             <i data-lucide="twitter" size="16"></i>
@@ -1671,23 +1664,10 @@
         lucide.createIcons();
         gsap.registerPlugin(ScrollTrigger);
 
-        // ==================== PRELOADER ====================
-        const preloader = document.getElementById('preloader');
-
+        // ==================== PRELOADER REMOVED — INSTANT LOAD ====================
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                preloader.classList.add('reveal');
-                setTimeout(() => {
-                    preloader.classList.add('hidden');
-                    document.body.style.overflow = '';
-                    // Trigger hero animations after preloader
-                    heroEntrance();
-                }, 800);
-            }, 2400);
+            heroEntrance();
         });
-
-        // Prevent scroll during preload
-        document.body.style.overflow = 'hidden';
 
         // ==================== HERO ENTRANCE ====================
         function heroEntrance() {
@@ -2101,6 +2081,20 @@
                         }
                     }
                 );
+            });
+        }
+
+        // ==================== PRICING SCROLL NAV ====================
+        const pricingGrid = document.querySelector('.pricing-grid');
+        const prevBtn = document.getElementById('pricing-prev');
+        const nextBtn = document.getElementById('pricing-next');
+
+        if (pricingGrid && prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                pricingGrid.scrollBy({ left: -380, behavior: 'smooth' });
+            });
+            nextBtn.addEventListener('click', () => {
+                pricingGrid.scrollBy({ left: 380, behavior: 'smooth' });
             });
         }
 

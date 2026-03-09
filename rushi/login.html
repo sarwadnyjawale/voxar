@@ -71,24 +71,7 @@
         .brand-logo-text{font-size:28px;font-weight:900;letter-spacing:-.05em}
         .brand-headline{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px;background:linear-gradient(135deg,rgba(255,255,255,.5),#fff 30%,var(--accent-light) 60%,#fff 90%);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shinyText 5s linear infinite}
         @keyframes shinyText{to{background-position:300% center}}
-        .brand-sub{font-size:15px;color:var(--text-secondary);line-height:1.7;margin-bottom:48px}
-
-        /* Floating stats */
-        .brand-stats{display:flex;gap:32px;justify-content:center}
-        .brand-stat{text-align:center}
-        .brand-stat-value{font-size:24px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--text-primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-        .brand-stat-label{font-family:var(--font-mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.15em;margin-top:4px}
-
-        /* Decorative elements */
-        .floating-badge{position:absolute;font-family:var(--font-mono);font-size:10px;color:var(--text-dim);letter-spacing:.1em;background:var(--glass);border:1px solid var(--border-light);padding:8px 16px;border-radius:8px;backdrop-filter:blur(12px);z-index:2}
-        .floating-badge:nth-child(1){top:15%;right:10%;animation:floatBadge 6s ease-in-out infinite}
-        .floating-badge:nth-child(2){bottom:20%;left:8%;animation:floatBadge 7s ease-in-out 2s infinite}
-        .floating-badge:nth-child(3){top:60%;right:15%;animation:floatBadge 8s ease-in-out 4s infinite}
-        @keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-        .badge-dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px}
-        .badge-dot--green{background:#22c55e;box-shadow:0 0 8px #22c55e}
-        .badge-dot--purple{background:var(--accent);box-shadow:0 0 8px var(--accent)}
-        .badge-dot--blue{background:#3b82f6;box-shadow:0 0 8px #3b82f6}
+        .brand-sub{font-size:15px;color:var(--text-secondary);line-height:1.7}
 
         /* ========== RIGHT PANEL (FORM) ========== */
         .auth-form-panel{width:520px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:60px 64px;background:var(--bg-elevated);border-left:1px solid var(--border);position:relative;z-index:10}
@@ -206,11 +189,6 @@
         </div>
         <div class="grid-overlay"></div>
 
-        <!-- Floating badges -->
-        <div class="floating-badge"><span class="badge-dot badge-dot--green"></span>240+ Voice Models</div>
-        <div class="floating-badge"><span class="badge-dot badge-dot--purple"></span>12 Languages</div>
-        <div class="floating-badge"><span class="badge-dot badge-dot--blue"></span>99.7% Accuracy</div>
-
         <div class="brand-content">
             <div class="brand-logo">
                 <svg viewBox="0 0 100 50" width="56" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
@@ -220,23 +198,8 @@
                 <span class="brand-logo-text">VOXAR</span>
             </div>
 
-            <h1 class="brand-headline">Your words.<br>Studio sound.</h1>
-            <p class="brand-sub">Neural voice synthesis, instant cloning, and precision transcription — engineered for creators who refuse to compromise.</p>
-
-            <div class="brand-stats">
-                <div class="brand-stat">
-                    <div class="brand-stat-value">20+</div>
-                    <div class="brand-stat-label">Neural Voices</div>
-                </div>
-                <div class="brand-stat">
-                    <div class="brand-stat-value">12</div>
-                    <div class="brand-stat-label">Languages</div>
-                </div>
-                <div class="brand-stat">
-                    <div class="brand-stat-value">&lt;0.3s</div>
-                    <div class="brand-stat-label">Latency</div>
-                </div>
-            </div>
+            <h1 class="brand-headline">Every voice.<br>One platform.</h1>
+            <p class="brand-sub">AI voice synthesis, cloning, and transcription — across 12 languages.</p>
         </div>
     </div>
 

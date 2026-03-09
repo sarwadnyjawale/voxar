@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Eye, EyeOff, RefreshCw } from "lucide-react";
+import { Copy, Eye, EyeOff, RefreshCw, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -125,7 +125,7 @@ function APIKeysTab() {
     return (
       <div className="rounded-xl border border-voxar-border/50 bg-voxar-surface p-8 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-voxar-violet/10">
-          <span className="text-2xl">🔒</span>
+          <Lock className="h-7 w-7 text-voxar-violet" />
         </div>
         <h3 className="text-lg font-semibold text-voxar-text">
           API Access - Pro Plan Only

@@ -1,4 +1,8 @@
 {
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/studio/page": "app/dashboard/studio/page.js",
+  "/dashboard/transcribe/page": "app/dashboard/transcribe/page.js",
+  "/dashboard/tts/page": "app/dashboard/tts/page.js",
   "/login/page": "app/login/page.js",
   "/page": "app/page.js"
 }

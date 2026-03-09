@@ -553,3 +553,150 @@
 [2026-03-06 11:23:35] [INFO] [VoxarEngine] Model unloaded from CPU
 [2026-03-06 11:23:35] [INFO] [VoxarAPI] XTTS model unloaded
 [2026-03-06 11:23:35] [INFO] [VoxarAPI] VOXAR server stopped
+[2026-03-08 20:00:43] [INFO] [VoxarEngine] Device: cpu
+[2026-03-08 20:00:43] [INFO] [VoxarEngine] Loading XTTS v2 model... (this takes 15-30 seconds)
+[2026-03-08 20:02:08] [INFO] [VoxarEngine] Model loaded in 85.3 seconds
+[2026-03-08 20:02:08] [INFO] [VoxarEngine] XTTS v2 languages: ['en', 'es', 'fr', 'de', 'it', 'pt', 'pl', 'tr', 'ru', 'nl', 'cs', 'ar', 'zh-cn', 'hu', 'ko', 'ja', 'hi']
+[2026-03-08 20:02:08] [INFO] [VoxarEngine] Total VOXAR languages: 26
+[2026-03-08 20:02:08] [INFO] [VoxarEngine] Loaded 4 modes: ['cinematic', 'flash', 'longform', 'multilingual']
+[2026-03-08 20:02:08] [INFO] [VoxarEngine] ==================================================
+[2026-03-08 20:02:08] [INFO] [VoxarEngine] VOXAR TTS ENGINE READY
+[2026-03-08 20:02:08] [INFO] [VoxarEngine] ==================================================
+[2026-03-08 20:02:08] [INFO] [VoxarRouter] EngineRouter initialized: XTTS=loaded | MMS=lazy | OpenVoice=lazy | Whisper=lazy | auto_reload_xtts=True
+[2026-03-08 20:02:08] [INFO] [VoxarVoiceManager] VoiceManager initialized: 20 voices loaded
+[2026-03-08 20:02:08] [INFO] [VoxarAPI] Voice catalog: 20 voices loaded
+[2026-03-08 20:02:11] [INFO] [VoxarUserVoice] UserVoiceManager initialized: base_dir=voices\user_voices max_voices_per_user=10
+[2026-03-08 20:02:11] [INFO] [VoxarAPI] User voice manager ready: base_dir=voices/user_voices
+[2026-03-08 20:02:11] [INFO] [VoxarQueue] GPUJobQueue initialized: max_queue=20 timeout=120s ttl=3600s
+[2026-03-08 20:02:11] [INFO] [VoxarQueue] GPU job queue worker started
+[2026-03-08 20:02:11] [INFO] [VoxarRateLimit] Rate limiter initialized: 10/min, burst=5
+[2026-03-08 20:02:11] [INFO] [VoxarAPI] ============================================================
+[2026-03-08 20:02:11] [INFO] [VoxarAPI]   VOXAR SERVER READY in 99.1s
+[2026-03-08 20:02:11] [INFO] [VoxarAPI]   http://0.0.0.0:8000/docs
+[2026-03-08 20:02:11] [INFO] [VoxarAPI] ============================================================
+[2026-03-08 20:02:11] [INFO] [VoxarQueue] GPU worker started — waiting for jobs...
+[2026-03-08 20:38:46] [WARNING] [VoxarAuth] Missing API key: GET /api/v1/voices
+[2026-03-08 20:38:58] [WARNING] [VoxarAuth] Missing API key: GET /api/v1/voices
+[2026-03-08 20:40:30] [INFO] [VoxarQueue] Job submitted: j_138f3f8d7ce8 | voice=v011 lang=en chars=21 | queue_size=1
+[2026-03-08 20:40:30] [INFO] [VoxarQueue] Processing job: j_138f3f8d7ce8 (type=tts)
+[2026-03-08 20:40:30] [INFO] [VoxarPipeline] VoxarPipeline initialized: lang=en mode=flash mastering=flash plan=free
+[2026-03-08 20:40:30] [INFO] [VoxarPipeline] Pipeline Step 1: Preprocessing text...
+[2026-03-08 20:40:30] [INFO] [VoxarPreprocessor] Loaded 72 custom Hinglish words
+[2026-03-08 20:40:30] [INFO] [VoxarPreprocessor] Loaded 6 pronunciations from pronunciations_en.json
+[2026-03-08 20:40:30] [INFO] [VoxarPreprocessor] Loaded 1 pronunciations from pronunciations_hi.json
+[2026-03-08 20:40:30] [INFO] [VoxarPreprocessor] ScriptPreprocessor initialized
+[2026-03-08 20:40:30] [INFO] [VoxarPipeline]   Preprocessed: 21 → 21 chars, 1 chunks, lang=en
+[2026-03-08 20:40:30] [INFO] [VoxarPipeline] Pipeline Step 2: Generating audio (1 chunks)...
+[2026-03-08 20:40:30] [INFO] [VoxarPipeline]   Generating chunk 1/1 (21 chars)
+[2026-03-08 20:40:30] [INFO] [VoxarEngine] Generating: mode=flash | lang=en | chars=21 | speed=1.1 | basic=False
+[2026-03-08 20:40:51] [INFO] [VoxarPipeline]   Chunk 1 done: 2.79s
+[2026-03-08 20:40:51] [INFO] [VoxarPipeline] Pipeline Step 3: Mastering audio...
+[2026-03-08 20:40:51] [INFO] [VoxarAudio] VoxarAudioMaster: mode=flash (Flash)
+[2026-03-08 20:40:51] [INFO] [VoxarAudio]   Mastering: _pipeline_chunk_0.wav (mode: flash)
+[2026-03-08 20:40:51] [INFO] [VoxarAudio]   Trimmed 470ms silence
+[2026-03-08 20:40:51] [INFO] [VoxarAudio]   Compression: 1.5:1 @-25dB avg_GR=-1.4dB
+[2026-03-08 20:40:51] [INFO] [VoxarAudio]   EQ: voice_clarity
+[2026-03-08 20:40:51] [INFO] [VoxarAudio]   Breaths: 63 segments reduced by 4dB
+[2026-03-08 20:40:51] [ERROR] [VoxarPipeline]   Mastering failed: No module named 'pyloudnorm'
+[2026-03-08 20:40:51] [INFO] [VoxarPipeline] Pipeline Step 4: Validating quality...
+[2026-03-08 20:40:51] [INFO] [VoxarQuality]   Quality: 80/100 (B) — PASS — 2 issues
+[2026-03-08 20:40:51] [INFO] [VoxarPipeline]   Quality: 80/100 Grade B (PASS)
+[2026-03-08 20:40:51] [INFO] [VoxarPipeline] Pipeline Step 5: Exporting for plan 'free'...
+[2026-03-08 20:40:51] [INFO] [VoxarExport] VoxarExporter initialized
+[2026-03-08 20:40:51] [INFO] [VoxarExport]   Using tone watermark (record real watermark later)
+[2026-03-08 20:40:59] [INFO] [VoxarExport]   MP3 exported: 128k | 76KB | 4.8s → output\api\j_138f3f8d7ce8\exports\voxar_output.mp3
+[2026-03-08 20:40:59] [INFO] [VoxarExport]   Exported for plan 'free': ['mp3']
+[2026-03-08 20:40:59] [INFO] [VoxarPipeline]   Exported: ['mp3']
+[2026-03-08 20:40:59] [INFO] [VoxarPipeline] Pipeline complete: 28.9s total | Quality: 80/100 (B) | Errors: 1
+[2026-03-08 20:40:59] [ERROR] [VoxarQueue] Job j_138f3f8d7ce8 failed: Pipeline errors: Mastering failed: No module named 'pyloudnorm'
+[2026-03-08 21:00:24] [WARNING] [VoxarAuth] Missing API key: GET /api/v1/voices
+[2026-03-08 21:01:21] [WARNING] [VoxarAuth] Missing API key: GET /api/v1/voices
+[2026-03-08 21:02:29] [WARNING] [VoxarAuth] Missing API key: GET /api/v1/voices
+[2026-03-08 21:03:00] [WARNING] [VoxarAuth] Missing API key: GET /api/v1/voices
+[2026-03-08 21:06:28] [INFO] [VoxarQueue] Job submitted: j_49d03233bf23 | voice=v011 lang=en chars=11 | queue_size=1
+[2026-03-08 21:06:28] [INFO] [VoxarQueue] Processing job: j_49d03233bf23 (type=tts)
+[2026-03-08 21:06:28] [INFO] [VoxarPipeline] VoxarPipeline initialized: lang=en mode=flash mastering=flash plan=free
+[2026-03-08 21:06:28] [INFO] [VoxarPipeline] Pipeline Step 1: Preprocessing text...
+[2026-03-08 21:06:28] [INFO] [VoxarPreprocessor] Loaded 72 custom Hinglish words
+[2026-03-08 21:06:28] [INFO] [VoxarPreprocessor] Loaded 6 pronunciations from pronunciations_en.json
+[2026-03-08 21:06:28] [INFO] [VoxarPreprocessor] Loaded 1 pronunciations from pronunciations_hi.json
+[2026-03-08 21:06:28] [INFO] [VoxarPreprocessor] ScriptPreprocessor initialized
+[2026-03-08 21:06:28] [INFO] [VoxarPipeline]   Preprocessed: 11 → 11 chars, 1 chunks, lang=en
+[2026-03-08 21:06:28] [INFO] [VoxarPipeline] Pipeline Step 2: Generating audio (1 chunks)...
+[2026-03-08 21:06:28] [INFO] [VoxarPipeline]   Generating chunk 1/1 (11 chars)
+[2026-03-08 21:06:28] [INFO] [VoxarEngine] Generating: mode=flash | lang=en | chars=11 | speed=1.1 | basic=False
+[2026-03-08 21:06:38] [INFO] [VoxarPipeline]   Chunk 1 done: 1.25s
+[2026-03-08 21:06:38] [INFO] [VoxarPipeline] Pipeline Step 3: Mastering audio...
+[2026-03-08 21:06:38] [INFO] [VoxarAudio] VoxarAudioMaster: mode=flash (Flash)
+[2026-03-08 21:06:38] [INFO] [VoxarAudio]   Mastering: _pipeline_chunk_0.wav (mode: flash)
+[2026-03-08 21:06:38] [INFO] [VoxarAudio]   Trimmed 478ms silence
+[2026-03-08 21:06:38] [INFO] [VoxarAudio]   Compression: 1.5:1 @-25dB avg_GR=-2.7dB
+[2026-03-08 21:06:38] [INFO] [VoxarAudio]   EQ: voice_clarity
+[2026-03-08 21:06:38] [INFO] [VoxarAudio]   Breaths: 9 segments reduced by 4dB
+[2026-03-08 21:06:38] [ERROR] [VoxarPipeline]   Mastering failed: No module named 'pyloudnorm'
+[2026-03-08 21:06:38] [INFO] [VoxarPipeline] Pipeline Step 4: Validating quality...
+[2026-03-08 21:06:38] [INFO] [VoxarQuality]   Quality: 65/100 (C) — PASS — 2 issues
+[2026-03-08 21:06:38] [INFO] [VoxarPipeline]   Quality: 65/100 Grade C (PASS)
+[2026-03-08 21:06:38] [INFO] [VoxarPipeline] Pipeline Step 5: Exporting for plan 'free'...
+[2026-03-08 21:06:38] [INFO] [VoxarExport] VoxarExporter initialized
+[2026-03-08 21:06:38] [INFO] [VoxarExport]   Using tone watermark (record real watermark later)
+[2026-03-08 21:06:38] [INFO] [VoxarExport]   MP3 exported: 128k | 52KB | 3.2s → output\api\j_49d03233bf23\exports\voxar_output.mp3
+[2026-03-08 21:06:38] [INFO] [VoxarExport]   Exported for plan 'free': ['mp3']
+[2026-03-08 21:06:38] [INFO] [VoxarPipeline]   Exported: ['mp3']
+[2026-03-08 21:06:38] [INFO] [VoxarPipeline] Pipeline complete: 10.2s total | Quality: 65/100 (C) | Errors: 1
+[2026-03-08 21:06:38] [ERROR] [VoxarQueue] Job j_49d03233bf23 failed: Pipeline errors: Mastering failed: No module named 'pyloudnorm'
+[2026-03-08 21:08:19] [INFO] [VoxarQueue] Job submitted: j_70f495d62fc2 | voice=v011 lang=en chars=17 | queue_size=1
+[2026-03-08 21:08:19] [INFO] [VoxarQueue] Processing job: j_70f495d62fc2 (type=tts)
+[2026-03-08 21:08:19] [INFO] [VoxarPipeline] VoxarPipeline initialized: lang=en mode=flash mastering=flash plan=free
+[2026-03-08 21:08:19] [INFO] [VoxarPipeline] Pipeline Step 1: Preprocessing text...
+[2026-03-08 21:08:19] [INFO] [VoxarPreprocessor] Loaded 72 custom Hinglish words
+[2026-03-08 21:08:19] [INFO] [VoxarPreprocessor] Loaded 6 pronunciations from pronunciations_en.json
+[2026-03-08 21:08:19] [INFO] [VoxarPreprocessor] Loaded 1 pronunciations from pronunciations_hi.json
+[2026-03-08 21:08:19] [INFO] [VoxarPreprocessor] ScriptPreprocessor initialized
+[2026-03-08 21:08:19] [INFO] [VoxarPipeline]   Preprocessed: 17 → 17 chars, 1 chunks, lang=en
+[2026-03-08 21:08:19] [INFO] [VoxarPipeline] Pipeline Step 2: Generating audio (1 chunks)...
+[2026-03-08 21:08:19] [INFO] [VoxarPipeline]   Generating chunk 1/1 (17 chars)
+[2026-03-08 21:08:19] [INFO] [VoxarEngine] Generating: mode=flash | lang=en | chars=17 | speed=1.1 | basic=False
+[2026-03-08 21:08:24] [INFO] [VoxarPipeline]   Chunk 1 done: 1.67s
+[2026-03-08 21:08:24] [INFO] [VoxarPipeline] Pipeline Step 3: Mastering audio...
+[2026-03-08 21:08:24] [INFO] [VoxarAudio] VoxarAudioMaster: mode=flash (Flash)
+[2026-03-08 21:08:24] [INFO] [VoxarAudio]   Mastering: _pipeline_chunk_0.wav (mode: flash)
+[2026-03-08 21:08:24] [INFO] [VoxarAudio]   Trimmed 481ms silence
+[2026-03-08 21:08:24] [INFO] [VoxarAudio]   Artifacts: 1 clicks
+[2026-03-08 21:08:24] [INFO] [VoxarAudio]   Compression: 1.5:1 @-25dB avg_GR=-2.3dB
+[2026-03-08 21:08:24] [INFO] [VoxarAudio]   EQ: voice_clarity
+[2026-03-08 21:08:24] [INFO] [VoxarAudio]   Breaths: 19 segments reduced by 4dB
+[2026-03-08 21:08:24] [ERROR] [VoxarPipeline]   Mastering failed: No module named 'pyloudnorm'
+[2026-03-08 21:08:24] [INFO] [VoxarPipeline] Pipeline Step 4: Validating quality...
+[2026-03-08 21:08:24] [INFO] [VoxarQuality]   Quality: 80/100 (B) — PASS — 2 issues
+[2026-03-08 21:08:24] [INFO] [VoxarPipeline]   Quality: 80/100 Grade B (PASS)
+[2026-03-08 21:08:24] [INFO] [VoxarPipeline] Pipeline Step 5: Exporting for plan 'free'...
+[2026-03-08 21:08:24] [INFO] [VoxarExport] VoxarExporter initialized
+[2026-03-08 21:08:24] [INFO] [VoxarExport]   Using tone watermark (record real watermark later)
+[2026-03-08 21:08:24] [INFO] [VoxarExport]   MP3 exported: 128k | 59KB | 3.7s → output\api\j_70f495d62fc2\exports\voxar_output.mp3
+[2026-03-08 21:08:24] [INFO] [VoxarExport]   Exported for plan 'free': ['mp3']
+[2026-03-08 21:08:24] [INFO] [VoxarPipeline]   Exported: ['mp3']
+[2026-03-08 21:08:24] [INFO] [VoxarPipeline] Pipeline complete: 5.4s total | Quality: 80/100 (B) | Errors: 1
+[2026-03-08 21:08:24] [ERROR] [VoxarQueue] Job j_70f495d62fc2 failed: Pipeline errors: Mastering failed: No module named 'pyloudnorm'
+[2026-03-08 21:32:10] [INFO] [VoxarEngine] Device: cpu
+[2026-03-08 21:32:10] [INFO] [VoxarEngine] Loading XTTS v2 model... (this takes 15-30 seconds)
+[2026-03-08 21:32:42] [INFO] [VoxarEngine] Model loaded in 31.9 seconds
+[2026-03-08 21:32:42] [INFO] [VoxarEngine] XTTS v2 languages: ['en', 'es', 'fr', 'de', 'it', 'pt', 'pl', 'tr', 'ru', 'nl', 'cs', 'ar', 'zh-cn', 'hu', 'ko', 'ja', 'hi']
+[2026-03-08 21:32:42] [INFO] [VoxarEngine] Total VOXAR languages: 26
+[2026-03-08 21:32:42] [INFO] [VoxarEngine] Loaded 4 modes: ['cinematic', 'flash', 'longform', 'multilingual']
+[2026-03-08 21:32:42] [INFO] [VoxarEngine] ==================================================
+[2026-03-08 21:32:42] [INFO] [VoxarEngine] VOXAR TTS ENGINE READY
+[2026-03-08 21:32:42] [INFO] [VoxarEngine] ==================================================
+[2026-03-08 21:32:42] [INFO] [VoxarRouter] EngineRouter initialized: XTTS=loaded | MMS=lazy | OpenVoice=lazy | Whisper=lazy | auto_reload_xtts=True
+[2026-03-08 21:32:42] [INFO] [VoxarVoiceManager] VoiceManager initialized: 20 voices loaded
+[2026-03-08 21:32:42] [INFO] [VoxarAPI] Voice catalog: 20 voices loaded
+[2026-03-08 21:32:42] [INFO] [VoxarUserVoice] UserVoiceManager initialized: base_dir=voices\user_voices max_voices_per_user=10
+[2026-03-08 21:32:42] [INFO] [VoxarAPI] User voice manager ready: base_dir=voices/user_voices
+[2026-03-08 21:32:42] [INFO] [VoxarQueue] GPUJobQueue initialized: max_queue=20 timeout=120s ttl=3600s
+[2026-03-08 21:32:42] [INFO] [VoxarQueue] GPU job queue worker started
+[2026-03-08 21:32:42] [INFO] [VoxarRateLimit] Rate limiter initialized: 10/min, burst=5
+[2026-03-08 21:32:42] [INFO] [VoxarAPI] ============================================================
+[2026-03-08 21:32:42] [INFO] [VoxarAPI]   VOXAR SERVER READY in 38.6s
+[2026-03-08 21:32:42] [INFO] [VoxarAPI]   http://0.0.0.0:8000/docs
+[2026-03-08 21:32:42] [INFO] [VoxarAPI] ============================================================
+[2026-03-08 21:32:42] [INFO] [VoxarQueue] GPU worker started — waiting for jobs...

@@ -1,0 +1,36 @@
+# ============================================================
+# VOXAR Node.js Backend — Docker Image
+# Auth, credits, billing, project management
+# ============================================================
+FROM node:20-alpine
+
+LABEL maintainer="VOXAR <hello@voxar.in>"
+LABEL description="VOXAR Backend — Auth, Credits, Billing"
+
+WORKDIR /app
+
+# Copy package files first for layer caching
+COPY backend/package.json backend/package-lock.json ./
+
+# Install production dependencies only
+RUN npm ci --omit=dev
+
+# Copy application code
+COPY backend/ .
+
+# Create uploads directory
+RUN mkdir -p /app/uploads/voice_samples
+
+# Non-root user for security
+RUN addgroup -S voxar && adduser -S voxar -G voxar
+RUN chown -R voxar:voxar /app
+USER voxar
+
+# Expose Express port
+EXPOSE 3001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:3001/health || exit 1
+
+CMD ["node", "server.js"]

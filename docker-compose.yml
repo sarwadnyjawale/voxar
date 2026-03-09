@@ -1,0 +1,79 @@
+# ============================================================
+# VOXAR — Docker Compose (Local Development)
+# ============================================================
+# Usage:
+#   docker-compose up -d          (start all services)
+#   docker-compose up backend     (start backend + mongo only)
+#   docker-compose logs -f engine (watch engine logs)
+#
+# GPU engine requires nvidia-docker2 runtime.
+# ============================================================
+
+services:
+  # MongoDB
+  mongo:
+    image: mongo:7
+    container_name: voxar-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - voxar-mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: voxar
+
+  # Node.js Backend (auth, credits, billing)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: voxar-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    environment:
+      PORT: 3001
+      NODE_ENV: production
+      MONGODB_URI: mongodb://mongo:27017/voxar
+      JWT_SECRET: ${JWT_SECRET:-voxar-docker-secret-change-me}
+      PYTHON_ENGINE_URL: http://engine:8000
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
+      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:-}
+      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:-}
+      RAZORPAY_WEBHOOK_SECRET: ${RAZORPAY_WEBHOOK_SECRET:-}
+    volumes:
+      - voxar-uploads:/app/uploads
+
+  # Python AI Engine (TTS, STT, Cloning)
+  engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.engine
+    container_name: voxar-engine
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      VOXAR_HOST: 0.0.0.0
+      VOXAR_PORT: 8000
+      VOXAR_API_KEYS: ${ENGINE_API_KEY:-voxar-dev-key-001}
+    volumes:
+      - voxar-models:/root/.local/share  # Cache XTTS/MMS model downloads
+      - voxar-output:/app/output
+      - voxar-voices:/app/voices
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  voxar-mongo-data:
+  voxar-uploads:
+  voxar-models:
+  voxar-output:
+  voxar-voices:

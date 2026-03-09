@@ -16,7 +16,15 @@
       "WebFetch(domain:elevenlabs.io)",
       "Bash(npm create:*)",
       "Bash(npx vite:*)",
-      "Bash(start:*)"
+      "Bash(start:*)",
+      "Bash(node:*)",
+      "Bash(do node:*)",
+      "Bash(taskkill:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(powershell:*)",
+      "Bash(netstat:*)",
+      "Bash(pip show:*)",
+      "Bash(./venv/Scripts/python.exe:*)"
     ]
   }
 }
