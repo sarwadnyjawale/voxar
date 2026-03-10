@@ -12,6 +12,13 @@ logs/
 *.mp3
 
 node_modules/
+.next/
 
+# Environment Variables
 .env
+.env.*
+backend/.env
+backend/.env.*
+
+# Uploads
 backend/uploads/

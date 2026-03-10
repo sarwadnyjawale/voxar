@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ================================
+# VOXAR LOCAL OPS FILES
+# ================================
+
+ops/api_keys.local.md
+ops/secrets.local.md
+
+# backend env
+backend/.env
+
+# python caches
+__pycache__/
+*.pyc

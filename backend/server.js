@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
 const rateLimit = require('express-rate-limit')
+const jobQueue = require('./services/jobQueue');
 
 // Route imports
 const authRoutes = require('./routes/auth')
@@ -48,6 +49,15 @@ const generalLimiter = rateLimit({
   message: { message: 'Rate limit exceeded. Try again shortly.' },
 })
 
+const demoLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,                   // 5 requests per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Demo limit reached. Please sign up to continue generating.' },
+})
+
+
 // ============================================================
 // Middleware
 // ============================================================
@@ -84,13 +94,42 @@ app.use('/api/v1/billing', generalLimiter, billingRoutes)
 app.use('/api/v1/webhooks', webhookRoutes)  // No rate limit on webhooks (Razorpay)
 app.use('/api/v1/marketplace', generalLimiter, marketplaceRoutes)
 
+// Demo Route
+app.post('/api/v1/demo/generate', demoLimiter, async (req, res) => {
+  try {
+    const { text, voice, language } = req.body;
+    if (!text || text.length > 120) {
+      return res.status(400).json({ message: 'Text exceeds 120 character limit for demo.' });
+    }
+    
+    // Default format and fast engine for demo
+    const result = await engineBridge.generateTTS({
+      text,
+      voice: voice || 'amrit',
+      engine: 'flash',
+      language: language || 'en',
+      format: 'mp3',
+      enhance: false,
+      normalize: true
+    });
+    
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: 'Demo generation failed' });
+  }
+});
+
 // Health check
 app.get('/health', async (req, res) => {
   const engineHealth = await engineBridge.healthCheck()
+  const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+  
   res.json({
     status: 'ok',
     service: 'voxar-backend',
-    version: '1.3.0',
+    version: '1.4.0',
+    mode: process.env.VOXAR_ENGINE_MODE || 'local',
+    database: dbStatus,
     engine: engineHealth,
     uptime: process.uptime(),
   })
@@ -107,7 +146,12 @@ app.use((err, req, res, next) => {
   if (err.name === 'MulterError') {
     return res.status(400).json({ message: err.message })
   }
-  res.status(500).json({ message: 'Internal server error', detail: err.message })
+  
+  const isProd = process.env.NODE_ENV === 'production';
+  res.status(500).json({ 
+    message: 'Internal server error', 
+    detail: isProd ? undefined : err.message 
+  })
 })
 
 // ============================================================
