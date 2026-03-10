@@ -1,24 +1,44 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
 venv/
 
+# Node / Frontend
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+
+# Output / Generated
 output/
 logs/
+voices/
 
+# Audio / Media
 *.wav
 *.mp3
 
-node_modules/
-.next/
+# Binaries
+*.exe
 
 # Environment Variables
 .env
 .env.*
 backend/.env
 backend/.env.*
+frontend/.env
+
+# Secrets / Ops
+ops/api_keys.local.md
+ops/secrets.local.md
 
 # Uploads
 backend/uploads/
+
+# IDE / Tool
+.aider*
+.claude/
