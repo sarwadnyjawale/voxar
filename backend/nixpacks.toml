@@ -1,0 +1,11 @@
+# Nixpacks configuration for VOXAR backend
+# Forces correct Node.js detection and install behavior
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm ci --include=dev || npm install"]
+
+[start]
+cmd = "node server.js"
