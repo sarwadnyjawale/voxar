@@ -30,6 +30,7 @@ async function startWorkerManager() {
   while (true) {
     try {
       const job = await jobQueue.dequeue();
+      if (job) {
         // Enforce max workers by checking currently active processing jobs
         const activeWorkersCount = await getActiveWorkerCount();
         

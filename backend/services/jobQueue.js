@@ -10,9 +10,11 @@ const { v4: uuidv4 } = require('uuid');
 
 const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 
-// Initialize Redis client. If Redis is unavailable, it will retry connecting.
+// Initialize Redis client lazily — only connects on first command.
+// Prevents connection errors in local engine mode where Redis isn't needed.
 const redis = new Redis(REDIS_URL, {
   maxRetriesPerRequest: null,
+  lazyConnect: true,
   retryStrategy(times) {
     const delay = Math.min(times * 50, 2000);
     return delay;
@@ -151,8 +153,12 @@ async function getQueueSize() {
   return await redis.llen(QUEUE_KEY);
 }
 
-// Call init once
-initQueue();
+// Only initialize queue if in runpod mode (Redis required)
+if (process.env.VOXAR_ENGINE_MODE === 'runpod') {
+  redis.connect().then(() => initQueue()).catch(err => {
+    console.error('[Redis JobQueue] Failed to connect:', err.message);
+  });
+}
 
 module.exports = {
   enqueue,

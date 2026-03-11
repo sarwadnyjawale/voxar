@@ -3,6 +3,12 @@ const User = require('../models/User')
 
 const JWT_SECRET = process.env.JWT_SECRET || 'voxar-dev-secret-change-in-production'
 
+// Refuse to start in production with the dev default secret
+if (process.env.NODE_ENV === 'production' && JWT_SECRET === 'voxar-dev-secret-change-in-production') {
+  console.error('[FATAL] JWT_SECRET must be set in production. Refusing to start with dev default.');
+  process.exit(1);
+}
+
 function generateToken(userId) {
   return jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: '30d' })
 }

@@ -10,6 +10,11 @@ async function generate(req, res) {
       return res.status(400).json({ message: 'Text is required' })
     }
 
+    // Hard cap: 50,000 chars (~67 minutes). Prevents abuse regardless of plan.
+    if (text.length > 50000) {
+      return res.status(400).json({ message: 'Text exceeds maximum length of 50,000 characters.' })
+    }
+
     // Check billing cycle reset
     await creditService.checkAndResetCycle(req.user)
 

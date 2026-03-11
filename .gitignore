@@ -36,6 +36,7 @@ frontend/.env
 ops/api_keys.local.md
 ops/secrets.local.md
 ops/voxar_secrets_master.txt
+ops/railway_env_template.txt
 
 # Uploads
 backend/uploads/
