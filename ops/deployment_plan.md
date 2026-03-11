@@ -42,7 +42,7 @@ Backend API
 
 Runtime: Node.js (Express)
 
-Host: Hetzner VPS (managed via Coolify)
+Host: YouStable VPS India (managed via Coolify)
 
 Base URL: https://api.voxar.in
 
@@ -66,7 +66,7 @@ Queue
 
 Technology: Redis
 
-Host: Hetzner VPS
+Host: YouStable VPS
 
 Purpose:
 

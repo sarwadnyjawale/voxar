@@ -1,10 +1,10 @@
-# Hetzner & Coolify Deployment Guide
+# YouStable VPS & Coolify Deployment Guide
 
 ## 1. Purchase Server
-1. Go to Hetzner Cloud and create a **CX33** server (4 vCPU, 8GB RAM).
-2. Choose Ubuntu 22.04 LTS.
-3. Add your SSH keys.
-4. Note the Server IP address.
+1. Go to youstable.com/vps-hosting-india and pick the VPS plan (2 vCPU, 4GB RAM minimum).
+2. Pay via UPI / Indian card / Paytm.
+3. Choose Ubuntu 22.04 LTS.
+4. Note the Server IP address from your YouStable dashboard.
 
 ## 2. Install Coolify (The PaaS)
 1. SSH into the server: `ssh root@<YOUR_SERVER_IP>`
@@ -33,4 +33,5 @@
 4. Click **Deploy**. Coolify will build the backend container and attach Let's Encrypt SSL.
 
 ## 5. Summary
-Your Node.js Backend, MongoDB, and Redis are now running smoothly on one $7/mo machine.
+Your Node.js Backend, MongoDB, and Redis are now running on YouStable VPS India.
+Payment via UPI — no international card required.

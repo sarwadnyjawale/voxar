@@ -163,7 +163,7 @@ mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('[MongoDB] Connected')
     app.listen(PORT, () => {
-      console.log(`[VOXAR Backend v1.3.0] Running on http://localhost:${PORT}`)
+      console.log(`[VOXAR Backend v1.4.0] Running on http://localhost:${PORT}`)
       console.log(`[Rate Limits] Auth: 10/min | TTS: 30/min | General: 100/min`)
     })
   })

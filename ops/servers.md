@@ -4,15 +4,19 @@ VOXAR SERVERS
 
 Backend VPS
 
-Provider: Hetzner
+Provider: YouStable
+
+Plan: VPS Hosting India (2 vCPU, 4GB RAM, 60GB SSD)
 
 Server name: voxar-core
 
-Location: <datacenter region>
+Location: India
 
 Public IP: <PASTE SERVER IP HERE>
 
 OS: Ubuntu 22.04
+
+Payment: UPI / Indian card / Paytm
 
 
 
@@ -61,4 +65,6 @@ Notes
 This server handles backend logic, job queue, and database.
 
 GPU inference is executed on RunPod serverless workers.
+
+YouStable replaces Hetzner due to Indian payment compatibility.
 

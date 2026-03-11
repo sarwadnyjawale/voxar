@@ -28,9 +28,9 @@ Purpose: frontend hosting
 
 
 
-Hetzner
+YouStable
 
-Purpose: backend VPS
+Purpose: backend VPS (India, UPI payments)
 
 
 

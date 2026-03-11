@@ -35,6 +35,7 @@ frontend/.env
 # Secrets / Ops
 ops/api_keys.local.md
 ops/secrets.local.md
+ops/voxar_secrets_master.txt
 
 # Uploads
 backend/uploads/

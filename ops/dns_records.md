@@ -52,7 +52,7 @@ Type: A
 
 Name: api.voxar.in
 
-Points to: <HETZNER\_SERVER\_IP>
+Points to: <YOUSTABLE\_SERVER\_IP>
 
 
 
@@ -98,7 +98,7 @@ voxar.in
 
 api.voxar.in
 
-→ backend Node.js server on Hetzner
+→ backend Node.js server on YouStable VPS India
 
 
 
