@@ -17,10 +17,6 @@
   ],
   "rewrites": [
     {
-      "source": "/api/engine/:path*",
-      "destination": "https://engine.voxar.in/api/v1/:path*"
-    },
-    {
       "source": "/api/v1/:path*",
       "destination": "https://api.voxar.in/api/v1/:path*"
     }

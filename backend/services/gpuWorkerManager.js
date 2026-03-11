@@ -11,6 +11,7 @@ const r2Storage = require('./r2Storage');
 const RUNPOD_API_KEY = process.env.RUNPOD_API_KEY || 'YOUR_RUNPOD_API_KEY_HERE';
 const RUNPOD_ENDPOINT_ID = process.env.RUNPOD_ENDPOINT_ID || 'YOUR_RUNPOD_ENDPOINT_ID_HERE';
 const RUNPOD_BASE_URL = `https://api.runpod.ai/v2/${RUNPOD_ENDPOINT_ID}`;
+const MAX_RUNPOD_WORKERS = 3;
 
 // Headers for RunPod API authentication
 const runpodHeaders = {
@@ -29,7 +30,17 @@ async function startWorkerManager() {
   while (true) {
     try {
       const job = await jobQueue.dequeue();
-      if (job) {
+        // Enforce max workers by checking currently active processing jobs
+        const activeWorkersCount = await getActiveWorkerCount();
+        
+        if (activeWorkersCount >= MAX_RUNPOD_WORKERS) {
+          console.warn(`[GPU Worker] Throttling: Max RunPod workers (${MAX_RUNPOD_WORKERS}) reached. Queuing job ${job.id} back.`);
+          // Push job back into the queue from the left (front)
+          await jobQueue.redisClient.lpush('voxar:jobs:queue', job.id);
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          continue;
+        }
+
         console.log(`[GPU Worker] Picked up job ${job.id} (${job.payload.type})`);
         
         // Execute the job via RunPod but don't await blockingly so we can process multiple jobs
@@ -47,6 +58,31 @@ async function startWorkerManager() {
       await new Promise(resolve => setTimeout(resolve, 5000));
     }
   }
+}
+
+/**
+ * Retrieves the count of currently processing jobs to limit RunPod workers
+ */
+async function getActiveWorkerCount() {
+  const scanStream = jobQueue.redisClient.scanStream({
+    match: 'voxar:job:*',
+    count: 100
+  });
+
+  let activeCount = 0;
+  for await (const keys of scanStream) {
+    if (!keys.length) continue;
+    const pipeline = jobQueue.redisClient.pipeline();
+    keys.forEach(key => pipeline.hget(key, 'status'));
+    const results = await pipeline.exec();
+    
+    results.forEach(([err, status]) => {
+      if (!err && status === 'processing') {
+        activeCount++;
+      }
+    });
+  }
+  return activeCount;
 }
 
 /**

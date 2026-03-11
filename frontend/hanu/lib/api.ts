@@ -1,6 +1,5 @@
 import type { ApiError } from './types'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 const BACKEND_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001'
 
 function getAuthToken(): string | null {
@@ -51,20 +50,20 @@ async function handleResponse<T>(res: Response): Promise<T> {
 // --- Core request methods ---
 
 export const api = {
-  // ─── FastAPI AI Engine (Python :8000) ───
+  // ─── FastAPI AI Engine calls have been removed ───
 
-  /** GET request to the FastAPI AI server */
+  /** GET request to the Node.js business backend */
   async get<T>(path: string): Promise<T> {
-    const res = await fetch(`${API_BASE}${path}`, {
+    const res = await fetch(`${BACKEND_BASE}${path}`, {
       method: 'GET',
       headers: buildHeaders(),
     })
     return handleResponse<T>(res)
   },
 
-  /** POST request to the FastAPI AI server */
+  /** POST request to the Node.js business backend */
   async post<T>(path: string, body?: unknown): Promise<T> {
-    const res = await fetch(`${API_BASE}${path}`, {
+    const res = await fetch(`${BACKEND_BASE}${path}`, {
       method: 'POST',
       headers: buildHeaders(),
       body: body ? JSON.stringify(body) : undefined,
@@ -72,9 +71,9 @@ export const api = {
     return handleResponse<T>(res)
   },
 
-  /** Upload file to the FastAPI AI server */
+  /** Upload file to the Node.js business backend */
   async upload<T>(path: string, formData: FormData): Promise<T> {
-    const res = await fetch(`${API_BASE}${path}`, {
+    const res = await fetch(`${BACKEND_BASE}${path}`, {
       method: 'POST',
       headers: buildAuthHeaders(),
       body: formData,
@@ -82,14 +81,15 @@ export const api = {
     return handleResponse<T>(res)
   },
 
-  /** DELETE request to the FastAPI AI server */
+  /** DELETE request to the Node.js business backend */
   async delete<T>(path: string): Promise<T> {
-    const res = await fetch(`${API_BASE}${path}`, {
+    const res = await fetch(`${BACKEND_BASE}${path}`, {
       method: 'DELETE',
       headers: buildHeaders(),
     })
     return handleResponse<T>(res)
   },
+}
 
   // ─── Node.js Business Backend (:3001) ───
 

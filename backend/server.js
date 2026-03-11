@@ -35,7 +35,7 @@ const authLimiter = rateLimit({
 
 const ttsLimiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 30,
+  max: 30, // 30 requests per minute per user constraint
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: 'TTS rate limit exceeded. Try again shortly.' },

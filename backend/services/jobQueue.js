@@ -29,7 +29,7 @@ redis.on('connect', () => {
 
 const QUEUE_KEY = 'voxar:jobs:queue'; // List of pending job IDs
 const JOB_HASH_PREFIX = 'voxar:job:'; // Hash map storing job details
-const MAX_QUEUE_SIZE = 50;
+const MAX_QUEUE_SIZE = 50; // Cost protection queue limit
 const JOB_EXPIRY_SECONDS = 3600; // 1 hour
 
 /**
@@ -52,6 +52,7 @@ async function initQueue() {
 async function enqueue(jobData) {
   const currentSize = await redis.llen(QUEUE_KEY);
   if (currentSize >= MAX_QUEUE_SIZE) {
+    console.warn(`[JobQueue] OVERFLOW ALERT: Queue reached maximum capacity (${MAX_QUEUE_SIZE}). Rejecting job.`);
     throw new Error('Service temporarily at capacity. The queue is full. Please try again later.');
   }
 

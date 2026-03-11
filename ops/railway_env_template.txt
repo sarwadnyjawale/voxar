@@ -1,25 +1,22 @@
-# ============================================================
-# VOXAR — Railway Environment Variables
-# ============================================================
-# Paste these into Railway Dashboard → Project → Variables
-# Fill in each blank value before deploying
-# ============================================================
-
-PORT=3001
 NODE_ENV=production
-MONGODB_URI=
-JWT_SECRET=
-VOXAR_ENGINE_MODE=runpod
-ENGINE_API_KEY=
-REDIS_URL=
+PORT=8080
+
+MONGODB_URI=mongodb+srv://voxaradmin:vupune%40123321@voxar-cluster.ovoxant.mongodb.net/voxar?retryWrites=true&w=majority
+REDIS_URL=redis://default:gQAAAAAAAQkWAAIncDIzYzcxOTZhYjdjYzY0NWRlODYyZDRmYzNmNDllNjJiN3AyNjc4NjI@delicate-trout-67862.upstash.io:6379
+
+JWT_SECRET=c2be2231cfa8b930a772e19306a07802aabed574087e84feccfc762a5e481fe8
+ENGINE_API_KEY=d4b3606c367b6e19f039e6806a1af246627d0af9199d1add
+
 RUNPOD_API_KEY=
 RUNPOD_ENDPOINT_ID=
-R2_ACCOUNT_ID=
-R2_ACCESS_KEY_ID=
-R2_SECRET_ACCESS_KEY=
-R2_BUCKET_NAME=voxar
-R2_PUBLIC_URL_PREFIX=https://audio.voxar.in
-RAZORPAY_KEY_ID=
-RAZORPAY_KEY_SECRET=
+
+R2_ACCOUNT_ID=8c24c619b03fdfb7164211bee06f2912
+R2_ACCESS_KEY=9770a8b8b8393ece974deb65e5344888
+R2_SECRET_KEY=67dbe988d933a11fc863ae592e894c0a9f50d559585d27f53388f699b7c158aa
+R2_BUCKET=voxar
+
+RAZORPAY_KEY_ID=rzp_test_rzp_test_SPsvdCJvlxxdCy
+RAZORPAY_KEY_SECRET=oM2RiXr5Z6a4n0R1e306kcVr
 RAZORPAY_WEBHOOK_SECRET=
+
 CORS_ORIGIN=https://voxar.in
