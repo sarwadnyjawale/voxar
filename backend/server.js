@@ -127,7 +127,13 @@ app.post('/api/v1/demo/generate', demoLimiter, async (req, res) => {
 // Health Check
 // ============================================================
 
-app.get('/health', async (req, res) => {
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'voxar-backend',
+    uptime: process.uptime()
+  });
+});
 
   const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
 
