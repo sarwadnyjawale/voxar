@@ -30,9 +30,26 @@ WORKDIR /app
 ENV PYTHONPATH=/app
 
 COPY requirements.txt .
+
+# Step 1: Build-time deps first (numpy needed by scipy/librosa, Cython by spacy/thinc)
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir runpod>=1.6.0
+    pip install --no-cache-dir --prefer-binary \
+        numpy==1.22.0 \
+        scipy==1.11.4 \
+        Cython==3.2.4
+
+# Step 2: All pinned packages
+#   --no-deps        → skip resolver (complete freeze, all transitive deps listed)
+#   --no-build-isolation → source builds (TTS, encodec, trainer) use system torch/numpy
+#                          instead of PEP 517 isolated venv that lacks them
+RUN pip install --no-cache-dir --prefer-binary --no-deps --no-build-isolation -r requirements.txt
+
+# Step 3: Git-sourced package (not on PyPI, also needs --no-build-isolation for torch)
+RUN pip install --no-cache-dir --no-deps --no-build-isolation \
+    "MyShell-OpenVoice @ git+https://github.com/myshell-ai/OpenVoice.git@74a1d147b17a8c3092dd5430504bd83ef6c7eb23"
+
+# Step 4: RunPod SDK (may already be in base image, ensure present)
+RUN pip install --no-cache-dir runpod
 
 COPY engine/ ./engine/
 COPY api/ ./api/
