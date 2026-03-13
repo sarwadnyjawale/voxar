@@ -1,16 +1,10 @@
 # VOXAR Engine — Python 3.10 · CUDA 11.8
-# torch/torchaudio provided by RunPod base image — do NOT list here
+# torch/torchaudio provided by base image — do NOT list here
 
 TTS==0.22.0
-transformers==4.38.2
-accelerate==0.27.2
+transformers<5
+accelerate
 numpy<2
 scipy<1.14
 librosa<0.11
-soundfile
-pydub
 ffmpeg-python
-runpod>=1.6.0
-sentencepiece
-einops
-tokenizers<0.15
