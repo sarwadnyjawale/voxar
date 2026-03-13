@@ -1,10 +1,12 @@
 # VOXAR Engine — Python 3.10 · CUDA 11.8
-# torch/torchaudio provided by base image — do NOT list here
+# torch==2.1.2 and torchaudio==2.1.2 provided by base image
 
 TTS==0.22.0
-transformers<5
-accelerate
-numpy<2
-scipy<1.14
-librosa<0.11
+transformers==4.36.2
+tokenizers==0.15.2
+numpy==1.22.0
+scipy==1.11.4
+librosa==0.10.0
+soundfile==0.13.1
 ffmpeg-python
+accelerate
