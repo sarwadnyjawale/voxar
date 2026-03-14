@@ -1,15 +1,21 @@
 # ============================================================
-# VOXAR AI Engine — RunPod Serverless
+# VOXAR AI Engine — Local Docker Build
 # Python 3.10 + CUDA 11.8 + PyTorch 2.1 (base image)
+# Build locally, push to DockerHub, pull on RunPod
 # ============================================================
 FROM runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
 
 LABEL maintainer="VOXAR <hello@voxar.in>"
-LABEL description="VOXAR AI Engine — RunPod Serverless TTS/STT"
+LABEL description="VOXAR AI Engine — TTS/STT Server"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+
+# HuggingFace cache — models downloaded at runtime, persisted via volume
+ENV HF_HOME=/app/models
+ENV TRANSFORMERS_CACHE=/app/models
+ENV TORCH_HOME=/app/models/torch
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -19,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     python3-dev \
     libsndfile1 \
+    libsndfile1-dev \
     espeak-ng \
     ffmpeg \
     sox \
@@ -31,35 +38,35 @@ ENV PYTHONPATH=/app
 
 COPY requirements.txt .
 
-# Step 1: Build-time deps first (numpy needed by scipy/librosa, Cython by spacy/thinc)
+# Step 1: numpy + scipy + Cython first (build-time deps for TTS/librosa)
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir --prefer-binary \
         numpy==1.22.0 \
         scipy==1.11.4 \
         Cython==3.2.4
 
-# Step 2: All pinned packages
-#   --no-deps        → skip resolver (complete freeze, all transitive deps listed)
-#   --no-build-isolation → source builds (TTS, encodec, trainer) use system torch/numpy
-#                          instead of PEP 517 isolated venv that lacks them
-RUN pip install --no-cache-dir --prefer-binary --no-deps --no-build-isolation -r requirements.txt
+# Step 2: All pinned packages (skip torch/torchaudio — already in base image)
+#   --no-deps            → skip resolver (we have a complete freeze)
+#   --no-build-isolation → source builds see system torch/numpy
+RUN grep -viE '^(torch==|torchaudio==|numpy==|scipy==|Cython==|MyShell|#)' requirements.txt > /tmp/filtered.txt && \
+    pip install --no-cache-dir --prefer-binary --no-deps --no-build-isolation \
+        --ignore-installed \
+        -r /tmp/filtered.txt
 
-# Step 3: Git-sourced package (not on PyPI, also needs --no-build-isolation for torch)
+# Step 3: OpenVoice from git (separate — needs --no-build-isolation for torch)
 RUN pip install --no-cache-dir --no-deps --no-build-isolation \
     "MyShell-OpenVoice @ git+https://github.com/myshell-ai/OpenVoice.git@74a1d147b17a8c3092dd5430504bd83ef6c7eb23"
 
-# Step 4: RunPod SDK (may already be in base image, ensure present)
-RUN pip install --no-cache-dir runpod
-
+# Copy application code
 COPY engine/ ./engine/
 COPY api/ ./api/
 COPY voices/ ./voices/
 COPY run_server.py .
 
-RUN mkdir -p /app/output /app/logs /app/voices/user_voices
+RUN mkdir -p /app/output /app/logs /app/voices/user_voices /app/models
 
-RUN python engine/download_models.py
+# NO model download during build — models load at runtime
 
 EXPOSE 8000
 
-CMD ["python", "-u", "engine/runpod_handler.py"]
+CMD ["python", "-u", "run_server.py"]
