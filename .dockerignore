@@ -25,8 +25,12 @@ Thumbs.db
 # Output
 output/
 logs/
-*.wav
-*.mp3
+
+# Audio files (but NOT voice embeddings)
+# We need voices/embeddings/*.wav in the image
+voices/cleaned_samples/
+voices/raw_samples/
+voices/previews/
 
 # Large binaries
 *.exe

@@ -106,7 +106,7 @@ app.post('/api/v1/demo/generate', demoLimiter, async (req, res) => {
 
     const result = await engineBridge.generateTTS({
       text,
-      voice: voice || 'amrit',
+      voice: voice || 'v011',
       engine: 'flash',
       language: language || 'en',
       format: 'mp3',

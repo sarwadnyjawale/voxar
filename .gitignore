@@ -17,10 +17,17 @@ coverage/
 output/
 logs/
 voices/
+# BUT track the catalog, embeddings, and scripts needed at runtime
+!voices/voices_catalog.json
+!voices/preview_scripts.json
+!voices/embeddings/
+!voices/embeddings/**
 
-# Audio / Media
+# Audio / Media (general — voice embeddings exempted above)
 *.wav
 *.mp3
+# BUT keep voice embedding WAVs (small reference files, ~1MB each)
+!voices/embeddings/*.wav
 
 # Binaries
 *.exe

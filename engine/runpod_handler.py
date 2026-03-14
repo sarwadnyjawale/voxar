@@ -2,8 +2,8 @@ import os
 import json
 import base64
 import runpod
-from pipeline import VoxarPipeline
-from engine_router import EngineRouter
+from engine.pipeline import VoxarPipeline
+from engine.engine_router import EngineRouter
 from pydantic import BaseModel
 
 # Initialize VOXAR AI engine components globally so they stay warm between requests
@@ -15,7 +15,7 @@ print("[RunPod] Engine initialized and ready.")
 def handle_tts(parameters):
     """Handle Text-to-Speech generation"""
     text = parameters.get("text")
-    voice_id = parameters.get("voice", "amrit")
+    voice_id = parameters.get("voice", "v011")
     engine_mode = parameters.get("engine", "cinematic")
     language = parameters.get("language", "en")
     output_format = parameters.get("format", "mp3")

@@ -37,8 +37,15 @@ logger = logging.getLogger("VoxarVoiceManager")
 class VoiceManager:
     """Manages the VOXAR voice catalog, embeddings, and previews."""
 
+    DEFAULT_VOICE_ID = "v011"
+
     def __init__(self, voices_dir="voices"):
-        self.voices_dir = Path(voices_dir)
+        # Auto-resolve voices directory: if local dir is empty, copy from
+        # Docker image or other known source locations (RunPod, /app, etc.)
+        from engine.catalog_loader import ensure_catalog
+        resolved = ensure_catalog(voices_dir)
+
+        self.voices_dir = Path(resolved)
         self.catalog_path = self.voices_dir / "voices_catalog.json"
         self.embeddings_dir = self.voices_dir / "embeddings"
         self.previews_dir = self.voices_dir / "previews"
@@ -52,7 +59,7 @@ class VoiceManager:
         # Load or create catalog
         self._catalog = self._load_catalog()
 
-        logger.info(f"VoiceManager initialized: {len(self._catalog['voices'])} voices loaded")
+        logger.info(f"Voice catalog: {len(self._catalog['voices'])} voices loaded")
 
     def _load_catalog(self):
         """Load catalog from JSON, or create empty one."""
@@ -140,9 +147,14 @@ class VoiceManager:
         logger.info(f"Removed voice: {voice_id}")
 
     def get_voice(self, voice_id):
-        """Get a voice entry by ID. Returns None if not found."""
+        """Get a voice entry by ID, falling back to name lookup (case-insensitive)."""
         for voice in self._catalog["voices"]:
             if voice["id"] == voice_id:
+                return voice
+        # Fallback: match by name (e.g. "arjun" -> v011)
+        voice_id_lower = voice_id.lower()
+        for voice in self._catalog["voices"]:
+            if voice.get("name", "").lower() == voice_id_lower:
                 return voice
         return None
 

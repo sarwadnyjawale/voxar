@@ -3,9 +3,11 @@ const jobQueue = require('./jobQueue');
 const gpuWorkerManager = require('./gpuWorkerManager');
 const r2Storage = require('./r2Storage');
 
-const PYTHON_ENGINE_URL = process.env.PYTHON_ENGINE_URL || 'http://localhost:8000';
+const PYTHON_ENGINE_URL =
+  process.env.PYTHON_ENGINE_URL ||
+  'https://n9mkz413dkbp0l-8000.proxy.runpod.net';
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY || 'voxar-dev-key-001';
-const ENGINE_MODE = process.env.VOXAR_ENGINE_MODE || 'local'; // 'local' or 'runpod'
+const ENGINE_MODE = process.env.VOXAR_ENGINE_MODE || 'runpod'; // 'local' or 'runpod'
 
 /**
  * Bridge to the Python FastAPI engine server or RunPod Serverless GPU.
