@@ -69,4 +69,4 @@ RUN mkdir -p /app/output /app/logs /app/voices/user_voices /app/models
 
 EXPOSE 8000
 
-CMD ["python", "-u", "run_server.py"]
+CMD ["python", "-u", "engine/runpod_handler.py"]
