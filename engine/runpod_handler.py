@@ -6,14 +6,22 @@ from engine.pipeline import VoxarPipeline
 from engine.engine_router import EngineRouter
 from pydantic import BaseModel
 
-# Initialize VOXAR AI engine components globally so they stay warm between requests
-print("[RunPod] Initializing VOXAR Engine...")
-pipeline = VoxarPipeline()
-router = EngineRouter()
-print("[RunPod] Engine initialized and ready.")
+# Lazy globals — initialized on first request, not at import time
+pipeline = None
+router = None
+
+def get_engine():
+    global pipeline, router
+    if pipeline is None:
+        print("[RunPod] Initializing VOXAR Engine...")
+        pipeline = VoxarPipeline()
+        router = EngineRouter()
+        print("[RunPod] Engine initialized and ready.")
+    return pipeline, router
 
 def handle_tts(parameters):
     """Handle Text-to-Speech generation"""
+    pipeline, router = get_engine()
     text = parameters.get("text")
     voice_id = parameters.get("voice", "v011")
     engine_mode = parameters.get("engine", "cinematic")
@@ -54,6 +62,7 @@ def handle_tts(parameters):
 
 def handle_stt(parameters):
     """Handle Speech-to-Text transcription"""
+    pipeline, router = get_engine()
     # For RunPod, the audio file is expected to be provided as base64 in the parameters
     # Alternatively it could be a URL that we download first.
     # To keep it simple, we assume base64 audio is sent.
@@ -85,6 +94,7 @@ def handle_stt(parameters):
 
 def handle_clone(parameters):
     """Handle Voice Cloning"""
+    pipeline, router = get_engine()
     audio_b64 = parameters.get("sample_base64")
     name = parameters.get("name")
     
