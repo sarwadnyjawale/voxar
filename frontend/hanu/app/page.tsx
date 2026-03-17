@@ -4,9 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/landing/Navbar'
 import Footer from '@/components/landing/Footer'
 import PricingCards from '@/components/landing/PricingCards'
+
+const VoiceGallery = dynamic(() => import('@/components/landing/VoiceGallery'), { ssr: false })
 import {
   IconZap, IconPlay, IconCheck, IconArrowRight, IconStar, IconMic, IconCopy,
   IconFileText, IconUsers, IconGlobe, IconSubtitles, IconCpu, IconLanguages,
@@ -412,6 +415,9 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* VOICE GALLERY */}
+        <VoiceGallery />
 
         {/* TTS DEMO */}
         <section className="demo-section" id="demo">

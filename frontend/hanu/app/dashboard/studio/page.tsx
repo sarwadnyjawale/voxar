@@ -3,105 +3,58 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import DashHeader from '@/components/dashboard/DashHeader'
 import { IconPlay, IconPlus, IconCopy, IconCheck } from '@/components/landing/Icons'
-
-interface SpeechBlock {
-  id: string
-  text: string
-  voice: string
-  voiceAvatar: string
-  duration: number
-}
-
-const VOICES = [
-  { name: 'Arjun', style: 'The Narrator', avatar: 'av-1', color: 'linear-gradient(135deg,#ff6b6b,#ee5a24)' },
-  { name: 'Priya', style: 'The Poet', avatar: 'av-2', color: 'linear-gradient(135deg,#a29bfe,#6c5ce7)' },
-  { name: 'Vikram', style: 'The Anchor', avatar: 'av-3', color: 'linear-gradient(135deg,#00cec9,#0984e3)' },
-  { name: 'Maya', style: 'The Storyteller', avatar: 'av-4', color: 'linear-gradient(135deg,#fd79a8,#e84393)' },
-  { name: 'Kabir', style: 'The Narrator', avatar: 'av-5', color: 'linear-gradient(135deg,#f9ca24,#f0932b)' },
-  { name: 'Kavya', style: 'The Guide', avatar: 'av-6', color: 'linear-gradient(135deg,#55efc4,#00b894)' },
-]
-
-let blockIdCounter = 0
-const makeBlock = (text = '', voiceIdx = 0): SpeechBlock => ({
-  id: `blk-${++blockIdCounter}`,
-  text,
-  voice: VOICES[voiceIdx].name,
-  voiceAvatar: VOICES[voiceIdx].avatar,
-  duration: Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length * 0.4)),
-})
+import { useStudioStore } from '@/stores/studioStore'
+import { useVoiceStore, CatalogVoice, ClonedVoice } from '@/stores/voiceStore'
 
 export default function StudioPage() {
-  const [projectName, setProjectName] = useState('Untitled Project')
-  const [blocks, setBlocks] = useState<SpeechBlock[]>([
-    makeBlock('Welcome to VOXAR Studio. This is your advanced workspace for creating multi-voice audio productions.', 0),
-    makeBlock('Each block represents a speech segment. You can assign different voices to each block.', 1),
-    makeBlock('Use the timeline below to preview your entire project as a seamless audio experience.', 2),
-  ])
-  const [activeBlockId, setActiveBlockId] = useState<string | null>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [playProgress, setPlayProgress] = useState(0)
-  const [volume, setVolume] = useState(80)
-  const [engine, setEngine] = useState('cinematic')
-  const [enhance, setEnhance] = useState(true)
+  const {
+    projectName, setProjectName,
+    blocks, activeBlockId, setActiveBlock,
+    format, setFormat, enhance, setEnhance, normalize, setNormalize, volume, setVolume,
+    addBlock, deleteBlock, duplicateBlock, updateBlockText, updateBlockSettings,
+    generateBlock, generateAll, stopGenerateAll, isGeneratingAll, generatingBlockId, generationProgress,
+    playBlock, playAll, stopPlayback, isPlaying, currentPlayBlockIdx, audioElement,
+  } = useStudioStore()
 
+  const { voices, clonedVoices, fetchVoices, fetchClonedVoices } = useVoiceStore()
+
+  const [voiceDropdownBlockId, setVoiceDropdownBlockId] = useState<string | null>(null)
   const volumeRef = useRef<HTMLDivElement>(null)
 
-  // Play simulation
+  // Fetch real voices on mount
   useEffect(() => {
-    if (!isPlaying) return
-    const interval = setInterval(() => {
-      setPlayProgress(prev => {
-        if (prev >= 100) { setIsPlaying(false); return 100 }
-        return prev + 0.3
-      })
-    }, 50)
-    return () => clearInterval(interval)
-  }, [isPlaying])
+    fetchVoices()
+    fetchClonedVoices()
+  }, [fetchVoices, fetchClonedVoices])
+
+  // All available voices (catalog + cloned)
+  const allVoices: { id: string; name: string; type: 'catalog' | 'cloned'; lang?: string }[] = [
+    ...voices.map((v: CatalogVoice) => ({
+      id: v.id,
+      name: v.display_name || v.name,
+      type: 'catalog' as const,
+      lang: v.primary_language || (v.languages?.[0]),
+    })),
+    ...clonedVoices
+      .filter((v: ClonedVoice) => v.status === 'ready')
+      .map((v: ClonedVoice) => ({
+        id: v._id,
+        name: `${v.name} (Clone)`,
+        type: 'cloned' as const,
+        lang: v.language,
+      })),
+  ]
 
   const totalDuration = blocks.reduce((sum, b) => sum + b.duration, 0)
-
-  const updateBlockText = (id: string, text: string) => {
-    setBlocks(prev => prev.map(b =>
-      b.id === id ? { ...b, text, duration: Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length * 0.4)) } : b
-    ))
-  }
-
-  const cycleVoice = (id: string) => {
-    setBlocks(prev => prev.map(b => {
-      if (b.id !== id) return b
-      const currentIdx = VOICES.findIndex(v => v.name === b.voice)
-      const nextIdx = (currentIdx + 1) % VOICES.length
-      return { ...b, voice: VOICES[nextIdx].name, voiceAvatar: VOICES[nextIdx].avatar }
-    }))
-  }
-
-  const addBlock = () => {
-    const newBlock = makeBlock('', 0)
-    setBlocks(prev => [...prev, newBlock])
-    setActiveBlockId(newBlock.id)
-  }
-
-  const deleteBlock = (id: string) => {
-    if (blocks.length <= 1) return
-    setBlocks(prev => prev.filter(b => b.id !== id))
-    if (activeBlockId === id) setActiveBlockId(null)
-  }
-
-  const duplicateBlock = (id: string) => {
-    const idx = blocks.findIndex(b => b.id === id)
-    if (idx === -1) return
-    const original = blocks[idx]
-    const voiceIdx = VOICES.findIndex(v => v.name === original.voice)
-    const dup = makeBlock(original.text, voiceIdx >= 0 ? voiceIdx : 0)
-    setBlocks(prev => [...prev.slice(0, idx + 1), dup, ...prev.slice(idx + 1)])
-  }
+  const totalChars = blocks.reduce((sum, b) => sum + b.text.trim().length, 0)
+  const pendingCount = blocks.filter(b => b.text.trim() && (b.dirty || b.status !== 'done')).length
 
   const handleVolumeClick = useCallback((e: React.MouseEvent) => {
     if (!volumeRef.current) return
     const rect = volumeRef.current.getBoundingClientRect()
     const pct = Math.max(0, Math.min(100, Math.round(((e.clientX - rect.left) / rect.width) * 100)))
     setVolume(pct)
-  }, [])
+  }, [setVolume])
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60)
@@ -109,7 +62,35 @@ export default function StudioPage() {
     return `${m}:${s.toString().padStart(2, '0')}`
   }
 
-  const getVoiceColor = (name: string) => VOICES.find(v => v.name === name)?.color || VOICES[0].color
+  const getVoiceColor = (voiceId: string): string => {
+    // Generate a consistent color from voice ID
+    const colors = [
+      'linear-gradient(135deg,#ff6b6b,#ee5a24)',
+      'linear-gradient(135deg,#a29bfe,#6c5ce7)',
+      'linear-gradient(135deg,#00cec9,#0984e3)',
+      'linear-gradient(135deg,#fd79a8,#e84393)',
+      'linear-gradient(135deg,#f9ca24,#f0932b)',
+      'linear-gradient(135deg,#55efc4,#00b894)',
+      'linear-gradient(135deg,#74b9ff,#0984e3)',
+      'linear-gradient(135deg,#e17055,#d63031)',
+    ]
+    let hash = 0
+    for (let i = 0; i < voiceId.length; i++) hash = ((hash << 5) - hash + voiceId.charCodeAt(i)) | 0
+    return colors[Math.abs(hash) % colors.length]
+  }
+
+  const selectVoice = (blockId: string, voiceId: string, voiceName: string) => {
+    updateBlockSettings(blockId, { voiceId, voiceName })
+    setVoiceDropdownBlockId(null)
+  }
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!voiceDropdownBlockId) return
+    const close = () => setVoiceDropdownBlockId(null)
+    window.addEventListener('click', close)
+    return () => window.removeEventListener('click', close)
+  }, [voiceDropdownBlockId])
 
   return (
     <>
@@ -146,16 +127,19 @@ export default function StudioPage() {
 
             <div className="controls-divider" />
 
-            {/* Engine */}
+            {/* Output */}
             <div className="studio-left-section">
-              <div className="studio-left-section-title">Model</div>
-              <div className="control-group">
-                <select className="model-select" value={engine} onChange={e => setEngine(e.target.value)}>
-                  <option value="flash">Flash — Low Latency</option>
-                  <option value="cinematic">Cinematic — Studio Grade</option>
-                  <option value="longform">Longform — Audiobooks</option>
-                  <option value="multilingual">Multilingual — 12 Languages</option>
-                </select>
+              <div className="studio-left-section-title">Output Format</div>
+              <div className="format-options">
+                {['mp3', 'wav'].map(f => (
+                  <button
+                    key={f}
+                    className={`format-chip ${f === format ? 'active' : ''}`}
+                    onClick={() => setFormat(f)}
+                  >
+                    {f.toUpperCase()}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -173,21 +157,35 @@ export default function StudioPage() {
                   <div className="toggle-knob" />
                 </div>
               </div>
-              <button className="btn-secondary-action" style={{ width: '100%', justifyContent: 'center', padding: '9px', fontSize: '12px' }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
-                Enhance Text with AI
-              </button>
+              <div className="toggle-control">
+                <div className="toggle-info">
+                  <span className="toggle-label">Loudness Normalize</span>
+                  <span className="toggle-desc">Consistent volume</span>
+                </div>
+                <div className={`toggle-switch ${normalize ? 'active' : ''}`} onClick={() => setNormalize(!normalize)}>
+                  <div className="toggle-knob" />
+                </div>
+              </div>
             </div>
 
             <div className="controls-divider" />
 
-            {/* Output */}
+            {/* Info */}
             <div className="studio-left-section">
-              <div className="studio-left-section-title">Output Format</div>
-              <div className="format-options">
-                {['mp3', 'wav', 'flac'].map(f => (
-                  <button key={f} className={`format-chip ${f === 'wav' ? 'active' : ''}`}>{f.toUpperCase()}</button>
-                ))}
+              <div className="studio-left-section-title">Project Stats</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Blocks</span><span style={{ color: 'var(--text-secondary)' }}>{blocks.length}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Characters</span><span style={{ color: 'var(--text-secondary)' }}>{totalChars.toLocaleString()}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Duration</span><span style={{ color: 'var(--text-secondary)' }}>{formatTime(totalDuration)}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Pending</span><span style={{ color: pendingCount > 0 ? 'var(--text-primary)' : 'var(--text-dim)' }}>{pendingCount}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -203,16 +201,33 @@ export default function StudioPage() {
                 value={projectName}
                 onChange={e => setProjectName(e.target.value)}
               />
-              <span className="studio-project-status">
-                <span className="studio-project-dot" />
-                Saved
-              </span>
+              {isGeneratingAll && generationProgress && (
+                <span className="studio-project-status" style={{ color: 'var(--accent-light)' }}>
+                  <span className="studio-project-dot" style={{ background: 'var(--accent)', animation: 'pulse 1s infinite' }} />
+                  Generating {generationProgress.current}/{generationProgress.total}
+                </span>
+              )}
             </div>
             <div className="studio-toolbar-right">
-              <span className="char-count">{blocks.length} blocks · {totalDuration}s total</span>
-              <button className="btn-generate" style={{ padding: '8px 20px', fontSize: '12px' }}>
-                Generate All
-              </button>
+              <span className="char-count">{blocks.length} blocks · {totalChars.toLocaleString()} chars</span>
+              {isGeneratingAll ? (
+                <button
+                  className="btn-secondary-action"
+                  style={{ padding: '8px 20px', fontSize: '12px' }}
+                  onClick={stopGenerateAll}
+                >
+                  Stop
+                </button>
+              ) : (
+                <button
+                  className="btn-generate"
+                  style={{ padding: '8px 20px', fontSize: '12px' }}
+                  onClick={() => generateAll()}
+                  disabled={pendingCount === 0}
+                >
+                  {pendingCount > 0 ? `Generate ${pendingCount > 1 ? `All (${pendingCount})` : ''}` : 'All Generated'}
+                </button>
+              )}
             </div>
           </div>
 
@@ -221,20 +236,144 @@ export default function StudioPage() {
             {blocks.map((block, i) => (
               <div
                 key={block.id}
-                className={`studio-block ${activeBlockId === block.id ? 'active' : ''}`}
-                onClick={() => setActiveBlockId(block.id)}
+                className={`studio-block ${activeBlockId === block.id ? 'active' : ''} ${block.status === 'generating' ? 'generating' : ''}`}
+                onClick={() => setActiveBlock(block.id)}
               >
-                <div className="studio-block-voice">
+                {/* Voice selector */}
+                <div className="studio-block-voice" style={{ position: 'relative' }}>
                   <div
                     className="studio-block-avatar"
-                    style={{ background: getVoiceColor(block.voice) }}
-                    onClick={(e) => { e.stopPropagation(); cycleVoice(block.id) }}
+                    style={{ background: getVoiceColor(block.voiceId) }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setVoiceDropdownBlockId(voiceDropdownBlockId === block.id ? null : block.id)
+                    }}
                     title="Click to change voice"
                   >
-                    {block.voice[0]}
+                    {block.voiceName[0]}
                   </div>
-                  <span className="studio-block-voice-name">{block.voice}</span>
+                  <span className="studio-block-voice-name">{block.voiceName}</span>
+
+                  {/* Voice dropdown */}
+                  {voiceDropdownBlockId === block.id && (
+                    <div
+                      className="studio-voice-dropdown"
+                      onClick={(e) => e.stopPropagation()}
+                      style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: 0,
+                        zIndex: 100,
+                        width: '220px',
+                        maxHeight: '240px',
+                        overflowY: 'auto',
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-md)',
+                        boxShadow: 'var(--shadow-lg)',
+                        padding: '4px',
+                        marginTop: '4px',
+                      }}
+                    >
+                      {allVoices.length === 0 && (
+                        <div style={{ padding: '12px', fontSize: '11px', color: 'var(--text-dim)', textAlign: 'center' }}>
+                          Loading voices...
+                        </div>
+                      )}
+                      {allVoices.map((v) => (
+                        <button
+                          key={v.id}
+                          onClick={() => selectVoice(block.id, v.id, v.name)}
+                          style={{
+                            width: '100%',
+                            padding: '8px 10px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            background: v.id === block.voiceId ? 'var(--bg-glass-hover)' : 'transparent',
+                            border: 'none',
+                            borderRadius: 'var(--radius-sm)',
+                            color: 'var(--text-primary)',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                            transition: 'background 0.15s',
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-glass-hover)')}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = v.id === block.voiceId ? 'var(--bg-glass-hover)' : 'transparent')}
+                        >
+                          <span
+                            style={{
+                              width: '24px', height: '24px', borderRadius: '50%',
+                              background: getVoiceColor(v.id),
+                              display: 'flex', alignItems: 'center', justifyContent: 'center',
+                              fontSize: '10px', fontWeight: 700, color: '#fff', flexShrink: 0,
+                            }}
+                          >
+                            {v.name[0]}
+                          </span>
+                          <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {v.name}
+                          </span>
+                          {v.type === 'cloned' && (
+                            <span style={{ fontSize: '9px', color: 'var(--accent-light)', background: 'var(--accent-glow)', padding: '1px 5px', borderRadius: '4px' }}>
+                              CLONE
+                            </span>
+                          )}
+                          {v.lang && (
+                            <span style={{ fontSize: '9px', color: 'var(--text-dim)', textTransform: 'uppercase' }}>
+                              {v.lang}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
+
+                {/* Per-block settings row */}
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0 }}>
+                  <select
+                    className="model-select"
+                    value={block.engine}
+                    onChange={(e) => { e.stopPropagation(); updateBlockSettings(block.id, { engine: e.target.value }) }}
+                    style={{ padding: '3px 6px', fontSize: '10px', width: 'auto', minWidth: '80px' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <option value="flash">Flash</option>
+                    <option value="cinematic">Cinematic</option>
+                    <option value="longform">Longform</option>
+                    <option value="multilingual">Multilingual</option>
+                  </select>
+                  <select
+                    className="model-select"
+                    value={block.language}
+                    onChange={(e) => { e.stopPropagation(); updateBlockSettings(block.id, { language: e.target.value }) }}
+                    style={{ padding: '3px 6px', fontSize: '10px', width: 'auto', minWidth: '60px' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <option value="auto">Auto</option>
+                    <option value="en">EN</option>
+                    <option value="hi">HI</option>
+                    <option value="hinglish">Hinglish</option>
+                    <option value="ta">Tamil</option>
+                    <option value="te">Telugu</option>
+                    <option value="bn">Bengali</option>
+                  </select>
+                  <select
+                    className="model-select"
+                    value={String(block.speed)}
+                    onChange={(e) => { e.stopPropagation(); updateBlockSettings(block.id, { speed: parseFloat(e.target.value) }) }}
+                    style={{ padding: '3px 6px', fontSize: '10px', width: 'auto', minWidth: '55px' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {[0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map(s => (
+                      <option key={s} value={String(s)}>{s}x</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Text */}
                 <div className="studio-block-content">
                   <textarea
                     className="studio-block-text"
@@ -244,16 +383,53 @@ export default function StudioPage() {
                     rows={Math.max(1, Math.ceil(block.text.length / 80))}
                   />
                 </div>
+
+                {/* Actions */}
                 <div className="studio-block-actions">
-                  <button className="studio-block-btn" title="Play block">
+                  {/* Status indicator */}
+                  {block.status === 'generating' && (
+                    <span style={{ fontSize: '9px', color: 'var(--accent-light)', marginRight: '4px' }}>Generating...</span>
+                  )}
+                  {block.status === 'done' && !block.dirty && (
+                    <span style={{ fontSize: '9px', color: 'var(--success)', marginRight: '4px' }}>Ready</span>
+                  )}
+                  {block.status === 'done' && block.dirty && (
+                    <span style={{ fontSize: '9px', color: 'var(--text-muted)', marginRight: '4px' }}>Modified</span>
+                  )}
+                  {block.status === 'error' && (
+                    <span style={{ fontSize: '9px', color: '#ef4444', marginRight: '4px' }} title={block.error || ''}>Error</span>
+                  )}
+
+                  {/* Play block */}
+                  <button
+                    className="studio-block-btn"
+                    title={block.audioUrl ? 'Play block' : 'Generate first'}
+                    onClick={(e) => { e.stopPropagation(); if (block.audioUrl) playBlock(block.id) }}
+                    style={{ opacity: block.audioUrl ? 1 : 0.3 }}
+                  >
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>
                   </button>
-                  <button className="studio-block-btn" title="Regenerate">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="1 4 1 10 7 10" /><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" /></svg>
+
+                  {/* Generate/Regenerate this block */}
+                  <button
+                    className="studio-block-btn"
+                    title={block.status === 'done' ? 'Regenerate' : 'Generate'}
+                    onClick={(e) => { e.stopPropagation(); generateBlock(block.id) }}
+                    style={{ opacity: block.status === 'generating' ? 0.3 : 1 }}
+                  >
+                    {block.status === 'generating' ? (
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ animation: 'loginSpin 1s linear infinite' }}><polyline points="1 4 1 10 7 10" /><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" /></svg>
+                    ) : (
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="1 4 1 10 7 10" /><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" /></svg>
+                    )}
                   </button>
+
+                  {/* Duplicate */}
                   <button className="studio-block-btn" title="Duplicate" onClick={(e) => { e.stopPropagation(); duplicateBlock(block.id) }}>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
                   </button>
+
+                  {/* Delete */}
                   <button className="studio-block-btn studio-block-btn--danger" title="Delete" onClick={(e) => { e.stopPropagation(); deleteBlock(block.id) }}>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
                   </button>
@@ -261,7 +437,10 @@ export default function StudioPage() {
               </div>
             ))}
 
-            <button className="studio-add-block" onClick={addBlock}>
+            <button className="studio-add-block" onClick={() => {
+              const newId = addBlock()
+              setVoiceDropdownBlockId(newId)
+            }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
               Add Speech Block
             </button>
@@ -272,33 +451,39 @@ export default function StudioPage() {
             <div className="studio-timeline-controls">
               <button
                 className="studio-timeline-play"
-                onClick={() => { if (playProgress >= 100) setPlayProgress(0); setIsPlaying(!isPlaying) }}
+                onClick={() => {
+                  if (isPlaying) { stopPlayback() } else { playAll() }
+                }}
+                style={{ opacity: blocks.some(b => b.audioUrl) ? 1 : 0.3 }}
               >
                 {isPlaying ? (
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><line x1="6" y1="4" x2="6" y2="20" /><line x1="18" y1="4" x2="18" y2="20" /></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="6" y1="4" x2="6" y2="20" /><line x1="18" y1="4" x2="18" y2="20" /></svg>
                 ) : (
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>
                 )}
               </button>
               <div className="studio-timeline-track">
                 <div className="studio-timeline-segments">
-                  {blocks.map((block, i) => (
+                  {blocks.map((block) => (
                     <div
                       key={block.id}
                       className={`studio-timeline-seg ${activeBlockId === block.id ? 'active' : ''}`}
-                      style={{ flex: block.duration }}
-                      onClick={() => setActiveBlockId(block.id)}
+                      style={{
+                        flex: block.duration > 0 ? block.duration : Math.max(1, Math.ceil(block.text.split(/\s+/).filter(Boolean).length * 0.4)),
+                        opacity: block.audioUrl ? 1 : 0.4,
+                      }}
+                      onClick={() => {
+                        setActiveBlock(block.id)
+                        if (block.audioUrl) playBlock(block.id)
+                      }}
                     >
-                      {block.voice}
+                      {block.voiceName.substring(0, 6)}
                     </div>
                   ))}
                 </div>
-                <div className="studio-timeline-progress" onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setPlayProgress(((e.clientX - rect.left) / rect.width) * 100) }}>
-                  <div className="studio-timeline-progress-fill" style={{ width: `${playProgress}%` }} />
-                </div>
               </div>
               <span className="studio-timeline-time">
-                {formatTime(Math.floor(playProgress / 100 * totalDuration))} / {formatTime(totalDuration)}
+                {formatTime(totalDuration)}
               </span>
             </div>
           </div>

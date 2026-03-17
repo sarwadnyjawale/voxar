@@ -10,7 +10,7 @@ export default function ControlsPanel() {
     updateSettings
   } = useTTSStore()
 
-  const { voices, fetchVoices } = useVoiceStore()
+  const { voices, clonedVoices, fetchVoices, fetchClonedVoices, favorites, isFavorite } = useVoiceStore()
   const [showVoiceDropdown, setShowVoiceDropdown] = useState(false)
 
   const stabilityRef = useRef<HTMLDivElement>(null)
@@ -19,9 +19,13 @@ export default function ControlsPanel() {
   // Load voices on mount
   useEffect(() => {
     if (voices.length === 0) fetchVoices()
+    fetchClonedVoices()
   }, [])
 
   const selectedVoice = voices.find(v => v.id === voice) || null
+
+  // Favorite voices for quick pick
+  const favoriteVoices = voices.filter(v => isFavorite(v.id))
 
   const selectVoice = (v: CatalogVoice) => {
     updateSettings({ voice: v.id })
@@ -59,6 +63,29 @@ export default function ControlsPanel() {
 
   return (
     <div className="controls-body">
+      {/* Saved Voices Quick Pick */}
+      {favoriteVoices.length > 0 && (
+        <div className="control-group">
+          <div className="control-label">Saved Voices</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {favoriteVoices.map(v => (
+              <button
+                key={v.id}
+                onClick={() => updateSettings({ voice: v.id })}
+                style={{
+                  padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 500,
+                  cursor: 'pointer', transition: 'all 0.2s', border: 'none',
+                  background: v.id === voice ? 'var(--btn-solid)' : 'var(--bg-glass)',
+                  color: v.id === voice ? 'var(--btn-solid-text)' : 'var(--text-secondary)',
+                }}
+              >
+                {v.display_name || v.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Voice Selector */}
       <div className="control-group">
         <div className="control-label">Voice <span className="control-label-hint">TAP TO CHANGE</span></div>
@@ -167,7 +194,7 @@ export default function ControlsPanel() {
       <div className="control-group">
         <div className="control-label">Output Format</div>
         <div className="format-options">
-          {['mp3', 'wav', 'ogg', 'flac'].map(f => (
+          {['mp3', 'wav'].map(f => (
             <button key={f} className={`format-chip ${format === f ? 'active' : ''}`} onClick={() => updateSettings({ format: f })}>{f.toUpperCase()}</button>
           ))}
         </div>

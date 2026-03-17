@@ -71,6 +71,7 @@ export const useTTSStore = create<TTSState>((set, get) => ({
         format: state.format,
         enhance: state.enhance,
         normalize: state.normalize,
+        speed: state.speed,
       })
 
       const mins = Math.floor(result.duration / 60)

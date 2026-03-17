@@ -24,6 +24,22 @@ export interface ClonedVoice {
   created_at: string
 }
 
+const FAVORITES_KEY = 'voxar-favorite-voices'
+
+function loadFavorites(): string[] {
+  if (typeof window === 'undefined') return []
+  try {
+    return JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]')
+  } catch {
+    return []
+  }
+}
+
+function saveFavorites(ids: string[]) {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(ids))
+}
+
 interface VoiceState {
   voices: CatalogVoice[]
   clonedVoices: ClonedVoice[]
@@ -36,15 +52,20 @@ interface VoiceState {
     tags: string[]
   }
 
+  // Favorites
+  favorites: string[]
+
   // Actions
   fetchVoices: () => Promise<void>
   fetchClonedVoices: () => Promise<void>
   setSearchQuery: (query: string) => void
   toggleTagFilter: (tag: string) => void
   playPreview: (id: string) => void
+  toggleFavorite: (id: string) => void
+  isFavorite: (id: string) => boolean
 }
 
-export const useVoiceStore = create<VoiceState>((set) => ({
+export const useVoiceStore = create<VoiceState>((set, get) => ({
   voices: [],
   clonedVoices: [],
   isLoading: false,
@@ -54,6 +75,8 @@ export const useVoiceStore = create<VoiceState>((set) => ({
   filters: {
     tags: []
   },
+
+  favorites: loadFavorites(),
 
   fetchVoices: async () => {
     set({ isLoading: true, error: null })
@@ -85,7 +108,6 @@ export const useVoiceStore = create<VoiceState>((set) => ({
   }),
 
   playPreview: (id) => {
-    // Generate a short TTS preview via the backend
     const previewText = 'Welcome to VOXAR. This is a preview of this voice.'
     api.backendPost<{ audio_url: string }>('/api/v1/tts/generate', {
       text: previewText,
@@ -101,5 +123,18 @@ export const useVoiceStore = create<VoiceState>((set) => ({
     }).catch(err => {
       console.warn('Voice preview failed:', err.message)
     })
+  },
+
+  toggleFavorite: (id) => {
+    const { favorites } = get()
+    const next = favorites.includes(id)
+      ? favorites.filter(f => f !== id)
+      : [...favorites, id]
+    saveFavorites(next)
+    set({ favorites: next })
+  },
+
+  isFavorite: (id) => {
+    return get().favorites.includes(id)
   },
 }))
