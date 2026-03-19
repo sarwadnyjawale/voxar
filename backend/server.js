@@ -22,6 +22,7 @@ const engineBridge = require('./services/engineBridge')
 const { authMiddleware } = require('./middleware/auth')
 
 const app = express()
+app.set('trust proxy', 1)
 const PORT = process.env.PORT || 3001
 const HOST = '0.0.0.0'
 
