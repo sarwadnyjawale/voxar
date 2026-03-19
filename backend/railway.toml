@@ -1,15 +1,11 @@
 [build]
 builder = "nixpacks"
 
-[build.environment]
-NODE_ENV = "production"
-
 [deploy]
 startCommand = "node server.js"
 healthcheckPath = "/health"
-healthcheckTimeout = 10
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 5
 
 [service]
-internalPort = 8888
+internalPort = 3001
