@@ -6,6 +6,3 @@ startCommand = "node server.js"
 healthcheckPath = "/health"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 5
-
-[service]
-internalPort = 3001
