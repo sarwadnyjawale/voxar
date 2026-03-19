@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "echo '=== PWD ===' && pwd && echo '=== ROOT ===' && ls / && echo '=== APP ===' && ls /app && echo '=== APP RECURSIVE ===' && find /app -maxdepth 3 -type f -name '*.js' | head -40 && node server.js"
+startCommand = "node server.js"
 healthcheckPath = "/health"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 5
