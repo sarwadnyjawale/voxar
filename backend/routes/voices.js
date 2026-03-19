@@ -31,6 +31,7 @@ const upload = multer({
   },
 })
 
+router.get('/', getCatalog)
 router.get('/catalog', getCatalog)
 router.get('/my', authMiddleware, getMyVoices)
 router.post('/clone', authMiddleware, upload.single('sample'), cloneVoice)
