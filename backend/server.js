@@ -17,6 +17,7 @@ const billingRoutes = require('./routes/billing')
 const webhookRoutes = require('./routes/webhooks')
 const marketplaceRoutes = require('./routes/marketplace')
 const transcribeRoutes = require('./routes/transcribe')
+const jobRoutes = require('./routes/jobs')
 
 const engineBridge = require('./services/engineBridge')
 const { authMiddleware } = require('./middleware/auth')
@@ -115,6 +116,7 @@ app.use('/api/v1/user', generalLimiter, userRoutes)
 app.use('/api/v1/billing', generalLimiter, billingRoutes)
 app.use('/api/v1/webhooks', webhookRoutes)  // No rate limit on webhooks (Razorpay)
 app.use('/api/v1/marketplace', generalLimiter, marketplaceRoutes)
+app.use('/api/v1/jobs', generalLimiter, jobRoutes)
 
 // Health check
 app.get('/health', async (req, res) => {

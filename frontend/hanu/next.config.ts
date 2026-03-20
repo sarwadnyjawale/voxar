@@ -8,10 +8,9 @@ const nextConfig: NextConfig = {
     return [
       // Engine-specific routes (matched first)
       { source: '/api/v1/generate', destination: `${ENGINE_URL}/api/v1/generate` },
-      { source: '/api/v1/jobs/:path*', destination: `${ENGINE_URL}/api/v1/jobs/:path*` },
       { source: '/api/v1/health', destination: `${ENGINE_URL}/api/v1/health` },
       { source: '/previews/:path*', destination: `${ENGINE_URL}/previews/:path*` },
-      // All other /api/v1/* routes → Node.js backend
+      // All other /api/v1/* routes (including /jobs/*) → Node.js backend
       { source: '/api/v1/:path*', destination: `${BACKEND_URL}/api/v1/:path*` },
     ]
   }

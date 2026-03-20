@@ -162,6 +162,40 @@ const engineBridge = {
   },
 
   /**
+   * Get job status from the Python engine
+   */
+  async getJobStatus(jobId) {
+    const endpoint = `${PYTHON_ENGINE_URL}/api/v1/jobs/${jobId}`
+    const res = await axios.get(endpoint, {
+      headers: engineHeaders(),
+      timeout: 10000,
+    })
+    logEngine('GET', `/api/v1/jobs/${jobId}`, res.data.status || 'ok')
+    return res.data
+  },
+
+  /**
+   * Stream job audio from the Python engine.
+   * Pipes the binary response directly to the Express response object.
+   */
+  async streamJobAudio(jobId, expressRes) {
+    const endpoint = `${PYTHON_ENGINE_URL}/api/v1/jobs/${jobId}/audio`
+    const res = await axios.get(endpoint, {
+      headers: { 'X-API-Key': ENGINE_API_KEY },
+      responseType: 'stream',
+      timeout: 60000,
+    })
+    logEngine('GET', `/api/v1/jobs/${jobId}/audio`, 'streaming')
+
+    // Forward content headers from engine
+    if (res.headers['content-type']) expressRes.set('Content-Type', res.headers['content-type'])
+    if (res.headers['content-length']) expressRes.set('Content-Length', res.headers['content-length'])
+    if (res.headers['content-disposition']) expressRes.set('Content-Disposition', res.headers['content-disposition'])
+
+    res.data.pipe(expressRes)
+  },
+
+  /**
    * Health check for the Python engine
    */
   async healthCheck() {
