@@ -1,8 +1,7 @@
 import type { ApiError } from './types'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-const BACKEND_BASE =
-  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001'
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
+const BACKEND_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || ''
 
 function getAuthToken(): string | null {
   if (typeof window === 'undefined') return null

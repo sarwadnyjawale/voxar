@@ -4,8 +4,8 @@
   "voices": [
     {
       "id": "v001",
-      "name": "Aisha Trivedi",
-      "display_name": "Aisha Trivedi — The Anchor",
+      "name": "Aisha",
+      "display_name": "Aisha — The Anchor",
       "gender": "female",
       "languages": [
         "en",
@@ -38,8 +38,8 @@
     },
     {
       "id": "v002",
-      "name": "Zara Bhatt",
-      "display_name": "Zara Bhatt — The Presenter",
+      "name": "Zara",
+      "display_name": "Zara — The Presenter",
       "gender": "female",
       "languages": [
         "en"
@@ -71,8 +71,8 @@
     },
     {
       "id": "v003",
-      "name": "Sophia Menon",
-      "display_name": "Sophia Menon — The Narrator",
+      "name": "Sophia",
+      "display_name": "Sophia — The Narrator",
       "gender": "female",
       "languages": [
         "en"
@@ -104,8 +104,8 @@
     },
     {
       "id": "v004",
-      "name": "Maya Sharma",
-      "display_name": "Maya Sharma — The Storyteller",
+      "name": "Maya",
+      "display_name": "Maya — The Storyteller",
       "gender": "female",
       "languages": [
         "en",
@@ -138,8 +138,8 @@
     },
     {
       "id": "v005",
-      "name": "Isha Malhotra",
-      "display_name": "Isha Malhotra — The Creator",
+      "name": "Isha",
+      "display_name": "Isha — The Creator",
       "gender": "female",
       "languages": [
         "en"
@@ -171,8 +171,8 @@
     },
     {
       "id": "v006",
-      "name": "Priya Nair",
-      "display_name": "Priya Nair — The Poet",
+      "name": "Priya",
+      "display_name": "Priya — The Poet",
       "gender": "female",
       "languages": [
         "hi",
@@ -206,8 +206,8 @@
     },
     {
       "id": "v007",
-      "name": "Kavya Reddy",
-      "display_name": "Kavya Reddy — The Guide",
+      "name": "Kavya",
+      "display_name": "Kavya — The Guide",
       "gender": "female",
       "languages": [
         "hi",
@@ -240,8 +240,8 @@
     },
     {
       "id": "v008",
-      "name": "Divya Iyer",
-      "display_name": "Divya Iyer — The Teacher",
+      "name": "Divya",
+      "display_name": "Divya — The Teacher",
       "gender": "female",
       "languages": [
         "hi"
@@ -273,8 +273,8 @@
     },
     {
       "id": "v009",
-      "name": "Neha Verma",
-      "display_name": "Neha Verma — The Companion",
+      "name": "Neha",
+      "display_name": "Neha — The Companion",
       "gender": "female",
       "languages": [
         "hi",
@@ -307,8 +307,8 @@
     },
     {
       "id": "v010",
-      "name": "Meera Joshi",
-      "display_name": "Meera Joshi — The Soulful",
+      "name": "Meera",
+      "display_name": "Meera — The Soulful",
       "gender": "female",
       "languages": [
         "mr",
@@ -341,8 +341,8 @@
     },
     {
       "id": "v011",
-      "name": "Arjun Mehta",
-      "display_name": "Arjun Mehta — The Narrator",
+      "name": "Arjun",
+      "display_name": "Arjun — The Narrator",
       "gender": "male",
       "languages": [
         "en",
@@ -375,8 +375,8 @@
     },
     {
       "id": "v012",
-      "name": "Vikram Singh",
-      "display_name": "Vikram Singh — The Anchor",
+      "name": "Vikram",
+      "display_name": "Vikram — The Anchor",
       "gender": "male",
       "languages": [
         "en"
@@ -408,8 +408,8 @@
     },
     {
       "id": "v013",
-      "name": "Rohan Kapoor",
-      "display_name": "Rohan Kapoor — The Presenter",
+      "name": "Rohan",
+      "display_name": "Rohan — The Presenter",
       "gender": "male",
       "languages": [
         "en"
@@ -441,8 +441,8 @@
     },
     {
       "id": "v014",
-      "name": "Kabir Pandey",
-      "display_name": "Kabir Pandey — The Storyteller",
+      "name": "Kabir",
+      "display_name": "Kabir — The Storyteller",
       "gender": "male",
       "languages": [
         "en",
@@ -475,8 +475,8 @@
     },
     {
       "id": "v015",
-      "name": "Raj Thakur",
-      "display_name": "Raj Thakur — The Mentor",
+      "name": "Raj",
+      "display_name": "Raj — The Mentor",
       "gender": "male",
       "languages": [
         "hi",
@@ -509,8 +509,8 @@
     },
     {
       "id": "v016",
-      "name": "Aakash Chauhan",
-      "display_name": "Aakash Chauhan — The Explorer",
+      "name": "Aakash",
+      "display_name": "Aakash — The Explorer",
       "gender": "male",
       "languages": [
         "hi",
@@ -543,8 +543,8 @@
     },
     {
       "id": "v017",
-      "name": "Dev Rathore",
-      "display_name": "Dev Rathore — The Professional",
+      "name": "Dev",
+      "display_name": "Dev — The Professional",
       "gender": "male",
       "languages": [
         "hi"
@@ -576,8 +576,8 @@
     },
     {
       "id": "v018",
-      "name": "Sahil Tiwari",
-      "display_name": "Sahil Tiwari — The Calm",
+      "name": "Sahil",
+      "display_name": "Sahil — The Calm",
       "gender": "male",
       "languages": [
         "hi",
@@ -611,8 +611,8 @@
     },
     {
       "id": "v019",
-      "name": "Omkar Patil",
-      "display_name": "Omkar Patil — The Bold",
+      "name": "Omkar",
+      "display_name": "Omkar — The Bold",
       "gender": "male",
       "languages": [
         "mr",
@@ -645,8 +645,8 @@
     },
     {
       "id": "v020",
-      "name": "Tejas Desai",
-      "display_name": "Tejas Desai — The Energetic",
+      "name": "Tejas",
+      "display_name": "Tejas — The Energetic",
       "gender": "male",
       "languages": [
         "mr",

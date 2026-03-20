@@ -25,26 +25,26 @@ const marqueeItems1 = ['Text-to-Speech', 'Voice Cloning', 'Transcription', '12 L
 const marqueeItems2 = ['YouTube', 'Podcasts', 'Audiobooks', 'E-Learning', 'Reels & Shorts', 'Marketing', 'News Channels', 'Video Dubbing', 'Accessibility']
 
 const voices = [
-  { num: '01', name: 'Arjun Mehta', style: 'The Narrator', lang: 'EN, HI', tags: ['Cinematic', 'Documentary'], av: 'av-1' },
-  { num: '02', name: 'Priya Nair', style: 'The Poet', lang: 'HI, EN', tags: ['Poetry', 'Meditation'], av: 'av-2' },
-  { num: '03', name: 'Vikram Singh', style: 'The Anchor', lang: 'EN', tags: ['News', 'Professional'], av: 'av-3' },
-  { num: '04', name: 'Maya Sharma', style: 'The Storyteller', lang: 'EN, HI', tags: ['Storytelling', 'Calm'], av: 'av-4' },
-  { num: '05', name: 'Kabir Pandey', style: 'The Storyteller', lang: 'EN, HI', tags: ['Cinematic', 'Drama'], av: 'av-5' },
-  { num: '06', name: 'Kavya Reddy', style: 'The Guide', lang: 'HI, EN', tags: ['Educational', 'Guide'], av: 'av-6' },
-  { num: '07', name: 'Aisha Trivedi', style: 'The Anchor', lang: 'EN, HI', tags: ['News', 'Narration'], av: 'av-1' },
-  { num: '08', name: 'Sahil Tiwari', style: 'The Calm', lang: 'HI, EN', tags: ['Meditation', 'ASMR'], av: 'av-3' },
-  { num: '09', name: 'Sophia Menon', style: 'The Narrator', lang: 'EN', tags: ['Audiobooks', 'Narration'], av: 'av-2' },
-  { num: '10', name: 'Rohan Kapoor', style: 'The Presenter', lang: 'EN, HI', tags: ['Professional', 'Clear'], av: 'av-5' },
-  { num: '11', name: 'Divya Iyer', style: 'The Teacher', lang: 'EN, HI', tags: ['Educational', 'Clear'], av: 'av-4' },
-  { num: '12', name: 'Dev Rathore', style: 'The Professional', lang: 'EN', tags: ['Corporate', 'Clean'], av: 'av-6' },
-  { num: '13', name: 'Isha Malhotra', style: 'The Creator', lang: 'HI, EN', tags: ['YouTube', 'Reels'], av: 'av-1' },
-  { num: '14', name: 'Raj Thakur', style: 'The Mentor', lang: 'EN, HI', tags: ['Coaching', 'Warm'], av: 'av-3' },
+  { num: '01', name: 'Arjun', style: 'The Narrator', lang: 'EN, HI', tags: ['Cinematic', 'Documentary'], av: 'av-1' },
+  { num: '02', name: 'Priya', style: 'The Poet', lang: 'HI, EN', tags: ['Poetry', 'Meditation'], av: 'av-2' },
+  { num: '03', name: 'Vikram', style: 'The Anchor', lang: 'EN', tags: ['News', 'Professional'], av: 'av-3' },
+  { num: '04', name: 'Maya', style: 'The Storyteller', lang: 'EN, HI', tags: ['Storytelling', 'Calm'], av: 'av-4' },
+  { num: '05', name: 'Kabir', style: 'The Storyteller', lang: 'EN, HI', tags: ['Cinematic', 'Drama'], av: 'av-5' },
+  { num: '06', name: 'Kavya', style: 'The Guide', lang: 'HI, EN', tags: ['Educational', 'Guide'], av: 'av-6' },
+  { num: '07', name: 'Aisha', style: 'The Anchor', lang: 'EN, HI', tags: ['News', 'Narration'], av: 'av-1' },
+  { num: '08', name: 'Sahil', style: 'The Calm', lang: 'HI, EN', tags: ['Meditation', 'ASMR'], av: 'av-3' },
+  { num: '09', name: 'Sophia', style: 'The Narrator', lang: 'EN', tags: ['Audiobooks', 'Narration'], av: 'av-2' },
+  { num: '10', name: 'Rohan', style: 'The Presenter', lang: 'EN, HI', tags: ['Professional', 'Clear'], av: 'av-5' },
+  { num: '11', name: 'Divya', style: 'The Teacher', lang: 'EN, HI', tags: ['Educational', 'Clear'], av: 'av-4' },
+  { num: '12', name: 'Dev', style: 'The Professional', lang: 'EN', tags: ['Corporate', 'Clean'], av: 'av-6' },
+  { num: '13', name: 'Isha', style: 'The Creator', lang: 'HI, EN', tags: ['YouTube', 'Reels'], av: 'av-1' },
+  { num: '14', name: 'Raj', style: 'The Mentor', lang: 'EN, HI', tags: ['Coaching', 'Warm'], av: 'av-3' },
   { num: '15', name: 'Naina', style: 'The Dreamer', lang: 'HI', tags: ['Soft', 'Storytelling'], av: 'av-2' },
-  { num: '16', name: 'Omkar Patil', style: 'The Bold', lang: 'EN, HI', tags: ['Drama', 'Cinematic'], av: 'av-5' },
+  { num: '16', name: 'Omkar', style: 'The Bold', lang: 'EN, HI', tags: ['Drama', 'Cinematic'], av: 'av-5' },
   { num: '17', name: 'Shreya', style: 'The Reciter', lang: 'HI', tags: ['Poetry', 'Devotional'], av: 'av-4' },
   { num: '18', name: 'Nikhil', style: 'The Anchor', lang: 'EN, HI', tags: ['News', 'Podcast'], av: 'av-6' },
   { num: '19', name: 'Ananya', style: 'The Host', lang: 'EN, HI', tags: ['Events', 'Lively'], av: 'av-1' },
-  { num: '20', name: 'Tejas Desai', style: 'The Energetic', lang: 'EN', tags: ['Marketing', 'Ads'], av: 'av-3' },
+  { num: '20', name: 'Tejas', style: 'The Energetic', lang: 'EN', tags: ['Marketing', 'Ads'], av: 'av-3' },
 ]
 
 const engines = [
@@ -95,6 +95,8 @@ export default function LandingPage() {
   const demoAudioRef = useRef<HTMLAudioElement | null>(null)
   const [previewVoice, setPreviewVoice] = useState<number | null>(null)
   const [voiceProgress, setVoiceProgress] = useState(0)
+  const [voicePreviews, setVoicePreviews] = useState<Record<string, string>>({})
+  const previewAudioRef = useRef<HTMLAudioElement | null>(null)
 
   const cubeSceneRef = useRef<HTMLDivElement>(null)
   const cubesRef = useRef<HTMLDivElement[]>([])
@@ -303,7 +305,7 @@ export default function LandingPage() {
     setDemoLoading(true)
     setDemoProgress(0)
     try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
       const res = await fetch(`${API_BASE}/api/v1/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-API-Key': 'voxar-dev-key-001' },
@@ -361,17 +363,73 @@ export default function LandingPage() {
     setDemoPlaying(false)
   }, [demoText, demoVoice])
 
-  // Voice preview progress
+  // Fetch real voice catalog for preview URLs
   useEffect(() => {
-    if (previewVoice === null) return
-    const interval = setInterval(() => {
-      setVoiceProgress(prev => {
-        if (prev >= 100) { setPreviewVoice(null); return 0 }
-        return prev + 1.5
+    fetch('/api/v1/voices')
+      .then(r => r.json())
+      .then(data => {
+        if (data.voices) {
+          const map: Record<string, string> = {}
+          for (const v of data.voices) {
+            const firstName = (v.display_name || v.name || '').split(' ')[0]
+            if (v.preview_urls?.default) {
+              const url = v.preview_urls.default
+              map[firstName.toLowerCase()] = url.startsWith('/') ? url : `/${url}`
+            }
+          }
+          setVoicePreviews(map)
+        }
       })
-    }, 50)
-    return () => clearInterval(interval)
+      .catch(() => {})
+  }, [])
+
+  // Voice preview — real audio playback with progress tracking
+  useEffect(() => {
+    const audio = previewAudioRef.current
+    if (!audio || previewVoice === null) return
+
+    const updateProgress = () => {
+      if (audio.duration) {
+        setVoiceProgress((audio.currentTime / audio.duration) * 100)
+      }
+    }
+    const onEnded = () => {
+      setPreviewVoice(null)
+      setVoiceProgress(0)
+    }
+
+    audio.addEventListener('timeupdate', updateProgress)
+    audio.addEventListener('ended', onEnded)
+    return () => {
+      audio.removeEventListener('timeupdate', updateProgress)
+      audio.removeEventListener('ended', onEnded)
+    }
   }, [previewVoice])
+
+  const handleVoicePreview = (i: number) => {
+    if (previewVoice === i) {
+      previewAudioRef.current?.pause()
+      previewAudioRef.current = null
+      setPreviewVoice(null)
+      setVoiceProgress(0)
+      return
+    }
+
+    if (previewAudioRef.current) {
+      previewAudioRef.current.pause()
+    }
+
+    const voice = voices[i]
+    const firstName = voice.name.split(' ')[0].toLowerCase()
+    const previewUrl = voicePreviews[firstName]
+    if (!previewUrl) return
+
+    const audio = new Audio(previewUrl)
+    previewAudioRef.current = audio
+    audio.play().catch(() => {})
+    setPreviewVoice(i)
+    setVoiceProgress(0)
+  }
 
   return (
     <>
@@ -623,7 +681,7 @@ export default function LandingPage() {
             </div>
             <div className="roster-table">
               {voices.map((voice, i) => (
-                <div key={i} className={`roster-row ${previewVoice === i ? 'previewing' : ''}`} onClick={() => { setPreviewVoice(previewVoice === i ? null : i); setVoiceProgress(0) }}>
+                <div key={i} className={`roster-row ${previewVoice === i ? 'previewing' : ''}`} onClick={() => handleVoicePreview(i)}>
                   <span className="r-number">{voice.num}</span>
                   <div className={`track-avatar ${voice.av}`}>
                     <div className="avatar-overlay" />

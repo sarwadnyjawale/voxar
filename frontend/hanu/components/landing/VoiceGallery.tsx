@@ -125,13 +125,10 @@ export default function VoiceGallery() {
       const scroll = { cur: 0, tgt: 0, last: 0 }
       let isDown = false, startX = 0, scrollPos = 0
       let activeIdx = 0, prevActiveIdx = -1
-      let audioCtx: AudioContext | null = null
-      let analyser: AnalyserNode | null = null
-      let freqData: Uint8Array<ArrayBuffer> | null = null
       let audioLevel = 0
       let isPlaying = false
-      let oscillator: OscillatorNode | null = null
-      let lfoNode: OscillatorNode | null = null
+      let currentAudio: HTMLAudioElement | null = null
+      let voiceMap: Record<string, string> = {}
       let velocity = 0, lastPointerX = 0, lastPointerTime = 0
       let snapTimeout: ReturnType<typeof setTimeout>
       let wheelTimeout: ReturnType<typeof setTimeout>
@@ -149,6 +146,22 @@ export default function VoiceGallery() {
       const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 0.1, 100)
       camera.position.z = CAM_Z
       const scene = new THREE.Scene()
+
+      /* Fetch real voice catalog for preview URLs */
+      fetch('/api/v1/voices')
+        .then(r => r.json())
+        .then(data => {
+          if (data.voices) {
+            for (const v of data.voices) {
+              const firstName = (v.display_name || v.name || '').split(' ')[0]
+              if (v.preview_urls?.default) {
+                const url = v.preview_urls.default
+                voiceMap[firstName.toLowerCase()] = url.startsWith('/') ? url : `/${url}`
+              }
+            }
+          }
+        })
+        .catch(() => {})
 
       /* Glow texture */
       const gc = document.createElement('canvas')
@@ -286,6 +299,7 @@ export default function VoiceGallery() {
 
         // Name fade
         if (activeIdx !== prevActiveIdx) {
+          if (isPlaying) stopAudio()
           nameEl!.style.opacity = '0'
           setTimeout(() => {
             nameEl!.textContent = items[activeIdx].name
@@ -352,45 +366,31 @@ export default function VoiceGallery() {
       window.addEventListener('keydown', onKey)
       window.addEventListener('resize', onResize)
 
-      /* Audio */
+      /* Audio — real voice previews */
       function toggleAudio() {
         if (isPlaying) stopAudio(); else startAudio()
       }
       function startAudio() {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)()
-          analyser = audioCtx.createAnalyser()
-          analyser.fftSize = 256
-          freqData = new Uint8Array(analyser.frequencyBinCount) as Uint8Array<ArrayBuffer>
-        }
-        const freq = 140 + (activeIdx % 12) * 8
-        oscillator = audioCtx!.createOscillator()
-        const gain = audioCtx!.createGain()
-        gain.gain.value = 0.1
-        oscillator.type = 'sine'
-        oscillator.frequency.value = freq
+        const speaker = SPEAKERS[activeIdx % SPEAKERS.length]
+        const previewUrl = voiceMap[speaker.name.toLowerCase()]
+        if (!previewUrl) return
 
-        lfoNode = audioCtx!.createOscillator()
-        const lfoGain = audioCtx!.createGain()
-        lfoNode.frequency.value = 5 + Math.random() * 3
-        lfoGain.gain.value = 25
-        lfoNode.connect(lfoGain)
-        lfoGain.connect(oscillator.frequency)
-        lfoNode.start()
+        stopAudio()
 
-        oscillator.connect(gain)
-        gain.connect(analyser!)
-        analyser!.connect(audioCtx!.destination)
-        oscillator.start()
+        currentAudio = new Audio(previewUrl)
+        currentAudio.play().catch(() => {})
+        currentAudio.onended = () => stopAudio()
 
         isPlaying = true
         playEl!.innerHTML = '&#9646;&#9646;'
         playEl!.classList.add('on')
       }
       function stopAudio() {
-        try { oscillator?.stop() } catch {}
-        try { lfoNode?.stop() } catch {}
-        oscillator = null; lfoNode = null
+        if (currentAudio) {
+          currentAudio.pause()
+          currentAudio.onended = null
+          currentAudio = null
+        }
         isPlaying = false; audioLevel = 0
         playEl!.innerHTML = '&#9654;'
         playEl!.classList.remove('on')
@@ -404,11 +404,8 @@ export default function VoiceGallery() {
         globalTime = performance.now() * 0.001
         scroll.cur += (scroll.tgt - scroll.cur) * EASE
 
-        if (isPlaying && analyser && freqData) {
-          analyser.getByteFrequencyData(freqData)
-          let sum = 0
-          for (let i = 0; i < freqData.length; i++) sum += freqData[i]
-          audioLevel += (sum / freqData.length / 128 - audioLevel) * 0.08
+        if (isPlaying) {
+          audioLevel += (0.5 + Math.sin(globalTime * 3) * 0.3 - audioLevel) * 0.08
         } else { audioLevel *= 0.93 }
 
         for (const it of items) {
