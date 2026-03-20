@@ -588,6 +588,8 @@ body.light-mode .coming-card{background:var(--bg-secondary)}
     .footer-bottom{flex-direction:column;text-align:center}
 }
 @media(max-width:480px){
+    .hero-cta-group{max-width:100%;padding:0 4px}
+    .cta-primary,.cta-secondary{padding:14px 24px;font-size:13px}
     .engine-grid{grid-template-columns:1fr}
     .coming-grid{grid-template-columns:1fr}
     .footer-top{grid-template-columns:1fr}
