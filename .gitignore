@@ -12,8 +12,15 @@ logs/
 *.mp3
 
 node_modules/
+.next/
+package-lock.json
+
+*.exe
 
 .env
+.env.*
+!.env.example
+
 backend/uploads/
 
 # Production secrets — never commit
