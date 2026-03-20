@@ -1,0 +1,23 @@
+{
+  "devFiles": [],
+  "ampDevFiles": [],
+  "polyfillFiles": [],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [],
+  "pages": {
+    "/_app": [
+      "static/chunks/6fa63_next_dist_compiled_0742716c._.js",
+      "static/chunks/6fa63_next_dist_shared_lib_6d6d6cb8._.js",
+      "static/chunks/6fa63_next_dist_client_7bb800d6._.js",
+      "static/chunks/6fa63_next_dist_b456aafc._.js",
+      "static/chunks/6fa63_next_app_43169cc1.js",
+      "static/chunks/[next]_entry_page-loader_ts_6b0385a0._.js",
+      "static/chunks/6fa63_react-dom_e0935d19._.js",
+      "static/chunks/6fa63_b9b2daf0._.js",
+      "static/chunks/[root-of-the-server]__d8cb0530._.js",
+      "static/chunks/hanu_pages__app_2da965e7._.js",
+      "static/chunks/turbopack-hanu_pages__app_507ad60a._.js"
+    ]
+  },
+  "ampFirstPages": []
+}

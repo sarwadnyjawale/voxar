@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///D:/My%20Projects/VOXAR1/frontend/hanu/app/dashboard/page.tsx"],"sourcesContent":["import { redirect } from 'next/navigation'\n\nexport default function DashboardPage() {\n  redirect('/dashboard/studio')\n}\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACtB,IAAA,yMAAQ,EAAC;AACX"}}]
+}

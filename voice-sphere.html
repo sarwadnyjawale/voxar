@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOXAR Voice Sphere</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            overflow: hidden;
+            background: #02040a;
+            font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+            color: #fff;
+        }
+        #canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            cursor: grab;
+            outline: none;
+        }
+        #canvas:active { cursor: grabbing; }
+        #ui {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 14px;
+            z-index: 10;
+        }
+        #mic-btn {
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.75);
+            border: 1px solid rgba(255,255,255,0.14);
+            padding: 11px 26px;
+            border-radius: 10px;
+            cursor: pointer;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+            transition: all 0.3s ease;
+        }
+        #mic-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.28);
+        }
+        #mic-btn.active {
+            background: rgba(80,200,120,0.12);
+            border-color: rgba(80,200,120,0.35);
+            color: rgba(80,200,120,0.9);
+        }
+        #voice-label {
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            text-shadow: 0 0 20px rgba(255,255,255,0.15);
+        }
+        #voice-label.visible { opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="voice-label"></div>
+    <div id="ui">
+        <button id="mic-btn">Link Microphone</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/gl-matrix-min.js"></script>
+    <script>
+    'use strict';
+    const { mat4, quat, vec2, vec3 } = glMatrix;
+
+    /* ===================== SHADERS ===================== */
+
+    const VS = `#version 300 es
+precision highp float;
+
+uniform float uTime;
+uniform mat4 uView;
+uniform mat4 uProj;
+uniform vec3 uCamPos;
+uniform vec4 uRotAxisVel;
+
+in vec3 aPos;
+in vec3 aNorm;
+in mat4 aInstMat;
+in vec3 aC1;
+in vec3 aC2;
+in vec3 aC3;
+in float aAudio;
+
+out vec3 vN;
+out vec3 vWP;
+out float vNoise;
+out vec3 vC1, vC2, vC3;
+out float vAlpha, vAudio;
+
+vec3 mod289v3(vec3 x){return x-floor(x*(1./289.))*289.;}
+vec4 mod289v4(vec4 x){return x-floor(x*(1./289.))*289.;}
+vec4 perm(vec4 x){return mod289v4(((x*34.)+1.)*x);}
+vec4 tis(vec4 r){return 1.79284291400159-.85373472095314*r;}
+
+float snoise(vec3 v){
+    const vec2 C=vec2(1./6.,1./3.);
+    const vec4 D=vec4(0.,.5,1.,2.);
+    vec3 i=floor(v+dot(v,C.yyy));
+    vec3 x0=v-i+dot(i,C.xxx);
+    vec3 g=step(x0.yzx,x0.xyz);
+    vec3 l=1.-g;
+    vec3 i1=min(g,l.zxy);
+    vec3 i2=max(g,l.zxy);
+    vec3 x1=x0-i1+C.xxx;
+    vec3 x2=x0-i2+C.yyy;
+    vec3 x3=x0-D.yyy;
+    i=mod289v3(i);
+    vec4 p=perm(perm(perm(
+        i.z+vec4(0.,i1.z,i2.z,1.))
+       +i.y+vec4(0.,i1.y,i2.y,1.))
+       +i.x+vec4(0.,i1.x,i2.x,1.));
+    float n_=.142857142857;
+    vec3 ns=n_*D.wyz-D.xzx;
+    vec4 j=p-49.*floor(p*ns.z*ns.z);
+    vec4 x_=floor(j*ns.z);
+    vec4 y_=floor(j-7.*x_);
+    vec4 xv=x_*ns.x+ns.yyyy;
+    vec4 yv=y_*ns.x+ns.yyyy;
+    vec4 h=1.-abs(xv)-abs(yv);
+    vec4 b0=vec4(xv.xy,yv.xy);
+    vec4 b1=vec4(xv.zw,yv.zw);
+    vec4 s0=floor(b0)*2.+1.;
+    vec4 s1=floor(b1)*2.+1.;
+    vec4 sh=-step(h,vec4(0.));
+    vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;
+    vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+    vec3 p0=vec3(a0.xy,h.x);
+    vec3 p1=vec3(a0.zw,h.y);
+    vec3 p2=vec3(a1.xy,h.z);
+    vec3 p3=vec3(a1.zw,h.w);
+    vec4 nr=tis(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+    p0*=nr.x;p1*=nr.y;p2*=nr.z;p3*=nr.w;
+    vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);
+    m=m*m;
+    return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+}
+
+void main(){
+    float n1 = snoise(aPos * 0.5 + uTime * 0.4);
+    float n2 = snoise(aPos * 1.2 - uTime * 0.25) * 0.3;
+    float noise = n1 + n2;
+    float disp = noise * (0.07 + aAudio * 0.55);
+    vec3 lp = aPos + aNorm * disp;
+
+    vec4 wp = aInstMat * vec4(lp, 1.0);
+    vec3 center = (aInstMat * vec4(0.,0.,0.,1.)).xyz;
+
+    vec3 rAxis = uRotAxisVel.xyz;
+    float rVel = min(0.12, uRotAxisVel.w * 12.0);
+    vec3 cp = cross(center, rAxis);
+    if(length(cp)>0.001 && length(aPos)>0.001){
+        vec3 sd = normalize(cp);
+        vec3 rp = normalize(wp.xyz - center);
+        float st = dot(sd, rp);
+        float iv = min(0., abs(st)-1.);
+        st = rVel * sign(st) * abs(iv*iv*iv+1.);
+        wp.xyz += sd * st * 0.35;
+    }
+
+    gl_Position = uProj * uView * wp;
+
+    mat3 nm = mat3(aInstMat);
+    vN = normalize(nm * aNorm);
+    vWP = wp.xyz;
+    vNoise = noise;
+    vC1 = aC1; vC2 = aC2; vC3 = aC3;
+    vAudio = aAudio;
+
+    float fz = normalize(center).z;
+    vAlpha = smoothstep(-0.15, 0.85, fz) * 0.85 + 0.15;
+}
+`;
+
+    const FS = `#version 300 es
+precision highp float;
+
+uniform vec3 uCamPos;
+uniform float uTime;
+
+in vec3 vN, vWP;
+in float vNoise;
+in vec3 vC1, vC2, vC3;
+in float vAlpha, vAudio;
+
+out vec4 outColor;
+
+void main(){
+    vec3 N = normalize(vN);
+    vec3 V = normalize(uCamPos - vWP);
+    float fresnel = pow(1.0 - max(0.0, dot(V, N)), 3.0);
+
+    float t = clamp(vNoise * 0.5 + 0.5, 0.0, 1.0);
+    vec3 base;
+    if(t < 0.5){
+        base = mix(vC1, vC2, smoothstep(0.0, 0.5, t));
+    } else {
+        base = mix(vC2, vC3, smoothstep(0.5, 1.0, t));
+    }
+
+    vec3 glow = mix(vC2, vC3, 0.5);
+    vec3 col = base + fresnel * glow * 1.8;
+    col += vAudio * base * 0.35;
+
+    // subtle rim highlight
+    col += fresnel * vec3(0.08) * vAlpha;
+
+    outColor = vec4(col * vAlpha, 1.0);
+}
+`;
+
+    /* =================== GEOMETRY =================== */
+
+    function createIcosahedron() {
+        const t = Math.sqrt(5) * 0.5 + 0.5;
+        const v = [
+            [-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],
+            [0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],
+            [t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]
+        ];
+        const f = [
+            [0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],
+            [1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],
+            [3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],
+            [4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]
+        ];
+        return { vertices: v, faces: f };
+    }
+
+    function subdivide(verts, faces, n) {
+        const cache = {};
+        let f = faces;
+        function mid(a, b) {
+            const k = a < b ? a+'_'+b : b+'_'+a;
+            if (cache[k] !== undefined) return cache[k];
+            const va = verts[a], vb = verts[b];
+            const idx = verts.length;
+            verts.push([(va[0]+vb[0])*.5,(va[1]+vb[1])*.5,(va[2]+vb[2])*.5]);
+            cache[k] = idx;
+            return idx;
+        }
+        for (let d = 0; d < n; d++) {
+            const nf = [];
+            for (const fc of f) {
+                const ab = mid(fc[0],fc[1]);
+                const bc = mid(fc[1],fc[2]);
+                const ca = mid(fc[2],fc[0]);
+                nf.push([fc[0],ab,ca],[fc[1],bc,ab],[fc[2],ca,bc],[ab,bc,ca]);
+            }
+            f = nf;
+        }
+        return { vertices: verts, faces: f };
+    }
+
+    function spherize(verts, radius) {
+        const normals = [];
+        for (let i = 0; i < verts.length; i++) {
+            const v = verts[i];
+            const len = Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
+            const nx = v[0]/len, ny = v[1]/len, nz = v[2]/len;
+            normals.push([nx,ny,nz]);
+            verts[i] = [nx*radius, ny*radius, nz*radius];
+        }
+        return normals;
+    }
+
+    function buildSphere(sub, radius) {
+        let { vertices, faces } = createIcosahedron();
+        ({ vertices, faces } = subdivide(vertices, faces, sub));
+        const normals = spherize(vertices, radius);
+        return {
+            positions: new Float32Array(vertices.flat()),
+            normals: new Float32Array(normals.flat()),
+            indices: new Uint16Array(faces.flat())
+        };
+    }
+
+    /* ================== ARCBALL ================== */
+
+    class ArcballControl {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.isPointerDown = false;
+            this.orientation = quat.create();
+            this.pointerRotation = quat.create();
+            this.rotationVelocity = 0;
+            this.rotationAxis = vec3.fromValues(1, 0, 0);
+            this.snapDirection = vec3.fromValues(0, 0, 1);
+            this.snapTargetDirection = null;
+            this._pp = vec2.create();
+            this._prev = vec2.create();
+            this._rv = 0;
+            this._cq = quat.create();
+            this._ID = quat.create();
+
+            canvas.addEventListener('pointerdown', e => {
+                vec2.set(this._pp, e.clientX, e.clientY);
+                vec2.copy(this._prev, this._pp);
+                this.isPointerDown = true;
+            });
+            canvas.addEventListener('pointerup', () => this.isPointerDown = false);
+            canvas.addEventListener('pointerleave', () => this.isPointerDown = false);
+            canvas.addEventListener('pointermove', e => {
+                if (this.isPointerDown) vec2.set(this._pp, e.clientX, e.clientY);
+            });
+            canvas.style.touchAction = 'none';
+        }
+
+        update(dt, tf = 16) {
+            const ts = dt / tf + 0.00001;
+            let af = ts;
+            const snapR = quat.create();
+
+            if (this.isPointerDown) {
+                const I = 0.3 * ts, AA = 5 / ts;
+                const m = vec2.sub(vec2.create(), this._pp, this._prev);
+                vec2.scale(m, m, I);
+                if (vec2.sqrLen(m) > 0.1) {
+                    vec2.add(m, this._prev, m);
+                    const p = this._proj(m), q = this._proj(this._prev);
+                    const a = vec3.normalize(vec3.create(), p);
+                    const b = vec3.normalize(vec3.create(), q);
+                    vec2.copy(this._prev, m);
+                    af *= AA;
+                    this._qfv(a, b, this.pointerRotation, af);
+                } else {
+                    quat.slerp(this.pointerRotation, this.pointerRotation, this._ID, I);
+                }
+            } else {
+                quat.slerp(this.pointerRotation, this.pointerRotation, this._ID, 0.1 * ts);
+                if (this.snapTargetDirection) {
+                    const sd = vec3.squaredDistance(this.snapTargetDirection, this.snapDirection);
+                    const df = Math.max(0.1, 1 - sd * 10);
+                    af *= 0.2 * df;
+                    this._qfv(this.snapTargetDirection, this.snapDirection, snapR, af);
+                }
+            }
+
+            const comb = quat.multiply(quat.create(), snapR, this.pointerRotation);
+            this.orientation = quat.multiply(quat.create(), comb, this.orientation);
+            quat.normalize(this.orientation, this.orientation);
+
+            quat.slerp(this._cq, this._cq, comb, 0.8 * ts);
+            quat.normalize(this._cq, this._cq);
+
+            const rad = Math.acos(Math.min(1, Math.max(-1, this._cq[3]))) * 2;
+            const s = Math.sin(rad / 2);
+            let rv = 0;
+            if (s > 1e-6) {
+                rv = rad / (2 * Math.PI);
+                this.rotationAxis[0] = this._cq[0] / s;
+                this.rotationAxis[1] = this._cq[1] / s;
+                this.rotationAxis[2] = this._cq[2] / s;
+            }
+            this._rv += (rv - this._rv) * 0.5 * ts;
+            this.rotationVelocity = this._rv / ts;
+        }
+
+        _qfv(a, b, out, af = 1) {
+            const ax = vec3.cross(vec3.create(), a, b);
+            vec3.normalize(ax, ax);
+            const d = Math.max(-1, Math.min(1, vec3.dot(a, b)));
+            quat.setAxisAngle(out, ax, Math.acos(d) * af);
+        }
+
+        _proj(pos) {
+            const r = 2, w = this.canvas.clientWidth, h = this.canvas.clientHeight;
+            const s = Math.max(w, h) - 1;
+            const x = (2*pos[0]-w-1)/s, y = (2*pos[1]-h-1)/s;
+            const xySq = x*x+y*y, rSq = r*r;
+            const z = xySq <= rSq/2 ? Math.sqrt(rSq-xySq) : rSq/Math.sqrt(xySq);
+            return vec3.fromValues(-x, y, z);
+        }
+    }
+
+    /* ================ 20 PALETTES (3 colors each) ================ */
+
+    const palettes = [
+        { name: 'Northern Lights',   c1:[0.0,1.0,0.5],  c2:[0.2,0.5,1.0],  c3:[0.6,0.0,1.0]  },
+        { name: 'Liquid Gold',       c1:[1.0,0.3,0.0],  c2:[1.0,0.7,0.1],  c3:[1.0,0.95,0.4] },
+        { name: 'Deep Sea',          c1:[0.0,0.1,0.5],  c2:[0.0,0.5,0.7],  c3:[0.0,1.0,0.9]  },
+        { name: 'Siri Intelligence', c1:[0.3,0.0,1.0],  c2:[0.5,0.3,1.0],  c3:[0.0,0.8,1.0]  },
+        { name: 'Jarvis Core',       c1:[0.0,0.9,1.0],  c2:[0.3,0.7,0.5],  c3:[1.0,0.6,0.0]  },
+        { name: 'Quantum',           c1:[1.0,0.0,0.4],  c2:[0.7,0.0,0.8],  c3:[0.2,0.0,1.0]  },
+        { name: 'Royal Emerald',     c1:[0.0,1.0,0.3],  c2:[0.1,0.7,0.4],  c3:[0.0,0.4,0.2]  },
+        { name: 'Midnight Aurora',   c1:[0.15,0.0,0.45],c2:[0.2,0.1,0.8],  c3:[0.0,0.3,1.0]  },
+        { name: 'Cyber Sunset',      c1:[1.0,0.5,0.0],  c2:[1.0,0.2,0.2],  c3:[1.0,0.0,0.5]  },
+        { name: 'Nebula',            c1:[0.5,0.0,1.0],  c2:[0.8,0.1,0.7],  c3:[1.0,0.0,0.5]  },
+        { name: 'Arctic Ice',        c1:[0.85,1.0,1.0], c2:[0.4,0.8,1.0],  c3:[0.0,0.5,1.0]  },
+        { name: 'Toxic Neon',        c1:[0.4,1.0,0.0],  c2:[0.7,1.0,0.2],  c3:[1.0,1.0,0.0]  },
+        { name: 'Volcanic',          c1:[0.8,0.0,0.0],  c2:[1.0,0.35,0.0], c3:[1.0,0.7,0.0]  },
+        { name: 'Synthwave',         c1:[0.6,0.0,1.0],  c2:[0.3,0.4,1.0],  c3:[0.0,1.0,1.0]  },
+        { name: 'Rose Gold',         c1:[1.0,0.5,0.45], c2:[1.0,0.72,0.62],c3:[1.0,0.9,0.8]  },
+        { name: 'Ultra Violet',      c1:[0.2,0.0,0.5],  c2:[0.5,0.0,0.8],  c3:[0.85,0.0,1.0] },
+        { name: 'Galactic',          c1:[0.1,0.1,0.3],  c2:[0.4,0.4,0.7],  c3:[0.9,0.9,1.0]  },
+        { name: 'Supernova',         c1:[1.0,0.85,0.4], c2:[0.6,0.7,0.75], c3:[0.2,0.5,1.0]  },
+        { name: 'Electric Blue',     c1:[0.0,0.2,1.0],  c2:[0.0,0.6,1.0],  c3:[0.2,1.0,1.0]  },
+        { name: 'Coral Reef',        c1:[1.0,0.35,0.35],c2:[1.0,0.6,0.3],  c3:[1.0,0.85,0.2] }
+    ];
+
+    /* ================ MAIN APP ================ */
+
+    class VoiceSphere {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.gl = canvas.getContext('webgl2', { antialias: true, alpha: false });
+            if (!this.gl) throw new Error('WebGL 2 not available');
+
+            this.time = 0;
+            this._prev = 0;
+            this.TF = 1000 / 60;
+            this.SR = 2;        // sphere radius
+            this.MS = 0.22;     // mini scale
+            this.SI = 0.6;      // scale intensity
+
+            this.audioOn = false;
+            this.analyser = null;
+            this.freqData = null;
+            this.audioLvl = 0;
+            this.activeIdx = 0;
+            this.prevActiveIdx = -1;
+
+            this.cam = {
+                pos: vec3.fromValues(0, 0, 3),
+                up: vec3.fromValues(0, 1, 0),
+                fov: Math.PI / 4, near: 0.1, far: 40, aspect: 1,
+                view: mat4.create(),
+                proj: mat4.create(),
+                mat: mat4.create()
+            };
+
+            this.ctrl = new ArcballControl(canvas);
+
+            // big sphere for positions (subdiv 1 = 42 vertices)
+            const posGeo = buildSphere(1, this.SR);
+            this.instPos = [];
+            for (let i = 0; i < posGeo.positions.length; i += 3) {
+                this.instPos.push(vec3.fromValues(
+                    posGeo.positions[i], posGeo.positions[i+1], posGeo.positions[i+2]
+                ));
+            }
+            this.IC = this.instPos.length;
+
+            // mini sphere geometry (subdiv 3 = 642 verts, sharp and performant)
+            this.geo = buildSphere(3, 1.0);
+
+            this.FPI = 26; // floats per instance
+            this.instData = new Float32Array(this.IC * this.FPI);
+
+            this._initGL();
+            this._setColors();
+            this.resize();
+        }
+
+        _initGL() {
+            const gl = this.gl;
+            this.prog = this._mkProg(VS, FS, {
+                aPos: 0, aNorm: 1,
+                aInstMat: 2, // 2,3,4,5
+                aC1: 6, aC2: 7, aC3: 8, aAudio: 9
+            });
+
+            this.ulocs = {
+                uTime:       gl.getUniformLocation(this.prog, 'uTime'),
+                uView:       gl.getUniformLocation(this.prog, 'uView'),
+                uProj:       gl.getUniformLocation(this.prog, 'uProj'),
+                uCamPos:     gl.getUniformLocation(this.prog, 'uCamPos'),
+                uRotAxisVel: gl.getUniformLocation(this.prog, 'uRotAxisVel')
+            };
+
+            this.vao = gl.createVertexArray();
+            gl.bindVertexArray(this.vao);
+
+            // positions
+            const pb = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, pb);
+            gl.bufferData(gl.ARRAY_BUFFER, this.geo.positions, gl.STATIC_DRAW);
+            gl.enableVertexAttribArray(0);
+            gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+
+            // normals
+            const nb = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, nb);
+            gl.bufferData(gl.ARRAY_BUFFER, this.geo.normals, gl.STATIC_DRAW);
+            gl.enableVertexAttribArray(1);
+            gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 0, 0);
+
+            // indices
+            const ib = gl.createBuffer();
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib);
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this.geo.indices, gl.STATIC_DRAW);
+
+            // instance buffer
+            this.instBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.instBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, this.instData.byteLength, gl.DYNAMIC_DRAW);
+
+            const ST = this.FPI * 4; // stride in bytes
+
+            // instance matrix (4 columns at locations 2-5)
+            for (let c = 0; c < 4; c++) {
+                const loc = 2 + c;
+                gl.enableVertexAttribArray(loc);
+                gl.vertexAttribPointer(loc, 4, gl.FLOAT, false, ST, c * 16);
+                gl.vertexAttribDivisor(loc, 1);
+            }
+            // color1 @ loc 6, offset 64
+            gl.enableVertexAttribArray(6);
+            gl.vertexAttribPointer(6, 3, gl.FLOAT, false, ST, 64);
+            gl.vertexAttribDivisor(6, 1);
+            // color2 @ loc 7, offset 76
+            gl.enableVertexAttribArray(7);
+            gl.vertexAttribPointer(7, 3, gl.FLOAT, false, ST, 76);
+            gl.vertexAttribDivisor(7, 1);
+            // color3 @ loc 8, offset 88
+            gl.enableVertexAttribArray(8);
+            gl.vertexAttribPointer(8, 3, gl.FLOAT, false, ST, 88);
+            gl.vertexAttribDivisor(8, 1);
+            // audio @ loc 9, offset 100
+            gl.enableVertexAttribArray(9);
+            gl.vertexAttribPointer(9, 1, gl.FLOAT, false, ST, 100);
+            gl.vertexAttribDivisor(9, 1);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, null);
+            gl.bindVertexArray(null);
+        }
+
+        _setColors() {
+            for (let i = 0; i < this.IC; i++) {
+                const p = palettes[i % palettes.length];
+                const o = i * this.FPI;
+                this.instData[o+16]=p.c1[0]; this.instData[o+17]=p.c1[1]; this.instData[o+18]=p.c1[2];
+                this.instData[o+19]=p.c2[0]; this.instData[o+20]=p.c2[1]; this.instData[o+21]=p.c2[2];
+                this.instData[o+22]=p.c3[0]; this.instData[o+23]=p.c3[1]; this.instData[o+24]=p.c3[2];
+            }
+        }
+
+        resize() {
+            const dpr = Math.min(2, window.devicePixelRatio || 1);
+            const w = Math.round(this.canvas.clientWidth * dpr);
+            const h = Math.round(this.canvas.clientHeight * dpr);
+            if (this.canvas.width !== w || this.canvas.height !== h) {
+                this.canvas.width = w;
+                this.canvas.height = h;
+            }
+            this.gl.viewport(0, 0, w, h);
+            this._updProj();
+        }
+
+        _updProj() {
+            this.cam.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
+            const h = this.SR * 0.35, d = this.cam.pos[2];
+            this.cam.fov = this.cam.aspect > 1
+                ? 2 * Math.atan(h / d)
+                : 2 * Math.atan(h / this.cam.aspect / d);
+            mat4.perspective(this.cam.proj, this.cam.fov, this.cam.aspect, this.cam.near, this.cam.far);
+        }
+
+        _updCam() {
+            mat4.targetTo(this.cam.mat, this.cam.pos, [0,0,0], this.cam.up);
+            mat4.invert(this.cam.view, this.cam.mat);
+        }
+
+        _findNearest() {
+            const inv = quat.conjugate(quat.create(), this.ctrl.orientation);
+            const nt = vec3.transformQuat(vec3.create(), this.ctrl.snapDirection, inv);
+            let mx = -Infinity, idx = 0;
+            for (let i = 0; i < this.instPos.length; i++) {
+                const d = vec3.dot(nt, this.instPos[i]);
+                if (d > mx) { mx = d; idx = i; }
+            }
+            return idx;
+        }
+
+        _worldPos(i) {
+            return vec3.transformQuat(vec3.create(), this.instPos[i], this.ctrl.orientation);
+        }
+
+        _animate(dt) {
+            const ts = dt / this.TF + 0.0001;
+            this.ctrl.update(dt, this.TF);
+
+            let camZ = 3, damp = 5 / ts;
+
+            if (!this.ctrl.isPointerDown) {
+                const ni = this._findNearest();
+                this.activeIdx = ni % palettes.length;
+                const sd = vec3.normalize(vec3.create(), this._worldPos(ni));
+                this.ctrl.snapTargetDirection = sd;
+
+                // update label
+                if (this.activeIdx !== this.prevActiveIdx) {
+                    this.prevActiveIdx = this.activeIdx;
+                    const lbl = document.getElementById('voice-label');
+                    lbl.textContent = palettes[this.activeIdx].name;
+                }
+            } else {
+                camZ += this.ctrl.rotationVelocity * 80 + 2.5;
+                damp = 7 / ts;
+            }
+
+            // movement detection for label visibility
+            const isMoving = this.ctrl.isPointerDown || Math.abs(this.ctrl.rotationVelocity) > 0.01;
+            const lbl = document.getElementById('voice-label');
+            if (isMoving) lbl.classList.remove('visible');
+            else lbl.classList.add('visible');
+
+            this.cam.pos[2] += (camZ - this.cam.pos[2]) / damp;
+            this._updCam();
+
+            // audio
+            if (this.audioOn && this.analyser) {
+                this.analyser.getByteFrequencyData(this.freqData);
+                let avg = 0;
+                for (let i = 0; i < this.freqData.length; i++) avg += this.freqData[i];
+                avg /= this.freqData.length * 128;
+                this.audioLvl += (avg - this.audioLvl) * 0.1;
+            }
+
+            // update instances
+            const nearI = this._findNearest();
+            const positions = this.instPos.map(p =>
+                vec3.transformQuat(vec3.create(), p, this.ctrl.orientation)
+            );
+
+            for (let i = 0; i < this.IC; i++) {
+                const p = positions[i];
+                const s = (Math.abs(p[2]) / this.SR) * this.SI + (1 - this.SI);
+                const fs = s * this.MS;
+
+                const m = mat4.create();
+                mat4.translate(m, m, p);
+                mat4.scale(m, m, [fs, fs, fs]);
+
+                const o = i * this.FPI;
+                for (let j = 0; j < 16; j++) this.instData[o + j] = m[j];
+
+                // audio: active sphere gets full audio, neighbours get a fraction, rest zero
+                if (i === nearI) {
+                    this.instData[o + 25] = this.audioLvl;
+                } else {
+                    // subtle idle pulse for all spheres
+                    this.instData[o + 25] = 0.0;
+                }
+            }
+
+            const gl = this.gl;
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.instBuf);
+            gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.instData);
+            gl.bindBuffer(gl.ARRAY_BUFFER, null);
+        }
+
+        _render() {
+            const gl = this.gl;
+            gl.useProgram(this.prog);
+            gl.enable(gl.DEPTH_TEST);
+            gl.enable(gl.CULL_FACE);
+            gl.clearColor(0.008, 0.016, 0.039, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+            gl.uniform1f(this.ulocs.uTime, this.time);
+            gl.uniformMatrix4fv(this.ulocs.uView, false, this.cam.view);
+            gl.uniformMatrix4fv(this.ulocs.uProj, false, this.cam.proj);
+            gl.uniform3f(this.ulocs.uCamPos, this.cam.pos[0], this.cam.pos[1], this.cam.pos[2]);
+            gl.uniform4f(this.ulocs.uRotAxisVel,
+                this.ctrl.rotationAxis[0], this.ctrl.rotationAxis[1], this.ctrl.rotationAxis[2],
+                this.ctrl.rotationVelocity * 1.1
+            );
+
+            gl.bindVertexArray(this.vao);
+            gl.drawElementsInstanced(gl.TRIANGLES, this.geo.indices.length, gl.UNSIGNED_SHORT, 0, this.IC);
+            gl.bindVertexArray(null);
+        }
+
+        run(t = 0) {
+            const dt = Math.min(32, t - this._prev);
+            this._prev = t;
+            const df = dt / this.TF;
+            this.time += df * 0.01;
+
+            this._animate(dt);
+            this._render();
+            this._updProj();
+
+            requestAnimationFrame(v => this.run(v));
+        }
+
+        async startAudio() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const ctx = new AudioContext();
+            const src = ctx.createMediaStreamSource(stream);
+            this.analyser = ctx.createAnalyser();
+            src.connect(this.analyser);
+            this.freqData = new Uint8Array(this.analyser.frequencyBinCount);
+            this.audioOn = true;
+        }
+
+        _mkProg(vs, fs, attribs) {
+            const gl = this.gl;
+            const vsh = gl.createShader(gl.VERTEX_SHADER);
+            gl.shaderSource(vsh, vs);
+            gl.compileShader(vsh);
+            if (!gl.getShaderParameter(vsh, gl.COMPILE_STATUS))
+                console.error('VS:', gl.getShaderInfoLog(vsh));
+
+            const fsh = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(fsh, fs);
+            gl.compileShader(fsh);
+            if (!gl.getShaderParameter(fsh, gl.COMPILE_STATUS))
+                console.error('FS:', gl.getShaderInfoLog(fsh));
+
+            const p = gl.createProgram();
+            gl.attachShader(p, vsh);
+            gl.attachShader(p, fsh);
+            if (attribs) {
+                for (const [name, loc] of Object.entries(attribs))
+                    gl.bindAttribLocation(p, loc, name);
+            }
+            gl.linkProgram(p);
+            if (!gl.getProgramParameter(p, gl.LINK_STATUS))
+                console.error('Link:', gl.getProgramInfoLog(p));
+            return p;
+        }
+    }
+
+    /* ================ INIT ================ */
+
+    const canvas = document.getElementById('canvas');
+    const app = new VoiceSphere(canvas);
+    app.run();
+
+    window.addEventListener('resize', () => app.resize());
+
+    document.getElementById('mic-btn').addEventListener('click', async function() {
+        if (!app.audioOn) {
+            await app.startAudio();
+            this.textContent = 'Microphone Active';
+            this.classList.add('active');
+        }
+    });
+
+    </script>
+</body>
+</html>

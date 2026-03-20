@@ -184,9 +184,15 @@ export default function ControlsPanel() {
           <option value="en">English</option>
           <option value="hi">Hindi</option>
           <option value="hinglish">Hinglish</option>
+          <option value="mr">Marathi</option>
           <option value="ta">Tamil</option>
           <option value="te">Telugu</option>
           <option value="bn">Bengali</option>
+          <option value="kn">Kannada</option>
+          <option value="ml">Malayalam</option>
+          <option value="gu">Gujarati</option>
+          <option value="pa">Punjabi</option>
+          <option value="or">Odia</option>
         </select>
       </div>
 

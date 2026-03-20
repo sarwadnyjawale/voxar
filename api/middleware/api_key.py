@@ -50,7 +50,11 @@ class APIKeyMiddleware(BaseHTTPMiddleware):
         path = request.url.path.rstrip("/") or "/"
 
         # Skip auth for public endpoints
-        if path in PUBLIC_PATHS or path.startswith("/audio"):
+        if (
+            path in PUBLIC_PATHS
+            or path.startswith("/audio")
+            or path.startswith("/previews")
+        ):
             return await call_next(request)
 
         # Extract API key

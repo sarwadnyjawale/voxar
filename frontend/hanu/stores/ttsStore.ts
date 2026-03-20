@@ -26,6 +26,7 @@ interface TTSState {
   updateSettings: (settings: Partial<TTSState>) => void
   generateAudio: () => Promise<void>
   setPlayerState: (show: boolean, url?: string, duration?: string) => void
+  setUsageRefresh: (fn: (() => Promise<void>) | null) => void
 }
 
 export const useTTSStore = create<TTSState>((set, get) => ({
@@ -47,7 +48,11 @@ export const useTTSStore = create<TTSState>((set, get) => ({
   duration: null,
   minutesUsed: null,
 
+  _usageRefresh: null as (() => Promise<void>) | null,
+
   updateSettings: (settings) => set((state) => ({ ...state, ...settings })),
+
+  setUsageRefresh: (fn) => set({ _usageRefresh: fn } as any),
 
   generateAudio: async () => {
     const state = get()
@@ -84,6 +89,10 @@ export const useTTSStore = create<TTSState>((set, get) => ({
         duration: `${mins}:${secs.toString().padStart(2, '0')}`,
         minutesUsed: result.minutes_used,
       })
+
+      // Refresh sidebar usage after successful generation
+      const refresh = (get() as any)._usageRefresh
+      if (refresh) refresh()
     } catch (err: any) {
       set({ error: err.message || 'Generation failed', isGenerating: false })
     }

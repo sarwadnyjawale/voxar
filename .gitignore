@@ -15,3 +15,9 @@ node_modules/
 
 .env
 backend/uploads/
+
+# Production secrets — never commit
+ops/production.*.env
+ops/voxar_secrets_master.txt
+ops/secrets.local.md
+ops/api_keys.local.md

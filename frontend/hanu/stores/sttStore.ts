@@ -54,7 +54,7 @@ export const useSTTStore = create<STTState>((set, get) => ({
       set({ progress: 30 })
 
       // Use sync endpoint for simplicity (blocks until done)
-      const result = await api.upload<{
+      const result = await api.backendUpload<{
         text: string
         language: string
         segments: Array<{ start: number; end: number; text: string; speaker?: string }>

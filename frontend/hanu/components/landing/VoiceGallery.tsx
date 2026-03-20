@@ -2,20 +2,20 @@
 
 import { useEffect, useRef } from 'react'
 
-/* ── Speaker Data ── */
+/* ── Speaker Data — matches real voice catalog ── */
 const SPEAKERS = [
-  { name: 'Aarav',   c1: [0.0, 1.0, 0.5], c2: [0.5, 0.0, 1.0] },
-  { name: 'Priya',   c1: [0.5, 0.0, 1.0], c2: [1.0, 0.0, 0.5] },
-  { name: 'Arjun',   c1: [0.0, 0.2, 1.0], c2: [0.0, 1.0, 1.0] },
-  { name: 'Ananya',  c1: [1.0, 0.6, 0.5], c2: [1.0, 0.9, 0.8] },
-  { name: 'Vikram',  c1: [0.0, 0.9, 1.0], c2: [1.0, 0.6, 0.0] },
-  { name: 'Meera',   c1: [1.0, 0.3, 0.0], c2: [1.0, 0.0, 0.5] },
-  { name: 'Rohan',   c1: [0.0, 1.0, 0.3], c2: [0.0, 0.4, 0.2] },
-  { name: 'Kavya',   c1: [1.0, 0.0, 0.4], c2: [0.2, 0.0, 1.0] },
-  { name: 'Aditya',  c1: [1.0, 0.9, 0.5], c2: [0.2, 0.5, 1.0] },
-  { name: 'Ishita',  c1: [0.6, 0.0, 1.0], c2: [0.0, 1.0, 1.0] },
-  { name: 'Karan',   c1: [0.1, 0.0, 0.4], c2: [0.0, 0.2, 1.0] },
-  { name: 'Diya',    c1: [1.0, 0.4, 0.4], c2: [1.0, 0.8, 0.2] },
+  { name: 'Arjun',    c1: [0.0, 1.0, 0.5], c2: [0.5, 0.0, 1.0] },
+  { name: 'Priya',    c1: [0.5, 0.0, 1.0], c2: [1.0, 0.0, 0.5] },
+  { name: 'Vikram',   c1: [0.0, 0.2, 1.0], c2: [0.0, 1.0, 1.0] },
+  { name: 'Ananya',   c1: [1.0, 0.6, 0.5], c2: [1.0, 0.9, 0.8] },
+  { name: 'Maya',     c1: [0.0, 0.9, 1.0], c2: [1.0, 0.6, 0.0] },
+  { name: 'Meera',    c1: [1.0, 0.3, 0.0], c2: [1.0, 0.0, 0.5] },
+  { name: 'Rohan',    c1: [0.0, 1.0, 0.3], c2: [0.0, 0.4, 0.2] },
+  { name: 'Kavya',    c1: [1.0, 0.0, 0.4], c2: [0.2, 0.0, 1.0] },
+  { name: 'Sahil',    c1: [1.0, 0.9, 0.5], c2: [0.2, 0.5, 1.0] },
+  { name: 'Isha',     c1: [0.6, 0.0, 1.0], c2: [0.0, 1.0, 1.0] },
+  { name: 'Kabir',    c1: [0.1, 0.0, 0.4], c2: [0.0, 0.2, 1.0] },
+  { name: 'Diya',     c1: [1.0, 0.4, 0.4], c2: [1.0, 0.8, 0.2] },
 ]
 
 /* ── Config ── */
@@ -461,7 +461,7 @@ export default function VoiceGallery() {
         <div className="vg-fade l"></div>
         <div className="vg-fade r"></div>
         <div className="vg-ctrl">
-          <div className="vg-speaker" ref={nameRef}>Aarav</div>
+          <div className="vg-speaker" ref={nameRef}>Arjun</div>
           <button className="vg-play" ref={playRef}>&#9654;</button>
           <div className="vg-dots" ref={dotsRef}></div>
         </div>

@@ -24,7 +24,18 @@
       "Bash(powershell:*)",
       "Bash(netstat:*)",
       "Bash(pip show:*)",
-      "Bash(./venv/Scripts/python.exe:*)"
+      "Bash(./venv/Scripts/python.exe:*)",
+      "Bash(node -e \":*)",
+      "Bash(npx tsc:*)",
+      "Bash(mkdir -p voices/previews)",
+      "Bash(cp voices/cleaned_samples/female_en_01_v2_cleaned.wav voices/previews/v001.wav)",
+      "Bash(cp voices/cleaned_samples/female_en_02_cleaned.wav voices/previews/v002.wav)",
+      "Bash(cp voices/cleaned_samples/female_en_03_cleaned.wav voices/previews/v003.wav)",
+      "Bash(cp voices/cleaned_samples/female_en_04_cleaned.wav voices/previews/v004.wav)",
+      "WebFetch(domain:github.com)",
+      "Bash(pip index:*)",
+      "Bash(where railway:*)",
+      "Bash(nslookup:*)"
     ]
   }
 }

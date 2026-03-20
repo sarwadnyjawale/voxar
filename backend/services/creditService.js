@@ -16,9 +16,24 @@ function minutesToChars(minutes) {
 }
 
 /**
+ * Check if user email is verified (required for TTS/STT/Clone)
+ * TEMPORARY: disabled — treat all users as verified until email flow is ready
+ */
+function requireVerified(user) {
+  // TODO: re-enable once email verification flow is live
+  // if (!user.email_verified) {
+  //   return { allowed: false, message: 'Please verify your email before using this feature.', code: 'EMAIL_NOT_VERIFIED' }
+  // }
+  return null
+}
+
+/**
  * Check if user has enough TTS credits for the given text
  */
 function canGenerateTTS(user, characterCount) {
+  const verifyCheck = requireVerified(user)
+  if (verifyCheck) return verifyCheck
+
   const limits = PLAN_LIMITS[user.plan] || PLAN_LIMITS.free
   if (limits.tts_minutes === -1) return { allowed: true, minutes_needed: charsToMinutes(characterCount) }
 
@@ -41,6 +56,9 @@ function canGenerateTTS(user, characterCount) {
  * Check if user has enough STT credits for the given audio duration
  */
 function canTranscribe(user, audioDurationMinutes) {
+  const verifyCheck = requireVerified(user)
+  if (verifyCheck) return verifyCheck
+
   const limits = PLAN_LIMITS[user.plan] || PLAN_LIMITS.free
   if (limits.stt_minutes === 0) {
     return { allowed: false, message: 'Transcription not available on your plan. Upgrade to Access or higher.' }
@@ -62,6 +80,9 @@ function canTranscribe(user, audioDurationMinutes) {
  * Check if user can create another voice clone
  */
 function canClone(user) {
+  const verifyCheck = requireVerified(user)
+  if (verifyCheck) return verifyCheck
+
   const limits = PLAN_LIMITS[user.plan] || PLAN_LIMITS.free
   if (limits.clones === 0) {
     return { allowed: false, message: 'Voice cloning not available on your plan. Upgrade to Access or higher.' }
@@ -160,6 +181,85 @@ async function checkAndResetCycle(user) {
   }
 }
 
+/**
+ * Atomically check and deduct TTS credits in a single DB operation.
+ * Prevents race conditions where concurrent requests both pass the check.
+ * Returns { success, minutesUsed } or { success: false, message }
+ */
+async function atomicDeductTTS(userId, plan, characterCount) {
+  const limits = PLAN_LIMITS[plan] || PLAN_LIMITS.free
+  if (limits.tts_minutes === -1) {
+    // Unlimited — just increment usage for tracking
+    const minutesUsed = charsToMinutes(characterCount)
+    await User.findByIdAndUpdate(userId, {
+      $inc: { 'usage.tts_minutes_used': minutesUsed },
+      updated_at: new Date(),
+    })
+    return { success: true, minutesUsed }
+  }
+
+  const minutesNeeded = charsToMinutes(characterCount)
+
+  const result = await User.findOneAndUpdate(
+    {
+      _id: userId,
+      $expr: { $lte: [{ $add: ['$usage.tts_minutes_used', minutesNeeded] }, limits.tts_minutes] },
+    },
+    {
+      $inc: { 'usage.tts_minutes_used': minutesNeeded },
+      updated_at: new Date(),
+    },
+    { new: true }
+  )
+
+  if (!result) {
+    return {
+      success: false,
+      message: `Insufficient TTS credits. Need ${minutesNeeded.toFixed(2)} min.`,
+    }
+  }
+
+  return { success: true, minutesUsed: minutesNeeded }
+}
+
+/**
+ * Atomically check and deduct STT credits in a single DB operation.
+ */
+async function atomicDeductSTT(userId, plan, audioDurationMinutes) {
+  const limits = PLAN_LIMITS[plan] || PLAN_LIMITS.free
+  if (limits.stt_minutes === 0) {
+    return { success: false, message: 'Transcription not available on your plan.' }
+  }
+  if (limits.stt_minutes === -1) {
+    await User.findByIdAndUpdate(userId, {
+      $inc: { 'usage.stt_minutes_used': audioDurationMinutes },
+      updated_at: new Date(),
+    })
+    return { success: true }
+  }
+
+  const result = await User.findOneAndUpdate(
+    {
+      _id: userId,
+      $expr: { $lte: [{ $add: ['$usage.stt_minutes_used', audioDurationMinutes] }, limits.stt_minutes] },
+    },
+    {
+      $inc: { 'usage.stt_minutes_used': audioDurationMinutes },
+      updated_at: new Date(),
+    },
+    { new: true }
+  )
+
+  if (!result) {
+    return {
+      success: false,
+      message: `Insufficient STT credits. Need ${audioDurationMinutes.toFixed(1)} min.`,
+    }
+  }
+
+  return { success: true }
+}
+
 module.exports = {
   PLAN_LIMITS,
   CHARS_PER_MINUTE,
@@ -171,6 +271,8 @@ module.exports = {
   deductTTS,
   deductSTT,
   deductClone,
+  atomicDeductTTS,
+  atomicDeductSTT,
   getUsageSummary,
   resetMonthlyUsage,
   checkAndResetCycle,

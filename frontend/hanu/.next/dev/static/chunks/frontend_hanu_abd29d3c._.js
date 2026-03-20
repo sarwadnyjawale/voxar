@@ -46,7 +46,8 @@ const useTTSStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend
                     language: state.language,
                     format: state.format,
                     enhance: state.enhance,
-                    normalize: state.normalize
+                    normalize: state.normalize,
+                    speed: state.speed
                 });
                 const mins = Math.floor(result.duration / 60);
                 const secs = Math.round(result.duration % 60);
@@ -198,7 +199,22 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_mod
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/lib/api.ts [app-client] (ecmascript)");
 ;
 ;
-const useVoiceStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$zustand$2f$esm$2f$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["create"])((set)=>({
+const FAVORITES_KEY = 'voxar-favorite-voices';
+function loadFavorites() {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    try {
+        return JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+    } catch  {
+        return [];
+    }
+}
+function saveFavorites(ids) {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(ids));
+}
+const useVoiceStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$zustand$2f$esm$2f$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["create"])((set, get)=>({
         voices: [],
         clonedVoices: [],
         isLoading: false,
@@ -207,6 +223,7 @@ const useVoiceStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronte
         filters: {
             tags: []
         },
+        favorites: loadFavorites(),
         fetchVoices: async ()=>{
             set({
                 isLoading: true,
@@ -252,7 +269,6 @@ const useVoiceStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronte
                 };
             }),
         playPreview: (id)=>{
-            // Generate a short TTS preview via the backend
             const previewText = 'Welcome to VOXAR. This is a preview of this voice.';
             __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].backendPost('/api/v1/tts/generate', {
                 text: previewText,
@@ -268,6 +284,20 @@ const useVoiceStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$fronte
             }).catch((err)=>{
                 console.warn('Voice preview failed:', err.message);
             });
+        },
+        toggleFavorite: (id)=>{
+            const { favorites } = get();
+            const next = favorites.includes(id) ? favorites.filter((f)=>f !== id) : [
+                ...favorites,
+                id
+            ];
+            saveFavorites(next);
+            set({
+                favorites: next
+            });
+        },
+        isFavorite: (id)=>{
+            return get().favorites.includes(id);
         }
     }));
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -295,7 +325,7 @@ function ControlsPanel() {
     _s();
     var _s1 = __turbopack_context__.k.signature();
     const { voice, engine, stability, speed, format, language, enhance, normalize, updateSettings } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$stores$2f$ttsStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTTSStore"])();
-    const { voices, fetchVoices } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$stores$2f$voiceStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useVoiceStore"])();
+    const { voices, clonedVoices, fetchVoices, fetchClonedVoices, favorites, isFavorite } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$stores$2f$voiceStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useVoiceStore"])();
     const [showVoiceDropdown, setShowVoiceDropdown] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const stabilityRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const speedRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -303,9 +333,12 @@ function ControlsPanel() {
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ControlsPanel.useEffect": ()=>{
             if (voices.length === 0) fetchVoices();
+            fetchClonedVoices();
         }
     }["ControlsPanel.useEffect"], []);
     const selectedVoice = voices.find((v)=>v.id === voice) || null;
+    // Favorite voices for quick pick
+    const favoriteVoices = voices.filter((v)=>isFavorite(v.id));
     const selectVoice = (v)=>{
         updateSettings({
             voice: v.id
@@ -374,6 +407,55 @@ function ControlsPanel() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "controls-body",
         children: [
+            favoriteVoices.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "control-group",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "control-label",
+                        children: "Saved Voices"
+                    }, void 0, false, {
+                        fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
+                        lineNumber: 69,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '6px'
+                        },
+                        children: favoriteVoices.map((v)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: ()=>updateSettings({
+                                        voice: v.id
+                                    }),
+                                style: {
+                                    padding: '6px 12px',
+                                    borderRadius: '20px',
+                                    fontSize: '12px',
+                                    fontWeight: 500,
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s',
+                                    border: 'none',
+                                    background: v.id === voice ? 'var(--btn-solid)' : 'var(--bg-glass)',
+                                    color: v.id === voice ? 'var(--btn-solid-text)' : 'var(--text-secondary)'
+                                },
+                                children: v.display_name || v.name
+                            }, v.id, false, {
+                                fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
+                                lineNumber: 72,
+                                columnNumber: 15
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
+                        lineNumber: 70,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
+                lineNumber: 68,
+                columnNumber: 9
+            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "control-group",
                 children: [
@@ -386,13 +468,13 @@ function ControlsPanel() {
                                 children: "TAP TO CHANGE"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 64,
+                                lineNumber: 91,
                                 columnNumber: 46
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 64,
+                        lineNumber: 91,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -407,7 +489,7 @@ function ControlsPanel() {
                                 className: "voice-avatar"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 66,
+                                lineNumber: 93,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,7 +500,7 @@ function ControlsPanel() {
                                         children: selectedVoice?.display_name || selectedVoice?.name || 'Select Voice'
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                        lineNumber: 68,
+                                        lineNumber: 95,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -426,13 +508,13 @@ function ControlsPanel() {
                                         children: selectedVoice ? `${selectedVoice.styles?.[0] || ''} ${selectedVoice.primary_language ? `\u00b7 ${selectedVoice.primary_language.toUpperCase()}` : ''}` : 'Loading voices...'
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                        lineNumber: 69,
+                                        lineNumber: 96,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 67,
+                                lineNumber: 94,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -449,18 +531,18 @@ function ControlsPanel() {
                                     points: "6 9 12 15 18 9"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 73,
+                                    lineNumber: 100,
                                     columnNumber: 187
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 73,
+                                lineNumber: 100,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 65,
+                        lineNumber: 92,
                         columnNumber: 9
                     }, this),
                     showVoiceDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -497,7 +579,7 @@ function ControlsPanel() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                        lineNumber: 94,
+                                        lineNumber: 121,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -515,7 +597,7 @@ function ControlsPanel() {
                                                 children: v.display_name || v.name
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                                lineNumber: 96,
+                                                lineNumber: 123,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -530,13 +612,13 @@ function ControlsPanel() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                                lineNumber: 97,
+                                                lineNumber: 124,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                        lineNumber: 95,
+                                        lineNumber: 122,
                                         columnNumber: 17
                                     }, this),
                                     v.id === voice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -550,29 +632,29 @@ function ControlsPanel() {
                                             points: "20 6 9 17 4 12"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                            lineNumber: 102,
+                                            lineNumber: 129,
                                             columnNumber: 120
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                        lineNumber: 102,
+                                        lineNumber: 129,
                                         columnNumber: 19
                                     }, this)
                                 ]
                             }, v.id, true, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 83,
+                                lineNumber: 110,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 78,
+                        lineNumber: 105,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 63,
+                lineNumber: 90,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -583,7 +665,7 @@ function ControlsPanel() {
                         children: "Engine"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 112,
+                        lineNumber: 139,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -598,7 +680,7 @@ function ControlsPanel() {
                                 children: "Flash — Low Latency"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 114,
+                                lineNumber: 141,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -606,7 +688,7 @@ function ControlsPanel() {
                                 children: "Cinematic — Studio Grade"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 115,
+                                lineNumber: 142,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -614,7 +696,7 @@ function ControlsPanel() {
                                 children: "Longform — Audiobooks"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 116,
+                                lineNumber: 143,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -622,19 +704,19 @@ function ControlsPanel() {
                                 children: "Multilingual — 12 Languages"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 117,
+                                lineNumber: 144,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 113,
+                        lineNumber: 140,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 111,
+                lineNumber: 138,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -650,7 +732,7 @@ function ControlsPanel() {
                                     children: "Stability"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 125,
+                                    lineNumber: 152,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -661,13 +743,13 @@ function ControlsPanel() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 126,
+                                    lineNumber: 153,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                            lineNumber: 124,
+                            lineNumber: 151,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -689,7 +771,7 @@ function ControlsPanel() {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 156,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -701,13 +783,13 @@ function ControlsPanel() {
                                     onTouchStart: stabilitySlider.handleStart
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 130,
+                                    lineNumber: 157,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                            lineNumber: 128,
+                            lineNumber: 155,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -715,18 +797,18 @@ function ControlsPanel() {
                             children: "Higher = more consistent. Lower = more expressive."
                         }, void 0, false, {
                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                            lineNumber: 132,
+                            lineNumber: 159,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                    lineNumber: 123,
+                    lineNumber: 150,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 122,
+                lineNumber: 149,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -742,7 +824,7 @@ function ControlsPanel() {
                                     children: "Speed"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 140,
+                                    lineNumber: 167,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -753,13 +835,13 @@ function ControlsPanel() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 141,
+                                    lineNumber: 168,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                            lineNumber: 139,
+                            lineNumber: 166,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -781,7 +863,7 @@ function ControlsPanel() {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 144,
+                                    lineNumber: 171,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -793,31 +875,31 @@ function ControlsPanel() {
                                     onTouchStart: speedSlider.handleStart
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                    lineNumber: 145,
+                                    lineNumber: 172,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                            lineNumber: 143,
+                            lineNumber: 170,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                    lineNumber: 138,
+                    lineNumber: 165,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 137,
+                lineNumber: 164,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "controls-divider"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 150,
+                lineNumber: 177,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -828,7 +910,7 @@ function ControlsPanel() {
                         children: "Language"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 154,
+                        lineNumber: 181,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -843,7 +925,7 @@ function ControlsPanel() {
                                 children: "Auto-detect"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 156,
+                                lineNumber: 183,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -851,7 +933,7 @@ function ControlsPanel() {
                                 children: "English"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 157,
+                                lineNumber: 184,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -859,7 +941,7 @@ function ControlsPanel() {
                                 children: "Hindi"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 158,
+                                lineNumber: 185,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -867,7 +949,7 @@ function ControlsPanel() {
                                 children: "Hinglish"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 159,
+                                lineNumber: 186,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -875,7 +957,7 @@ function ControlsPanel() {
                                 children: "Tamil"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 160,
+                                lineNumber: 187,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -883,7 +965,7 @@ function ControlsPanel() {
                                 children: "Telugu"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 161,
+                                lineNumber: 188,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -891,19 +973,19 @@ function ControlsPanel() {
                                 children: "Bengali"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 162,
+                                lineNumber: 189,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 155,
+                        lineNumber: 182,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 153,
+                lineNumber: 180,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -914,16 +996,14 @@ function ControlsPanel() {
                         children: "Output Format"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 168,
+                        lineNumber: 195,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "format-options",
                         children: [
                             'mp3',
-                            'wav',
-                            'ogg',
-                            'flac'
+                            'wav'
                         ].map((f)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 className: `format-chip ${format === f ? 'active' : ''}`,
                                 onClick: ()=>updateSettings({
@@ -932,25 +1012,25 @@ function ControlsPanel() {
                                 children: f.toUpperCase()
                             }, f, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 171,
+                                lineNumber: 198,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 169,
+                        lineNumber: 196,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 167,
+                lineNumber: 194,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "controls-divider"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 176,
+                lineNumber: 203,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -958,7 +1038,7 @@ function ControlsPanel() {
                 children: "Post-Processing"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 177,
+                lineNumber: 204,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -972,7 +1052,7 @@ function ControlsPanel() {
                                 children: "Audio Enhancement"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 182,
+                                lineNumber: 209,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -980,13 +1060,13 @@ function ControlsPanel() {
                                 children: "AI noise removal & clarity boost"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 183,
+                                lineNumber: 210,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 181,
+                        lineNumber: 208,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -998,18 +1078,18 @@ function ControlsPanel() {
                             className: "toggle-knob"
                         }, void 0, false, {
                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                            lineNumber: 186,
+                            lineNumber: 213,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 185,
+                        lineNumber: 212,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 180,
+                lineNumber: 207,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1023,7 +1103,7 @@ function ControlsPanel() {
                                 children: "Loudness Normalize"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 191,
+                                lineNumber: 218,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1031,13 +1111,13 @@ function ControlsPanel() {
                                 children: "Normalize to -14 LUFS"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                                lineNumber: 192,
+                                lineNumber: 219,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 190,
+                        lineNumber: 217,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1049,28 +1129,28 @@ function ControlsPanel() {
                             className: "toggle-knob"
                         }, void 0, false, {
                             fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                            lineNumber: 195,
+                            lineNumber: 222,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                        lineNumber: 194,
+                        lineNumber: 221,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-                lineNumber: 189,
+                lineNumber: 216,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/dashboard/ControlsPanel.tsx",
-        lineNumber: 61,
+        lineNumber: 65,
         columnNumber: 5
     }, this);
 }
-_s(ControlsPanel, "cKs08FisuoKLGiFb7bSuhBw14f0=", true, function() {
+_s(ControlsPanel, "VgVbv7IYTiuc7deZYfRz/4qNF40=", true, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$stores$2f$ttsStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTTSStore"],
         __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$stores$2f$voiceStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useVoiceStore"]

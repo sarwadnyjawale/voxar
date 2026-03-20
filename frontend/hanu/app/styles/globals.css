@@ -954,7 +954,7 @@ body.light-mode .coming-card{background:var(--bg-secondary)}
    ============================================= */
 
 /* ---------- PAGE LAYOUT ---------- */
-.dp-scroll{display:flex;flex-direction:column;padding:32px;overflow-y:auto;background:var(--bg-primary);gap:0}
+.dp-scroll{display:flex;flex-direction:column;padding:32px;overflow-y:scroll;overflow-x:hidden;background:var(--bg-primary);gap:0;grid-column:2;grid-row:2;height:calc(100vh - var(--header-height));max-height:calc(100vh - var(--header-height))}
 .dp-scroll::-webkit-scrollbar{width:4px}
 .dp-scroll::-webkit-scrollbar-track{background:transparent}
 .dp-scroll::-webkit-scrollbar-thumb{background:rgba(139,92,246,0.2);border-radius:2px}
@@ -1247,6 +1247,10 @@ body.light-mode .studio-timeline-play{background:#111;color:#fff;box-shadow:0 2p
 body.light-mode .studio-timeline-play:hover{box-shadow:0 4px 20px rgba(0,0,0,0.25)}
 body.light-mode .studio-timeline-progress{background:rgba(0,0,0,0.08)}
 body.light-mode .studio-timeline-progress-fill{background:linear-gradient(90deg,#333,#111)}
+/* Light mode: studio block contrast fixes */
+body.light-mode .studio-block-voice-name{color:#111;font-weight:600}
+body.light-mode .studio-block-btn{background:#111;border-color:#222;color:#fff}
+body.light-mode .studio-block-btn:hover{background:#333;color:#fff;border-color:#333}
 .studio-timeline-progress{height:3px;background:var(--bg-input);border-radius:2px;overflow:hidden;position:relative;cursor:pointer}
 .studio-timeline-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent-dark),var(--accent));border-radius:2px;transition:width 0.15s linear}
 .studio-timeline-time{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);flex-shrink:0;min-width:80px;text-align:right;letter-spacing:0.04em}

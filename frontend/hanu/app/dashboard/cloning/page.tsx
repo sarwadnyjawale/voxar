@@ -170,7 +170,7 @@ export default function CloningPage() {
     }, 200)
 
     try {
-      const result = await api.upload<{ voice: { name: string; quality_score: number; status: string } }>(
+      const result = await api.backendUpload<{ voice: { name: string; quality_score: number; status: string } }>(
         '/api/v1/voices/clone',
         formData
       )
@@ -230,7 +230,7 @@ export default function CloningPage() {
 
         <div className="dp-two-col">
           {/* Left: Clone Wizard */}
-          <div className="glass-card">
+          <div className="glass-card" style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 200px)' }}>
             {/* Step Indicator */}
             <div className="dp-steps">
               <div className="dp-step">

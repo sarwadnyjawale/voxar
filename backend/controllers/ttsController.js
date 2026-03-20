@@ -10,14 +10,18 @@ async function generate(req, res) {
       return res.status(400).json({ message: 'Text is required' })
     }
 
+    if (text.length > 10000) {
+      return res.status(400).json({ message: 'Text exceeds maximum length of 10,000 characters' })
+    }
+
     // Check billing cycle reset
     await creditService.checkAndResetCycle(req.user)
 
-    // Check credits
+    // Atomic credit check + deduction (prevents race conditions)
     const charCount = text.trim().length
-    const check = creditService.canGenerateTTS(req.user, charCount)
-    if (!check.allowed) {
-      return res.status(403).json({ message: check.message, code: 'INSUFFICIENT_CREDITS' })
+    const creditResult = await creditService.atomicDeductTTS(req.user._id, req.user.plan, charCount)
+    if (!creditResult.success) {
+      return res.status(403).json({ message: creditResult.message, code: 'INSUFFICIENT_CREDITS' })
     }
 
     // Call Python engine
@@ -33,7 +37,7 @@ async function generate(req, res) {
         normalize,
       })
     } catch (err) {
-      // Record failed attempt in history (no credit deduction)
+      // Record failed attempt in history (credits already deducted — refund not implemented yet)
       const errorMsg = String(err.response?.data?.message || err.response?.data?.detail || err.message || 'Unknown engine error')
       await History.create({
         user: req.user._id,
@@ -52,9 +56,6 @@ async function generate(req, res) {
         detail: errorMsg,
       })
     }
-
-    // Deduct credits
-    const minutesUsed = await creditService.deductTTS(req.user._id, charCount)
 
     // Record in history
     const record = await History.create({
@@ -76,7 +77,7 @@ async function generate(req, res) {
       audio_url: result.audio_url || result.audio_path || '',
       duration: result.duration || 0,
       characters: charCount,
-      minutes_used: minutesUsed,
+      minutes_used: creditResult.minutesUsed,
       format: format || 'wav',
     })
   } catch (err) {

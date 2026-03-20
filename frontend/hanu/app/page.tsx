@@ -25,14 +25,26 @@ const marqueeItems1 = ['Text-to-Speech', 'Voice Cloning', 'Transcription', '12 L
 const marqueeItems2 = ['YouTube', 'Podcasts', 'Audiobooks', 'E-Learning', 'Reels & Shorts', 'Marketing', 'News Channels', 'Video Dubbing', 'Accessibility']
 
 const voices = [
-  { num: '01', name: 'Arjun', style: 'The Narrator', lang: 'EN, HI', tags: ['Cinematic', 'Documentary'], av: 'av-1' },
-  { num: '02', name: 'Priya', style: 'The Poet', lang: 'HI, EN', tags: ['Poetry', 'Meditation'], av: 'av-2' },
-  { num: '03', name: 'Vikram', style: 'The Anchor', lang: 'EN', tags: ['News', 'Professional'], av: 'av-3' },
-  { num: '04', name: 'Maya', style: 'The Storyteller', lang: 'EN, HI', tags: ['Storytelling', 'Calm'], av: 'av-4' },
-  { num: '05', name: 'Kabir', style: 'The Storyteller', lang: 'EN, HI', tags: ['Cinematic', 'Drama'], av: 'av-5' },
-  { num: '06', name: 'Kavya', style: 'The Guide', lang: 'HI, EN', tags: ['Educational', 'Guide'], av: 'av-6' },
-  { num: '07', name: 'Aisha', style: 'The Anchor', lang: 'EN, HI', tags: ['News', 'Narration'], av: 'av-1' },
-  { num: '08', name: 'Sahil', style: 'The Calm', lang: 'HI, EN', tags: ['Meditation', 'ASMR'], av: 'av-3' },
+  { num: '01', name: 'Arjun Mehta', style: 'The Narrator', lang: 'EN, HI', tags: ['Cinematic', 'Documentary'], av: 'av-1' },
+  { num: '02', name: 'Priya Nair', style: 'The Poet', lang: 'HI, EN', tags: ['Poetry', 'Meditation'], av: 'av-2' },
+  { num: '03', name: 'Vikram Singh', style: 'The Anchor', lang: 'EN', tags: ['News', 'Professional'], av: 'av-3' },
+  { num: '04', name: 'Maya Sharma', style: 'The Storyteller', lang: 'EN, HI', tags: ['Storytelling', 'Calm'], av: 'av-4' },
+  { num: '05', name: 'Kabir Pandey', style: 'The Storyteller', lang: 'EN, HI', tags: ['Cinematic', 'Drama'], av: 'av-5' },
+  { num: '06', name: 'Kavya Reddy', style: 'The Guide', lang: 'HI, EN', tags: ['Educational', 'Guide'], av: 'av-6' },
+  { num: '07', name: 'Aisha Trivedi', style: 'The Anchor', lang: 'EN, HI', tags: ['News', 'Narration'], av: 'av-1' },
+  { num: '08', name: 'Sahil Tiwari', style: 'The Calm', lang: 'HI, EN', tags: ['Meditation', 'ASMR'], av: 'av-3' },
+  { num: '09', name: 'Sophia Menon', style: 'The Narrator', lang: 'EN', tags: ['Audiobooks', 'Narration'], av: 'av-2' },
+  { num: '10', name: 'Rohan Kapoor', style: 'The Presenter', lang: 'EN, HI', tags: ['Professional', 'Clear'], av: 'av-5' },
+  { num: '11', name: 'Divya Iyer', style: 'The Teacher', lang: 'EN, HI', tags: ['Educational', 'Clear'], av: 'av-4' },
+  { num: '12', name: 'Dev Rathore', style: 'The Professional', lang: 'EN', tags: ['Corporate', 'Clean'], av: 'av-6' },
+  { num: '13', name: 'Isha Malhotra', style: 'The Creator', lang: 'HI, EN', tags: ['YouTube', 'Reels'], av: 'av-1' },
+  { num: '14', name: 'Raj Thakur', style: 'The Mentor', lang: 'EN, HI', tags: ['Coaching', 'Warm'], av: 'av-3' },
+  { num: '15', name: 'Naina', style: 'The Dreamer', lang: 'HI', tags: ['Soft', 'Storytelling'], av: 'av-2' },
+  { num: '16', name: 'Omkar Patil', style: 'The Bold', lang: 'EN, HI', tags: ['Drama', 'Cinematic'], av: 'av-5' },
+  { num: '17', name: 'Shreya', style: 'The Reciter', lang: 'HI', tags: ['Poetry', 'Devotional'], av: 'av-4' },
+  { num: '18', name: 'Nikhil', style: 'The Anchor', lang: 'EN, HI', tags: ['News', 'Podcast'], av: 'av-6' },
+  { num: '19', name: 'Ananya', style: 'The Host', lang: 'EN, HI', tags: ['Events', 'Lively'], av: 'av-1' },
+  { num: '20', name: 'Tejas Desai', style: 'The Energetic', lang: 'EN', tags: ['Marketing', 'Ads'], av: 'av-3' },
 ]
 
 const engines = [
@@ -78,6 +90,9 @@ export default function LandingPage() {
   const [demoVoice, setDemoVoice] = useState('Arjun')
   const [demoPlaying, setDemoPlaying] = useState(false)
   const [demoProgress, setDemoProgress] = useState(0)
+  const [demoLoading, setDemoLoading] = useState(false)
+  const [demoAudioUrl, setDemoAudioUrl] = useState<string | null>(null)
+  const demoAudioRef = useRef<HTMLAudioElement | null>(null)
   const [previewVoice, setPreviewVoice] = useState<number | null>(null)
   const [voiceProgress, setVoiceProgress] = useState(0)
 
@@ -245,17 +260,106 @@ export default function LandingPage() {
     return () => { ScrollTrigger.getAll().forEach(t => t.kill()) }
   }, [])
 
-  // TTS Demo play simulation
+  // TTS Demo — real audio playback with progress tracking
   useEffect(() => {
-    if (!demoPlaying) return
-    const interval = setInterval(() => {
-      setDemoProgress(prev => {
-        if (prev >= 100) { setDemoPlaying(false); return 100 }
-        return prev + 0.8
-      })
-    }, 50)
-    return () => clearInterval(interval)
+    const audio = demoAudioRef.current
+    if (!audio || !demoPlaying) return
+
+    const updateProgress = () => {
+      if (audio.duration) {
+        setDemoProgress((audio.currentTime / audio.duration) * 100)
+      }
+    }
+    const onEnded = () => {
+      setDemoPlaying(false)
+      setDemoProgress(100)
+    }
+
+    audio.addEventListener('timeupdate', updateProgress)
+    audio.addEventListener('ended', onEnded)
+    return () => {
+      audio.removeEventListener('timeupdate', updateProgress)
+      audio.removeEventListener('ended', onEnded)
+    }
   }, [demoPlaying])
+
+  const handleDemoPlay = async () => {
+    if (demoPlaying) {
+      demoAudioRef.current?.pause()
+      setDemoPlaying(false)
+      return
+    }
+
+    // If we already have audio from a previous generation, replay it
+    if (demoAudioUrl && demoAudioRef.current) {
+      demoAudioRef.current.currentTime = 0
+      demoAudioRef.current.play()
+      setDemoPlaying(true)
+      setDemoProgress(0)
+      return
+    }
+
+    // Try to generate via engine
+    setDemoLoading(true)
+    setDemoProgress(0)
+    try {
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      const res = await fetch(`${API_BASE}/api/v1/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'voxar-dev-key-001' },
+        body: JSON.stringify({
+          text: demoText.trim(),
+          voice_id: demoVoice.toLowerCase(),
+          engine_mode: 'flash',
+          language: 'auto',
+          output_format: 'mp3',
+        }),
+      })
+      const data = await res.json()
+      if (data.job_id) {
+        // Poll for completion
+        let attempts = 0
+        while (attempts < 30) {
+          await new Promise(r => setTimeout(r, 2000))
+          const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`, {
+            headers: { 'X-API-Key': 'voxar-dev-key-001' },
+          })
+          const job = await jobRes.json()
+          if (job.status === 'completed') {
+            const audioUrl = job.audio_url || job.audio_path
+            if (audioUrl) {
+              const fullUrl = audioUrl.startsWith('http') ? audioUrl : `${API_BASE}${audioUrl}`
+              setDemoAudioUrl(fullUrl)
+              const audio = new Audio(fullUrl)
+              demoAudioRef.current = audio
+              audio.play()
+              setDemoPlaying(true)
+            }
+            break
+          }
+          if (job.status === 'failed') break
+          attempts++
+          setDemoProgress(Math.min(90, attempts * 3))
+        }
+      }
+    } catch {
+      // Engine unavailable — redirect to login to try the full studio
+      window.location.href = '/login'
+    } finally {
+      setDemoLoading(false)
+    }
+  }
+
+  // Reset demo audio when text or voice changes
+  useEffect(() => {
+    setDemoAudioUrl(null)
+    setDemoProgress(0)
+    if (demoAudioRef.current) {
+      demoAudioRef.current.pause()
+      demoAudioRef.current = null
+    }
+    setDemoPlaying(false)
+  }, [demoText, demoVoice])
 
   // Voice preview progress
   useEffect(() => {
@@ -288,7 +392,7 @@ export default function LandingPage() {
           <div className="hero-badge"><span className="badge-dot" /> NEXT-GEN NEURAL VOICE PLATFORM</div>
           <h1 className="hero-title">VOXAR</h1>
           <p className="hero-tagline">Your words. <strong>Studio sound.</strong></p>
-          <p className="hero-subtitle">Neural voice synthesis, instant cloning, and precision transcription — 20 voices across 12 languages, engineered for creators who refuse to compromise.</p>
+          <p className="hero-subtitle">Neural voice synthesis, instant cloning, and precision transcription — 40+ premium voices across 12 languages, engineered for creators who refuse to compromise.</p>
           <div className="hero-cta-group">
             <button className="cta-primary"><IconZap size={16} /> Start Creating — Free</button>
             <button className="cta-secondary" onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}><IconPlay size={18} /> Hear It Live</button>
@@ -329,7 +433,7 @@ export default function LandingPage() {
           <div className="stats-bar">
             <div className="stat-item"><div className="stat-value">240+</div><div className="stat-label">Voice-Language Combos</div></div>
             <div className="stat-item"><div className="stat-value">12+</div><div className="stat-label">Languages</div></div>
-            <div className="stat-item"><div className="stat-value">20+</div><div className="stat-label">Neural Voices</div></div>
+            <div className="stat-item"><div className="stat-value">40+</div><div className="stat-label">Neural Voices</div></div>
             <div className="stat-item"><div className="stat-value">99.7<span style={{ fontSize: '24px' }}>%</span></div><div className="stat-label">Accuracy</div></div>
           </div>
         </section>
@@ -425,7 +529,7 @@ export default function LandingPage() {
             <div className="demo-header">
               <div className="section-tag">// Try It Live</div>
               <h2 className="demo-title">Hear the difference.</h2>
-              <p className="features-subtitle" style={{ marginTop: '12px' }}>Type anything below. Pick a voice. Hit play. No signup required.</p>
+              <p className="features-subtitle" style={{ marginTop: '12px' }}>Type anything below. Pick a voice. Hit play. Experience VOXAR instantly.</p>
             </div>
             <div className="demo-card">
               <div className="demo-textarea-wrap">
@@ -445,13 +549,15 @@ export default function LandingPage() {
                     <button key={v} className={`demo-voice-pill ${demoVoice === v ? 'active' : ''}`} onClick={() => setDemoVoice(v)}>{v}</button>
                   ))}
                 </div>
-                <button className="demo-play-btn" onClick={() => { if (demoProgress >= 100) setDemoProgress(0); setDemoPlaying(!demoPlaying) }} disabled={!demoText.trim()}>
-                  {demoPlaying ? (
+                <button className="demo-play-btn" onClick={handleDemoPlay} disabled={!demoText.trim() || demoLoading}>
+                  {demoLoading ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56" /></svg>
+                  ) : demoPlaying ? (
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="6" y1="4" x2="6" y2="20" /><line x1="18" y1="4" x2="18" y2="20" /></svg>
                   ) : (
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3" /></svg>
                   )}
-                  {demoPlaying ? 'Playing...' : 'Play Preview'}
+                  {demoLoading ? 'Generating...' : demoPlaying ? 'Playing...' : 'Play Preview'}
                 </button>
               </div>
               {demoProgress > 0 && (
@@ -462,7 +568,7 @@ export default function LandingPage() {
                   <span className="demo-progress-voice">{demoVoice} · Cinematic</span>
                 </div>
               )}
-              <p className="demo-note">Want studio-grade quality with all 20 voices? <a href="/login">Try the full studio free →</a></p>
+              <p className="demo-note">Want studio-grade quality with all 40+ premium voices? <a href="/login">Try the full studio free →</a></p>
             </div>
           </div>
         </section>
@@ -545,7 +651,7 @@ export default function LandingPage() {
               ))}
             </div>
             <div className="voices-more">
-              <a href="#" className="voices-more-link">Explore all 20 voices <IconArrowRight size={14} /></a>
+              <a href="/dashboard/voices" className="voices-more-link">Explore all 40+ premium voices <IconArrowRight size={14} /></a>
             </div>
           </div>
         </section>
@@ -568,7 +674,7 @@ export default function LandingPage() {
               <div className="hiw-step">
                 <div className="hiw-step-number">02</div>
                 <h3 className="hiw-step-title">Choose</h3>
-                <p className="hiw-step-desc">Pick from 20 neural voices. Select your language. Choose Flash, Cinematic, Longform, or Multilingual mode. Preview instantly.</p>
+                <p className="hiw-step-desc">Pick from 40+ premium voices. Select your language. Choose Flash, Cinematic, Longform, or Multilingual mode. Preview instantly.</p>
                 <div className="hiw-step-icon"><IconSettings size={24} /></div>
               </div>
               <div className="hiw-step">

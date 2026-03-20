@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { useAuthStore } from '@/stores/authStore'
 
 interface SidebarProps {
   usagePercent?: number
@@ -11,6 +12,8 @@ interface SidebarProps {
 
 export default function Sidebar({ usagePercent = 34, usageUsed = '34 min', usageTotal = '120 min' }: SidebarProps) {
   const pathname = usePathname()
+  const router = useRouter()
+  const logout = useAuthStore(s => s.logout)
 
   const isActive = (path: string) => {
     if (path === '/dashboard/studio' && (pathname === '/dashboard' || pathname === '/dashboard/studio')) return true
@@ -20,13 +23,13 @@ export default function Sidebar({ usagePercent = 34, usageUsed = '34 min', usage
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-logo">
+      <Link href="/" className="sidebar-logo" style={{ textDecoration: 'none' }}>
         <svg viewBox="0 0 100 50" style={{ width: '32px', height: 'auto', color: 'var(--text-primary)' }} fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
           <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
         </svg>
         <span className="sidebar-logo-text">VOXAR</span>
-      </div>
+      </Link>
 
       <div className="sidebar-section">
         <div className="sidebar-section-label">Main</div>
@@ -51,7 +54,7 @@ export default function Sidebar({ usagePercent = 34, usageUsed = '34 min', usage
           <Link className={`sidebar-item ${isActive('/dashboard/voices') ? 'active' : ''}`} href="/dashboard/voices">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /></svg>
             <span>Voice Library</span>
-            <span className="sidebar-badge">20</span>
+            <span className="sidebar-badge">40+</span>
           </Link>
           <Link className={`sidebar-item ${isActive('/dashboard/history') ? 'active' : ''}`} href="/dashboard/history">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
@@ -86,9 +89,13 @@ export default function Sidebar({ usagePercent = 34, usageUsed = '34 min', usage
             <span>Settings</span>
           </Link>
           <Link className="sidebar-item" href="/">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
+            <span>Back to Site</span>
+          </Link>
+          <button className="sidebar-item" onClick={() => { logout(); router.push('/') }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
             <span>Logout</span>
-          </Link>
+          </button>
         </nav>
       </div>
 

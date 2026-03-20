@@ -40,6 +40,14 @@ const userSchema = new mongoose.Schema({
   billing_cycle_start: { type: Date, default: Date.now },
   billing_period: { type: String, enum: ['monthly', 'yearly', 'none'], default: 'none' },
 
+  // Login security
+  login_attempts: { type: Number, default: 0 },
+  locked_until: { type: Date, default: null },
+
+  // Email verification
+  email_verified: { type: Boolean, default: false },
+  verification_code: { type: String, default: null },
+
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 })

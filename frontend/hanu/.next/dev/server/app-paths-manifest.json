@@ -1,8 +1,13 @@
 {
+  "/dashboard/cloning/page": "app/dashboard/cloning/page.js",
+  "/dashboard/history/page": "app/dashboard/history/page.js",
   "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/projects/page": "app/dashboard/projects/page.js",
+  "/dashboard/settings/page": "app/dashboard/settings/page.js",
   "/dashboard/studio/page": "app/dashboard/studio/page.js",
   "/dashboard/transcribe/page": "app/dashboard/transcribe/page.js",
   "/dashboard/tts/page": "app/dashboard/tts/page.js",
+  "/dashboard/voices/page": "app/dashboard/voices/page.js",
   "/login/page": "app/login/page.js",
   "/page": "app/page.js"
 }

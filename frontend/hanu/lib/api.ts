@@ -36,6 +36,17 @@ function buildAuthHeaders(): Record<string, string> {
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {
+    // Auto-logout on 401 (expired/invalid token)
+    if (res.status === 401) {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('voxar-token')
+        // Dynamic import to avoid circular dependencies
+        const { useAuthStore } = await import('@/stores/authStore')
+        useAuthStore.getState().logout()
+        window.location.href = '/login'
+      }
+    }
+
     const error: ApiError = {
       status: res.status,
       message: res.statusText,

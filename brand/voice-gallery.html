@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOXAR — Voice Gallery</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --vg-bg: #050508;
+    --vg-text: rgba(255, 255, 255, 0.85);
+    --vg-text-dim: rgba(255, 255, 255, 0.5);
+    --vg-border: rgba(255, 255, 255, 0.2);
+    --vg-btn-bg: rgba(255, 255, 255, 0.04);
+    --vg-btn-hover: rgba(255, 255, 255, 0.08);
+    --vg-dot: rgba(255, 255, 255, 0.18);
+    --vg-dot-active: rgba(255, 255, 255, 0.85);
+  }
+  body.light {
+    --vg-bg: #F5F5F7;
+    --vg-text: rgba(0, 0, 0, 0.8);
+    --vg-text-dim: rgba(0, 0, 0, 0.35);
+    --vg-border: rgba(0, 0, 0, 0.12);
+    --vg-btn-bg: rgba(0, 0, 0, 0.03);
+    --vg-btn-hover: rgba(0, 0, 0, 0.06);
+    --vg-dot: rgba(0, 0, 0, 0.12);
+    --vg-dot-active: rgba(0, 0, 0, 0.7);
+  }
+
+  body {
+    background: var(--vg-bg);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    transition: background 0.5s ease;
+  }
+
+  .vg-wrap {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .vg-wrap:active { cursor: grabbing; }
+  .vg-wrap canvas { display: block; }
+
+  /* Edge fades */
+  .vg-fade {
+    position: absolute;
+    top: 0;
+    width: 140px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    transition: background 0.5s ease;
+  }
+  .vg-fade.l { left: 0; background: linear-gradient(90deg, var(--vg-bg) 0%, transparent 100%); }
+  .vg-fade.r { right: 0; background: linear-gradient(-90deg, var(--vg-bg) 0%, transparent 100%); }
+
+  /* Mode toggle */
+  .vg-mode {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--vg-border);
+    background: var(--vg-btn-bg);
+    color: var(--vg-text);
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .vg-mode:hover {
+    border-color: var(--vg-text-dim);
+    background: var(--vg-btn-hover);
+    transform: scale(1.1);
+  }
+
+  /* Bottom controls */
+  .vg-ctrl {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 5;
+  }
+  .vg-speaker {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vg-text);
+    letter-spacing: 0.06em;
+    transition: opacity 0.2s ease;
+  }
+  .vg-play {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid var(--vg-border);
+    background: var(--vg-btn-bg);
+    color: var(--vg-text);
+    font-size: 13px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2px;
+  }
+  .vg-play:hover {
+    border-color: var(--vg-text-dim);
+    background: var(--vg-btn-hover);
+    transform: scale(1.1);
+  }
+  .vg-play.on {
+    border-color: rgba(124, 58, 237, 0.5);
+    background: rgba(124, 58, 237, 0.12);
+    padding-left: 0;
+  }
+
+  /* Dot indicators */
+  .vg-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 2px;
+  }
+  .vg-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--vg-dot);
+    transition: all 0.3s ease;
+  }
+  .vg-dot.active {
+    background: var(--vg-dot-active);
+    transform: scale(1.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="vg-wrap" id="vg">
+  <div class="vg-fade l"></div>
+  <div class="vg-fade r"></div>
+  <button class="vg-mode" id="vgMode" title="Toggle light/dark">&#9788;</button>
+  <div class="vg-ctrl">
+    <div class="vg-speaker" id="vgName">Aarav</div>
+    <button class="vg-play" id="vgPlay">&#9654;</button>
+    <div class="vg-dots" id="vgDots"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160/build/three.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════
+     Speaker Data
+     ═══════════════════════════════════════════ */
+  var SPEAKERS = [
+    { name: 'Aarav',   c1: [0.0, 1.0, 0.5], c2: [0.5, 0.0, 1.0] },
+    { name: 'Priya',   c1: [0.5, 0.0, 1.0], c2: [1.0, 0.0, 0.5] },
+    { name: 'Arjun',   c1: [0.0, 0.2, 1.0], c2: [0.0, 1.0, 1.0] },
+    { name: 'Ananya',  c1: [1.0, 0.6, 0.5], c2: [1.0, 0.9, 0.8] },
+    { name: 'Vikram',  c1: [0.0, 0.9, 1.0], c2: [1.0, 0.6, 0.0] },
+    { name: 'Meera',   c1: [1.0, 0.3, 0.0], c2: [1.0, 0.0, 0.5] },
+    { name: 'Rohan',   c1: [0.0, 1.0, 0.3], c2: [0.0, 0.4, 0.2] },
+    { name: 'Kavya',   c1: [1.0, 0.0, 0.4], c2: [0.2, 0.0, 1.0] },
+    { name: 'Aditya',  c1: [1.0, 0.9, 0.5], c2: [0.2, 0.5, 1.0] },
+    { name: 'Ishita',  c1: [0.6, 0.0, 1.0], c2: [0.0, 1.0, 1.0] },
+    { name: 'Karan',   c1: [0.1, 0.0, 0.4], c2: [0.0, 0.2, 1.0] },
+    { name: 'Diya',    c1: [1.0, 0.4, 0.4], c2: [1.0, 0.8, 0.2] }
+  ];
+
+  /* ═══════════════════════════════════════════
+     Config
+     ═══════════════════════════════════════════ */
+  var RADIUS     = 0.85;
+  var GAP        = 2.8;
+  var CAM_Z      = 8;
+  var ACTIVE_S   = 1.15;
+  var IDLE_S     = 0.78;
+  var EASE       = 0.06;
+  var SCROLL_SPD = 2;
+  var DETAIL     = 40;
+
+  /* ═══════════════════════════════════════════
+     DOM
+     ═══════════════════════════════════════════ */
+  var wrap   = document.getElementById('vg');
+  var nameEl = document.getElementById('vgName');
+  var playEl = document.getElementById('vgPlay');
+  var modeEl = document.getElementById('vgMode');
+  var dotsEl = document.getElementById('vgDots');
+
+  /* ═══════════════════════════════════════════
+     State
+     ═══════════════════════════════════════════ */
+  var scene, camera, renderer;
+  var items = [];
+  var scroll = { cur: 0, tgt: 0, last: 0 };
+  var isDown = false, startX = 0, scrollPos = 0;
+  var activeIdx = 0, prevActiveIdx = -1;
+  var audioCtx, analyser, freqData, audioLevel = 0;
+  var isPlaying = false, oscillator = null, lfoNode = null;
+  var isDark = true;
+  var glowTexture;
+  var globalTime = 0;
+
+  // Momentum
+  var velocity = 0, lastPointerX = 0, lastPointerTime = 0;
+  var snapTimeout;
+
+  /* ═══════════════════════════════════════════
+     GLSL — Simplex 3D Noise
+     ═══════════════════════════════════════════ */
+  var NOISE_GLSL = [
+    'vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }',
+    'vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }',
+    'vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }',
+    'vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }',
+    'float snoise(vec3 v) {',
+    '  const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);',
+    '  const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);',
+    '  vec3 i = floor(v + dot(v, C.yyy));',
+    '  vec3 x0 = v - i + dot(i, C.xxx);',
+    '  vec3 g = step(x0.yzx, x0.xyz);',
+    '  vec3 l = 1.0 - g;',
+    '  vec3 i1 = min(g.xyz, l.zxy);',
+    '  vec3 i2 = max(g.xyz, l.zxy);',
+    '  vec3 x1 = x0 - i1 + C.xxx;',
+    '  vec3 x2 = x0 - i2 + C.yyy;',
+    '  vec3 x3 = x0 - D.yyy;',
+    '  i = mod289(i);',
+    '  vec4 p = permute(permute(permute(',
+    '    i.z + vec4(0.0, i1.z, i2.z, 1.0))',
+    '    + i.y + vec4(0.0, i1.y, i2.y, 1.0))',
+    '    + i.x + vec4(0.0, i1.x, i2.x, 1.0));',
+    '  float n_ = 0.142857142857;',
+    '  vec3 ns = n_ * D.wyz - D.xzx;',
+    '  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);',
+    '  vec4 x_ = floor(j * ns.z);',
+    '  vec4 y_ = floor(j - 7.0 * x_);',
+    '  vec4 x = x_ * ns.x + ns.yyyy;',
+    '  vec4 y = y_ * ns.x + ns.yyyy;',
+    '  vec4 h = 1.0 - abs(x) - abs(y);',
+    '  vec4 b0 = vec4(x.xy, y.xy);',
+    '  vec4 b1 = vec4(x.zw, y.zw);',
+    '  vec4 s0 = floor(b0) * 2.0 + 1.0;',
+    '  vec4 s1 = floor(b1) * 2.0 + 1.0;',
+    '  vec4 sh = -step(h, vec4(0.0));',
+    '  vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;',
+    '  vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;',
+    '  vec3 p0 = vec3(a0.xy, h.x);',
+    '  vec3 p1 = vec3(a0.zw, h.y);',
+    '  vec3 p2 = vec3(a1.xy, h.z);',
+    '  vec3 p3 = vec3(a1.zw, h.w);',
+    '  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));',
+    '  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;',
+    '  vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);',
+    '  m = m * m;',
+    '  return 42.0 * dot(m * m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));',
+    '}'
+  ].join('\n');
+
+  /* ═══════════════════════════════════════════
+     Vertex Shader — reference liquid mesh
+     ═══════════════════════════════════════════ */
+  var vertexShader = NOISE_GLSL + '\n' + [
+    'uniform float uTime;',
+    'uniform float uAudio;',
+    'uniform float uActive;',
+    'varying vec3 vNormal;',
+    'varying vec3 vPosition;',
+    'varying float vNoise;',
+    '',
+    'void main() {',
+    '  vNormal = normal;',
+    '  vPosition = position;',
+    '  float noise = snoise(position * 0.5 + uTime * 0.4);',
+    '  vNoise = noise;',
+    '  float displacement = noise * (0.04 + uAudio * uActive * 0.25);',
+    '  vec3 newPos = position + normal * displacement;',
+    '  gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0);',
+    '}'
+  ].join('\n');
+
+  /* ═══════════════════════════════════════════
+     Fragment Shader — 2-color gradient + fresnel
+     ═══════════════════════════════════════════ */
+  var fragmentShader = [
+    'precision highp float;',
+    'uniform vec3 uColor1;',
+    'uniform vec3 uColor2;',
+    'uniform float uTime;',
+    'uniform float uActive;',
+    'varying vec3 vNormal;',
+    'varying vec3 vPosition;',
+    'varying float vNoise;',
+    '',
+    'void main() {',
+    '  vec3 viewDirection = normalize(cameraPosition - vPosition);',
+    '  float fresnel = pow(1.0 - dot(viewDirection, vNormal), 3.0);',
+    '  float mixFactor = smoothstep(-0.5, 0.5, vNoise);',
+    '  vec3 baseColor = mix(uColor1, uColor2, mixFactor);',
+    '  vec3 finalColor = baseColor + (fresnel * uColor2 * 1.5);',
+    '  finalColor *= mix(0.25, 1.0, uActive);',
+    '  gl_FragColor = vec4(finalColor, 1.0);',
+    '}'
+  ].join('\n');
+
+  /* ═══════════════════════════════════════════
+     Init
+     ═══════════════════════════════════════════ */
+  function init() {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x050508, 1);
+    wrap.insertBefore(renderer.domElement, wrap.firstChild);
+
+    camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
+    camera.position.z = CAM_Z;
+
+    scene = new THREE.Scene();
+
+    // Shared geometry
+    var geometry = new THREE.IcosahedronGeometry(RADIUS, DETAIL);
+
+    // Shared glow texture
+    glowTexture = createGlowTexture();
+
+    // Create dot indicators
+    for (var d = 0; d < SPEAKERS.length; d++) {
+      var dot = document.createElement('div');
+      dot.className = 'vg-dot';
+      dotsEl.appendChild(dot);
+    }
+
+    // Double speakers for infinite scroll
+    var allSpeakers = SPEAKERS.concat(SPEAKERS);
+    var totalCount = allSpeakers.length;
+    var widthTotal = totalCount * GAP;
+
+    allSpeakers.forEach(function (speaker, i) {
+      var material = new THREE.ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        uniforms: {
+          uTime:   { value: Math.random() * 100 },
+          uAudio:  { value: 0.0 },
+          uActive: { value: 0.0 },
+          uColor1: { value: new THREE.Color(speaker.c1[0], speaker.c1[1], speaker.c1[2]) },
+          uColor2: { value: new THREE.Color(speaker.c2[0], speaker.c2[1], speaker.c2[2]) }
+        }
+      });
+
+      var mesh = new THREE.Mesh(geometry, material);
+      var group = new THREE.Group();
+      group.add(mesh);
+
+      // Glow sprite behind sphere
+      var glowMat = new THREE.SpriteMaterial({
+        map: glowTexture,
+        color: new THREE.Color(speaker.c2[0], speaker.c2[1], speaker.c2[2]),
+        transparent: true,
+        opacity: 0,
+        blending: THREE.AdditiveBlending,
+        depthTest: false,
+        depthWrite: false
+      });
+      var glow = new THREE.Sprite(glowMat);
+      glow.scale.set(3.5, 3.5, 1);
+      glow.position.z = -0.3;
+      group.add(glow);
+
+      // Speaker name label
+      var label = createLabel(speaker.name);
+      label.position.y = -RADIUS * ACTIVE_S - 0.32;
+      group.add(label);
+
+      scene.add(group);
+
+      var extra = (i * GAP >= widthTotal / 2) ? widthTotal : 0;
+
+      items.push({
+        group: group,
+        mesh: mesh,
+        material: material,
+        glow: glow,
+        label: label,
+        name: speaker.name,
+        c2: speaker.c2,
+        index: i,
+        extra: extra,
+        widthTotal: widthTotal,
+        currentScale: IDLE_S,
+        currentActive: 0
+      });
+    });
+
+    addListeners();
+    tick();
+  }
+
+  /* ═══════════════════════════════════════════
+     Glow texture (shared radial gradient)
+     ═══════════════════════════════════════════ */
+  function createGlowTexture() {
+    var c = document.createElement('canvas');
+    var ctx = c.getContext('2d');
+    c.width = 128; c.height = 128;
+    var grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(255,255,255,0.4)');
+    grad.addColorStop(0.4, 'rgba(255,255,255,0.12)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 128, 128);
+    return new THREE.CanvasTexture(c);
+  }
+
+  /* ═══════════════════════════════════════════
+     Label sprite
+     ═══════════════════════════════════════════ */
+  function createLabel(text) {
+    var c = document.createElement('canvas');
+    var ctx = c.getContext('2d');
+    c.width = 256; c.height = 48;
+    ctx.font = '500 20px Inter, sans-serif';
+    ctx.fillStyle = isDark ? '#ffffff' : '#333333';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = 0.8;
+    ctx.fillText(text, 128, 24);
+    var tex = new THREE.CanvasTexture(c);
+    var mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.5 });
+    var spr = new THREE.Sprite(mat);
+    spr.scale.set(1.6, 0.3, 1);
+    return spr;
+  }
+
+  function regenerateLabels() {
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      var oldY = it.label.position.y;
+      var oldOp = it.label.material.opacity;
+      it.group.remove(it.label);
+      it.label.material.map.dispose();
+      it.label.material.dispose();
+      it.label = createLabel(it.name);
+      it.label.position.y = oldY;
+      it.label.material.opacity = oldOp;
+      it.group.add(it.label);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     Viewport width in world units
+     ═══════════════════════════════════════════ */
+  function getViewportWidth() {
+    var fov = (camera.fov * Math.PI) / 180;
+    var h = 2 * Math.tan(fov / 2) * camera.position.z;
+    return h * camera.aspect;
+  }
+
+  /* ═══════════════════════════════════════════
+     Update positions, wrapping, active state
+     ═══════════════════════════════════════════ */
+  function updatePositions() {
+    var vw = getViewportWidth();
+    var direction = scroll.cur > scroll.last ? 'right' : 'left';
+    var closestDist = Infinity;
+    var closestIdx = 0;
+
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      var posX = it.index * GAP - scroll.cur - it.extra;
+      it.group.position.x = posX;
+
+      var dist = Math.abs(posX);
+      if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+
+      var edge = vw / 2 + GAP;
+      if (direction === 'right' && posX + RADIUS < -edge) it.extra -= it.widthTotal;
+      if (direction === 'left'  && posX - RADIUS >  edge) it.extra += it.widthTotal;
+    }
+
+    activeIdx = closestIdx;
+
+    for (var j = 0; j < items.length; j++) {
+      var item = items[j];
+      var isActive = (j === activeIdx);
+      var tgtActive = isActive ? 1.0 : 0.0;
+      var tgtScale  = isActive ? ACTIVE_S : IDLE_S;
+
+      item.currentActive += (tgtActive - item.currentActive) * 0.08;
+      item.currentScale  += (tgtScale  - item.currentScale)  * 0.08;
+
+      item.mesh.scale.setScalar(item.currentScale);
+      item.material.uniforms.uActive.value = item.currentActive;
+
+      // Gentle float on active sphere
+      item.group.position.y = Math.sin(globalTime * 1.5 + item.index * 0.5) * 0.06 * item.currentActive;
+
+      // Label follows scale
+      item.label.position.y = -item.currentScale * RADIUS - 0.32;
+      item.label.material.opacity += ((isActive ? 0.9 : 0.3) - item.label.material.opacity) * 0.08;
+
+      // Glow behind active sphere
+      var glowOpacity = item.currentActive * (isDark ? 0.45 : 0.2);
+      item.glow.material.opacity += (glowOpacity - item.glow.material.opacity) * 0.08;
+      item.glow.material.blending = isDark ? THREE.AdditiveBlending : THREE.NormalBlending;
+    }
+
+    // Fade speaker name on change
+    if (activeIdx !== prevActiveIdx) {
+      nameEl.style.opacity = '0';
+      setTimeout(function () {
+        nameEl.textContent = items[activeIdx].name;
+        nameEl.style.opacity = '1';
+      }, 180);
+      prevActiveIdx = activeIdx;
+
+      // Update dot indicators
+      var speakerIdx = activeIdx % SPEAKERS.length;
+      var dots = dotsEl.children;
+      for (var d = 0; d < dots.length; d++) {
+        dots[d].classList.toggle('active', d === speakerIdx);
+      }
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     Snap to nearest sphere
+     ═══════════════════════════════════════════ */
+  function snap() {
+    var n = Math.round(scroll.tgt / GAP);
+    scroll.tgt = n * GAP;
+  }
+
+  /* ═══════════════════════════════════════════
+     Input — with momentum
+     ═══════════════════════════════════════════ */
+  function onPointerDown(e) {
+    isDown = true;
+    startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    scrollPos = scroll.cur;
+    velocity = 0;
+    lastPointerX = startX;
+    lastPointerTime = Date.now();
+    clearTimeout(snapTimeout);
+  }
+
+  function onPointerMove(e) {
+    if (!isDown) return;
+    var x = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+
+    // Track velocity
+    var now = Date.now();
+    var dt = now - lastPointerTime;
+    if (dt > 5) {
+      velocity = (lastPointerX - x) / dt;
+      lastPointerX = x;
+      lastPointerTime = now;
+    }
+
+    var delta = (startX - x) * SCROLL_SPD * 0.015;
+    scroll.tgt = scrollPos + delta;
+  }
+
+  function onPointerUp() {
+    if (!isDown) return;
+    isDown = false;
+
+    // Apply momentum
+    scroll.tgt += velocity * 180;
+
+    // Snap after momentum settles
+    clearTimeout(snapTimeout);
+    snapTimeout = setTimeout(snap, 450);
+  }
+
+  var wheelTimeout;
+  function onWheel(e) {
+    e.preventDefault();
+    var delta = e.deltaY || e.deltaX;
+    scroll.tgt += (delta > 0 ? 1 : -1) * SCROLL_SPD * 0.3;
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(snap, 150);
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'ArrowRight') { scroll.tgt += GAP; snap(); }
+    if (e.key === 'ArrowLeft')  { scroll.tgt -= GAP; snap(); }
+  }
+
+  function onResize() {
+    camera.aspect = wrap.clientWidth / wrap.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+  }
+
+  function addListeners() {
+    wrap.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+    wrap.addEventListener('touchstart', onPointerDown, { passive: true });
+    window.addEventListener('touchmove', onPointerMove, { passive: true });
+    window.addEventListener('touchend', onPointerUp);
+    wrap.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('resize', onResize);
+    playEl.addEventListener('click', toggleAudio);
+    modeEl.addEventListener('click', toggleMode);
+  }
+
+  /* ═══════════════════════════════════════════
+     Dark / Light Mode
+     ═══════════════════════════════════════════ */
+  function toggleMode() {
+    isDark = !isDark;
+    document.body.classList.toggle('light', !isDark);
+    renderer.setClearColor(isDark ? 0x050508 : 0xF5F5F7, 1);
+    modeEl.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    regenerateLabels();
+  }
+
+  /* ═══════════════════════════════════════════
+     Audio
+     ═══════════════════════════════════════════ */
+  function toggleAudio() {
+    if (isPlaying) stopAudio(); else startAudio();
+  }
+
+  function startAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      freqData = new Uint8Array(analyser.frequencyBinCount);
+    }
+
+    var freq = 140 + (activeIdx % 12) * 8;
+    oscillator = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    gain.gain.value = 0.1;
+    oscillator.type = 'sine';
+    oscillator.frequency.value = freq;
+
+    lfoNode = audioCtx.createOscillator();
+    var lfoGain = audioCtx.createGain();
+    lfoNode.frequency.value = 5 + Math.random() * 3;
+    lfoGain.gain.value = 25;
+    lfoNode.connect(lfoGain);
+    lfoGain.connect(oscillator.frequency);
+    lfoNode.start();
+
+    oscillator.connect(gain);
+    gain.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    oscillator.start();
+
+    isPlaying = true;
+    playEl.innerHTML = '&#9646;&#9646;';
+    playEl.classList.add('on');
+  }
+
+  function stopAudio() {
+    if (oscillator) { try { oscillator.stop(); } catch (e) {} oscillator = null; }
+    if (lfoNode)    { try { lfoNode.stop(); } catch (e) {} lfoNode = null; }
+    isPlaying = false;
+    audioLevel = 0;
+    playEl.innerHTML = '&#9654;';
+    playEl.classList.remove('on');
+  }
+
+  /* ═══════════════════════════════════════════
+     Animation Loop
+     ═══════════════════════════════════════════ */
+  function tick() {
+    requestAnimationFrame(tick);
+
+    globalTime = performance.now() * 0.001;
+
+    // Smooth scroll
+    scroll.cur += (scroll.tgt - scroll.cur) * EASE;
+
+    // Audio analysis
+    if (isPlaying && analyser) {
+      analyser.getByteFrequencyData(freqData);
+      var sum = 0;
+      for (var i = 0; i < freqData.length; i++) sum += freqData[i];
+      var avg = sum / freqData.length / 128.0;
+      audioLevel += (avg - audioLevel) * 0.08;
+    } else {
+      audioLevel *= 0.93;
+    }
+
+    // Update uniforms
+    for (var j = 0; j < items.length; j++) {
+      items[j].material.uniforms.uTime.value += 0.01;
+      items[j].material.uniforms.uAudio.value = audioLevel;
+    }
+
+    updatePositions();
+
+    scroll.last = scroll.cur;
+    renderer.render(scene, camera);
+  }
+
+  /* ═══════════════════════════════════════════
+     Start
+     ═══════════════════════════════════════════ */
+  init();
+
+})();
+</script>
+</body>
+</html>

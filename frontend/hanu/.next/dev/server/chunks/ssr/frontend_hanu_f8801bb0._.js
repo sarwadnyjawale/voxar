@@ -48,7 +48,7 @@ const useSTTStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend
                     progress: 30
                 });
                 // Use sync endpoint for simplicity (blocks until done)
-                const result = await __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$lib$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["api"].upload('/api/v1/transcribe/sync', formData);
+                const result = await __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$lib$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["api"].backendUpload('/api/v1/transcribe/sync', formData);
                 set({
                     isUploading: false,
                     isTranscribing: false,
@@ -535,6 +535,8 @@ __turbopack_context__.s([
     ()=>IconGithub,
     "IconGlobe",
     ()=>IconGlobe,
+    "IconInstagram",
+    ()=>IconInstagram,
     "IconKey",
     ()=>IconKey,
     "IconLanguages",
@@ -2359,6 +2361,51 @@ const IconYoutube = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mo
         lineNumber: 122,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
+const IconInstagram = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+        width: size,
+        height: size,
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
+                x: "2",
+                y: "2",
+                width: "20",
+                height: "20",
+                rx: "5",
+                ry: "5"
+            }, void 0, false, {
+                fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+                lineNumber: 126,
+                columnNumber: 150
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+            }, void 0, false, {
+                fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+                lineNumber: 126,
+                columnNumber: 207
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
+                x1: "17.5",
+                y1: "6.5",
+                x2: "17.51",
+                y2: "6.5"
+            }, void 0, false, {
+                fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+                lineNumber: 126,
+                columnNumber: 267
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, void 0, true, {
+        fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+        lineNumber: 126,
+        columnNumber: 3
+    }, ("TURBOPACK compile-time value", void 0));
 const VoxarLogo = ({ width = 48 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         viewBox: "0 0 100 50",
         style: {
@@ -2377,20 +2424,20 @@ const VoxarLogo = ({ width = 48 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 d: "M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 127,
+                lineNumber: 131,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 128,
+                lineNumber: 132,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 126,
+        lineNumber: 130,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 const IconUpload = ({ size = 22 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2407,14 +2454,14 @@ const IconUpload = ({ size = 22 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 133,
+                lineNumber: 137,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
                 points: "17 8 12 3 7 8"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 133,
+                lineNumber: 137,
                 columnNumber: 204
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -2424,13 +2471,13 @@ const IconUpload = ({ size = 22 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 y2: "15"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 133,
+                lineNumber: 137,
                 columnNumber: 239
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 133,
+        lineNumber: 137,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 const IconTrash = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2447,20 +2494,20 @@ const IconTrash = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modu
                 points: "3 6 5 6 21 6"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 137,
+                lineNumber: 141,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 137,
+                lineNumber: 141,
                 columnNumber: 184
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 137,
+        lineNumber: 141,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 const IconFilter = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2476,12 +2523,12 @@ const IconFilter = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
             points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-            lineNumber: 141,
+            lineNumber: 145,
             columnNumber: 150
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 141,
+        lineNumber: 145,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 const IconUser = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2498,7 +2545,7 @@ const IconUser = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modul
                 d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 145,
+                lineNumber: 149,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -2507,13 +2554,13 @@ const IconUser = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modul
                 r: "4"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 145,
+                lineNumber: 149,
                 columnNumber: 204
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 145,
+        lineNumber: 149,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 const IconClock = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2532,20 +2579,20 @@ const IconClock = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modu
                 r: "10"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 149,
+                lineNumber: 153,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
                 points: "12 6 12 12 16 14"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 149,
+                lineNumber: 153,
                 columnNumber: 183
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 149,
+        lineNumber: 153,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 const IconRefresh = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2562,20 +2609,20 @@ const IconRefresh = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mo
                 points: "1 4 1 10 7 10"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 153,
+                lineNumber: 157,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M3.51 15a9 9 0 1 0 2.13-9.36L1 10"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 153,
+                lineNumber: 157,
                 columnNumber: 185
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 153,
+        lineNumber: 157,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 const IconSearch = ({ size = 18 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2594,7 +2641,7 @@ const IconSearch = ({ size = 18 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 r: "8"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 158,
+                lineNumber: 162,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -2604,13 +2651,13 @@ const IconSearch = ({ size = 18 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 y2: "16.65"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 159,
+                lineNumber: 163,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 157,
+        lineNumber: 161,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 }),
@@ -3162,6 +3209,30 @@ function TranscribePage() {
                                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
                                                         lineNumber: 168,
                                                         columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "gu",
+                                                        children: "Gujarati"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
+                                                        lineNumber: 169,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "pa",
+                                                        children: "Punjabi"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
+                                                        lineNumber: 170,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "or",
+                                                        children: "Odia"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
+                                                        lineNumber: 171,
+                                                        columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
@@ -3186,7 +3257,7 @@ function TranscribePage() {
                                                         children: "Speaker Diarization"
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                        lineNumber: 175,
+                                                        lineNumber: 178,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3194,13 +3265,13 @@ function TranscribePage() {
                                                         children: "Identify distinct speakers"
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                        lineNumber: 176,
+                                                        lineNumber: 179,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                lineNumber: 174,
+                                                lineNumber: 177,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3209,18 +3280,18 @@ function TranscribePage() {
                                                     className: "toggle-knob"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                    lineNumber: 179,
+                                                    lineNumber: 182,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                lineNumber: 178,
+                                                lineNumber: 181,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                        lineNumber: 173,
+                                        lineNumber: 176,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3234,7 +3305,7 @@ function TranscribePage() {
                                                         children: "Word Timestamps"
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                        lineNumber: 186,
+                                                        lineNumber: 189,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3242,13 +3313,13 @@ function TranscribePage() {
                                                         children: "Word-level timing data"
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                        lineNumber: 187,
+                                                        lineNumber: 190,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                lineNumber: 185,
+                                                lineNumber: 188,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3257,25 +3328,25 @@ function TranscribePage() {
                                                     className: "toggle-knob"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                    lineNumber: 190,
+                                                    lineNumber: 193,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                lineNumber: 189,
+                                                lineNumber: 192,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                        lineNumber: 184,
+                                        lineNumber: 187,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "controls-divider"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                        lineNumber: 194,
+                                        lineNumber: 197,
                                         columnNumber: 13
                                     }, this),
                                     isUploading || isTranscribing ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3289,7 +3360,7 @@ function TranscribePage() {
                                                         children: isUploading ? 'Uploading...' : 'Transcribing...'
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                        lineNumber: 200,
+                                                        lineNumber: 203,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3300,13 +3371,13 @@ function TranscribePage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                        lineNumber: 203,
+                                                        lineNumber: 206,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                lineNumber: 199,
+                                                lineNumber: 202,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3318,18 +3389,18 @@ function TranscribePage() {
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                    lineNumber: 206,
+                                                    lineNumber: 209,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                                lineNumber: 205,
+                                                lineNumber: 208,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                        lineNumber: 198,
+                                        lineNumber: 201,
                                         columnNumber: 15
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         className: "btn-generate",
@@ -3342,7 +3413,7 @@ function TranscribePage() {
                                         children: "Start Transcription"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                        lineNumber: 210,
+                                        lineNumber: 213,
                                         columnNumber: 15
                                     }, this),
                                     result && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3355,7 +3426,7 @@ function TranscribePage() {
                                         children: "New Transcription"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/dashboard/transcribe/page.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 224,
                                         columnNumber: 15
                                     }, this)
                                 ]

@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { IconMoon, IconSun } from './Icons'
 import { VoxarLogo } from './Icons'
+import { useAuthStore } from '@/stores/authStore'
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [isLightMode, setIsLightMode] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const navRef = useRef<HTMLElement>(null)
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated)
 
   // Toggle theme
   const toggleTheme = useCallback(() => {
@@ -75,8 +77,8 @@ export default function Navbar() {
             {isLightMode ? <IconMoon size={18} /> : <IconSun size={18} />}
           </button>
           <div className="nav-divider" />
-          <a href="/login" className="nav-cta-btn">
-            Start Creating
+          <a href={isAuthenticated ? '/dashboard' : '/login'} className="nav-cta-btn">
+            {isAuthenticated ? 'Dashboard' : 'Start Creating'}
           </a>
           <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <div className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}>
@@ -93,8 +95,8 @@ export default function Navbar() {
         <a href="#engines" className="nav-link" onClick={(e) => handleNavClick(e, '#engines')}>Engines</a>
         <a href="#" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Docs</a>
         <div style={{ height: '16px' }} />
-        <a href="/login" className="cta-primary" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
-          Start Creating Free
+        <a href={isAuthenticated ? '/dashboard' : '/login'} className="cta-primary" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
+          {isAuthenticated ? 'Go to Dashboard' : 'Start Creating Free'}
         </a>
       </div>
     </>

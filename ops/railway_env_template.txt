@@ -1,0 +1,48 @@
+# ============================================================
+# Railway Environment Variables — VOXAR Backend
+# ============================================================
+# Set each of these in Railway dashboard → Variables
+# DO NOT commit this file with real values!
+# ============================================================
+
+NODE_ENV=production
+# PORT is set by Railway automatically — do NOT set manually
+
+# ---------- MongoDB Atlas ----------
+MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/voxar?retryWrites=true&w=majority
+
+# ---------- Auth ----------
+# Generate: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+JWT_SECRET=<generate-64-char-hex>
+
+# ---------- Engine Mode ----------
+# Use 'local' initially (no RunPod needed). Switch to 'runpod' when GPU infra is ready.
+VOXAR_ENGINE_MODE=local
+
+# ---------- Python Engine (local mode) ----------
+PYTHON_ENGINE_URL=https://engine.voxar.in
+ENGINE_API_KEY=<generate-secure-key>
+
+# ---------- Redis / Upstash (runpod mode only) ----------
+# IMPORTANT: Use 'rediss://' (with double s) for TLS
+REDIS_URL=rediss://default:<upstash-token>@<host>.upstash.io:6379
+
+# ---------- RunPod (runpod mode only) ----------
+RUNPOD_API_KEY=<your-runpod-api-key>
+RUNPOD_ENDPOINT_ID=<your-runpod-endpoint-id>
+
+# ---------- Cloudflare R2 ----------
+# IMPORTANT: Variable names must match exactly what the code expects:
+R2_ACCOUNT_ID=<cloudflare-account-id>
+R2_ACCESS_KEY_ID=<r2-api-token-access-key>
+R2_SECRET_ACCESS_KEY=<r2-api-token-secret-key>
+R2_BUCKET_NAME=voxar
+R2_PUBLIC_URL_PREFIX=https://audio.voxar.in
+
+# ---------- Razorpay ----------
+RAZORPAY_KEY_ID=<rzp_live_xxx or rzp_test_xxx>
+RAZORPAY_KEY_SECRET=<your-key-secret>
+RAZORPAY_WEBHOOK_SECRET=<from-razorpay-webhook-settings>
+
+# ---------- CORS ----------
+CORS_ORIGIN=https://voxar.in

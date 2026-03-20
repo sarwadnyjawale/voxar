@@ -1,0 +1,1418 @@
+{
+  "version": "1.0",
+  "total_voices": 42,
+  "voices": [
+    {
+      "id": "v001",
+      "name": "Aisha Trivedi",
+      "display_name": "Aisha Trivedi — The Anchor",
+      "gender": "female",
+      "languages": [
+        "en",
+        "hi"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "narration",
+        "news"
+      ],
+      "description": "Clear, confident voice perfect for news and professional content",
+      "tags": [
+        "clear",
+        "confident",
+        "professional",
+        "anchor"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v001_aisha_trivedi.wav",
+      "preview_urls": {
+        "default": "previews/v001.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.213604Z"
+    },
+    {
+      "id": "v002",
+      "name": "Zara Bhatt",
+      "display_name": "Zara Bhatt — The Presenter",
+      "gender": "female",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "presentation",
+        "commercial"
+      ],
+      "description": "Engaging voice for presentations and advertisements",
+      "tags": [
+        "engaging",
+        "bright",
+        "commercial",
+        "presenter"
+      ],
+      "pitch": "medium-high",
+      "energy": "energetic",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v002_zara_bhatt.wav",
+      "preview_urls": {
+        "default": "previews/v002.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.217610Z"
+    },
+    {
+      "id": "v003",
+      "name": "Sophia Menon",
+      "display_name": "Sophia Menon — The Narrator",
+      "gender": "female",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "narration",
+        "audiobook"
+      ],
+      "description": "Smooth, flowing voice ideal for audiobooks and storytelling",
+      "tags": [
+        "smooth",
+        "flowing",
+        "storytelling",
+        "audiobook"
+      ],
+      "pitch": "medium",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v003_sophia_menon.wav",
+      "preview_urls": {
+        "default": "previews/v003.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.221660Z"
+    },
+    {
+      "id": "v004",
+      "name": "Maya Sharma",
+      "display_name": "Maya Sharma — The Storyteller",
+      "gender": "female",
+      "languages": [
+        "en",
+        "hi"
+      ],
+      "primary_language": "en",
+      "accent": "neutral_indian",
+      "styles": [
+        "storytelling",
+        "calm"
+      ],
+      "description": "Warm and inviting voice for educational and narrative content",
+      "tags": [
+        "warm",
+        "inviting",
+        "educational",
+        "narrative"
+      ],
+      "pitch": "medium",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v004_maya_sharma.wav",
+      "preview_urls": {
+        "default": "previews/v004.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.225837Z"
+    },
+    {
+      "id": "v005",
+      "name": "Isha Malhotra",
+      "display_name": "Isha Malhotra — The Creator",
+      "gender": "female",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "youtube",
+        "energetic"
+      ],
+      "description": "Energetic and youthful voice for YouTube and social media",
+      "tags": [
+        "energetic",
+        "youthful",
+        "youtube",
+        "social"
+      ],
+      "pitch": "medium-high",
+      "energy": "energetic",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v005_isha_malhotra.wav",
+      "preview_urls": {
+        "default": "previews/v005.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.228878Z"
+    },
+    {
+      "id": "v006",
+      "name": "Priya Nair",
+      "display_name": "Priya Nair — The Poet",
+      "gender": "female",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "poetry",
+        "calm",
+        "meditation"
+      ],
+      "description": "Soothing Hindi voice for poetry, meditation, and calm content",
+      "tags": [
+        "soothing",
+        "poetic",
+        "calm",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v006_priya_nair.wav",
+      "preview_urls": {
+        "default": "previews/v006.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.232879Z"
+    },
+    {
+      "id": "v007",
+      "name": "Kavya Reddy",
+      "display_name": "Kavya Reddy — The Guide",
+      "gender": "female",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "educational",
+        "guide"
+      ],
+      "description": "Friendly guide voice for tutorials and educational Hindi content",
+      "tags": [
+        "friendly",
+        "guide",
+        "tutorial",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v007_kavya_reddy.wav",
+      "preview_urls": {
+        "default": "previews/v007.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.236837Z"
+    },
+    {
+      "id": "v008",
+      "name": "Divya Iyer",
+      "display_name": "Divya Iyer — The Teacher",
+      "gender": "female",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "educational",
+        "professional"
+      ],
+      "description": "Clear and articulate Hindi voice for lectures and courses",
+      "tags": [
+        "clear",
+        "articulate",
+        "teacher",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v008_divya_iyer.wav",
+      "preview_urls": {
+        "default": "previews/v008.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.240836Z"
+    },
+    {
+      "id": "v009",
+      "name": "Neha Verma",
+      "display_name": "Neha Verma — The Companion",
+      "gender": "female",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "conversational",
+        "podcast"
+      ],
+      "description": "Conversational Hindi voice for podcasts and casual content",
+      "tags": [
+        "conversational",
+        "friendly",
+        "podcast",
+        "hindi"
+      ],
+      "pitch": "medium-high",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v009_neha_verma.wav",
+      "preview_urls": {
+        "default": "previews/v009.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.244874Z"
+    },
+    {
+      "id": "v010",
+      "name": "Meera Joshi",
+      "display_name": "Meera Joshi — The Soulful",
+      "gender": "female",
+      "languages": [
+        "mr",
+        "hi"
+      ],
+      "primary_language": "mr",
+      "accent": "marathi",
+      "styles": [
+        "narration",
+        "soulful"
+      ],
+      "description": "Deep, soulful Marathi voice for cultural and narrative content",
+      "tags": [
+        "soulful",
+        "deep",
+        "cultural",
+        "marathi"
+      ],
+      "pitch": "medium-low",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v010_meera_joshi.wav",
+      "preview_urls": {
+        "default": "previews/v010.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.248879Z"
+    },
+    {
+      "id": "v011",
+      "name": "Arjun Mehta",
+      "display_name": "Arjun Mehta — The Narrator",
+      "gender": "male",
+      "languages": [
+        "en",
+        "hi"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "narration",
+        "documentary"
+      ],
+      "description": "Warm, authoritative voice perfect for documentaries and podcasts",
+      "tags": [
+        "warm",
+        "authoritative",
+        "documentary",
+        "narrator"
+      ],
+      "pitch": "medium-low",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v011_arjun_mehta.wav",
+      "preview_urls": {
+        "default": "previews/v011.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.253837Z"
+    },
+    {
+      "id": "v012",
+      "name": "Vikram Singh",
+      "display_name": "Vikram Singh — The Anchor",
+      "gender": "male",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "news",
+        "professional"
+      ],
+      "description": "Crisp, professional voice for news reading and corporate content",
+      "tags": [
+        "crisp",
+        "professional",
+        "news",
+        "corporate"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v012_vikram_singh.wav",
+      "preview_urls": {
+        "default": "previews/v012.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.258391Z"
+    },
+    {
+      "id": "v013",
+      "name": "Rohan Kapoor",
+      "display_name": "Rohan Kapoor — The Presenter",
+      "gender": "male",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "presentation",
+        "explainer"
+      ],
+      "description": "Clear and engaging voice for explainer videos and presentations",
+      "tags": [
+        "clear",
+        "engaging",
+        "explainer",
+        "presenter"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v013_rohan_kapoor.wav",
+      "preview_urls": {
+        "default": "previews/v013.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.262375Z"
+    },
+    {
+      "id": "v014",
+      "name": "Kabir Pandey",
+      "display_name": "Kabir Pandey — The Storyteller",
+      "gender": "male",
+      "languages": [
+        "en",
+        "hi"
+      ],
+      "primary_language": "en",
+      "accent": "neutral_indian",
+      "styles": [
+        "storytelling",
+        "cinematic"
+      ],
+      "description": "Rich, cinematic voice for dramatic narration and storytelling",
+      "tags": [
+        "rich",
+        "cinematic",
+        "dramatic",
+        "storytelling"
+      ],
+      "pitch": "low",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v014_kabir_pandey.wav",
+      "preview_urls": {
+        "default": "previews/v014.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.266415Z"
+    },
+    {
+      "id": "v015",
+      "name": "Raj Thakur",
+      "display_name": "Raj Thakur — The Mentor",
+      "gender": "male",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "educational",
+        "mentorship"
+      ],
+      "description": "Trustworthy Hindi voice for educational and motivational content",
+      "tags": [
+        "trustworthy",
+        "mentor",
+        "educational",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v015_raj_thakur.wav",
+      "preview_urls": {
+        "default": "previews/v015.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.270374Z"
+    },
+    {
+      "id": "v016",
+      "name": "Aakash Chauhan",
+      "display_name": "Aakash Chauhan — The Explorer",
+      "gender": "male",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "travel",
+        "adventure"
+      ],
+      "description": "Adventurous Hindi voice for travel and discovery content",
+      "tags": [
+        "adventurous",
+        "explorer",
+        "travel",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "energetic",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v016_aakash_chauhan.wav",
+      "preview_urls": {
+        "default": "previews/v016.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.275376Z"
+    },
+    {
+      "id": "v017",
+      "name": "Dev Rathore",
+      "display_name": "Dev Rathore — The Professional",
+      "gender": "male",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "corporate",
+        "professional"
+      ],
+      "description": "Polished Hindi voice for corporate and business content",
+      "tags": [
+        "polished",
+        "corporate",
+        "business",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v017_dev_rathore.wav",
+      "preview_urls": {
+        "default": "previews/v017.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.280384Z"
+    },
+    {
+      "id": "v018",
+      "name": "Sahil Tiwari",
+      "display_name": "Sahil Tiwari — The Calm",
+      "gender": "male",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "meditation",
+        "calm",
+        "asmr"
+      ],
+      "description": "Gentle, calming Hindi voice for meditation and wellness content",
+      "tags": [
+        "gentle",
+        "calming",
+        "meditation",
+        "wellness"
+      ],
+      "pitch": "medium-low",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v018_sahil_tiwari.wav",
+      "preview_urls": {
+        "default": "previews/v018.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.284380Z"
+    },
+    {
+      "id": "v019",
+      "name": "Omkar Patil",
+      "display_name": "Omkar Patil — The Bold",
+      "gender": "male",
+      "languages": [
+        "mr",
+        "hi"
+      ],
+      "primary_language": "mr",
+      "accent": "marathi",
+      "styles": [
+        "commercial",
+        "bold"
+      ],
+      "description": "Strong, bold Marathi voice for ads and impactful content",
+      "tags": [
+        "strong",
+        "bold",
+        "commercial",
+        "marathi"
+      ],
+      "pitch": "low",
+      "energy": "energetic",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v019_omkar_patil.wav",
+      "preview_urls": {
+        "default": "previews/v019.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.289412Z"
+    },
+    {
+      "id": "v020",
+      "name": "Tejas Desai",
+      "display_name": "Tejas Desai — The Energetic",
+      "gender": "male",
+      "languages": [
+        "mr",
+        "hi"
+      ],
+      "primary_language": "mr",
+      "accent": "marathi",
+      "styles": [
+        "youtube",
+        "energetic"
+      ],
+      "description": "Energetic Marathi voice for YouTube and social media content",
+      "tags": [
+        "energetic",
+        "youthful",
+        "youtube",
+        "marathi"
+      ],
+      "pitch": "medium",
+      "energy": "energetic",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v020_tejas_desai.wav",
+      "preview_urls": {
+        "default": "previews/v020.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T07:41:29.295410Z"
+    },
+    {
+      "id": "v021",
+      "name": "Naina",
+      "display_name": "Naina — The Dreamer",
+      "gender": "female",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "lifestyle",
+        "vlog"
+      ],
+      "description": "Soft and dreamy voice for lifestyle and vlog content",
+      "tags": [
+        "soft",
+        "dreamy",
+        "lifestyle",
+        "vlog"
+      ],
+      "pitch": "medium-high",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v021_naina.wav",
+      "preview_urls": {
+        "default": "previews/v021.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.036005Z"
+    },
+    {
+      "id": "v022",
+      "name": "Tara",
+      "display_name": "Tara — The Coach",
+      "gender": "female",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "motivational",
+        "coaching"
+      ],
+      "description": "Empowering and motivational voice for coaching and self-help",
+      "tags": [
+        "motivational",
+        "empowering",
+        "coaching",
+        "self-help"
+      ],
+      "pitch": "medium",
+      "energy": "energetic",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v022_tara.wav",
+      "preview_urls": {
+        "default": "previews/v022.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.059431Z"
+    },
+    {
+      "id": "v023",
+      "name": "Riya",
+      "display_name": "Riya — The Tutor",
+      "gender": "female",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral_indian",
+      "styles": [
+        "educational",
+        "elearning"
+      ],
+      "description": "Clear and patient voice perfect for e-learning and tutoring",
+      "tags": [
+        "clear",
+        "patient",
+        "elearning",
+        "tutor"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v023_riya.wav",
+      "preview_urls": {
+        "default": "previews/v023.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.076680Z"
+    },
+    {
+      "id": "v024",
+      "name": "Ananya",
+      "display_name": "Ananya — The Host",
+      "gender": "female",
+      "languages": [
+        "en",
+        "hi"
+      ],
+      "primary_language": "en",
+      "accent": "neutral_indian",
+      "styles": [
+        "podcast",
+        "interview"
+      ],
+      "description": "Warm and conversational voice ideal for podcast hosting",
+      "tags": [
+        "podcast",
+        "interview",
+        "conversational",
+        "host"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v024_ananya.wav",
+      "preview_urls": {
+        "default": "previews/v024.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.098904Z"
+    },
+    {
+      "id": "v025",
+      "name": "Shreya",
+      "display_name": "Shreya — The Reciter",
+      "gender": "female",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "poetry",
+        "recitation"
+      ],
+      "description": "Melodic Hindi voice for poetry recitation and devotional content",
+      "tags": [
+        "melodic",
+        "poetry",
+        "recitation",
+        "hindi"
+      ],
+      "pitch": "medium-high",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v025_shreya.wav",
+      "preview_urls": {
+        "default": "previews/v025.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.118148Z"
+    },
+    {
+      "id": "v026",
+      "name": "Diya",
+      "display_name": "Diya — The Newscaster",
+      "gender": "female",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "news",
+        "formal"
+      ],
+      "description": "Sharp and authoritative Hindi voice for news and formal announcements",
+      "tags": [
+        "news",
+        "formal",
+        "authoritative",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v026_diya.wav",
+      "preview_urls": {
+        "default": "previews/v026.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.142992Z"
+    },
+    {
+      "id": "v027",
+      "name": "Pooja",
+      "display_name": "Pooja — The Narrator",
+      "gender": "female",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "narration",
+        "documentary"
+      ],
+      "description": "Rich and expressive Hindi voice for documentary narration",
+      "tags": [
+        "rich",
+        "expressive",
+        "documentary",
+        "hindi"
+      ],
+      "pitch": "medium-low",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v027_pooja.wav",
+      "preview_urls": {
+        "default": "previews/v027.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.163797Z"
+    },
+    {
+      "id": "v028",
+      "name": "Sana",
+      "display_name": "Sana — The Storyteller",
+      "gender": "female",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "storytelling",
+        "children"
+      ],
+      "description": "Gentle and expressive Hindi voice for stories and children content",
+      "tags": [
+        "gentle",
+        "storytelling",
+        "children",
+        "hindi"
+      ],
+      "pitch": "medium-high",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v028_sana.wav",
+      "preview_urls": {
+        "default": "previews/v028.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.176061Z"
+    },
+    {
+      "id": "v029",
+      "name": "Simran",
+      "display_name": "Simran — The Creator",
+      "gender": "female",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "youtube",
+        "social"
+      ],
+      "description": "Upbeat and youthful Hindi voice for YouTube and social media",
+      "tags": [
+        "upbeat",
+        "youthful",
+        "youtube",
+        "hindi"
+      ],
+      "pitch": "medium-high",
+      "energy": "energetic",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v029_simran.wav",
+      "preview_urls": {
+        "default": "previews/v029.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.205385Z"
+    },
+    {
+      "id": "v030",
+      "name": "Radha",
+      "display_name": "Radha — The Devotional",
+      "gender": "female",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "devotional",
+        "spiritual"
+      ],
+      "description": "Soulful and devotional Hindi voice for spiritual and religious content",
+      "tags": [
+        "devotional",
+        "spiritual",
+        "soulful",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v030_radha.wav",
+      "preview_urls": {
+        "default": "previews/v030.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.235302Z"
+    },
+    {
+      "id": "v031",
+      "name": "Aditi",
+      "display_name": "Aditi — The Anchor",
+      "gender": "female",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "news",
+        "professional"
+      ],
+      "description": "Confident and clear Hindi voice for news anchoring",
+      "tags": [
+        "confident",
+        "news",
+        "anchor",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v031_aditi.wav",
+      "preview_urls": {
+        "default": "previews/v031.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.261583Z"
+    },
+    {
+      "id": "v032",
+      "name": "Gauri",
+      "display_name": "Gauri — The Companion",
+      "gender": "female",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "conversational",
+        "friendly"
+      ],
+      "description": "Warm and friendly Hindi voice for casual and conversational content",
+      "tags": [
+        "friendly",
+        "conversational",
+        "warm",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v032_gauri.wav",
+      "preview_urls": {
+        "default": "previews/v032.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.287722Z"
+    },
+    {
+      "id": "v033",
+      "name": "Nikhil",
+      "display_name": "Nikhil — The Anchor",
+      "gender": "male",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "news",
+        "documentary"
+      ],
+      "description": "Deep and commanding voice for news and documentary content",
+      "tags": [
+        "deep",
+        "commanding",
+        "news",
+        "documentary"
+      ],
+      "pitch": "low",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v033_nikhil.wav",
+      "preview_urls": {
+        "default": "previews/v033.wav"
+      },
+      "is_premium": false,
+      "quality_score": 9,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.310277Z"
+    },
+    {
+      "id": "v034",
+      "name": "Siddharth",
+      "display_name": "Siddharth — The Narrator",
+      "gender": "male",
+      "languages": [
+        "en"
+      ],
+      "primary_language": "en",
+      "accent": "neutral",
+      "styles": [
+        "narration",
+        "audiobook"
+      ],
+      "description": "Smooth and rich voice for audiobooks and long-form narration",
+      "tags": [
+        "smooth",
+        "rich",
+        "audiobook",
+        "narrator"
+      ],
+      "pitch": "medium-low",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v034_siddharth.wav",
+      "preview_urls": {
+        "default": "previews/v034.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.341381Z"
+    },
+    {
+      "id": "v035",
+      "name": "Ishaan",
+      "display_name": "Ishaan — The Presenter",
+      "gender": "male",
+      "languages": [
+        "en",
+        "hi"
+      ],
+      "primary_language": "en",
+      "accent": "neutral_indian",
+      "styles": [
+        "presentation",
+        "corporate"
+      ],
+      "description": "Confident and polished voice for corporate presentations",
+      "tags": [
+        "confident",
+        "polished",
+        "corporate",
+        "presenter"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v035_ishaan.wav",
+      "preview_urls": {
+        "default": "previews/v035.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.370401Z"
+    },
+    {
+      "id": "v036",
+      "name": "Manav",
+      "display_name": "Manav — The Storyteller",
+      "gender": "male",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "storytelling",
+        "cinematic"
+      ],
+      "description": "Powerful and cinematic Hindi voice for drama and storytelling",
+      "tags": [
+        "powerful",
+        "cinematic",
+        "drama",
+        "hindi"
+      ],
+      "pitch": "low",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v036_manav.wav",
+      "preview_urls": {
+        "default": "previews/v036.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.392452Z"
+    },
+    {
+      "id": "v037",
+      "name": "Yash",
+      "display_name": "Yash — The Creator",
+      "gender": "male",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "youtube",
+        "energetic"
+      ],
+      "description": "Energetic and youthful Hindi voice for YouTube and reels",
+      "tags": [
+        "energetic",
+        "youthful",
+        "youtube",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "energetic",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v037_yash.wav",
+      "preview_urls": {
+        "default": "previews/v037.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.427440Z"
+    },
+    {
+      "id": "v038",
+      "name": "Pranav",
+      "display_name": "Pranav — The Mentor",
+      "gender": "male",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "educational",
+        "motivational"
+      ],
+      "description": "Trustworthy and motivational Hindi voice for education and mentorship",
+      "tags": [
+        "trustworthy",
+        "motivational",
+        "educational",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v038_pranav.wav",
+      "preview_urls": {
+        "default": "previews/v038.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.456708Z"
+    },
+    {
+      "id": "v039",
+      "name": "Kunal",
+      "display_name": "Kunal — The Professional",
+      "gender": "male",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "corporate",
+        "professional"
+      ],
+      "description": "Sharp and polished Hindi voice for business and corporate content",
+      "tags": [
+        "sharp",
+        "polished",
+        "corporate",
+        "hindi"
+      ],
+      "pitch": "medium",
+      "energy": "moderate",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v039_kunal.wav",
+      "preview_urls": {
+        "default": "previews/v039.wav"
+      },
+      "is_premium": false,
+      "quality_score": 8,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.483394Z"
+    },
+    {
+      "id": "v040",
+      "name": "Vivek",
+      "display_name": "Vivek — The Guide",
+      "gender": "male",
+      "languages": [
+        "hi"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "educational",
+        "calm"
+      ],
+      "description": "Calm and clear Hindi voice for tutorials and guided learning",
+      "tags": [
+        "calm",
+        "clear",
+        "tutorial",
+        "hindi"
+      ],
+      "pitch": "medium-low",
+      "energy": "calm",
+      "warmth": "warm",
+      "embedding_path": "embeddings/v040_vivek.wav",
+      "preview_urls": {
+        "default": "previews/v040.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.507393Z"
+    },
+    {
+      "id": "v041",
+      "name": "Harsh",
+      "display_name": "Harsh — The Bold",
+      "gender": "male",
+      "languages": [
+        "hi",
+        "en"
+      ],
+      "primary_language": "hi",
+      "accent": "hindi",
+      "styles": [
+        "commercial",
+        "bold"
+      ],
+      "description": "Bold and commanding Hindi voice for ads and impactful content",
+      "tags": [
+        "bold",
+        "commanding",
+        "commercial",
+        "hindi"
+      ],
+      "pitch": "low",
+      "energy": "energetic",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v041_harsh.wav",
+      "preview_urls": {
+        "default": "previews/v041.wav"
+      },
+      "is_premium": false,
+      "quality_score": 10,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.527248Z"
+    },
+    {
+      "id": "v042",
+      "name": "Gaurav",
+      "display_name": "Gaurav — The Narrator",
+      "gender": "male",
+      "languages": [
+        "mr",
+        "hi"
+      ],
+      "primary_language": "mr",
+      "accent": "marathi",
+      "styles": [
+        "narration",
+        "documentary"
+      ],
+      "description": "Steady and authoritative Marathi voice for narration and documentary",
+      "tags": [
+        "steady",
+        "authoritative",
+        "documentary",
+        "marathi"
+      ],
+      "pitch": "medium-low",
+      "energy": "calm",
+      "warmth": "neutral",
+      "embedding_path": "embeddings/v042_gaurav.wav",
+      "preview_urls": {
+        "default": "previews/v042.wav"
+      },
+      "is_premium": false,
+      "quality_score": 7,
+      "usage_count": 0,
+      "created_at": "2026-03-18T09:41:22.562340Z"
+    }
+  ]
+}

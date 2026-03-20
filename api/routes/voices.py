@@ -23,7 +23,7 @@ def _sanitize_voice(voice):
     previews = safe.get("preview_urls", {})
     if previews:
         safe["preview_urls"] = {
-            lang: f"/audio/previews/{path.split('/')[-1]}"
+            lang: f"/previews/{path.split('/')[-1]}"
             for lang, path in previews.items()
         }
     return safe

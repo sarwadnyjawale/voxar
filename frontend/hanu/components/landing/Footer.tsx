@@ -1,4 +1,4 @@
-import { VoxarLogo, IconTwitter, IconGithub, IconLinkedin, IconYoutube } from './Icons'
+import { VoxarLogo, IconTwitter, IconGithub, IconLinkedin, IconYoutube, IconInstagram } from './Icons'
 
 export default function Footer() {
   return (
@@ -52,10 +52,11 @@ export default function Footer() {
         <div className="footer-bottom">
           <span className="footer-copy">© {new Date().getFullYear()} VOXAR. All rights reserved.</span>
           <div className="footer-socials">
-            <a href="#" className="footer-social"><IconTwitter /></a>
+            <a href="https://x.com/voxar_ai" target="_blank" rel="noopener noreferrer" className="footer-social"><IconTwitter /></a>
+            <a href="https://www.youtube.com/@voxar_ai" target="_blank" rel="noopener noreferrer" className="footer-social"><IconYoutube /></a>
+            <a href="https://www.instagram.com/voxar.ai/" target="_blank" rel="noopener noreferrer" className="footer-social"><IconInstagram /></a>
             <a href="#" className="footer-social"><IconGithub /></a>
             <a href="#" className="footer-social"><IconLinkedin /></a>
-            <a href="#" className="footer-social"><IconYoutube /></a>
           </div>
         </div>
       </div>

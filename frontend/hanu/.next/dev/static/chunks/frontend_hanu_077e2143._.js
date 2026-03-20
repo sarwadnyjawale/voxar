@@ -39,6 +39,8 @@ __turbopack_context__.s([
     ()=>IconGithub,
     "IconGlobe",
     ()=>IconGlobe,
+    "IconInstagram",
+    ()=>IconInstagram,
     "IconKey",
     ()=>IconKey,
     "IconLanguages",
@@ -1903,6 +1905,52 @@ const IconYoutube = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mo
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 _c39 = IconYoutube;
+const IconInstagram = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+        width: size,
+        height: size,
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
+                x: "2",
+                y: "2",
+                width: "20",
+                height: "20",
+                rx: "5",
+                ry: "5"
+            }, void 0, false, {
+                fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+                lineNumber: 126,
+                columnNumber: 150
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+            }, void 0, false, {
+                fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+                lineNumber: 126,
+                columnNumber: 207
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
+                x1: "17.5",
+                y1: "6.5",
+                x2: "17.51",
+                y2: "6.5"
+            }, void 0, false, {
+                fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+                lineNumber: 126,
+                columnNumber: 267
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, void 0, true, {
+        fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
+        lineNumber: 126,
+        columnNumber: 3
+    }, ("TURBOPACK compile-time value", void 0));
+_c40 = IconInstagram;
 const VoxarLogo = ({ width = 48 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         viewBox: "0 0 100 50",
         style: {
@@ -1921,23 +1969,23 @@ const VoxarLogo = ({ width = 48 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 d: "M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 127,
+                lineNumber: 131,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 128,
+                lineNumber: 132,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 126,
+        lineNumber: 130,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c40 = VoxarLogo;
+_c41 = VoxarLogo;
 const IconUpload = ({ size = 22 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         width: size,
         height: size,
@@ -1952,14 +2000,14 @@ const IconUpload = ({ size = 22 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 133,
+                lineNumber: 137,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
                 points: "17 8 12 3 7 8"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 133,
+                lineNumber: 137,
                 columnNumber: 204
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -1969,16 +2017,16 @@ const IconUpload = ({ size = 22 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 y2: "15"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 133,
+                lineNumber: 137,
                 columnNumber: 239
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 133,
+        lineNumber: 137,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c41 = IconUpload;
+_c42 = IconUpload;
 const IconTrash = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         width: size,
         height: size,
@@ -1993,23 +2041,23 @@ const IconTrash = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modu
                 points: "3 6 5 6 21 6"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 137,
+                lineNumber: 141,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 137,
+                lineNumber: 141,
                 columnNumber: 184
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 137,
+        lineNumber: 141,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c42 = IconTrash;
+_c43 = IconTrash;
 const IconFilter = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         width: size,
         height: size,
@@ -2023,15 +2071,15 @@ const IconFilter = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
             points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-            lineNumber: 141,
+            lineNumber: 145,
             columnNumber: 150
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 141,
+        lineNumber: 145,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c43 = IconFilter;
+_c44 = IconFilter;
 const IconUser = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         width: size,
         height: size,
@@ -2046,7 +2094,7 @@ const IconUser = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modul
                 d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 145,
+                lineNumber: 149,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -2055,16 +2103,16 @@ const IconUser = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modul
                 r: "4"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 145,
+                lineNumber: 149,
                 columnNumber: 204
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 145,
+        lineNumber: 149,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c44 = IconUser;
+_c45 = IconUser;
 const IconClock = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         width: size,
         height: size,
@@ -2081,23 +2129,23 @@ const IconClock = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__modu
                 r: "10"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 149,
+                lineNumber: 153,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
                 points: "12 6 12 12 16 14"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 149,
+                lineNumber: 153,
                 columnNumber: 183
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 149,
+        lineNumber: 153,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c45 = IconClock;
+_c46 = IconClock;
 const IconRefresh = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         width: size,
         height: size,
@@ -2112,23 +2160,23 @@ const IconRefresh = ({ size = 16 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mo
                 points: "1 4 1 10 7 10"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 153,
+                lineNumber: 157,
                 columnNumber: 150
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                 d: "M3.51 15a9 9 0 1 0 2.13-9.36L1 10"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 153,
+                lineNumber: 157,
                 columnNumber: 185
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 153,
+        lineNumber: 157,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c46 = IconRefresh;
+_c47 = IconRefresh;
 const IconSearch = ({ size = 18 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
         width: size,
         height: size,
@@ -2145,7 +2193,7 @@ const IconSearch = ({ size = 18 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 r: "8"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 158,
+                lineNumber: 162,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -2155,17 +2203,17 @@ const IconSearch = ({ size = 18 })=>/*#__PURE__*/ (0, __TURBOPACK__imported__mod
                 y2: "16.65"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-                lineNumber: 159,
+                lineNumber: 163,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/hanu/components/landing/Icons.tsx",
-        lineNumber: 157,
+        lineNumber: 161,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-_c47 = IconSearch;
-var _c, _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9, _c10, _c11, _c12, _c13, _c14, _c15, _c16, _c17, _c18, _c19, _c20, _c21, _c22, _c23, _c24, _c25, _c26, _c27, _c28, _c29, _c30, _c31, _c32, _c33, _c34, _c35, _c36, _c37, _c38, _c39, _c40, _c41, _c42, _c43, _c44, _c45, _c46, _c47;
+_c48 = IconSearch;
+var _c, _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9, _c10, _c11, _c12, _c13, _c14, _c15, _c16, _c17, _c18, _c19, _c20, _c21, _c22, _c23, _c24, _c25, _c26, _c27, _c28, _c29, _c30, _c31, _c32, _c33, _c34, _c35, _c36, _c37, _c38, _c39, _c40, _c41, _c42, _c43, _c44, _c45, _c46, _c47, _c48;
 __turbopack_context__.k.register(_c, "IconZap");
 __turbopack_context__.k.register(_c1, "IconPlay");
 __turbopack_context__.k.register(_c2, "IconCheck");
@@ -2206,14 +2254,15 @@ __turbopack_context__.k.register(_c36, "IconTwitter");
 __turbopack_context__.k.register(_c37, "IconGithub");
 __turbopack_context__.k.register(_c38, "IconLinkedin");
 __turbopack_context__.k.register(_c39, "IconYoutube");
-__turbopack_context__.k.register(_c40, "VoxarLogo");
-__turbopack_context__.k.register(_c41, "IconUpload");
-__turbopack_context__.k.register(_c42, "IconTrash");
-__turbopack_context__.k.register(_c43, "IconFilter");
-__turbopack_context__.k.register(_c44, "IconUser");
-__turbopack_context__.k.register(_c45, "IconClock");
-__turbopack_context__.k.register(_c46, "IconRefresh");
-__turbopack_context__.k.register(_c47, "IconSearch");
+__turbopack_context__.k.register(_c40, "IconInstagram");
+__turbopack_context__.k.register(_c41, "VoxarLogo");
+__turbopack_context__.k.register(_c42, "IconUpload");
+__turbopack_context__.k.register(_c43, "IconTrash");
+__turbopack_context__.k.register(_c44, "IconFilter");
+__turbopack_context__.k.register(_c45, "IconUser");
+__turbopack_context__.k.register(_c46, "IconClock");
+__turbopack_context__.k.register(_c47, "IconRefresh");
+__turbopack_context__.k.register(_c48, "IconSearch");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -2314,7 +2363,7 @@ function Navbar() {
                                 width: 42
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 63,
+                                lineNumber: 64,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2322,13 +2371,13 @@ function Navbar() {
                                 children: "VOXAR"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 64,
+                                lineNumber: 65,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 62,
+                        lineNumber: 63,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2341,7 +2390,7 @@ function Navbar() {
                                 children: "Platform"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 67,
+                                lineNumber: 68,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2351,7 +2400,7 @@ function Navbar() {
                                 children: "Voices"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 68,
+                                lineNumber: 69,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2361,7 +2410,7 @@ function Navbar() {
                                 children: "Pricing"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 69,
+                                lineNumber: 70,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2371,7 +2420,7 @@ function Navbar() {
                                 children: "Engines"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 70,
+                                lineNumber: 71,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2380,13 +2429,13 @@ function Navbar() {
                                 children: "Docs"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 71,
+                                lineNumber: 72,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 66,
+                        lineNumber: 67,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2400,25 +2449,25 @@ function Navbar() {
                                     size: 18
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                    lineNumber: 75,
+                                    lineNumber: 76,
                                     columnNumber: 28
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconSun"], {
                                     size: 18
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                    lineNumber: 75,
+                                    lineNumber: 76,
                                     columnNumber: 53
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 74,
+                                lineNumber: 75,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "nav-divider"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 77,
+                                lineNumber: 78,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2427,7 +2476,7 @@ function Navbar() {
                                 children: "Start Creating"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 78,
+                                lineNumber: 79,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2438,40 +2487,40 @@ function Navbar() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {}, void 0, false, {
                                             fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                            lineNumber: 83,
+                                            lineNumber: 84,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {}, void 0, false, {
                                             fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                            lineNumber: 83,
+                                            lineNumber: 84,
                                             columnNumber: 23
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {}, void 0, false, {
                                             fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                            lineNumber: 83,
+                                            lineNumber: 84,
                                             columnNumber: 31
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                    lineNumber: 82,
+                                    lineNumber: 83,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                                lineNumber: 81,
+                                lineNumber: 82,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 73,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                lineNumber: 61,
+                lineNumber: 62,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2484,7 +2533,7 @@ function Navbar() {
                         children: "Platform"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 90,
+                        lineNumber: 91,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2494,7 +2543,7 @@ function Navbar() {
                         children: "Voices"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 91,
+                        lineNumber: 92,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2504,7 +2553,7 @@ function Navbar() {
                         children: "Pricing"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 92,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2514,7 +2563,7 @@ function Navbar() {
                         children: "Engines"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 93,
+                        lineNumber: 94,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2524,7 +2573,7 @@ function Navbar() {
                         children: "Docs"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 94,
+                        lineNumber: 95,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2533,7 +2582,7 @@ function Navbar() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 95,
+                        lineNumber: 96,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2548,13 +2597,13 @@ function Navbar() {
                         children: "Start Creating Free"
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                        lineNumber: 96,
+                        lineNumber: 97,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/components/landing/Navbar.tsx",
-                lineNumber: 89,
+                lineNumber: 90,
                 columnNumber: 7
             }, this)
         ]
@@ -2977,12 +3026,14 @@ function Footer() {
                             className: "footer-socials",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "#",
+                                    href: "https://x.com/voxar_ai",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
                                     className: "footer-social",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconTwitter"], {}, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
                                         lineNumber: 55,
-                                        columnNumber: 51
+                                        columnNumber: 114
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
@@ -2990,12 +3041,14 @@ function Footer() {
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "#",
+                                    href: "https://www.youtube.com/@voxar_ai",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
                                     className: "footer-social",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconGithub"], {}, void 0, false, {
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconYoutube"], {}, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
                                         lineNumber: 56,
-                                        columnNumber: 51
+                                        columnNumber: 125
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
@@ -3003,12 +3056,14 @@ function Footer() {
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "#",
+                                    href: "https://www.instagram.com/voxar.ai/",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
                                     className: "footer-social",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconLinkedin"], {}, void 0, false, {
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconInstagram"], {}, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
                                         lineNumber: 57,
-                                        columnNumber: 51
+                                        columnNumber: 127
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
@@ -3018,7 +3073,7 @@ function Footer() {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                     href: "#",
                                     className: "footer-social",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconYoutube"], {}, void 0, false, {
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconGithub"], {}, void 0, false, {
                                         fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
                                         lineNumber: 58,
                                         columnNumber: 51
@@ -3026,6 +3081,19 @@ function Footer() {
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
                                     lineNumber: 58,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                    href: "#",
+                                    className: "footer-social",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconLinkedin"], {}, void 0, false, {
+                                        fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
+                                        lineNumber: 59,
+                                        columnNumber: 51
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/frontend/hanu/components/landing/Footer.tsx",
+                                    lineNumber: 59,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -4662,14 +4730,17 @@ __turbopack_context__.s([
     "default",
     ()=>LandingPage
 ]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/frontend/hanu/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/frontend/hanu/node_modules/gsap/index.js [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$gsap$2f$ScrollTrigger$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/node_modules/gsap/ScrollTrigger.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/node_modules/next/dist/shared/lib/app-dynamic.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Navbar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/components/landing/Navbar.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/components/landing/Footer.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$PricingCards$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/components/landing/PricingCards.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/hanu/components/landing/Icons.tsx [app-client] (ecmascript)");
+;
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
@@ -4679,6 +4750,16 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
+const VoiceGallery = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(()=>__turbopack_context__.A("[project]/frontend/hanu/components/landing/VoiceGallery.tsx [app-client] (ecmascript, next/dynamic entry, async loader)"), {
+    loadableGenerated: {
+        modules: [
+            "[project]/frontend/hanu/components/landing/VoiceGallery.tsx [app-client] (ecmascript, next/dynamic entry)"
+        ]
+    },
+    ssr: false
+});
+_c = VoiceGallery;
 ;
 __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].registerPlugin(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$gsap$2f$ScrollTrigger$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ScrollTrigger"]);
 // ===== DATA =====
@@ -4706,7 +4787,7 @@ const marqueeItems2 = [
 const voices = [
     {
         num: '01',
-        name: 'Arjun',
+        name: 'Arjun Mehta',
         style: 'The Narrator',
         lang: 'EN, HI',
         tags: [
@@ -4717,7 +4798,7 @@ const voices = [
     },
     {
         num: '02',
-        name: 'Priya',
+        name: 'Priya Nair',
         style: 'The Poet',
         lang: 'HI, EN',
         tags: [
@@ -4728,7 +4809,7 @@ const voices = [
     },
     {
         num: '03',
-        name: 'Vikram',
+        name: 'Vikram Singh',
         style: 'The Anchor',
         lang: 'EN',
         tags: [
@@ -4739,7 +4820,7 @@ const voices = [
     },
     {
         num: '04',
-        name: 'Maya',
+        name: 'Maya Sharma',
         style: 'The Storyteller',
         lang: 'EN, HI',
         tags: [
@@ -4750,7 +4831,7 @@ const voices = [
     },
     {
         num: '05',
-        name: 'Kabir',
+        name: 'Kabir Pandey',
         style: 'The Storyteller',
         lang: 'EN, HI',
         tags: [
@@ -4761,7 +4842,7 @@ const voices = [
     },
     {
         num: '06',
-        name: 'Kavya',
+        name: 'Kavya Reddy',
         style: 'The Guide',
         lang: 'HI, EN',
         tags: [
@@ -4772,7 +4853,7 @@ const voices = [
     },
     {
         num: '07',
-        name: 'Aisha',
+        name: 'Aisha Trivedi',
         style: 'The Anchor',
         lang: 'EN, HI',
         tags: [
@@ -4783,12 +4864,144 @@ const voices = [
     },
     {
         num: '08',
-        name: 'Sahil',
+        name: 'Sahil Tiwari',
         style: 'The Calm',
         lang: 'HI, EN',
         tags: [
             'Meditation',
             'ASMR'
+        ],
+        av: 'av-3'
+    },
+    {
+        num: '09',
+        name: 'Sophia Menon',
+        style: 'The Narrator',
+        lang: 'EN',
+        tags: [
+            'Audiobooks',
+            'Narration'
+        ],
+        av: 'av-2'
+    },
+    {
+        num: '10',
+        name: 'Rohan Kapoor',
+        style: 'The Presenter',
+        lang: 'EN, HI',
+        tags: [
+            'Professional',
+            'Clear'
+        ],
+        av: 'av-5'
+    },
+    {
+        num: '11',
+        name: 'Divya Iyer',
+        style: 'The Teacher',
+        lang: 'EN, HI',
+        tags: [
+            'Educational',
+            'Clear'
+        ],
+        av: 'av-4'
+    },
+    {
+        num: '12',
+        name: 'Dev Rathore',
+        style: 'The Professional',
+        lang: 'EN',
+        tags: [
+            'Corporate',
+            'Clean'
+        ],
+        av: 'av-6'
+    },
+    {
+        num: '13',
+        name: 'Isha Malhotra',
+        style: 'The Creator',
+        lang: 'HI, EN',
+        tags: [
+            'YouTube',
+            'Reels'
+        ],
+        av: 'av-1'
+    },
+    {
+        num: '14',
+        name: 'Raj Thakur',
+        style: 'The Mentor',
+        lang: 'EN, HI',
+        tags: [
+            'Coaching',
+            'Warm'
+        ],
+        av: 'av-3'
+    },
+    {
+        num: '15',
+        name: 'Naina',
+        style: 'The Dreamer',
+        lang: 'HI',
+        tags: [
+            'Soft',
+            'Storytelling'
+        ],
+        av: 'av-2'
+    },
+    {
+        num: '16',
+        name: 'Omkar Patil',
+        style: 'The Bold',
+        lang: 'EN, HI',
+        tags: [
+            'Drama',
+            'Cinematic'
+        ],
+        av: 'av-5'
+    },
+    {
+        num: '17',
+        name: 'Shreya',
+        style: 'The Reciter',
+        lang: 'HI',
+        tags: [
+            'Poetry',
+            'Devotional'
+        ],
+        av: 'av-4'
+    },
+    {
+        num: '18',
+        name: 'Nikhil',
+        style: 'The Anchor',
+        lang: 'EN, HI',
+        tags: [
+            'News',
+            'Podcast'
+        ],
+        av: 'av-6'
+    },
+    {
+        num: '19',
+        name: 'Ananya',
+        style: 'The Host',
+        lang: 'EN, HI',
+        tags: [
+            'Events',
+            'Lively'
+        ],
+        av: 'av-1'
+    },
+    {
+        num: '20',
+        name: 'Tejas Desai',
+        style: 'The Energetic',
+        lang: 'EN',
+        tags: [
+            'Marketing',
+            'Ads'
         ],
         av: 'av-3'
     }
@@ -4802,7 +5015,7 @@ const engines = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 36,
+            lineNumber: 51,
             columnNumber: 174
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4814,7 +5027,7 @@ const engines = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 37,
+            lineNumber: 52,
             columnNumber: 180
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4826,7 +5039,7 @@ const engines = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 38,
+            lineNumber: 53,
             columnNumber: 177
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4838,7 +5051,7 @@ const engines = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 39,
+            lineNumber: 54,
             columnNumber: 179
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4850,7 +5063,7 @@ const engines = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 40,
+            lineNumber: 55,
             columnNumber: 189
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4862,7 +5075,7 @@ const engines = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 41,
+            lineNumber: 56,
             columnNumber: 181
         }, ("TURBOPACK compile-time value", void 0))
     }
@@ -4931,7 +5144,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 61,
+            lineNumber: 76,
             columnNumber: 60
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4942,7 +5155,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 62,
+            lineNumber: 77,
             columnNumber: 64
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4953,7 +5166,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 63,
+            lineNumber: 78,
             columnNumber: 60
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4964,7 +5177,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 64,
+            lineNumber: 79,
             columnNumber: 64
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4975,7 +5188,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 65,
+            lineNumber: 80,
             columnNumber: 62
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4986,7 +5199,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 66,
+            lineNumber: 81,
             columnNumber: 67
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -4997,7 +5210,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 67,
+            lineNumber: 82,
             columnNumber: 61
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -5008,7 +5221,7 @@ const comingCards = [
             size: 20
         }, void 0, false, {
             fileName: "[project]/frontend/hanu/app/page.tsx",
-            lineNumber: 68,
+            lineNumber: 83,
             columnNumber: 55
         }, ("TURBOPACK compile-time value", void 0))
     }
@@ -5020,6 +5233,9 @@ function LandingPage() {
     const [demoVoice, setDemoVoice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Arjun');
     const [demoPlaying, setDemoPlaying] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [demoProgress, setDemoProgress] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [demoLoading, setDemoLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [demoAudioUrl, setDemoAudioUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const demoAudioRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [previewVoice, setPreviewVoice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [voiceProgress, setVoiceProgress] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const cubeSceneRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -5284,29 +5500,119 @@ function LandingPage() {
             })["LandingPage.useEffect"];
         }
     }["LandingPage.useEffect"], []);
-    // TTS Demo play simulation
+    // TTS Demo — real audio playback with progress tracking
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "LandingPage.useEffect": ()=>{
-            if (!demoPlaying) return;
-            const interval = setInterval({
-                "LandingPage.useEffect.interval": ()=>{
-                    setDemoProgress({
-                        "LandingPage.useEffect.interval": (prev)=>{
-                            if (prev >= 100) {
-                                setDemoPlaying(false);
-                                return 100;
-                            }
-                            return prev + 0.8;
-                        }
-                    }["LandingPage.useEffect.interval"]);
+            const audio = demoAudioRef.current;
+            if (!audio || !demoPlaying) return;
+            const updateProgress = {
+                "LandingPage.useEffect.updateProgress": ()=>{
+                    if (audio.duration) {
+                        setDemoProgress(audio.currentTime / audio.duration * 100);
+                    }
                 }
-            }["LandingPage.useEffect.interval"], 50);
+            }["LandingPage.useEffect.updateProgress"];
+            const onEnded = {
+                "LandingPage.useEffect.onEnded": ()=>{
+                    setDemoPlaying(false);
+                    setDemoProgress(100);
+                }
+            }["LandingPage.useEffect.onEnded"];
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', onEnded);
             return ({
-                "LandingPage.useEffect": ()=>clearInterval(interval)
+                "LandingPage.useEffect": ()=>{
+                    audio.removeEventListener('timeupdate', updateProgress);
+                    audio.removeEventListener('ended', onEnded);
+                }
             })["LandingPage.useEffect"];
         }
     }["LandingPage.useEffect"], [
         demoPlaying
+    ]);
+    const handleDemoPlay = async ()=>{
+        if (demoPlaying) {
+            demoAudioRef.current?.pause();
+            setDemoPlaying(false);
+            return;
+        }
+        // If we already have audio from a previous generation, replay it
+        if (demoAudioUrl && demoAudioRef.current) {
+            demoAudioRef.current.currentTime = 0;
+            demoAudioRef.current.play();
+            setDemoPlaying(true);
+            setDemoProgress(0);
+            return;
+        }
+        // Try to generate via engine
+        setDemoLoading(true);
+        setDemoProgress(0);
+        try {
+            const API_BASE = ("TURBOPACK compile-time value", "http://localhost:8000") || 'http://localhost:8000';
+            const res = await fetch(`${API_BASE}/api/v1/generate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': 'voxar-dev-key-001'
+                },
+                body: JSON.stringify({
+                    text: demoText.trim(),
+                    voice_id: demoVoice.toLowerCase(),
+                    engine_mode: 'flash',
+                    language: 'auto',
+                    output_format: 'mp3'
+                })
+            });
+            const data = await res.json();
+            if (data.job_id) {
+                // Poll for completion
+                let attempts = 0;
+                while(attempts < 30){
+                    await new Promise((r)=>setTimeout(r, 2000));
+                    const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`, {
+                        headers: {
+                            'X-API-Key': 'voxar-dev-key-001'
+                        }
+                    });
+                    const job = await jobRes.json();
+                    if (job.status === 'completed') {
+                        const audioUrl = job.audio_url || job.audio_path;
+                        if (audioUrl) {
+                            const fullUrl = audioUrl.startsWith('http') ? audioUrl : `${API_BASE}${audioUrl}`;
+                            setDemoAudioUrl(fullUrl);
+                            const audio = new Audio(fullUrl);
+                            demoAudioRef.current = audio;
+                            audio.play();
+                            setDemoPlaying(true);
+                        }
+                        break;
+                    }
+                    if (job.status === 'failed') break;
+                    attempts++;
+                    setDemoProgress(Math.min(90, attempts * 3));
+                }
+            }
+        } catch  {
+            // Engine unavailable — redirect to login to try the full studio
+            window.location.href = '/login';
+        } finally{
+            setDemoLoading(false);
+        }
+    };
+    // Reset demo audio when text or voice changes
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "LandingPage.useEffect": ()=>{
+            setDemoAudioUrl(null);
+            setDemoProgress(0);
+            if (demoAudioRef.current) {
+                demoAudioRef.current.pause();
+                demoAudioRef.current = null;
+            }
+            setDemoPlaying(false);
+        }
+    }["LandingPage.useEffect"], [
+        demoText,
+        demoVoice
     ]);
     // Voice preview progress
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
@@ -5338,7 +5644,7 @@ function LandingPage() {
                 className: "grain-overlay"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                lineNumber: 271,
+                lineNumber: 378,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5346,21 +5652,21 @@ function LandingPage() {
                 children: "VOXAR"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                lineNumber: 272,
+                lineNumber: 379,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "ambient-orb"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                lineNumber: 273,
+                lineNumber: 380,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "ambient-orb-2"
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                lineNumber: 274,
+                lineNumber: 381,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5368,12 +5674,12 @@ function LandingPage() {
                 ref: cubeSceneRef
             }, void 0, false, {
                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                lineNumber: 275,
+                lineNumber: 382,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Navbar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                lineNumber: 278,
+                lineNumber: 385,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5389,14 +5695,14 @@ function LandingPage() {
                                         className: "badge-dot"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 285,
+                                        lineNumber: 392,
                                         columnNumber: 39
                                     }, this),
                                     " NEXT-GEN NEURAL VOICE PLATFORM"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 285,
+                                lineNumber: 392,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -5404,7 +5710,7 @@ function LandingPage() {
                                 children: "VOXAR"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 286,
+                                lineNumber: 393,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5415,21 +5721,21 @@ function LandingPage() {
                                         children: "Studio sound."
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 287,
+                                        lineNumber: 394,
                                         columnNumber: 51
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 287,
+                                lineNumber: 394,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "hero-subtitle",
-                                children: "Neural voice synthesis, instant cloning, and precision transcription — 20 voices across 12 languages, engineered for creators who refuse to compromise."
+                                children: "Neural voice synthesis, instant cloning, and precision transcription — 40+ premium voices across 12 languages, engineered for creators who refuse to compromise."
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 288,
+                                lineNumber: 395,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5442,14 +5748,14 @@ function LandingPage() {
                                                 size: 16
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 290,
+                                                lineNumber: 397,
                                                 columnNumber: 45
                                             }, this),
                                             " Start Creating — Free"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 290,
+                                        lineNumber: 397,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -5462,20 +5768,20 @@ function LandingPage() {
                                                 size: 18
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 291,
+                                                lineNumber: 398,
                                                 columnNumber: 135
                                             }, this),
                                             " Hear It Live"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 291,
+                                        lineNumber: 398,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 289,
+                                lineNumber: 396,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5486,7 +5792,7 @@ function LandingPage() {
                                         children: "Trusted by creators everywhere"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 294,
+                                        lineNumber: 401,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5499,14 +5805,14 @@ function LandingPage() {
                                                         size: 14
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 296,
+                                                        lineNumber: 403,
                                                         columnNumber: 45
                                                     }, this),
                                                     " No credit card"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 296,
+                                                lineNumber: 403,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5516,14 +5822,14 @@ function LandingPage() {
                                                         size: 14
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 297,
+                                                        lineNumber: 404,
                                                         columnNumber: 45
                                                     }, this),
                                                     " 3 min free forever"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 297,
+                                                lineNumber: 404,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5533,26 +5839,26 @@ function LandingPage() {
                                                         size: 14
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 298,
+                                                        lineNumber: 405,
                                                         columnNumber: 45
                                                     }, this),
                                                     " Studio-grade quality"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 298,
+                                                lineNumber: 405,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 295,
+                                        lineNumber: 402,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 293,
+                                lineNumber: 400,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5561,18 +5867,18 @@ function LandingPage() {
                                     className: "scroll-line"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 302,
+                                    lineNumber: 409,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 301,
+                                lineNumber: 408,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 284,
+                        lineNumber: 391,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -5592,24 +5898,24 @@ function LandingPage() {
                                                     className: "marquee-dot"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 311,
+                                                    lineNumber: 418,
                                                     columnNumber: 64
                                                 }, this),
                                                 item
                                             ]
                                         }, `m1-${i}`, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 311,
+                                            lineNumber: 418,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 309,
+                                    lineNumber: 416,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 308,
+                                lineNumber: 415,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5626,30 +5932,30 @@ function LandingPage() {
                                                     className: "marquee-dot"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 318,
+                                                    lineNumber: 425,
                                                     columnNumber: 64
                                                 }, this),
                                                 item
                                             ]
                                         }, `m2-${i}`, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 318,
+                                            lineNumber: 425,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 316,
+                                    lineNumber: 423,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 315,
+                                lineNumber: 422,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 307,
+                        lineNumber: 414,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -5665,7 +5971,7 @@ function LandingPage() {
                                             children: "240+"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 327,
+                                            lineNumber: 434,
                                             columnNumber: 40
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5673,13 +5979,13 @@ function LandingPage() {
                                             children: "Voice-Language Combos"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 327,
+                                            lineNumber: 434,
                                             columnNumber: 78
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 327,
+                                    lineNumber: 434,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5690,7 +5996,7 @@ function LandingPage() {
                                             children: "12+"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 328,
+                                            lineNumber: 435,
                                             columnNumber: 40
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5698,13 +6004,13 @@ function LandingPage() {
                                             children: "Languages"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 328,
+                                            lineNumber: 435,
                                             columnNumber: 77
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 328,
+                                    lineNumber: 435,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5712,10 +6018,10 @@ function LandingPage() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "stat-value",
-                                            children: "20+"
+                                            children: "40+"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 329,
+                                            lineNumber: 436,
                                             columnNumber: 40
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5723,13 +6029,13 @@ function LandingPage() {
                                             children: "Neural Voices"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 329,
+                                            lineNumber: 436,
                                             columnNumber: 77
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 329,
+                                    lineNumber: 436,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5746,13 +6052,13 @@ function LandingPage() {
                                                     children: "%"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 330,
+                                                    lineNumber: 437,
                                                     columnNumber: 72
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 330,
+                                            lineNumber: 437,
                                             columnNumber: 40
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5760,24 +6066,24 @@ function LandingPage() {
                                             children: "Accuracy"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 330,
+                                            lineNumber: 437,
                                             columnNumber: 121
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 330,
+                                    lineNumber: 437,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 326,
+                            lineNumber: 433,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 325,
+                        lineNumber: 432,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -5794,7 +6100,7 @@ function LandingPage() {
                                             children: "// Capabilities"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 338,
+                                            lineNumber: 445,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -5803,14 +6109,14 @@ function LandingPage() {
                                                 "Everything you need.",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 339,
+                                                    lineNumber: 446,
                                                     columnNumber: 66
                                                 }, this),
                                                 "Nothing you don't."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 339,
+                                            lineNumber: 446,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5818,13 +6124,13 @@ function LandingPage() {
                                             children: "Six core capabilities. One unified platform. Built for production-grade audio at any scale."
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 340,
+                                            lineNumber: 447,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 337,
+                                    lineNumber: 444,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5839,12 +6145,12 @@ function LandingPage() {
                                                         size: 22
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 344,
+                                                        lineNumber: 451,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 344,
+                                                    lineNumber: 451,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -5852,7 +6158,7 @@ function LandingPage() {
                                                     children: "Text-to-Speech"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 345,
+                                                    lineNumber: 452,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5860,7 +6166,7 @@ function LandingPage() {
                                                     children: "Type anything. Get studio audio. Four generation modes — Flash for speed, Cinematic for drama, Longform for books, Multilingual for reach."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 346,
+                                                    lineNumber: 453,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5871,7 +6177,7 @@ function LandingPage() {
                                                             children: "Flash"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 348,
+                                                            lineNumber: 455,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5879,7 +6185,7 @@ function LandingPage() {
                                                             children: "Cinematic"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 349,
+                                                            lineNumber: 456,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5887,7 +6193,7 @@ function LandingPage() {
                                                             children: "Longform"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 350,
+                                                            lineNumber: 457,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5895,13 +6201,13 @@ function LandingPage() {
                                                             children: "Multilingual"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 351,
+                                                            lineNumber: 458,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 347,
+                                                    lineNumber: 454,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5930,18 +6236,18 @@ function LandingPage() {
                                                             }
                                                         }, i, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 355,
+                                                            lineNumber: 462,
                                                             columnNumber: 21
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 353,
+                                                    lineNumber: 460,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 343,
+                                            lineNumber: 450,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5953,12 +6259,12 @@ function LandingPage() {
                                                         size: 22
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 361,
+                                                        lineNumber: 468,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 361,
+                                                    lineNumber: 468,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -5966,7 +6272,7 @@ function LandingPage() {
                                                     children: "Voice Cloning"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 362,
+                                                    lineNumber: 469,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5974,7 +6280,7 @@ function LandingPage() {
                                                     children: "Upload 30 seconds of any voice. Get a flawless digital replica. Generate speech in that voice across all 12 languages instantly."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 363,
+                                                    lineNumber: 470,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5985,7 +6291,7 @@ function LandingPage() {
                                                             children: "30s Sample"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 365,
+                                                            lineNumber: 472,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5993,19 +6299,19 @@ function LandingPage() {
                                                             children: "Cross-lingual"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 366,
+                                                            lineNumber: 473,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 364,
+                                                    lineNumber: 471,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 360,
+                                            lineNumber: 467,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6017,12 +6323,12 @@ function LandingPage() {
                                                         size: 22
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 371,
+                                                        lineNumber: 478,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 371,
+                                                    lineNumber: 478,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -6030,7 +6336,7 @@ function LandingPage() {
                                                     children: "Speech-to-Text"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 372,
+                                                    lineNumber: 479,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6038,7 +6344,7 @@ function LandingPage() {
                                                     children: "Upload audio or video. Get precise transcription with word-level timestamps. Supports 99 languages with unmatched accuracy."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 373,
+                                                    lineNumber: 480,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6049,7 +6355,7 @@ function LandingPage() {
                                                             children: "99 Languages"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 375,
+                                                            lineNumber: 482,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6057,19 +6363,19 @@ function LandingPage() {
                                                             children: "Word-level"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 376,
+                                                            lineNumber: 483,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 374,
+                                                    lineNumber: 481,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 370,
+                                            lineNumber: 477,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6081,12 +6387,12 @@ function LandingPage() {
                                                         size: 22
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 381,
+                                                        lineNumber: 488,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 381,
+                                                    lineNumber: 488,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -6094,7 +6400,7 @@ function LandingPage() {
                                                     children: "Speaker Diarization"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 382,
+                                                    lineNumber: 489,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6102,7 +6408,7 @@ function LandingPage() {
                                                     children: "Multi-speaker audio. VOXAR identifies who said what. Perfect for podcasts, meetings, interviews, and panel discussions."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 383,
+                                                    lineNumber: 490,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6113,7 +6419,7 @@ function LandingPage() {
                                                             children: "Multi-speaker"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 385,
+                                                            lineNumber: 492,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6121,19 +6427,19 @@ function LandingPage() {
                                                             children: "Auto-detect"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 386,
+                                                            lineNumber: 493,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 384,
+                                                    lineNumber: 491,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 380,
+                                            lineNumber: 487,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6145,12 +6451,12 @@ function LandingPage() {
                                                         size: 22
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 391,
+                                                        lineNumber: 498,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 391,
+                                                    lineNumber: 498,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -6158,7 +6464,7 @@ function LandingPage() {
                                                     children: "12 Languages. Native Pronunciation."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 392,
+                                                    lineNumber: 499,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6166,7 +6472,7 @@ function LandingPage() {
                                                     children: "Not robotic transliteration. Every language sounds the way a native speaker would say it — with authentic intonation, rhythm, and cadence."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 393,
+                                                    lineNumber: 500,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6189,18 +6495,18 @@ function LandingPage() {
                                                             children: lang
                                                         }, lang, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 396,
+                                                            lineNumber: 503,
                                                             columnNumber: 21
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 394,
+                                                    lineNumber: 501,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 390,
+                                            lineNumber: 497,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6212,12 +6518,12 @@ function LandingPage() {
                                                         size: 22
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 402,
+                                                        lineNumber: 509,
                                                         columnNumber: 45
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 402,
+                                                    lineNumber: 509,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -6225,7 +6531,7 @@ function LandingPage() {
                                                     children: "Subtitle Generation"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 403,
+                                                    lineNumber: 510,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6233,7 +6539,7 @@ function LandingPage() {
                                                     children: "Auto-generate SRT, VTT, or JSON subtitle files from any audio. Word-level precision for karaoke-style display. Ready for YouTube, Instagram, and every major platform."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 404,
+                                                    lineNumber: 511,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6244,7 +6550,7 @@ function LandingPage() {
                                                             children: "SRT"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 406,
+                                                            lineNumber: 513,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6252,7 +6558,7 @@ function LandingPage() {
                                                             children: "VTT"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 407,
+                                                            lineNumber: 514,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6260,7 +6566,7 @@ function LandingPage() {
                                                             children: "JSON"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 408,
+                                                            lineNumber: 515,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6268,36 +6574,41 @@ function LandingPage() {
                                                             children: "Karaoke-ready"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 409,
+                                                            lineNumber: 516,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 405,
+                                                    lineNumber: 512,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 401,
+                                            lineNumber: 508,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 342,
+                                    lineNumber: 449,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 336,
+                            lineNumber: 443,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 335,
+                        lineNumber: 442,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(VoiceGallery, {}, void 0, false, {
+                        fileName: "[project]/frontend/hanu/app/page.tsx",
+                        lineNumber: 524,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -6314,7 +6625,7 @@ function LandingPage() {
                                             children: "// Try It Live"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 420,
+                                            lineNumber: 530,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -6322,7 +6633,7 @@ function LandingPage() {
                                             children: "Hear the difference."
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 421,
+                                            lineNumber: 531,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6330,16 +6641,16 @@ function LandingPage() {
                                             style: {
                                                 marginTop: '12px'
                                             },
-                                            children: "Type anything below. Pick a voice. Hit play. No signup required."
+                                            children: "Type anything below. Pick a voice. Hit play. Experience VOXAR instantly."
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 422,
+                                            lineNumber: 532,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 419,
+                                    lineNumber: 529,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6359,7 +6670,7 @@ function LandingPage() {
                                                     placeholder: "Type something to hear..."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 426,
+                                                    lineNumber: 536,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6370,13 +6681,13 @@ function LandingPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 434,
+                                                    lineNumber: 544,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 425,
+                                            lineNumber: 535,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6395,23 +6706,40 @@ function LandingPage() {
                                                             children: v
                                                         }, v, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 439,
+                                                            lineNumber: 549,
                                                             columnNumber: 21
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 437,
+                                                    lineNumber: 547,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     className: "demo-play-btn",
-                                                    onClick: ()=>{
-                                                        if (demoProgress >= 100) setDemoProgress(0);
-                                                        setDemoPlaying(!demoPlaying);
-                                                    },
-                                                    disabled: !demoText.trim(),
+                                                    onClick: handleDemoPlay,
+                                                    disabled: !demoText.trim() || demoLoading,
                                                     children: [
-                                                        demoPlaying ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                        demoLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                            width: "16",
+                                                            height: "16",
+                                                            viewBox: "0 0 24 24",
+                                                            fill: "none",
+                                                            stroke: "currentColor",
+                                                            strokeWidth: "2",
+                                                            strokeLinecap: "round",
+                                                            strokeLinejoin: "round",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                d: "M21 12a9 9 0 1 1-6.219-8.56"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/frontend/hanu/app/page.tsx",
+                                                                lineNumber: 554,
+                                                                columnNumber: 164
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/frontend/hanu/app/page.tsx",
+                                                            lineNumber: 554,
+                                                            columnNumber: 21
+                                                        }, this) : demoPlaying ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                             width: "16",
                                                             height: "16",
                                                             viewBox: "0 0 24 24",
@@ -6428,7 +6756,7 @@ function LandingPage() {
                                                                     y2: "20"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                    lineNumber: 444,
+                                                                    lineNumber: 556,
                                                                     columnNumber: 166
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -6438,13 +6766,13 @@ function LandingPage() {
                                                                     y2: "20"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                    lineNumber: 444,
+                                                                    lineNumber: 556,
                                                                     columnNumber: 203
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 444,
+                                                            lineNumber: 556,
                                                             columnNumber: 21
                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                             width: "16",
@@ -6459,25 +6787,25 @@ function LandingPage() {
                                                                 points: "5 3 19 12 5 21 5 3"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                lineNumber: 446,
+                                                                lineNumber: 558,
                                                                 columnNumber: 164
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 446,
+                                                            lineNumber: 558,
                                                             columnNumber: 21
                                                         }, this),
-                                                        demoPlaying ? 'Playing...' : 'Play Preview'
+                                                        demoLoading ? 'Generating...' : demoPlaying ? 'Playing...' : 'Play Preview'
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 442,
+                                                    lineNumber: 552,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 436,
+                                            lineNumber: 546,
                                             columnNumber: 15
                                         }, this),
                                         demoProgress > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6492,12 +6820,12 @@ function LandingPage() {
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 454,
+                                                        lineNumber: 566,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 453,
+                                                    lineNumber: 565,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6508,48 +6836,48 @@ function LandingPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 456,
+                                                    lineNumber: 568,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 452,
+                                            lineNumber: 564,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             className: "demo-note",
                                             children: [
-                                                "Want studio-grade quality with all 20 voices? ",
+                                                "Want studio-grade quality with all 40+ premium voices? ",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                                     href: "/login",
                                                     children: "Try the full studio free →"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 459,
-                                                    columnNumber: 86
+                                                    lineNumber: 571,
+                                                    columnNumber: 95
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 459,
+                                            lineNumber: 571,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 424,
+                                    lineNumber: 534,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 418,
+                            lineNumber: 528,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 417,
+                        lineNumber: 527,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -6568,7 +6896,7 @@ function LandingPage() {
                                                     children: "// Architecture"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 469,
+                                                    lineNumber: 581,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -6577,20 +6905,20 @@ function LandingPage() {
                                                         "Six engines.",
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 470,
+                                                            lineNumber: 582,
                                                             columnNumber: 59
                                                         }, this),
                                                         "One platform."
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 470,
+                                                    lineNumber: 582,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 468,
+                                            lineNumber: 580,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6598,13 +6926,13 @@ function LandingPage() {
                                             children: "Each engine is purpose-built for a specific audio intelligence task. Together, they power the most complete voice platform ever built."
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 472,
+                                            lineNumber: 584,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 467,
+                                    lineNumber: 579,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6617,7 +6945,7 @@ function LandingPage() {
                                                     children: engine.icon
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 477,
+                                                    lineNumber: 589,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6625,7 +6953,7 @@ function LandingPage() {
                                                     children: engine.num
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 478,
+                                                    lineNumber: 590,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -6633,7 +6961,7 @@ function LandingPage() {
                                                     children: engine.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 479,
+                                                    lineNumber: 591,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -6641,18 +6969,18 @@ function LandingPage() {
                                                     children: engine.desc
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 480,
+                                                    lineNumber: 592,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, i, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 476,
+                                            lineNumber: 588,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 474,
+                                    lineNumber: 586,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6666,12 +6994,12 @@ function LandingPage() {
                                                     className: "ring-dot"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 487,
+                                                    lineNumber: 599,
                                                     columnNumber: 50
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 487,
+                                                lineNumber: 599,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6680,19 +7008,19 @@ function LandingPage() {
                                                     className: "ring-dot"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 488,
+                                                    lineNumber: 600,
                                                     columnNumber: 50
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 488,
+                                                lineNumber: 600,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "hud-ring ring-3"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 489,
+                                                lineNumber: 601,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6703,17 +7031,17 @@ function LandingPage() {
                                                         size: 24
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 492,
+                                                        lineNumber: 604,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 491,
+                                                    lineNumber: 603,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 490,
+                                                lineNumber: 602,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6721,7 +7049,7 @@ function LandingPage() {
                                                 children: "LAT: 0.3ms"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 495,
+                                                lineNumber: 607,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6729,7 +7057,7 @@ function LandingPage() {
                                                 children: "THR: 98.2%"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 496,
+                                                lineNumber: 608,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6737,7 +7065,7 @@ function LandingPage() {
                                                 children: "QPS: 12.4K"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 497,
+                                                lineNumber: 609,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6745,29 +7073,29 @@ function LandingPage() {
                                                 children: "STA: ACTIVE"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 498,
+                                                lineNumber: 610,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 486,
+                                        lineNumber: 598,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 485,
+                                    lineNumber: 597,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 466,
+                            lineNumber: 578,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 465,
+                        lineNumber: 577,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -6784,7 +7112,7 @@ function LandingPage() {
                                             children: "// The Talent"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 508,
+                                            lineNumber: 620,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -6793,14 +7121,14 @@ function LandingPage() {
                                                 "The premium voice library.",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 509,
+                                                    lineNumber: 621,
                                                     columnNumber: 70
                                                 }, this),
                                                 "240+ combinations."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 509,
+                                            lineNumber: 621,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6810,20 +7138,20 @@ function LandingPage() {
                                                     className: "count-dot"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 510,
+                                                    lineNumber: 622,
                                                     columnNumber: 45
                                                 }, this),
                                                 " All voices active & streaming"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 510,
+                                            lineNumber: 622,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 507,
+                                    lineNumber: 619,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6840,7 +7168,7 @@ function LandingPage() {
                                                     children: voice.num
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 515,
+                                                    lineNumber: 627,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6850,7 +7178,7 @@ function LandingPage() {
                                                             className: "avatar-overlay"
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 517,
+                                                            lineNumber: 629,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -6865,18 +7193,18 @@ function LandingPage() {
                                                                 points: "5 3 19 12 5 21 5 3"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                lineNumber: 518,
+                                                                lineNumber: 630,
                                                                 columnNumber: 141
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 518,
+                                                            lineNumber: 630,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 516,
+                                                    lineNumber: 628,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6890,7 +7218,7 @@ function LandingPage() {
                                                                     children: voice.name
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                    lineNumber: 522,
+                                                                    lineNumber: 634,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6900,40 +7228,40 @@ function LandingPage() {
                                                                             className: "eq-bar"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                            lineNumber: 524,
+                                                                            lineNumber: 636,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                             className: "eq-bar"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                            lineNumber: 524,
+                                                                            lineNumber: 636,
                                                                             columnNumber: 51
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                             className: "eq-bar"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                            lineNumber: 524,
+                                                                            lineNumber: 636,
                                                                             columnNumber: 77
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                             className: "eq-bar"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                            lineNumber: 524,
+                                                                            lineNumber: 636,
                                                                             columnNumber: 103
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                    lineNumber: 523,
+                                                                    lineNumber: 635,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 521,
+                                                            lineNumber: 633,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6941,7 +7269,7 @@ function LandingPage() {
                                                             children: voice.style
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 527,
+                                                            lineNumber: 639,
                                                             columnNumber: 21
                                                         }, this),
                                                         previewVoice === i && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6953,18 +7281,18 @@ function LandingPage() {
                                                                 }
                                                             }, void 0, false, {
                                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                lineNumber: 530,
+                                                                lineNumber: 642,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 529,
+                                                            lineNumber: 641,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 520,
+                                                    lineNumber: 632,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -6972,7 +7300,7 @@ function LandingPage() {
                                                     children: voice.lang
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 534,
+                                                    lineNumber: 646,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -6982,59 +7310,59 @@ function LandingPage() {
                                                             children: tag
                                                         }, tag, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 536,
+                                                            lineNumber: 648,
                                                             columnNumber: 44
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 535,
+                                                    lineNumber: 647,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, i, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 514,
+                                            lineNumber: 626,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 512,
+                                    lineNumber: 624,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "voices-more",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                        href: "#",
+                                        href: "/dashboard/voices",
                                         className: "voices-more-link",
                                         children: [
-                                            "Explore all 20 voices ",
+                                            "Explore all 40+ premium voices ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IconArrowRight"], {
                                                 size: 14
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 542,
-                                                columnNumber: 78
+                                                lineNumber: 654,
+                                                columnNumber: 103
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 542,
+                                        lineNumber: 654,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 541,
+                                    lineNumber: 653,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 506,
+                            lineNumber: 618,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 505,
+                        lineNumber: 617,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -7050,7 +7378,7 @@ function LandingPage() {
                                             children: "// How It Works"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 551,
+                                            lineNumber: 663,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -7059,20 +7387,20 @@ function LandingPage() {
                                                 "Three steps to",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 552,
+                                                    lineNumber: 664,
                                                     columnNumber: 55
                                                 }, this),
                                                 "studio audio."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 552,
+                                            lineNumber: 664,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 550,
+                                    lineNumber: 662,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7084,12 +7412,12 @@ function LandingPage() {
                                                 className: "hiw-line-fill"
                                             }, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 555,
+                                                lineNumber: 667,
                                                 columnNumber: 41
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 555,
+                                            lineNumber: 667,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7100,7 +7428,7 @@ function LandingPage() {
                                                     children: "01"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 557,
+                                                    lineNumber: 669,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -7108,7 +7436,7 @@ function LandingPage() {
                                                     children: "Write"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 558,
+                                                    lineNumber: 670,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7116,7 +7444,7 @@ function LandingPage() {
                                                     children: "Type your text — any language, any format. VOXAR handles formatting, numbers, mixed languages, and abbreviations automatically."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 559,
+                                                    lineNumber: 671,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7125,18 +7453,18 @@ function LandingPage() {
                                                         size: 24
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 560,
+                                                        lineNumber: 672,
                                                         columnNumber: 48
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 560,
+                                                    lineNumber: 672,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 556,
+                                            lineNumber: 668,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7147,7 +7475,7 @@ function LandingPage() {
                                                     children: "02"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 563,
+                                                    lineNumber: 675,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -7155,15 +7483,15 @@ function LandingPage() {
                                                     children: "Choose"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 564,
+                                                    lineNumber: 676,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "hiw-step-desc",
-                                                    children: "Pick from 20 neural voices. Select your language. Choose Flash, Cinematic, Longform, or Multilingual mode. Preview instantly."
+                                                    children: "Pick from 40+ premium voices. Select your language. Choose Flash, Cinematic, Longform, or Multilingual mode. Preview instantly."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 565,
+                                                    lineNumber: 677,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7172,18 +7500,18 @@ function LandingPage() {
                                                         size: 24
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 566,
+                                                        lineNumber: 678,
                                                         columnNumber: 48
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 566,
+                                                    lineNumber: 678,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 562,
+                                            lineNumber: 674,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7194,7 +7522,7 @@ function LandingPage() {
                                                     children: "03"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 569,
+                                                    lineNumber: 681,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -7202,7 +7530,7 @@ function LandingPage() {
                                                     children: "Ship"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 570,
+                                                    lineNumber: 682,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7210,7 +7538,7 @@ function LandingPage() {
                                                     children: "Download studio-grade MP3 (320kbps) or WAV lossless. No watermark on paid plans. Production-ready. Instantly."
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 571,
+                                                    lineNumber: 683,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7219,35 +7547,35 @@ function LandingPage() {
                                                         size: 24
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 572,
+                                                        lineNumber: 684,
                                                         columnNumber: 48
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 572,
+                                                    lineNumber: 684,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 568,
+                                            lineNumber: 680,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 554,
+                                    lineNumber: 666,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 549,
+                            lineNumber: 661,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 548,
+                        lineNumber: 660,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -7264,7 +7592,7 @@ function LandingPage() {
                                             children: "// Pricing"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 582,
+                                            lineNumber: 694,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -7273,14 +7601,14 @@ function LandingPage() {
                                                 "Simple pricing.",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 583,
+                                                    lineNumber: 695,
                                                     columnNumber: 60
                                                 }, this),
                                                 "Generous limits."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 583,
+                                            lineNumber: 695,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7288,29 +7616,29 @@ function LandingPage() {
                                             children: "Start free. Scale as you grow. Every plan includes identical studio-grade audio quality."
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 584,
+                                            lineNumber: 696,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 581,
+                                    lineNumber: 693,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$PricingCards$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 586,
+                                    lineNumber: 698,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 580,
+                            lineNumber: 692,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 579,
+                        lineNumber: 691,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -7326,7 +7654,7 @@ function LandingPage() {
                                             children: "// FAQ"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 594,
+                                            lineNumber: 706,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -7334,13 +7662,13 @@ function LandingPage() {
                                             children: "Common questions."
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 595,
+                                            lineNumber: 707,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 593,
+                                    lineNumber: 705,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7357,13 +7685,13 @@ function LandingPage() {
                                                             size: 18
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 602,
+                                                            lineNumber: 714,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 600,
+                                                    lineNumber: 712,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7373,34 +7701,34 @@ function LandingPage() {
                                                         children: item.a
                                                     }, void 0, false, {
                                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                        lineNumber: 605,
+                                                        lineNumber: 717,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 604,
+                                                    lineNumber: 716,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, i, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 599,
+                                            lineNumber: 711,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 597,
+                                    lineNumber: 709,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 592,
+                            lineNumber: 704,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 591,
+                        lineNumber: 703,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -7416,7 +7744,7 @@ function LandingPage() {
                                             children: "// What Creators Say"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 617,
+                                            lineNumber: 729,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -7425,20 +7753,20 @@ function LandingPage() {
                                                 "Loved by creators",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 618,
+                                                    lineNumber: 730,
                                                     columnNumber: 67
                                                 }, this),
                                                 "worldwide."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 618,
+                                            lineNumber: 730,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 616,
+                                    lineNumber: 728,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7454,12 +7782,12 @@ function LandingPage() {
                                                             size: 14
                                                         }, j, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 624,
+                                                            lineNumber: 736,
                                                             columnNumber: 62
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 623,
+                                                    lineNumber: 735,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7471,7 +7799,7 @@ function LandingPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 626,
+                                                    lineNumber: 738,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7485,7 +7813,7 @@ function LandingPage() {
                                                             children: t.name.split(' ').map((n)=>n[0]).join('')
                                                         }, void 0, false, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 628,
+                                                            lineNumber: 740,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7495,7 +7823,7 @@ function LandingPage() {
                                                                     children: t.name
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                    lineNumber: 632,
+                                                                    lineNumber: 744,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7503,41 +7831,41 @@ function LandingPage() {
                                                                     children: t.role
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                                    lineNumber: 633,
+                                                                    lineNumber: 745,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                            lineNumber: 631,
+                                                            lineNumber: 743,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 627,
+                                                    lineNumber: 739,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, i, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 622,
+                                            lineNumber: 734,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 620,
+                                    lineNumber: 732,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 615,
+                            lineNumber: 727,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 614,
+                        lineNumber: 726,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -7553,7 +7881,7 @@ function LandingPage() {
                                             children: "// Roadmap"
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 646,
+                                            lineNumber: 758,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -7562,20 +7890,20 @@ function LandingPage() {
                                                 "And we're just",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 647,
+                                                    lineNumber: 759,
                                                     columnNumber: 63
                                                 }, this),
                                                 "getting started."
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 647,
+                                            lineNumber: 759,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 645,
+                                    lineNumber: 757,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7588,7 +7916,7 @@ function LandingPage() {
                                                     children: card.icon
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 652,
+                                                    lineNumber: 764,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -7596,7 +7924,7 @@ function LandingPage() {
                                                     children: card.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 653,
+                                                    lineNumber: 765,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -7604,29 +7932,29 @@ function LandingPage() {
                                                     children: card.badge
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 654,
+                                                    lineNumber: 766,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, i, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 651,
+                                            lineNumber: 763,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                    lineNumber: 649,
+                                    lineNumber: 761,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                            lineNumber: 644,
+                            lineNumber: 756,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 643,
+                        lineNumber: 755,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -7636,7 +7964,7 @@ function LandingPage() {
                                 className: "final-cta-bg"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 663,
+                                lineNumber: 775,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7654,7 +7982,7 @@ function LandingPage() {
                                         children: "// Get Started"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 665,
+                                        lineNumber: 777,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -7663,14 +7991,14 @@ function LandingPage() {
                                             "Your next satisfying",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                lineNumber: 666,
+                                                lineNumber: 778,
                                                 columnNumber: 65
                                             }, this),
                                             "voice is waiting."
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 666,
+                                        lineNumber: 778,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7678,7 +8006,7 @@ function LandingPage() {
                                         children: "Join thousands of creators already using VOXAR. Start free. No credit card. No compromise."
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 667,
+                                        lineNumber: 779,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -7698,19 +8026,19 @@ function LandingPage() {
                                                     size: 18
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/hanu/app/page.tsx",
-                                                    lineNumber: 670,
+                                                    lineNumber: 782,
                                                     columnNumber: 17
                                                 }, this),
                                                 "Start Creating — It's Free"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/hanu/app/page.tsx",
-                                            lineNumber: 669,
+                                            lineNumber: 781,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 668,
+                                        lineNumber: 780,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -7718,39 +8046,40 @@ function LandingPage() {
                                         children: "No credit card required  ·  3 minutes free  ·  Upgrade anytime"
                                     }, void 0, false, {
                                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                                        lineNumber: 674,
+                                        lineNumber: 786,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                                lineNumber: 664,
+                                lineNumber: 776,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 662,
+                        lineNumber: 774,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$hanu$2f$components$2f$landing$2f$Footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                         fileName: "[project]/frontend/hanu/app/page.tsx",
-                        lineNumber: 679,
+                        lineNumber: 791,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/frontend/hanu/app/page.tsx",
-                lineNumber: 281,
+                lineNumber: 388,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true);
 }
-_s(LandingPage, "gTyJLEbdFOUQR2eZK+YK0itSB5g=");
-_c = LandingPage;
-var _c;
-__turbopack_context__.k.register(_c, "LandingPage");
+_s(LandingPage, "Bsf0ZZAzmQ+gt99vouan9LQZiOI=");
+_c1 = LandingPage;
+var _c, _c1;
+__turbopack_context__.k.register(_c, "VoiceGallery");
+__turbopack_context__.k.register(_c1, "LandingPage");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }

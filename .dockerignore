@@ -28,6 +28,15 @@ logs/
 *.wav
 *.mp3
 
+# But INCLUDE voice files needed by engine
+!voices/
+!voices/embeddings/
+!voices/embeddings/*.wav
+!voices/cleaned_samples/
+!voices/cleaned_samples/*.wav
+!voices/previews/
+!voices/previews/*.wav
+
 # Large binaries
 *.exe
 ffmpeg.exe

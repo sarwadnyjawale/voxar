@@ -166,6 +166,9 @@ export default function TranscribePage() {
                 <option value="mr">Marathi</option>
                 <option value="kn">Kannada</option>
                 <option value="ml">Malayalam</option>
+                <option value="gu">Gujarati</option>
+                <option value="pa">Punjabi</option>
+                <option value="or">Odia</option>
               </select>
             </div>
 

@@ -43,24 +43,22 @@ async function handleResponse(res) {
             const body = await res.json();
             error.message = body.detail || body.message || res.statusText;
             error.detail = body.detail;
-        } catch  {
-        // ignore parse errors
-        }
+        } catch  {}
         throw error;
     }
     if (res.status === 204) return undefined;
     return res.json();
 }
 const api = {
-    // ─── FastAPI AI Engine (Python :8000) ───
-    /** GET request to the FastAPI AI server */ async get (path) {
+    // ---------- FastAPI AI Engine (Python :8000) ----------
+    async get (path) {
         const res = await fetch(`${API_BASE}${path}`, {
             method: 'GET',
             headers: buildHeaders()
         });
         return handleResponse(res);
     },
-    /** POST request to the FastAPI AI server */ async post (path, body) {
+    async post (path, body) {
         const res = await fetch(`${API_BASE}${path}`, {
             method: 'POST',
             headers: buildHeaders(),
@@ -68,7 +66,7 @@ const api = {
         });
         return handleResponse(res);
     },
-    /** Upload file to the FastAPI AI server */ async upload (path, formData) {
+    async upload (path, formData) {
         const res = await fetch(`${API_BASE}${path}`, {
             method: 'POST',
             headers: buildAuthHeaders(),
@@ -76,22 +74,22 @@ const api = {
         });
         return handleResponse(res);
     },
-    /** DELETE request to the FastAPI AI server */ async delete (path) {
+    async delete (path) {
         const res = await fetch(`${API_BASE}${path}`, {
             method: 'DELETE',
             headers: buildHeaders()
         });
         return handleResponse(res);
     },
-    // ─── Node.js Business Backend (:3001) ───
-    /** GET request to the Node.js business backend */ async backendGet (path) {
+    // ---------- Node.js Backend (:3001) ----------
+    async backendGet (path) {
         const res = await fetch(`${BACKEND_BASE}${path}`, {
             method: 'GET',
             headers: buildHeaders()
         });
         return handleResponse(res);
     },
-    /** POST request to the Node.js business backend */ async backendPost (path, body) {
+    async backendPost (path, body) {
         const res = await fetch(`${BACKEND_BASE}${path}`, {
             method: 'POST',
             headers: buildHeaders(),
@@ -99,7 +97,7 @@ const api = {
         });
         return handleResponse(res);
     },
-    /** PATCH request to the Node.js business backend */ async backendPatch (path, body) {
+    async backendPatch (path, body) {
         const res = await fetch(`${BACKEND_BASE}${path}`, {
             method: 'PATCH',
             headers: buildHeaders(),
@@ -107,14 +105,14 @@ const api = {
         });
         return handleResponse(res);
     },
-    /** DELETE request to the Node.js business backend */ async backendDelete (path) {
+    async backendDelete (path) {
         const res = await fetch(`${BACKEND_BASE}${path}`, {
             method: 'DELETE',
             headers: buildHeaders()
         });
         return handleResponse(res);
     },
-    /** Upload file to the Node.js business backend (multipart) */ async backendUpload (path, formData) {
+    async backendUpload (path, formData) {
         const res = await fetch(`${BACKEND_BASE}${path}`, {
             method: 'POST',
             headers: buildAuthHeaders(),

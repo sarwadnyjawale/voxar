@@ -167,6 +167,11 @@ def create_app():
     output_path.mkdir(parents=True, exist_ok=True)
     app.mount("/audio", StaticFiles(directory=str(output_path)), name="audio")
 
+    # Serve voice preview clips
+    preview_path = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) / "voices" / "previews"
+    preview_path.mkdir(parents=True, exist_ok=True)
+    app.mount("/previews", StaticFiles(directory=str(preview_path)), name="previews")
+
     # Root endpoint
     @app.get("/", include_in_schema=False)
     async def root():

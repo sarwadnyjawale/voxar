@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOXAR Brand Kit</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #050508;
+    color: #F0F0F5;
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 60px 40px;
+  }
+
+  .section {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #7C3AED;
+    margin-bottom: 32px;
+  }
+
+  /* ── The actual VOXAR V-wave logo ── */
+  .voxar-wave {
+    display: inline-block;
+  }
+
+  .voxar-wave svg {
+    color: var(--wave-color, #F0F0F5);
+    filter: drop-shadow(0 0 12px var(--wave-glow, rgba(124, 58, 237, 0.4)));
+    transition: filter 0.3s ease;
+  }
+
+  .voxar-wave:hover svg {
+    filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.7));
+  }
+
+  /* ── Logo Grid ── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .logo-card {
+    border-radius: 20px;
+    padding: 60px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .logo-card.dark {
+    background: #0A0A0F;
+    border: 1px solid rgba(124, 58, 237, 0.15);
+  }
+
+  .logo-card.glass {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+  }
+
+  .logo-card.light {
+    background: #F0F0F5;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .logo-card.gradient-bg {
+    background: linear-gradient(135deg, #0A0A0F 0%, #1a1025 50%, #0A0A0F 100%);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+  }
+
+  .card-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9CA3AF;
+    position: absolute;
+    top: 16px;
+    left: 20px;
+  }
+
+  .logo-card.light .card-label { color: #666; }
+
+  /* ── Logo lockup (icon + text) ── */
+  .logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-wordmark {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #F0F0F5;
+    line-height: 1;
+  }
+
+  .logo-card.light .logo-wordmark { color: #0A0A0F; }
+  .logo-card.light .voxar-wave svg { color: #0A0A0F; --wave-glow: rgba(124, 58, 237, 0.2); }
+
+  .tagline {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: #9CA3AF;
+  }
+
+  .logo-card.light .tagline { color: #666; }
+
+  /* ── Hero Preview ── */
+  .hero-preview {
+    width: 100%;
+    border-radius: 20px;
+    padding: 120px 60px;
+    background: linear-gradient(180deg, #0A0A0F 0%, #0d0a18 50%, #0A0A0F 100%);
+    border: 1px solid rgba(124, 58, 237, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-preview::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-lockup {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    z-index: 1;
+  }
+
+  .hero-lockup .logo-wordmark {
+    font-size: 80px;
+    text-shadow: 0 0 60px rgba(124, 58, 237, 0.25);
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+    color: #9CA3AF;
+    letter-spacing: 0.04em;
+    z-index: 1;
+  }
+
+  .hero-sub {
+    font-size: 12px;
+    color: rgba(156, 163, 175, 0.5);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 1;
+  }
+
+  /* ── Icon Sizes ── */
+  .icon-row {
+    display: flex;
+    align-items: end;
+    gap: 32px;
+    margin-top: 20px;
+  }
+
+  .icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .icon-box {
+    background: #0A0A0F;
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-label {
+    font-size: 11px;
+    color: #9CA3AF;
+  }
+
+  /* ── Colors ── */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .swatch {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .swatch-color { height: 100px; width: 100%; }
+
+  .swatch-info {
+    padding: 14px 16px;
+    background: #0A0A0F;
+  }
+
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .swatch-hex {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-family: monospace;
+  }
+
+  /* ── Typography ── */
+  .type-samples {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .type-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7C3AED;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .t-brand { font-size: 32px; font-weight: 900; letter-spacing: -0.04em; }
+  .t-h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
+  .t-h2 { font-size: 34px; font-weight: 700; }
+  .t-body { font-size: 16px; font-weight: 400; color: #9CA3AF; line-height: 1.6; }
+
+  /* ── SVG Code Block ── */
+  .code-block {
+    background: #0A0A0F;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    color: #9CA3AF;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.6;
+  }
+
+  .code-block .tag { color: #7C3AED; }
+  .code-block .attr { color: #06B6D4; }
+  .code-block .val { color: #A78BFA; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="section">
+  <div class="hero-preview">
+    <div class="hero-lockup">
+      <div class="voxar-wave">
+        <svg viewBox="0 0 100 50" style="width:88px;height:auto;" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+          <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+        </svg>
+      </div>
+      <span class="logo-wordmark" style="text-shadow: 0 0 60px rgba(124,58,237,0.25);">VOXAR</span>
+    </div>
+    <div class="hero-tagline">Every Voice. Every Language. Perfectly You.</div>
+    <div class="hero-sub">Voice Without Limits</div>
+  </div>
+</div>
+
+<!-- ═══════════════ LOGO VARIATIONS ═══════════════ -->
+<div class="section">
+  <div class="section-title">Logo Variations</div>
+  <div class="logo-grid">
+
+    <!-- Dark -->
+    <div class="logo-card dark">
+      <span class="card-label">Primary &mdash; Dark</span>
+      <div class="logo-lockup">
+        <div class="voxar-wave">
+          <svg viewBox="0 0 100 50" style="width:52px;height:auto;" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+            <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+          </svg>
+        </div>
+        <span class="logo-wordmark">VOXAR</span>
+      </div>
+      <div class="tagline">Voice Without Limits</div>
+    </div>
+
+    <!-- Glass -->
+    <div class="logo-card glass">
+      <span class="card-label">Glass / Overlay</span>
+      <div class="logo-lockup">
+        <div class="voxar-wave" style="--wave-glow: rgba(124,58,237,0.6);">
+          <svg viewBox="0 0 100 50" style="width:52px;height:auto;" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+            <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+          </svg>
+        </div>
+        <span class="logo-wordmark" style="text-shadow: 0 0 40px rgba(124,58,237,0.3);">VOXAR</span>
+      </div>
+      <div class="tagline">Voice Without Limits</div>
+    </div>
+
+    <!-- Light -->
+    <div class="logo-card light">
+      <span class="card-label">Light (Rare Use)</span>
+      <div class="logo-lockup">
+        <div class="voxar-wave">
+          <svg viewBox="0 0 100 50" style="width:52px;height:auto;" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+            <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+          </svg>
+        </div>
+        <span class="logo-wordmark">VOXAR</span>
+      </div>
+    </div>
+
+    <!-- Icon Only -->
+    <div class="logo-card gradient-bg">
+      <span class="card-label">Icon Only</span>
+      <div class="voxar-wave" style="--wave-glow: rgba(124,58,237,0.5);">
+        <svg viewBox="0 0 100 50" style="width:96px;height:auto;" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+          <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ ICON SIZES ═══════════════ -->
+<div class="section">
+  <div class="section-title">Icon at Different Sizes</div>
+  <div class="icon-row">
+    <div class="icon-item">
+      <div class="icon-box" style="width:128px; height:128px;">
+        <svg viewBox="0 0 100 50" style="width:80px;height:auto;color:#F0F0F5;filter:drop-shadow(0 0 8px rgba(124,58,237,0.4));" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+          <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+        </svg>
+      </div>
+      <span class="icon-label">128px</span>
+    </div>
+    <div class="icon-item">
+      <div class="icon-box" style="width:64px; height:64px;">
+        <svg viewBox="0 0 100 50" style="width:40px;height:auto;color:#F0F0F5;filter:drop-shadow(0 0 6px rgba(124,58,237,0.4));" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+          <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+        </svg>
+      </div>
+      <span class="icon-label">64px</span>
+    </div>
+    <div class="icon-item">
+      <div class="icon-box" style="width:32px; height:32px; border-radius: 8px;">
+        <svg viewBox="0 0 100 50" style="width:20px;height:auto;color:#F0F0F5;" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+          <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+        </svg>
+      </div>
+      <span class="icon-label">32px</span>
+    </div>
+    <div class="icon-item">
+      <div class="icon-box" style="width:16px; height:16px; border-radius: 4px; padding: 2px;">
+        <svg viewBox="0 0 100 50" style="width:12px;height:auto;color:#F0F0F5;" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 5 25 L 20 25 C 26 25, 30 10, 35 10 C 38 10, 40 16, 42 22" />
+          <path d="M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36 L 63 14 C 65 8, 69 8, 71 14 C 73 21, 76 25, 82 25 L 95 25" />
+        </svg>
+      </div>
+      <span class="icon-label">16px</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ COLORS ═══════════════ -->
+<div class="section">
+  <div class="section-title">Brand Colors</div>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #0A0A0F;"></div>
+      <div class="swatch-info"><div class="swatch-name">VOXAR Black</div><div class="swatch-hex">#0A0A0F</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #12121A;"></div>
+      <div class="swatch-info"><div class="swatch-name">VOXAR Deep</div><div class="swatch-hex">#12121A</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #7C3AED;"></div>
+      <div class="swatch-info"><div class="swatch-name">VOXAR Violet</div><div class="swatch-hex">#7C3AED</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #A78BFA;"></div>
+      <div class="swatch-info"><div class="swatch-name">VOXAR Glow</div><div class="swatch-hex">#A78BFA</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #06B6D4;"></div>
+      <div class="swatch-info"><div class="swatch-name">Accent Cyan</div><div class="swatch-hex">#06B6D4</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #10B981;"></div>
+      <div class="swatch-info"><div class="swatch-name">Success Green</div><div class="swatch-hex">#10B981</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TYPOGRAPHY ═══════════════ -->
+<div class="section">
+  <div class="section-title">Typography</div>
+  <div class="type-samples">
+    <div class="type-row">
+      <span class="type-label">Brand Mark</span>
+      <span class="t-brand">VOXAR</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Heading 1</span>
+      <span class="t-h1">Voice Without Limits</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Heading 2</span>
+      <span class="t-h2">Every Voice. Every Language.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body</span>
+      <span class="t-body">The only voice AI that truly understands how India speaks &mdash; Hindi, Hinglish, English, and 9 regional languages with 10,000+ word intelligence.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SVG CODE ═══════════════ -->
+<div class="section">
+  <div class="section-title">Logo SVG Code (Copy &amp; Paste)</div>
+  <div class="code-block"><span class="tag">&lt;svg</span> <span class="attr">viewBox</span>=<span class="val">"0 0 100 50"</span> <span class="attr">fill</span>=<span class="val">"none"</span> <span class="attr">stroke</span>=<span class="val">"currentColor"</span>
+     <span class="attr">stroke-width</span>=<span class="val">"4.5"</span> <span class="attr">stroke-linecap</span>=<span class="val">"round"</span> <span class="attr">stroke-linejoin</span>=<span class="val">"round"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;path</span> <span class="attr">d</span>=<span class="val">"M 5 25 L 20 25 C 26 25, 30 10, 35 10
+           C 38 10, 40 16, 42 22"</span> <span class="tag">/&gt;</span>
+
+  <span class="tag">&lt;path</span> <span class="attr">d</span>=<span class="val">"M 38 14 L 47 36 C 48.5 40, 51.5 40, 53 36
+           L 63 14 C 65 8, 69 8, 71 14
+           C 73 21, 76 25, 82 25 L 95 25"</span> <span class="tag">/&gt;</span>
+
+<span class="tag">&lt;/svg&gt;</span></div>
+</div>
+
+</body>
+</html>
