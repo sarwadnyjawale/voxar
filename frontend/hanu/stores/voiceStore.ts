@@ -55,6 +55,9 @@ interface VoiceState {
   // Favorites
   favorites: string[]
 
+  // Private state
+  _previewAudio?: HTMLAudioElement | null
+
   // Actions
   fetchVoices: () => Promise<void>
   fetchClonedVoices: () => Promise<void>
