@@ -81,10 +81,16 @@ export const useTTSStore = create<TTSState>((set, get) => ({
       })
 
       const jobId = result.job_id || result.id
-      
+
+      if (!jobId) {
+        throw new Error('No job_id returned from server')
+      }
+
       let finalJob: any = null
-      while (true) {
+      const maxPolls = 120 // 4 minutes max (120 * 2s)
+      for (let i = 0; i < maxPolls; i++) {
         const job = await api.backendGet<any>(`/api/v1/jobs/${jobId}?t=${Date.now()}`)
+        console.log(`[VOXAR] Poll ${i + 1}: job=${jobId} status=${job?.status}`)
         if (job.status === 'completed') {
           finalJob = job
           break
@@ -93,6 +99,10 @@ export const useTTSStore = create<TTSState>((set, get) => ({
           throw new Error(job.error || 'Engine job failed')
         }
         await new Promise(r => setTimeout(r, 2000))
+      }
+
+      if (!finalJob) {
+        throw new Error('Generation timed out — please try again')
       }
 
       const dur = finalJob.duration || result.duration || 0

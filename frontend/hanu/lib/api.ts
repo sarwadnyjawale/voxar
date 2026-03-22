@@ -112,6 +112,7 @@ export const api = {
     const res = await fetch(`${BACKEND_BASE}${path}`, {
       method: 'GET',
       headers: buildHeaders(),
+      cache: 'no-store',
     })
     return handleResponse<T>(res)
   },

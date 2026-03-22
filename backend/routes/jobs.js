@@ -11,6 +11,7 @@ const { authMiddleware, optionalAuth } = require('../middleware/auth')
 router.get('/:id', authMiddleware, async (req, res) => {
   try {
     const data = await engineBridge.getJobStatus(req.params.id)
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate')
     res.json(data)
   } catch (err) {
     const status = err.response?.status || 502

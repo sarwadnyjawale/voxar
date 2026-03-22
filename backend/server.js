@@ -72,7 +72,9 @@ const generalLimiter = rateLimit({
 // ============================================================
 // Middleware
 // ============================================================
-app.use(helmet())
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+}))
 
 // CORS — supports comma-separated CORS_ORIGINS or single CORS_ORIGIN
 const allowedOrigins = (process.env.CORS_ORIGINS || process.env.CORS_ORIGIN || 'http://localhost:3000')

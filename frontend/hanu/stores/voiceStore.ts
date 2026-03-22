@@ -144,11 +144,12 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
       const jobId = result.job_id
       if (!jobId) return
 
-      while (true) {
+      for (let i = 0; i < 60; i++) {
         const job = await api.backendGet<any>(`/api/v1/jobs/${jobId}?t=${Date.now()}`)
         if (job.status === 'completed') break
         if (job.status === 'failed') throw new Error('Preview failed')
         await new Promise(r => setTimeout(r, 2000))
+        if (i === 59) return // timeout, silently give up
       }
 
       const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || ''

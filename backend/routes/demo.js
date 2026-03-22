@@ -12,7 +12,7 @@ const demoLimiter = rateLimit({
   legacyHeaders: false,
 })
 
-router.post('/generate', demoLimiter, async (req, res) => {
+router.post('/', demoLimiter, async (req, res) => {
   try {
     const { text, voice_id, engine_mode, language, output_format } = req.body
 

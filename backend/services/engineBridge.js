@@ -69,11 +69,9 @@ const engineBridge = {
       const res = await axios.post(endpoint, {
         text,
         voice_id: voice,
-        engine_mode: engine || 'cinematic',
+        mode: engine || 'cinematic',
         language: language || 'en',
-        output_format: format || 'wav',
-        enhance: enhance !== false,
-        normalize: normalize !== false,
+        format: format || 'wav',
       }, {
         headers: engineHeaders(),
         timeout: 30000,
