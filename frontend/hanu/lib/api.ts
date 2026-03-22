@@ -1,7 +1,8 @@
 import type { ApiError } from './types'
 
-const API_BASE = ''
-const BACKEND_BASE = ''
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
+// Hardcode the fallback so it NEVER hits the Vercel 502 proxy or Engine URL by mistake
+const BACKEND_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
 
 function getAuthToken(): string | null {
   if (typeof window === 'undefined') return null
