@@ -76,15 +76,21 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }))
 
-// CORS — supports comma-separated CORS_ORIGINS or single CORS_ORIGIN
-const allowedOrigins = (process.env.CORS_ORIGINS || process.env.CORS_ORIGIN || 'http://localhost:3000')
-  .split(',').map(s => s.trim()).filter(Boolean)
+// CORS — explicitly allowing production domains to fix mobile "Failed to fetch" errors
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://voxar.in',
+  'https://www.voxar.in',
+  ...(process.env.CORS_ORIGINS || process.env.CORS_ORIGIN || '').split(',').map(s => s.trim()).filter(Boolean)
+]
+
 app.use(cors({
   origin: (origin, cb) => {
-    // '*' means allow all origins
+    // allow all known origins, or bypass if no origin (like server-to-server)
     if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin) || allowedOrigins.some(o => origin.endsWith(o.replace(/^https?:\/\/\*\./, '')))) {
       cb(null, true)
     } else {
+      console.warn(`[CORS Blocked] Origin: ${origin}`)
       cb(null, false)
     }
   },
