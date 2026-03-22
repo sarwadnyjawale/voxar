@@ -389,7 +389,7 @@ export default function VoiceGallery() {
         playEl!.classList.add('on')
 
         // Load static preview file from backend (bypassing Vercel proxy 404s)
-        const API_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+        const API_BASE = 'https://voxar-production-95a3.up.railway.app'
         const audioUrl = `${API_BASE}/previews/${speaker.id}.wav`
 
         currentAudio = new Audio(audioUrl)

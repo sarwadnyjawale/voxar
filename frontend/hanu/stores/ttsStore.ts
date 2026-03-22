@@ -109,7 +109,7 @@ export const useTTSStore = create<TTSState>((set, get) => ({
       const mins = Math.floor(dur / 60)
       const secs = Math.round(dur % 60)
 
-      const baseUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+      const baseUrl = 'https://voxar-production-95a3.up.railway.app'
       const audioUrl = `${baseUrl}/api/v1/jobs/${jobId}/audio`
 
       set({
