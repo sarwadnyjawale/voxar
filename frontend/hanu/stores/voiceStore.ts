@@ -152,13 +152,12 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
         if (i === 59) return // timeout, silently give up
       }
 
-      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || ''
       let audio = get()._previewAudio
       if (!audio) {
         audio = new Audio()
         set({ _previewAudio: audio } as any)
       }
-      audio.src = `${baseUrl}/api/v1/jobs/${jobId}/audio`
+      audio.src = `/api/v1/jobs/${jobId}/audio`
       audio.play().catch(() => {})
     }).catch(err => {
       console.warn('Voice preview failed:', err.message)

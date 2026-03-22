@@ -109,8 +109,7 @@ export const useTTSStore = create<TTSState>((set, get) => ({
       const mins = Math.floor(dur / 60)
       const secs = Math.round(dur % 60)
 
-      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || ''
-      const audioUrl = `${baseUrl}/api/v1/jobs/${jobId}/audio`
+      const audioUrl = `/api/v1/jobs/${jobId}/audio`
 
       set({
         isGenerating: false,
