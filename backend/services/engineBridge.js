@@ -81,14 +81,8 @@ const engineBridge = {
 
       logEngine('POST', '/api/v1/generate', `submitted: ${res.data.job_id}`)
 
-      // Poll for completion
-      const result = await pollJob(res.data.job_id)
-      logEngine('POLL', `/api/v1/jobs/${res.data.job_id}`, 'completed')
-
       return {
-        audio_url: result.audio_url || result.audio_path || '',
-        duration: result.duration || 0,
-        job_id: result.job_id,
+        job_id: res.data.job_id,
       }
     } catch (err) {
       logEngine('POST', '/api/v1/generate', `failed: ${err.message}`)

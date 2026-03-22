@@ -97,8 +97,10 @@ async function generate(req, res) {
     })
 
     res.json({
-      id: record._id,
-      audio_url: result.audio_url || result.audio_path || '',
+      id: result.job_id,
+      job_id: result.job_id,
+      db_id: record._id,
+      audio_url: '',
       duration: result.duration || 0,
       characters: charCount,
       minutes_used: creditResult.minutesUsed,
