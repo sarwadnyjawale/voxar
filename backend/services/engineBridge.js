@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const PYTHON_ENGINE_URL = process.env.PYTHON_ENGINE_URL || 'http://localhost:8000'
+const PYTHON_ENGINE_URL = (process.env.PYTHON_ENGINE_URL || 'http://localhost:8000').replace(/\/+$/, '')
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY || 'voxar-dev-key-001'
 
 /**
