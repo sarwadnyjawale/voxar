@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const engineBridge = require('../services/engineBridge')
+const History = require('../models/History')
 
 const { authMiddleware, optionalAuth } = require('../middleware/auth')
 
@@ -19,6 +20,28 @@ router.get('/:id', (req, res, next) => {
 router.get('/:id', authMiddleware, async (req, res) => {
   try {
     const data = await engineBridge.getJobStatus(req.params.id)
+
+    // Update history when job completes
+    if (data.status === 'completed') {
+      // Async update - don't block the response
+      History.findOneAndUpdate(
+        { job_id: req.params.id, status: { $ne: 'completed' } },
+        {
+          status: 'completed',
+          duration: data.duration || 0,
+          audio_url: data.audio_url || ''
+        }
+      ).catch(err => console.error('[History Update Error]', err.message))
+    } else if (data.status === 'failed') {
+      History.findOneAndUpdate(
+        { job_id: req.params.id, status: { $ne: 'failed' } },
+        {
+          status: 'failed',
+          error: data.error || 'Engine generation failed'
+        }
+      ).catch(err => console.error('[History Update Error]', err.message))
+    }
+
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate')
     res.json(data)
   } catch (err) {

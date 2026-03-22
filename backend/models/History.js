@@ -26,6 +26,7 @@ const historySchema = new mongoose.Schema({
   format: { type: String, default: 'wav' },
   status: { type: String, enum: ['queued', 'processing', 'completed', 'failed'], default: 'completed' },
   error: { type: String, default: '' },
+  job_id: { type: String, index: true },
   created_at: { type: Date, default: Date.now },
 })
 

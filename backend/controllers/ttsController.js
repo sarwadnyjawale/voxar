@@ -44,16 +44,9 @@ async function generate(req, res) {
         normalize,
       })
 
-      // FIX 4 & 5: If the frontend connection dropped (timeout), refund the credit to prevent loss.
-      if (req.closed || req.destroyed || res.destroyed) {
-        if (!isDev && creditResult.minutesUsed > 0) {
-          await User.findByIdAndUpdate(req.user._id, {
-            $inc: { 'usage.tts_minutes_used': -creditResult.minutesUsed }
-          })
-        }
-        // Don't save to history if we refunded due to timeout
-        return
-      }
+      // [REMOVED req.closed check]
+      // It was falsely evaluating to true during Vercel/Railway proxies
+      // causing the route to silently 'return' and never call res.json()
 
     } catch (err) {
       // Refund credits on engine failure (only in production where credits were deducted)
@@ -81,7 +74,7 @@ async function generate(req, res) {
       })
     }
 
-    // Record in history
+    // Record in history as queued/processing
     const record = await History.create({
       user: req.user._id,
       type: 'tts',
@@ -90,18 +83,19 @@ async function generate(req, res) {
       engine,
       language,
       characters: charCount,
-      duration: result.duration || 0,
-      audio_url: result.audio_url || result.audio_path || '',
+      duration: 0,
+      audio_url: '',
       format: format || 'wav',
-      status: 'completed',
+      status: 'queued', // The engine is processing this async
+      job_id: result.job_id // Save job_id to link it during polling
     })
 
-    res.json({
+    return res.json({
       id: result.job_id,
       job_id: result.job_id,
       db_id: record._id,
       audio_url: '',
-      duration: result.duration || 0,
+      duration: 0,
       characters: charCount,
       minutes_used: creditResult.minutesUsed,
       format: format || 'wav',
