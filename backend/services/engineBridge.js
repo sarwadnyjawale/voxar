@@ -147,6 +147,11 @@ const engineBridge = {
    * Get available voices from the Python catalog
    */
   async getVoiceCatalog() {
+    if (this._catalogCache && Date.now() - this._catalogCacheTime < 5 * 60 * 1000) {
+      // Return cached catalog if younger than 5 minutes
+      return this._catalogCache
+    }
+
     const endpoint = `${PYTHON_ENGINE_URL}/api/v1/voices`
     try {
       const res = await axios.get(endpoint, {
@@ -154,6 +159,11 @@ const engineBridge = {
         timeout: 10000,
       })
       logEngine('GET', '/api/v1/voices', 'success')
+      
+      // Update cache
+      this._catalogCache = res.data
+      this._catalogCacheTime = Date.now()
+      
       return res.data
     } catch (err) {
       logEngine('GET', '/api/v1/voices', `failed: ${err.message}`)

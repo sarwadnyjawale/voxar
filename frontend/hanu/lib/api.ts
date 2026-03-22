@@ -53,7 +53,11 @@ async function handleResponse<T>(res: Response): Promise<T> {
 
     try {
       const body = await res.json()
-      error.message = body.detail || body.message || res.statusText
+      let msg = body.detail || body.message || res.statusText
+      if (typeof msg === 'object') {
+        msg = JSON.stringify(msg)
+      }
+      error.message = msg
       error.detail = body.detail
     } catch {}
 
