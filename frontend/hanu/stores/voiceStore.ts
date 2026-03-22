@@ -119,20 +119,8 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
     const { voices } = get()
     const voice = voices.find(v => v.id === id)
 
-    // Use static preview URL if available (no credit cost, instant playback)
-    const previewUrl = voice?.preview_urls?.default || voice?.preview_urls?.en
-    if (previewUrl) {
-      let audio = get()._previewAudio
-      if (!audio) {
-        audio = new Audio()
-        set({ _previewAudio: audio } as any)
-      }
-      audio.src = previewUrl
-      audio.play().catch(() => {})
-      return
-    }
-
-    // Fallback: generate via TTS (only if no static preview exists)
+    // Generate dynamic preview via async job flow
+    // This replaces the old static /previews/*.wav which returned 404
     const previewText = 'Welcome to VOXAR. This is a preview of this voice.'
     api.backendPost<{ job_id: string }>('/api/v1/generate', {
       text: previewText,

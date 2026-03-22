@@ -38,7 +38,8 @@
       "Bash(nslookup:*)",
       "Bash(find 'D:/My Projects/VOXAR1' -name *.css)",
       "Bash(find 'D:/My Projects/VOXAR1/engine' -name *.json)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

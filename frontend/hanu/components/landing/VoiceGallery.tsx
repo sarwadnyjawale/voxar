@@ -378,20 +378,63 @@ export default function VoiceGallery() {
       function toggleAudio() {
         if (isPlaying) stopAudio(); else startAudio()
       }
-      function startAudio() {
+      async function startAudio() {
         const speaker = SPEAKERS[activeIdx % SPEAKERS.length]
-        const previewUrl = voiceMap[speaker.name.toLowerCase()]
-        if (!previewUrl) return
+        if (!speaker) return
 
         stopAudio()
 
-        currentAudio = new Audio(previewUrl)
-        currentAudio.play().catch(() => {})
-        currentAudio.onended = () => stopAudio()
-
         isPlaying = true
-        playEl!.innerHTML = '&#9646;&#9646;'
+        playEl!.innerHTML = '...'
         playEl!.classList.add('on')
+
+        try {
+          const API_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+
+          const res = await fetch(`${API_BASE}/api/v1/generate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              text: 'Welcome to VOXAR. This is a preview of this voice.',
+              voice_id: speaker.id,
+              engine_mode: 'flash',
+              language: 'en',
+              output_format: 'mp3',
+            }),
+          })
+
+          const data = await res.json()
+          if (!data.job_id) throw new Error('No job ID')
+
+          let completedJob = null
+          for (let i = 0; i < 40; i++) {
+            await new Promise(r => setTimeout(r, 1500))
+            const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`)
+            const job = await jobRes.json()
+
+            if (job.status === 'completed') {
+              completedJob = job
+              break
+            }
+            if (job.status === 'failed') throw new Error('Preview failed')
+          }
+
+          if (!completedJob) throw new Error('Preview timeout')
+
+          // Ensure the user hasn't skipped to another voice or stopped it while loading
+          const currentSpeaker = SPEAKERS[activeIdx % SPEAKERS.length]
+          if (!isPlaying || currentSpeaker.id !== speaker.id) return
+
+          const audioUrl = `${API_BASE}/api/v1/jobs/${data.job_id}/audio`
+          currentAudio = new Audio(audioUrl)
+          currentAudio.play().catch(() => {})
+          currentAudio.onended = () => stopAudio()
+
+          playEl!.innerHTML = '&#9646;&#9646;'
+        } catch (err) {
+          console.warn('Gallery preview failed:', err)
+          stopAudio()
+        }
       }
       function stopAudio() {
         if (currentAudio) {

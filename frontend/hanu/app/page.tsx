@@ -375,24 +375,7 @@ export default function LandingPage() {
   }, [demoText, demoVoice])
 
   // Fetch real voice catalog for preview URLs
-  useEffect(() => {
-    fetch('/api/v1/voices')
-      .then(r => r.json())
-      .then(data => {
-        if (data.voices) {
-          const map: Record<string, string> = {}
-          for (const v of data.voices) {
-            const firstName = (v.display_name || v.name || '').split(' ')[0]
-            if (v.preview_urls?.default) {
-              const url = v.preview_urls.default
-              map[firstName.toLowerCase()] = url.startsWith('/') ? url : `/${url}`
-            }
-          }
-          setVoicePreviews(map)
-        }
-      })
-      .catch(() => {})
-  }, [])
+  // [REMOVED] We now use dynamic async generation instead of static files
 
   // Voice preview — real audio playback with progress tracking
   useEffect(() => {
@@ -417,7 +400,7 @@ export default function LandingPage() {
     }
   }, [previewVoice])
 
-  const handleVoicePreview = (i: number) => {
+  const handleVoicePreview = async (i: number) => {
     if (previewVoice === i) {
       previewAudioRef.current?.pause()
       previewAudioRef.current = null
@@ -431,15 +414,68 @@ export default function LandingPage() {
     }
 
     const voice = voices[i]
-    const firstName = voice.name.split(' ')[0].toLowerCase()
-    const previewUrl = voicePreviews[firstName]
-    if (!previewUrl) return
+    const firstName = voice.name.split(' ')[0]
 
-    const audio = new Audio(previewUrl)
-    previewAudioRef.current = audio
-    audio.play().catch(() => {})
+    // Complete mapping of all 20 landing page voices to engine voice IDs
+    const voiceMap: Record<string, string> = {
+      'Arjun': 'v011', 'Priya': 'v006', 'Vikram': 'v012', 'Maya': 'v004',
+      'Kabir': 'v005', 'Kavya': 'v006', 'Aisha': 'v001', 'Sahil': 'v003',
+      'Sophia': 'v002', 'Rohan': 'v005', 'Divya': 'v004', 'Dev': 'v006',
+      'Isha': 'v001', 'Raj': 'v003', 'Naina': 'v002', 'Omkar': 'v005',
+      'Shreya': 'v004', 'Nikhil': 'v006', 'Ananya': 'v001', 'Tejas': 'v003'
+    }
+    const voiceId = voiceMap[firstName] || 'v011'
+
+    // Show generating state in UI immediately
     setPreviewVoice(i)
     setVoiceProgress(0)
+
+    try {
+      const API_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+
+      const res = await fetch(`${API_BASE}/api/v1/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: 'Welcome to VOXAR. This is a preview of this voice.',
+          voice_id: voiceId,
+          engine_mode: 'flash',
+          language: 'en',
+          output_format: 'mp3',
+        }),
+      })
+
+      const data = await res.json()
+      if (!data.job_id) return
+
+      let attempts = 0
+      while (attempts < 60) {
+        await new Promise(r => setTimeout(r, 1500))
+        const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`)
+        const job = await jobRes.json()
+
+        if (job.status === 'completed') {
+          // Play audio ONLY if user hasn't clicked a different voice while we were waiting
+          setPreviewVoice((currentPreview) => {
+            if (currentPreview !== i) return currentPreview
+
+            const audioUrl = `${API_BASE}/api/v1/jobs/${data.job_id}/audio`
+            const audio = new Audio(audioUrl)
+            previewAudioRef.current = audio
+            audio.play().catch(() => {})
+            return i
+          })
+          break
+        }
+        if (job.status === 'failed') {
+          throw new Error('Preview generation failed')
+        }
+        attempts++
+      }
+    } catch (err) {
+      console.warn('Voice preview failed:', err)
+      setPreviewVoice((current) => current === i ? null : current)
+    }
   }
 
   return (
