@@ -400,7 +400,7 @@ export default function LandingPage() {
     }
   }, [previewVoice])
 
-  const handleVoicePreview = async (i: number) => {
+  const handleVoicePreview = (i: number) => {
     if (previewVoice === i) {
       previewAudioRef.current?.pause()
       previewAudioRef.current = null
@@ -426,56 +426,16 @@ export default function LandingPage() {
     }
     const voiceId = voiceMap[firstName] || 'v011'
 
-    // Show generating state in UI immediately
+    // Load static preview file from backend (bypassing Vercel proxy 404s)
+    const API_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+    const audioUrl = `${API_BASE}/previews/${voiceId}.wav`
+
+    const audio = new Audio(audioUrl)
+    previewAudioRef.current = audio
+    audio.play().catch(() => {})
+
     setPreviewVoice(i)
     setVoiceProgress(0)
-
-    try {
-      const API_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
-
-      const res = await fetch(`${API_BASE}/api/v1/generate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: 'Welcome to VOXAR. This is a preview of this voice.',
-          voice_id: voiceId,
-          engine_mode: 'flash',
-          language: 'en',
-          output_format: 'mp3',
-        }),
-      })
-
-      const data = await res.json()
-      if (!data.job_id) return
-
-      let attempts = 0
-      while (attempts < 60) {
-        await new Promise(r => setTimeout(r, 1500))
-        const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`)
-        const job = await jobRes.json()
-
-        if (job.status === 'completed') {
-          // Play audio ONLY if user hasn't clicked a different voice while we were waiting
-          setPreviewVoice((currentPreview) => {
-            if (currentPreview !== i) return currentPreview
-
-            const audioUrl = `${API_BASE}/api/v1/jobs/${data.job_id}/audio`
-            const audio = new Audio(audioUrl)
-            previewAudioRef.current = audio
-            audio.play().catch(() => {})
-            return i
-          })
-          break
-        }
-        if (job.status === 'failed') {
-          throw new Error('Preview generation failed')
-        }
-        attempts++
-      }
-    } catch (err) {
-      console.warn('Voice preview failed:', err)
-      setPreviewVoice((current) => current === i ? null : current)
-    }
   }
 
   return (

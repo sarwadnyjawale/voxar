@@ -119,38 +119,19 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
     const { voices } = get()
     const voice = voices.find(v => v.id === id)
 
-    // Generate dynamic preview via async job flow
-    // This replaces the old static /previews/*.wav which returned 404
-    const previewText = 'Welcome to VOXAR. This is a preview of this voice.'
-    api.backendPost<{ job_id: string }>('/api/v1/generate', {
-      text: previewText,
-      voice_id: id,
-      engine_mode: 'flash',
-      language: 'en',
-      output_format: 'mp3',
-    }).then(async result => {
-      const jobId = result.job_id
-      if (!jobId) return
+    // Construct direct static URL to the backend's /previews folder
+    // Bypassing Vercel proxy to prevent 404s and directly hit the Express static route
+    const baseUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+    const previewUrl = `${baseUrl}/previews/${id}.wav`
 
-      for (let i = 0; i < 60; i++) {
-        const job = await api.backendGet<any>(`/api/v1/jobs/${jobId}?t=${Date.now()}`)
-        if (job.status === 'completed') break
-        if (job.status === 'failed') throw new Error('Preview failed')
-        await new Promise(r => setTimeout(r, 2000))
-        if (i === 59) return // timeout, silently give up
-      }
+    let audio = get()._previewAudio
+    if (!audio) {
+      audio = new Audio()
+      set({ _previewAudio: audio } as any)
+    }
 
-      const baseUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
-      let audio = get()._previewAudio
-      if (!audio) {
-        audio = new Audio()
-        set({ _previewAudio: audio } as any)
-      }
-      audio.src = `${baseUrl}/api/v1/jobs/${jobId}/audio`
-      audio.play().catch(() => {})
-    }).catch(err => {
-      console.warn('Voice preview failed:', err.message)
-    })
+    audio.src = previewUrl
+    audio.play().catch(err => console.warn('Static voice preview failed:', err.message))
   },
 
   toggleFavorite: (id) => {

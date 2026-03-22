@@ -378,63 +378,26 @@ export default function VoiceGallery() {
       function toggleAudio() {
         if (isPlaying) stopAudio(); else startAudio()
       }
-      async function startAudio() {
+      function startAudio() {
         const speaker = SPEAKERS[activeIdx % SPEAKERS.length]
         if (!speaker) return
 
         stopAudio()
 
         isPlaying = true
-        playEl!.innerHTML = '...'
+        playEl!.innerHTML = '&#9646;&#9646;'
         playEl!.classList.add('on')
 
-        try {
-          const API_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+        // Load static preview file from backend (bypassing Vercel proxy 404s)
+        const API_BASE = (process.env.NEXT_PUBLIC_BACKEND_URL || 'https://voxar-production-95a3.up.railway.app').replace(/\/$/, '')
+        const audioUrl = `${API_BASE}/previews/${speaker.id}.wav`
 
-          const res = await fetch(`${API_BASE}/api/v1/generate`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              text: 'Welcome to VOXAR. This is a preview of this voice.',
-              voice_id: speaker.id,
-              engine_mode: 'flash',
-              language: 'en',
-              output_format: 'mp3',
-            }),
-          })
-
-          const data = await res.json()
-          if (!data.job_id) throw new Error('No job ID')
-
-          let completedJob = null
-          for (let i = 0; i < 40; i++) {
-            await new Promise(r => setTimeout(r, 1500))
-            const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`)
-            const job = await jobRes.json()
-
-            if (job.status === 'completed') {
-              completedJob = job
-              break
-            }
-            if (job.status === 'failed') throw new Error('Preview failed')
-          }
-
-          if (!completedJob) throw new Error('Preview timeout')
-
-          // Ensure the user hasn't skipped to another voice or stopped it while loading
-          const currentSpeaker = SPEAKERS[activeIdx % SPEAKERS.length]
-          if (!isPlaying || currentSpeaker.id !== speaker.id) return
-
-          const audioUrl = `${API_BASE}/api/v1/jobs/${data.job_id}/audio`
-          currentAudio = new Audio(audioUrl)
-          currentAudio.play().catch(() => {})
-          currentAudio.onended = () => stopAudio()
-
-          playEl!.innerHTML = '&#9646;&#9646;'
-        } catch (err) {
+        currentAudio = new Audio(audioUrl)
+        currentAudio.play().catch(err => {
           console.warn('Gallery preview failed:', err)
           stopAudio()
-        }
+        })
+        currentAudio.onended = () => stopAudio()
       }
       function stopAudio() {
         if (currentAudio) {
