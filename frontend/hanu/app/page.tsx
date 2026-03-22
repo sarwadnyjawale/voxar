@@ -64,7 +64,7 @@ const testimonials = [
 ]
 
 const faqItems = [
-  { q: 'Is the free plan really free forever?', a: 'Yes. You get 3 minutes of TTS generation for life. No credit card required. No trial expiry. When you\'re ready to scale, upgrade instantly — your work is always saved.' },
+  { q: 'Is the free plan really free forever?', a: 'Yes. You get 10 minutes of TTS generation every month — it resets automatically. No credit card required. No trial expiry. When you\'re ready to scale, upgrade instantly — your work is always saved.' },
   { q: 'Can I change plans anytime?', a: 'Absolutely. Upgrade or downgrade at any time. Upgrades are prorated — you only pay the difference. No lock-in contracts. No hidden fees.' },
   { q: 'Is audio quality different between plans?', a: 'No. Every plan gets identical studio-grade audio quality — same neural models, same mastering pipeline, same output formats. Plans only differ in usage limits.' },
   { q: 'What happens when I hit my limit?', a: 'You\'ll see a usage notification. You can upgrade instantly to continue — no data is lost, no work is deleted. Your projects and voice clones are always preserved.' },
@@ -83,8 +83,13 @@ const comingCards = [
   { title: 'AI Lip Sync', badge: 'Coming Soon', icon: <IconScanFace size={20} /> },
 ]
 
+import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/stores/authStore'
+
 // ===== COMPONENT =====
 export default function LandingPage() {
+  const router = useRouter()
+  const { isAuthenticated } = useAuthStore()
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
   const [demoText, setDemoText] = useState('Welcome to VOXAR. Experience studio-grade voice synthesis in seconds.')
   const [demoVoice, setDemoVoice] = useState('Arjun')
@@ -305,13 +310,21 @@ export default function LandingPage() {
     setDemoLoading(true)
     setDemoProgress(0)
     try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
+      const voiceMap: Record<string, string> = {
+        'Arjun': 'v011',
+        'Priya': 'v006',
+        'Vikram': 'v012',
+        'Maya': 'v004'
+      }
+      const mappedVoiceId = voiceMap[demoVoice] || 'v011'
+
+      const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || ''
       const res = await fetch(`${API_BASE}/api/v1/generate`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'voxar-dev-key-001' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text: demoText.trim(),
-          voice_id: demoVoice.toLowerCase(),
+          voice_id: mappedVoiceId,
           engine_mode: 'flash',
           language: 'auto',
           output_format: 'mp3',
@@ -321,11 +334,9 @@ export default function LandingPage() {
       if (data.job_id) {
         // Poll for completion
         let attempts = 0
-        while (attempts < 30) {
-          await new Promise(r => setTimeout(r, 2000))
-          const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`, {
-            headers: { 'X-API-Key': 'voxar-dev-key-001' },
-          })
+        while (attempts < 40) {
+          await new Promise(r => setTimeout(r, 1500))
+          const jobRes = await fetch(`${API_BASE}/api/v1/jobs/${data.job_id}`)
           const job = await jobRes.json()
           if (job.status === 'completed') {
             const audioUrl = job.audio_url || job.audio_path
@@ -345,8 +356,8 @@ export default function LandingPage() {
         }
       }
     } catch {
-      // Engine unavailable — redirect to login to try the full studio
-      window.location.href = '/login'
+      // Engine unavailable — show inline feedback instead of redirecting
+      alert('Voice engine is currently offline. Please try again later or sign in to use the studio.')
     } finally {
       setDemoLoading(false)
     }
@@ -452,14 +463,16 @@ export default function LandingPage() {
           <p className="hero-tagline">Your words. <strong>Studio sound.</strong></p>
           <p className="hero-subtitle">Neural voice synthesis, instant cloning, and precision transcription — 40+ premium voices across 12 languages, engineered for creators who refuse to compromise.</p>
           <div className="hero-cta-group">
-            <button className="cta-primary"><IconZap size={16} /> Start Creating — Free</button>
+            <button className="cta-primary" onClick={() => router.push(isAuthenticated ? '/dashboard/tts' : '/login')}>
+              <IconZap size={16} /> Start Creating — Free
+            </button>
             <button className="cta-secondary" onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}><IconPlay size={18} /> Hear It Live</button>
           </div>
           <div className="hero-trust">
             <span className="hero-trust-text">Trusted by creators everywhere</span>
             <div className="hero-trust-items">
               <span className="trust-check"><IconCheck size={14} /> No credit card</span>
-              <span className="trust-check"><IconCheck size={14} /> 3 min free forever</span>
+              <span className="trust-check"><IconCheck size={14} /> 10 min free / month</span>
               <span className="trust-check"><IconCheck size={14} /> Studio-grade quality</span>
             </div>
           </div>
@@ -841,7 +854,7 @@ export default function LandingPage() {
                 Start Creating — It&apos;s Free
               </button>
             </div>
-            <p className="final-cta-trust">No credit card required &nbsp;·&nbsp; 3 minutes free &nbsp;·&nbsp; Upgrade anytime</p>
+            <p className="final-cta-trust">No credit card required &nbsp;·&nbsp; 10 minutes free every month &nbsp;·&nbsp; Upgrade anytime</p>
           </div>
         </section>
 

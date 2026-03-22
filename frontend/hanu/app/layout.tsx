@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './styles/globals.css'
+import { ThemeProvider } from './ThemeProvider'
 
 export const metadata: Metadata = {
   title: 'VOXAR | Your Words. Studio Sound.',
@@ -26,7 +27,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider />
+        {children}
+      </body>
     </html>
   )
 }

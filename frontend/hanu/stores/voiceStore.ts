@@ -78,7 +78,12 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
 
   favorites: loadFavorites(),
 
+  // Reusable audio element for previews
+  _previewAudio: null as HTMLAudioElement | null,
+
   fetchVoices: async () => {
+    // Skip if already loaded (cache until page reload)
+    if (get().voices.length > 0) return
     set({ isLoading: true, error: null })
     try {
       const data = await api.backendGet<{ voices: CatalogVoice[] } | CatalogVoice[]>('/api/v1/voices/catalog')
@@ -108,6 +113,23 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
   }),
 
   playPreview: (id) => {
+    const { voices } = get()
+    const voice = voices.find(v => v.id === id)
+
+    // Use static preview URL if available (no credit cost, instant playback)
+    const previewUrl = voice?.preview_urls?.default || voice?.preview_urls?.en
+    if (previewUrl) {
+      let audio = get()._previewAudio
+      if (!audio) {
+        audio = new Audio()
+        set({ _previewAudio: audio } as any)
+      }
+      audio.src = previewUrl
+      audio.play().catch(() => {})
+      return
+    }
+
+    // Fallback: generate via TTS (only if no static preview exists)
     const previewText = 'Welcome to VOXAR. This is a preview of this voice.'
     api.backendPost<{ audio_url: string }>('/api/v1/tts/generate', {
       text: previewText,
@@ -117,7 +139,12 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
       format: 'mp3',
     }).then(result => {
       if (result.audio_url) {
-        const audio = new Audio(result.audio_url)
+        let audio = get()._previewAudio
+        if (!audio) {
+          audio = new Audio()
+          set({ _previewAudio: audio } as any)
+        }
+        audio.src = result.audio_url
         audio.play().catch(() => {})
       }
     }).catch(err => {

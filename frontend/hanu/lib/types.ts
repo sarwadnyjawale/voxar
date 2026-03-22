@@ -6,6 +6,7 @@ export interface User {
   email: string
   avatar?: string
   plan: 'free' | 'access' | 'starter' | 'creator' | 'pro' | 'enterprise'
+  api_keys?: { _id: string, key: string, label: string, created_at: string }[]
   createdAt: string
 }
 

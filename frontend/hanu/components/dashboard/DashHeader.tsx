@@ -8,7 +8,7 @@ interface DashHeaderProps {
   planLabel?: string
 }
 
-export default function DashHeader({ breadcrumbs, planLabel = 'Pro Plan' }: DashHeaderProps) {
+export default function DashHeader({ breadcrumbs, planLabel = 'Free Plan' }: DashHeaderProps) {
   const [showProfileMenu, setShowProfileMenu] = useState(false)
 
   return (
@@ -57,7 +57,7 @@ export default function DashHeader({ breadcrumbs, planLabel = 'Pro Plan' }: Dash
               <a className="profile-dropdown-item" href="#">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
                 Plan
-                <span className="profile-plan-badge">Pro</span>
+                <span className="profile-plan-badge">{planLabel.replace(' Plan', '')}</span>
               </a>
               <div className="profile-dropdown-divider" />
               <Link className="profile-dropdown-item profile-dropdown-logout" href="/">

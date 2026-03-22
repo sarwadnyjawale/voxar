@@ -24,7 +24,7 @@ export default function PricingCards() {
         <span className={`billing-label ${isAnnual ? 'active' : ''}`} onClick={() => setIsAnnual(true)}>Annual</span>
         <span className={`billing-save ${isAnnual ? 'visible' : ''}`}>SAVE 20%</span>
       </div>
-      
+
       <div className="pricing-grid" ref={pricingGridRef}>
         {/* FREE */}
         <div className="pricing-card">
@@ -36,12 +36,12 @@ export default function PricingCards() {
           <a href="/login" className="card-cta card-cta-outline" style={{ display: 'flex', textDecoration: 'none', justifyContent: 'center' }}>Start Free</a>
           <div className="features-label">What&apos;s included</div>
           <ul className="feature-list">
-            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 3 minutes TTS (lifetime)</li>
-            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> All 20 voices</li>
-            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> All 12 languages</li>
+            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 10 minutes TTS / month</li>
+            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 5 min transcription</li>
+            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> All voices &amp; languages</li>
             <li className="feature-item"><span className="feature-icon disabled"><IconX /></span> Voice cloning</li>
-            <li className="feature-item"><span className="feature-icon disabled"><IconX /></span> Transcription</li>
             <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> Watermarked output</li>
+            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> Resets monthly</li>
           </ul>
         </div>
         {/* ACCESS */}
@@ -49,12 +49,12 @@ export default function PricingCards() {
           <div className="card-tier-icon"><IconKey size={22} /></div>
           <div className="card-tier-name">Tier 02</div>
           <h3 className="pricing-plan-name">Access</h3>
-          <div className="card-price"><span className="price-amount">{isAnnual ? '₹159' : '₹199'}</span><span className="price-period">/month</span></div>
-          <p className="price-note">{isAnnual ? '₹159/mo billed annually' : '₹199/mo billed monthly'}</p>
+          <div className="card-price"><span className="price-amount">{isAnnual ? '₹199' : '₹249'}</span><span className="price-period">/month</span></div>
+          <p className="price-note">{isAnnual ? '₹199/mo billed annually' : '₹249/mo billed monthly'}</p>
           <a href="/login" className="card-cta card-cta-outline" style={{ display: 'flex', textDecoration: 'none', justifyContent: 'center' }}>Get Access</a>
           <div className="features-label">What&apos;s included</div>
           <ul className="feature-list">
-            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 10 minutes TTS / month</li>
+            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 30 minutes TTS / month</li>
             <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 1 voice clone</li>
             <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 15 min transcription</li>
             <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> No watermark</li>
@@ -62,20 +62,20 @@ export default function PricingCards() {
             <li className="feature-item"><span className="feature-icon disabled"><IconX /></span> API access</li>
           </ul>
         </div>
-        {/* STARTER (Featured) */}
+        {/* STARTER (Featured — MOST POPULAR) */}
         <div className="pricing-card pricing-card--featured">
           <span className="popular-tag">MOST POPULAR</span>
           <div className="card-tier-icon"><IconWaveform size={22} /></div>
           <div className="card-tier-name">Tier 03</div>
           <h3 className="pricing-plan-name">Starter</h3>
-          <div className="card-price"><span className="price-amount">{isAnnual ? '₹399' : '₹499'}</span><span className="price-period">/month</span></div>
-          <p className="price-note">{isAnnual ? '₹399/mo billed annually' : '₹499/mo billed monthly'}</p>
+          <div className="card-price"><span className="price-amount">{isAnnual ? '₹499' : '₹599'}</span><span className="price-period">/month</span></div>
+          <p className="price-note">{isAnnual ? '₹499/mo billed annually' : '₹599/mo billed monthly'}</p>
           <a href="/login" className="card-cta card-cta-filled" style={{ display: 'flex', textDecoration: 'none', justifyContent: 'center' }}>Get Starter</a>
           <div className="features-label">Everything in Access, plus</div>
           <ul className="feature-list">
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 120 minutes TTS / month</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 3 voice clones</li>
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 5 hours transcription</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 1 hour transcription</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> Speaker diarization</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> Subtitle export (SRT, VTT)</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> All generation modes</li>
@@ -91,10 +91,10 @@ export default function PricingCards() {
           <a href="/login" className="card-cta card-cta-outline" style={{ display: 'flex', textDecoration: 'none', justifyContent: 'center' }}>Get Creator</a>
           <div className="features-label">Everything in Starter, plus</div>
           <ul className="feature-list">
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 500 minutes TTS / month</li>
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 10 voice clones</li>
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 20 hours transcription</li>
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> All features included</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 300 minutes TTS / month</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 5 voice clones</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 2.5 hours transcription</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> Add-ons support</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> Priority processing</li>
             <li className="feature-item"><span className="feature-icon disabled"><IconX /></span> API access</li>
           </ul>
@@ -110,9 +110,9 @@ export default function PricingCards() {
           <a href="/login" className="card-cta card-cta-filled" style={{ display: 'flex', textDecoration: 'none', justifyContent: 'center' }}>Get Pro</a>
           <div className="features-label">Everything in Creator, plus</div>
           <ul className="feature-list">
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 2,000 minutes TTS / month</li>
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 25 voice clones</li>
-            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 100 hours transcription</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 1,000 minutes TTS / month</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 15 voice clones</li>
+            <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> 8+ hours transcription</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> Full API access</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> Webhooks &amp; SDKs</li>
             <li className="feature-item"><span className="feature-icon pro"><IconCheckSmall /></span> Priority support</li>
@@ -128,7 +128,7 @@ export default function PricingCards() {
           <a href="/login" className="card-cta card-cta-enterprise" style={{ display: 'flex', textDecoration: 'none', justifyContent: 'center' }}>Contact Sales</a>
           <div className="features-label">Everything in Pro, plus</div>
           <ul className="feature-list">
-            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> Unlimited TTS</li>
+            <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> 3,000+ minutes TTS</li>
             <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> Unlimited voice clones</li>
             <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> Unlimited transcription</li>
             <li className="feature-item"><span className="feature-icon"><IconCheckSmall /></span> Dedicated infrastructure</li>
@@ -137,14 +137,14 @@ export default function PricingCards() {
           </ul>
         </div>
       </div>
-      
+
       <div className="pricing-scroll-nav">
         <button className="pricing-scroll-btn" onClick={() => scrollPricing('left')}><IconChevronLeft /></button>
         <button className="pricing-scroll-btn" onClick={() => scrollPricing('right')}><IconChevronRight /></button>
       </div>
-      
+
       <div style={{ textAlign: 'center', marginTop: '64px', paddingTop: '40px', borderTop: '1px solid var(--border)' }}>
-        <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6 }}>All plans include a <strong>14-day free trial</strong>. No credit card required.<br />
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6 }}>No credit card required for the free plan.<br />
         Need something specific? <a href="#" style={{ color: 'var(--accent)', textDecoration: 'none', borderBottom: '1px solid rgba(139,92,246,.3)', transition: 'border-color .2s ease' }}>Talk to our team</a></p>
       </div>
     </>

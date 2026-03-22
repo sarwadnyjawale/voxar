@@ -4,13 +4,23 @@ import { useRef, useCallback, useEffect, useState } from 'react'
 import { useTTSStore } from '@/stores/ttsStore'
 import { useVoiceStore, type CatalogVoice } from '@/stores/voiceStore'
 
+const getVoiceFirstName = (v: CatalogVoice) => {
+  if (v.display_name) return v.display_name.split(' — ')[0]
+  return v.name
+}
+
+const getVoiceGradientClass = (id: string) => {
+  if (id.startsWith('v0') || id.startsWith('v')) return `voice-gradient-${id}`
+  return 'voice-gradient-cloned'
+}
+
 export default function ControlsPanel() {
   const {
     voice, engine, stability, speed, format, language, enhance, normalize,
     updateSettings
   } = useTTSStore()
 
-  const { voices, clonedVoices, fetchVoices, fetchClonedVoices, favorites, isFavorite } = useVoiceStore()
+  const { voices, clonedVoices, fetchVoices, fetchClonedVoices, favorites, isFavorite, playPreview } = useVoiceStore()
   const [showVoiceDropdown, setShowVoiceDropdown] = useState(false)
 
   const stabilityRef = useRef<HTMLDivElement>(null)
@@ -79,7 +89,7 @@ export default function ControlsPanel() {
                   color: v.id === voice ? 'var(--btn-solid-text)' : 'var(--text-secondary)',
                 }}
               >
-                {v.display_name || v.name}
+                {getVoiceFirstName(v)}
               </button>
             ))}
           </div>
@@ -90,9 +100,9 @@ export default function ControlsPanel() {
       <div className="control-group">
         <div className="control-label">Voice <span className="control-label-hint">TAP TO CHANGE</span></div>
         <div className="voice-selector" onClick={() => setShowVoiceDropdown(!showVoiceDropdown)} style={{ cursor: 'pointer', position: 'relative' }}>
-          <div className="voice-avatar" />
+          <div className={`voice-avatar ${selectedVoice ? getVoiceGradientClass(selectedVoice.id) : ''}`} />
           <div className="voice-info">
-            <div className="voice-name">{selectedVoice?.display_name || selectedVoice?.name || 'Select Voice'}</div>
+            <div className="voice-name">{selectedVoice ? getVoiceFirstName(selectedVoice) : 'Select Voice'}</div>
             <div className="voice-meta">
               {selectedVoice ? `${selectedVoice.styles?.[0] || ''} ${selectedVoice.primary_language ? `\u00b7 ${selectedVoice.primary_language.toUpperCase()}` : ''}` : 'Loading voices...'}
             </div>
@@ -118,13 +128,23 @@ export default function ControlsPanel() {
                 onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.04)')}
                 onMouseLeave={e => (e.currentTarget.style.background = v.id === voice ? 'rgba(139,92,246,0.12)' : 'transparent')}
               >
-                <div className="voice-avatar" style={{ width: 28, height: 28, fontSize: 11 }} />
+                <div className={`voice-avatar ${getVoiceGradientClass(v.id)}`} style={{ width: 28, height: 28, fontSize: 11, borderRadius: '50%' }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{v.display_name || v.name}</div>
+                  <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{getVoiceFirstName(v)}</div>
                   <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
                     {v.primary_language?.toUpperCase()} {v.styles?.[0] ? `\u00b7 ${v.styles[0]}` : ''}
                   </div>
                 </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); playPreview(v.id) }}
+                  title="Preview"
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer', padding: '4px',
+                    color: 'var(--text-muted)', display: 'flex', alignItems: 'center',
+                  }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                </button>
                 {v.id === voice && (
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
                 )}

@@ -6,7 +6,7 @@ import DashHeader from '@/components/dashboard/DashHeader'
 import { IconFileText, IconCopy, IconCheck, IconDownload } from '@/components/landing/Icons'
 
 export default function TranscribePage() {
-  const { file, isUploading, isTranscribing, progress, result, startTranscription, setFile, reset } = useSTTStore()
+  const { file, isUploading, isTranscribing, progress, result, startTranscription, setFile, reset, language, diarizationEnabled, wordTimestampsEnabled, setOptions } = useSTTStore()
   const [copied, setCopied] = useState(false)
   const [dragging, setDragging] = useState(false)
   const [exportFormat, setExportFormat] = useState('txt')
@@ -156,7 +156,7 @@ export default function TranscribePage() {
             {/* Language Select */}
             <div className="control-group">
               <div className="control-label">Source Language</div>
-              <select className="lang-select">
+              <select className="lang-select" value={language} onChange={e => setOptions({ language: e.target.value })}>
                 <option value="auto">Auto-detect</option>
                 <option value="en">English</option>
                 <option value="hi">Hindi</option>
@@ -173,23 +173,23 @@ export default function TranscribePage() {
             </div>
 
             {/* Speaker Diarization Toggle */}
-            <div className="toggle-control">
+            <div className="toggle-control" onClick={() => setOptions({ diarizationEnabled: !diarizationEnabled })} style={{ cursor: 'pointer' }}>
               <div className="toggle-info">
                 <span className="toggle-label">Speaker Diarization</span>
                 <span className="toggle-desc">Identify distinct speakers</span>
               </div>
-              <div className="toggle-switch active">
+              <div className={`toggle-switch ${diarizationEnabled ? 'active' : ''}`}>
                 <div className="toggle-knob" />
               </div>
             </div>
 
             {/* Word Timestamps Toggle */}
-            <div className="toggle-control">
+            <div className="toggle-control" onClick={() => setOptions({ wordTimestampsEnabled: !wordTimestampsEnabled })} style={{ cursor: 'pointer' }}>
               <div className="toggle-info">
                 <span className="toggle-label">Word Timestamps</span>
                 <span className="toggle-desc">Word-level timing data</span>
               </div>
-              <div className="toggle-switch active">
+              <div className={`toggle-switch ${wordTimestampsEnabled ? 'active' : ''}`}>
                 <div className="toggle-knob" />
               </div>
             </div>

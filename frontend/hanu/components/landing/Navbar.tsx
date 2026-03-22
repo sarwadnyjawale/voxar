@@ -6,33 +6,15 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { IconMoon, IconSun } from './Icons'
 import { VoxarLogo } from './Icons'
 import { useAuthStore } from '@/stores/authStore'
+import { useThemeStore } from '@/stores/themeStore'
 
 gsap.registerPlugin(ScrollToPlugin)
 
 export default function Navbar() {
-  const [isLightMode, setIsLightMode] = useState(false)
+  const { isLight, toggleTheme } = useThemeStore()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const navRef = useRef<HTMLElement>(null)
   const isAuthenticated = useAuthStore(s => s.isAuthenticated)
-
-  // Toggle theme
-  const toggleTheme = useCallback(() => {
-    setIsLightMode(prev => {
-      const next = !prev
-      document.body.classList.toggle('light-mode', next)
-      localStorage.setItem('voxar-theme', next ? 'light' : 'dark')
-      return next
-    })
-  }, [])
-
-  // Load saved theme
-  useEffect(() => {
-    const saved = localStorage.getItem('voxar-theme')
-    if (saved === 'light') {
-      document.body.classList.add('light-mode')
-      setIsLightMode(true)
-    }
-  }, [])
 
   // Navigation scroll
   useEffect(() => {
@@ -74,7 +56,7 @@ export default function Navbar() {
         </div>
         <div className="nav-right">
           <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
-            {isLightMode ? <IconMoon size={18} /> : <IconSun size={18} />}
+            {isLight ? <IconMoon size={18} /> : <IconSun size={18} />}
           </button>
           <div className="nav-divider" />
           <a href={isAuthenticated ? '/dashboard' : '/login'} className="nav-cta-btn">

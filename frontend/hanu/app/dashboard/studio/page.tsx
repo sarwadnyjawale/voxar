@@ -14,6 +14,7 @@ export default function StudioPage() {
     addBlock, deleteBlock, duplicateBlock, updateBlockText, updateBlockSettings,
     generateBlock, generateAll, stopGenerateAll, isGeneratingAll, generatingBlockId, generationProgress,
     playBlock, playAll, stopPlayback, isPlaying, currentPlayBlockIdx, audioElement,
+    mergeAllBlocks, mergedAudioUrl, isMerging,
   } = useStudioStore()
 
   const { voices, clonedVoices, fetchVoices, fetchClonedVoices } = useVoiceStore()
@@ -492,6 +493,34 @@ export default function StudioPage() {
                 {formatTime(totalDuration)}
               </span>
             </div>
+
+            {/* Merge & Download */}
+            {blocks.filter(b => b.audioUrl && b.status === 'done').length > 1 && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', paddingTop: '8px', borderTop: '1px solid var(--border)' }}>
+                <button
+                  className="btn-secondary-action"
+                  style={{ padding: '6px 14px', fontSize: '11px' }}
+                  onClick={() => mergeAllBlocks()}
+                  disabled={isMerging}
+                >
+                  {isMerging ? 'Merging...' : 'Merge All'}
+                </button>
+                {mergedAudioUrl && (
+                  <>
+                    <audio src={mergedAudioUrl} controls style={{ height: '28px', flex: 1, minWidth: 0 }} />
+                    <a
+                      href={mergedAudioUrl}
+                      download={`${projectName.replace(/[^a-zA-Z0-9_-]/g, '_')}.wav`}
+                      className="btn-generate"
+                      style={{ padding: '6px 14px', fontSize: '11px', textDecoration: 'none', flexShrink: 0 }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                      Download
+                    </a>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

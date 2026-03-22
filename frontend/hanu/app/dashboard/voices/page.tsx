@@ -57,6 +57,16 @@ export default function VoicesPage() {
     playPreview(id)
   }
 
+  const getVoiceGradientClass = (id: string) => {
+    if (id.startsWith('v0') || id.startsWith('v')) return `voice-gradient-${id}`
+    return 'voice-gradient-cloned'
+  }
+
+  const getVoiceFirstName = (v: CatalogVoice) => {
+    if (v.display_name) return v.display_name.split(' — ')[0]
+    return v.name
+  }
+
   const VoiceCard = ({ voice }: { voice: CatalogVoice }) => {
     const fav = isFavorite(voice.id)
     const isClone = getVoiceTags(voice).includes('Cloned')
@@ -65,12 +75,12 @@ export default function VoicesPage() {
       <div className="dp-voice-card">
         <div className="dp-voice-card-top">
           <div className="dp-voice-card-info">
-            <div className="dp-voice-avatar track-avatar" style={isClone ? { background: 'linear-gradient(135deg, var(--accent-glow), var(--bg-glass))' } : {}}>
+            <div className={`dp-voice-avatar track-avatar ${getVoiceGradientClass(voice.id)}`} style={isClone ? { background: 'linear-gradient(135deg, var(--accent-glow), var(--bg-glass))' } : {}}>
               <div className="avatar-overlay" />
             </div>
             <div>
               <div className="dp-voice-name">
-                {voice.display_name || voice.name}
+                {getVoiceFirstName(voice)}
               </div>
               <div className="dp-voice-style">{getVoiceStyle(voice)}</div>
             </div>

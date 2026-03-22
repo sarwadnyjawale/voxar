@@ -564,7 +564,8 @@ body.light-mode .coming-card{background:var(--bg-secondary)}
     .top-nav{padding:16px 20px}
     .top-nav.scrolled{padding:12px 20px}
     .nav-center,.nav-divider{display:none}
-    .nav-right .electric-btn{display:none}
+    .nav-right .icon-btn{display:none}
+    .nav-right .nav-cta-btn{flex-shrink:0}
     .mobile-menu-btn{display:block}
     .hero-section{padding:100px 20px 60px}
     .hero-cta-group{flex-direction:column;width:100%;max-width:320px;margin:0 auto;align-items:stretch}
@@ -1426,4 +1427,49 @@ body.light-mode .studio-block-btn:hover{background:#333;color:#fff;border-color:
   .vg-speaker { font-size: 15px; }
   .vg-play { width: 36px; height: 36px; font-size: 12px; }
 }
+
+/* ── Voice Profile Gradient Colors ── */
+.voice-gradient-v001{background:radial-gradient(circle at 30% 30%,#f472b6,#a855f7,#6366f1)}
+.voice-gradient-v002{background:radial-gradient(circle at 30% 30%,#c084fc,#818cf8,#38bdf8)}
+.voice-gradient-v003{background:radial-gradient(circle at 30% 30%,#fb923c,#f472b6,#c084fc)}
+.voice-gradient-v004{background:radial-gradient(circle at 30% 30%,#34d399,#2dd4bf,#22d3ee)}
+.voice-gradient-v005{background:radial-gradient(circle at 30% 30%,#a78bfa,#f472b6,#fb923c)}
+.voice-gradient-v006{background:radial-gradient(circle at 30% 30%,#f43f5e,#e879f9,#a78bfa)}
+.voice-gradient-v007{background:radial-gradient(circle at 30% 30%,#ec4899,#f97316,#fbbf24)}
+.voice-gradient-v008{background:radial-gradient(circle at 30% 30%,#8b5cf6,#6366f1,#3b82f6)}
+.voice-gradient-v009{background:radial-gradient(circle at 30% 30%,#14b8a6,#06b6d4,#818cf8)}
+.voice-gradient-v010{background:radial-gradient(circle at 30% 30%,#f59e0b,#ef4444,#ec4899)}
+.voice-gradient-v011{background:radial-gradient(circle at 30% 30%,#6366f1,#8b5cf6,#a855f7)}
+.voice-gradient-v012{background:radial-gradient(circle at 30% 30%,#0ea5e9,#6366f1,#a855f7)}
+.voice-gradient-v013{background:radial-gradient(circle at 30% 30%,#10b981,#14b8a6,#06b6d4)}
+.voice-gradient-v014{background:radial-gradient(circle at 30% 30%,#1e3a5f,#3b82f6,#60a5fa)}
+.voice-gradient-v015{background:radial-gradient(circle at 30% 30%,#f97316,#fb923c,#fbbf24)}
+.voice-gradient-v016{background:radial-gradient(circle at 30% 30%,#0d9488,#059669,#34d399)}
+.voice-gradient-v017{background:radial-gradient(circle at 30% 30%,#4f46e5,#7c3aed,#9333ea)}
+.voice-gradient-v018{background:radial-gradient(circle at 30% 30%,#0284c7,#0ea5e9,#38bdf8)}
+.voice-gradient-v019{background:radial-gradient(circle at 30% 30%,#dc2626,#ea580c,#f97316)}
+.voice-gradient-v020{background:radial-gradient(circle at 30% 30%,#16a34a,#65a30d,#facc15)}
+.voice-gradient-v021{background:radial-gradient(circle at 30% 30%,#e879f9,#c084fc,#93c5fd)}
+.voice-gradient-v022{background:radial-gradient(circle at 30% 30%,#f472b6,#fb7185,#fda4af)}
+.voice-gradient-v023{background:radial-gradient(circle at 30% 30%,#a3e635,#22c55e,#14b8a6)}
+.voice-gradient-v024{background:radial-gradient(circle at 30% 30%,#fbbf24,#f59e0b,#f97316)}
+.voice-gradient-v025{background:radial-gradient(circle at 30% 30%,#d946ef,#a855f7,#6366f1)}
+.voice-gradient-v026{background:radial-gradient(circle at 30% 30%,#ef4444,#f97316,#fbbf24)}
+.voice-gradient-v027{background:radial-gradient(circle at 30% 30%,#8b5cf6,#a78bfa,#c4b5fd)}
+.voice-gradient-v028{background:radial-gradient(circle at 30% 30%,#e11d48,#be185d,#9d174d)}
+.voice-gradient-v029{background:radial-gradient(circle at 30% 30%,#06b6d4,#0891b2,#0e7490)}
+.voice-gradient-v030{background:radial-gradient(circle at 30% 30%,#f59e0b,#d97706,#b45309)}
+.voice-gradient-v031{background:radial-gradient(circle at 30% 30%,#10b981,#059669,#047857)}
+.voice-gradient-v032{background:radial-gradient(circle at 30% 30%,#f472b6,#ec4899,#db2777)}
+.voice-gradient-v033{background:radial-gradient(circle at 30% 30%,#3b82f6,#2563eb,#1d4ed8)}
+.voice-gradient-v034{background:radial-gradient(circle at 30% 30%,#6366f1,#4f46e5,#4338ca)}
+.voice-gradient-v035{background:radial-gradient(circle at 30% 30%,#14b8a6,#0d9488,#0f766e)}
+.voice-gradient-v036{background:radial-gradient(circle at 30% 30%,#f97316,#ea580c,#c2410c)}
+.voice-gradient-v037{background:radial-gradient(circle at 30% 30%,#a855f7,#9333ea,#7e22ce)}
+.voice-gradient-v038{background:radial-gradient(circle at 30% 30%,#0ea5e9,#0284c7,#0369a1)}
+.voice-gradient-v039{background:radial-gradient(circle at 30% 30%,#84cc16,#65a30d,#4d7c0f)}
+.voice-gradient-v040{background:radial-gradient(circle at 30% 30%,#f43f5e,#e11d48,#be185d)}
+.voice-gradient-v041{background:radial-gradient(circle at 30% 30%,#7c3aed,#6d28d9,#5b21b6)}
+.voice-gradient-v042{background:radial-gradient(circle at 30% 30%,#22c55e,#16a34a,#15803d)}
+.voice-gradient-cloned{background:radial-gradient(circle at 30% 30%,var(--accent),#6366f1,#06b6d4)}
 .dp-voice-hscroll .dp-voice-card{min-width:280px;flex-shrink:0;scroll-snap-align:start}

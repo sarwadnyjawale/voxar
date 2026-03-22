@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
 const PLANS = {
-  free:       { tts_minutes: 3,    stt_minutes: 0,     clones: 0,  api_access: false, watermark: true,  monthly_reset: false },
-  access:     { tts_minutes: 10,   stt_minutes: 15,    clones: 1,  api_access: false, watermark: false, monthly_reset: true },
-  starter:    { tts_minutes: 120,  stt_minutes: 300,   clones: 3,  api_access: false, watermark: false, monthly_reset: true },
-  creator:    { tts_minutes: 500,  stt_minutes: 1200,  clones: 10, api_access: false, watermark: false, monthly_reset: true },
-  pro:        { tts_minutes: 2000, stt_minutes: 6000,  clones: 25, api_access: true,  watermark: false, monthly_reset: true },
+  free:       { tts_minutes: 10,   stt_minutes: 5,     clones: 0,  api_access: false, watermark: true,  monthly_reset: true },
+  access:     { tts_minutes: 30,   stt_minutes: 15,    clones: 1,  api_access: false, watermark: false, monthly_reset: true },
+  starter:    { tts_minutes: 120,  stt_minutes: 60,    clones: 3,  api_access: false, watermark: false, monthly_reset: true },
+  creator:    { tts_minutes: 300,  stt_minutes: 150,   clones: 5,  api_access: false, watermark: false, monthly_reset: true },
+  pro:        { tts_minutes: 1000, stt_minutes: 500,   clones: 15, api_access: true,  watermark: false, monthly_reset: true },
   enterprise: { tts_minutes: -1,   stt_minutes: -1,    clones: -1, api_access: true,  watermark: false, monthly_reset: true },
 }
 

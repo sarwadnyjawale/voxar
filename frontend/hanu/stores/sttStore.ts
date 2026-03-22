@@ -13,11 +13,12 @@ interface STTState {
 
   // Options
   diarizationEnabled: boolean
+  wordTimestampsEnabled: boolean
   language: string
 
   // Actions
   setFile: (file: File | null) => void
-  setOptions: (options: Partial<Pick<STTState, 'diarizationEnabled' | 'language'>>) => void
+  setOptions: (options: Partial<Pick<STTState, 'diarizationEnabled' | 'wordTimestampsEnabled' | 'language'>>) => void
   startTranscription: () => Promise<void>
   reset: () => void
 }
@@ -32,6 +33,7 @@ export const useSTTStore = create<STTState>((set, get) => ({
   error: null,
 
   diarizationEnabled: true,
+  wordTimestampsEnabled: true,
   language: 'auto',
 
   setFile: (file) => set({ file, result: null, error: null, progress: 0 }),
@@ -39,7 +41,7 @@ export const useSTTStore = create<STTState>((set, get) => ({
   setOptions: (options) => set((state) => ({ ...state, ...options })),
 
   startTranscription: async () => {
-    const { file, diarizationEnabled, language } = get()
+    const { file, diarizationEnabled, wordTimestampsEnabled, language } = get()
     if (!file) return
 
     set({ isUploading: true, error: null, progress: 10 })
@@ -49,7 +51,7 @@ export const useSTTStore = create<STTState>((set, get) => ({
       formData.append('file', file)
       formData.append('language', language)
       formData.append('diarize', String(diarizationEnabled))
-      formData.append('word_timestamps', 'true')
+      formData.append('word_timestamps', String(wordTimestampsEnabled))
 
       set({ progress: 30 })
 

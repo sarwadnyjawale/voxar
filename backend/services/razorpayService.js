@@ -9,15 +9,15 @@ const crypto = require('crypto')
 const RAZORPAY_PLANS = {
   access: {
     name: 'VOXAR Access',
-    monthly: { amount: 19900, display: '₹199/mo' },      // ₹199
-    yearly:  { amount: 15900, display: '₹159/mo' },       // ₹159/mo billed annually = ₹1,908/yr
-    yearly_total: 190800,                                   // ₹1,908
+    monthly: { amount: 24900, display: '₹249/mo' },      // ₹249
+    yearly:  { amount: 19900, display: '₹199/mo' },       // ₹199/mo billed annually = ₹2,388/yr
+    yearly_total: 238800,                                   // ₹2,388
   },
   starter: {
     name: 'VOXAR Starter',
-    monthly: { amount: 49900, display: '₹499/mo' },       // ₹499
-    yearly:  { amount: 39900, display: '₹399/mo' },       // ₹399/mo billed annually = ₹4,788/yr
-    yearly_total: 478800,
+    monthly: { amount: 59900, display: '₹599/mo' },       // ₹599
+    yearly:  { amount: 49900, display: '₹499/mo' },       // ₹499/mo billed annually = ₹5,988/yr
+    yearly_total: 598800,
   },
   creator: {
     name: 'VOXAR Creator',

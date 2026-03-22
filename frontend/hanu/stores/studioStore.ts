@@ -1,6 +1,52 @@
 import { create } from 'zustand'
 import { api } from '../lib/api'
 
+/* WAV encoder — converts AudioBuffer to a WAV Blob */
+function audioBufferToWav(buffer: AudioBuffer): Blob {
+  const numChannels = buffer.numberOfChannels
+  const sampleRate = buffer.sampleRate
+  const length = buffer.length
+  const bytesPerSample = 2 // 16-bit
+  const blockAlign = numChannels * bytesPerSample
+  const dataSize = length * blockAlign
+  const headerSize = 44
+  const arrayBuffer = new ArrayBuffer(headerSize + dataSize)
+  const view = new DataView(arrayBuffer)
+
+  function writeString(offset: number, str: string) {
+    for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i))
+  }
+
+  writeString(0, 'RIFF')
+  view.setUint32(4, 36 + dataSize, true)
+  writeString(8, 'WAVE')
+  writeString(12, 'fmt ')
+  view.setUint32(16, 16, true)
+  view.setUint16(20, 1, true) // PCM
+  view.setUint16(22, numChannels, true)
+  view.setUint32(24, sampleRate, true)
+  view.setUint32(28, sampleRate * blockAlign, true)
+  view.setUint16(32, blockAlign, true)
+  view.setUint16(34, 16, true) // bits per sample
+  writeString(36, 'data')
+  view.setUint32(40, dataSize, true)
+
+  // Interleave channels
+  const channels: Float32Array[] = []
+  for (let ch = 0; ch < numChannels; ch++) channels.push(buffer.getChannelData(ch))
+
+  let offset = 44
+  for (let i = 0; i < length; i++) {
+    for (let ch = 0; ch < numChannels; ch++) {
+      const sample = Math.max(-1, Math.min(1, channels[ch][i]))
+      view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true)
+      offset += 2
+    }
+  }
+
+  return new Blob([arrayBuffer], { type: 'audio/wav' })
+}
+
 export interface StudioBlock {
   id: string
   text: string
@@ -37,6 +83,10 @@ interface StudioState {
   currentPlayBlockIdx: number
   audioElement: HTMLAudioElement | null
 
+  // Merged audio
+  mergedAudioUrl: string | null
+  isMerging: boolean
+
   // Actions
   setProjectName: (name: string) => void
   setActiveBlock: (id: string | null) => void
@@ -56,6 +106,9 @@ interface StudioState {
   generateBlock: (id: string) => Promise<void>
   generateAll: () => Promise<void>
   stopGenerateAll: () => void
+
+  // Merge
+  mergeAllBlocks: () => Promise<void>
 
   // Playback
   playBlock: (id: string) => void
@@ -116,6 +169,9 @@ export const useStudioStore = create<StudioState>((set, get) => ({
   isPlaying: false,
   currentPlayBlockIdx: -1,
   audioElement: null,
+
+  mergedAudioUrl: null,
+  isMerging: false,
 
   setProjectName: (name) => set({ projectName: name }),
   setActiveBlock: (id) => set({ activeBlockId: id }),
@@ -242,7 +298,7 @@ export const useStudioStore = create<StudioState>((set, get) => ({
     if (pending.length === 0) return
 
     abortGenerateAll = false
-    set({ isGeneratingAll: true, generationProgress: { current: 0, total: pending.length } })
+    set({ isGeneratingAll: true, generationProgress: { current: 0, total: pending.length }, mergedAudioUrl: null })
 
     for (let i = 0; i < pending.length; i++) {
       if (abortGenerateAll) break
@@ -255,6 +311,65 @@ export const useStudioStore = create<StudioState>((set, get) => ({
 
   stopGenerateAll: () => {
     abortGenerateAll = true
+  },
+
+  mergeAllBlocks: async () => {
+    const { blocks, mergedAudioUrl: oldUrl } = get()
+    const withAudio = blocks.filter(b => b.audioUrl && b.status === 'done')
+    if (withAudio.length === 0) return
+
+    // Revoke old merged URL
+    if (oldUrl) URL.revokeObjectURL(oldUrl)
+
+    set({ isMerging: true, mergedAudioUrl: null })
+
+    try {
+      // Fetch and decode all audio buffers
+      const audioCtx = new AudioContext()
+      const buffers: AudioBuffer[] = []
+
+      for (const block of withAudio) {
+        const res = await fetch(block.audioUrl!)
+        const arrayBuf = await res.arrayBuffer()
+        const decoded = await audioCtx.decodeAudioData(arrayBuf)
+        buffers.push(decoded)
+      }
+
+      if (buffers.length === 0) {
+        set({ isMerging: false })
+        audioCtx.close()
+        return
+      }
+
+      // Calculate total length
+      const sampleRate = buffers[0].sampleRate
+      const numChannels = Math.max(...buffers.map(b => b.numberOfChannels))
+      const totalLength = buffers.reduce((sum, b) => sum + b.length, 0)
+
+      // Render merged audio
+      const offlineCtx = new OfflineAudioContext(numChannels, totalLength, sampleRate)
+      let offset = 0
+
+      for (const buf of buffers) {
+        const source = offlineCtx.createBufferSource()
+        source.buffer = buf
+        source.connect(offlineCtx.destination)
+        source.start(offset / sampleRate)
+        offset += buf.length
+      }
+
+      const rendered = await offlineCtx.startRendering()
+
+      // Encode as WAV
+      const wavBlob = audioBufferToWav(rendered)
+      const url = URL.createObjectURL(wavBlob)
+
+      set({ mergedAudioUrl: url, isMerging: false })
+      audioCtx.close()
+    } catch (err) {
+      console.error('Merge failed:', err)
+      set({ isMerging: false })
+    }
   },
 
   playBlock: (id) => {

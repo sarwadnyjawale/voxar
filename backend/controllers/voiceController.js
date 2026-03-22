@@ -3,17 +3,48 @@ const History = require('../models/History')
 const creditService = require('../services/creditService')
 const engineBridge = require('../services/engineBridge')
 const path = require('path')
+const fs = require('fs')
+
+/**
+ * Local catalog fallback — read voices_catalog.json directly.
+ * Used when the Python engine is offline.
+ */
+function getLocalCatalog() {
+  try {
+    const catalogPath = path.join(__dirname, '..', '..', 'voices', 'voices_catalog.json')
+    const raw = fs.readFileSync(catalogPath, 'utf-8')
+    const data = JSON.parse(raw)
+    const voices = (data.voices || []).map(v => {
+      // Sanitize: strip embedding_path, fix preview_urls to absolute paths
+      const { embedding_path, ...safe } = v
+      if (safe.preview_urls) {
+        safe.preview_urls = Object.fromEntries(
+          Object.entries(safe.preview_urls).map(([lang, p]) => [
+            lang,
+            `/previews/${String(p).split('/').pop()}`
+          ])
+        )
+      }
+      return safe
+    })
+    return { voices, source: 'local' }
+  } catch {
+    return { voices: [] }
+  }
+}
 
 /**
  * Get voice catalog (built-in voices from Python engine)
+ * Falls back to local catalog file if engine is offline.
  */
 async function getCatalog(req, res) {
   try {
     const catalog = await engineBridge.getVoiceCatalog()
     res.json(catalog)
   } catch (err) {
-    // Return empty catalog if engine is offline
-    res.json({ voices: [], message: 'Engine offline — showing cached catalog' })
+    // Engine offline — serve from local catalog file instead of returning empty
+    const fallback = getLocalCatalog()
+    res.json({ ...fallback, message: 'Engine offline — showing local catalog' })
   }
 }
 

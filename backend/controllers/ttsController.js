@@ -1,4 +1,5 @@
 const History = require('../models/History')
+const User = require('../models/User')
 const creditService = require('../services/creditService')
 const engineBridge = require('../services/engineBridge')
 
@@ -14,14 +15,20 @@ async function generate(req, res) {
       return res.status(400).json({ message: 'Text exceeds maximum length of 10,000 characters' })
     }
 
-    // Check billing cycle reset
-    await creditService.checkAndResetCycle(req.user)
-
-    // Atomic credit check + deduction (prevents race conditions)
     const charCount = text.trim().length
-    const creditResult = await creditService.atomicDeductTTS(req.user._id, req.user.plan, charCount)
-    if (!creditResult.success) {
-      return res.status(403).json({ message: creditResult.message, code: 'INSUFFICIENT_CREDITS' })
+    // FIX A3: Default to production mode (secure) unless explicitly set to development
+    const isDev = process.env.NODE_ENV === 'development'
+    let creditResult = { success: true, minutesUsed: 0 }
+
+    if (!isDev) {
+      // Check billing cycle reset
+      await creditService.checkAndResetCycle(req.user)
+
+      // Atomic credit check + deduction (prevents race conditions)
+      creditResult = await creditService.atomicDeductTTS(req.user._id, req.user.plan, charCount)
+      if (!creditResult.success) {
+        return res.status(403).json({ message: creditResult.message, code: 'INSUFFICIENT_CREDITS' })
+      }
     }
 
     // Call Python engine
@@ -36,8 +43,25 @@ async function generate(req, res) {
         enhance,
         normalize,
       })
+
+      // FIX 4 & 5: If the frontend connection dropped (timeout), refund the credit to prevent loss.
+      if (req.closed || req.destroyed || res.destroyed) {
+        if (!isDev && creditResult.minutesUsed > 0) {
+          await User.findByIdAndUpdate(req.user._id, {
+            $inc: { 'usage.tts_minutes_used': -creditResult.minutesUsed }
+          })
+        }
+        // Don't save to history if we refunded due to timeout
+        return
+      }
+
     } catch (err) {
-      // Record failed attempt in history (credits already deducted — refund not implemented yet)
+      // Refund credits on engine failure (only in production where credits were deducted)
+      if (!isDev && creditResult.minutesUsed > 0) {
+        await User.findByIdAndUpdate(req.user._id, {
+          $inc: { 'usage.tts_minutes_used': -creditResult.minutesUsed }
+        })
+      }
       const errorMsg = String(err.response?.data?.message || err.response?.data?.detail || err.message || 'Unknown engine error')
       await History.create({
         user: req.user._id,
@@ -81,6 +105,19 @@ async function generate(req, res) {
       format: format || 'wav',
     })
   } catch (err) {
+    // If an unexpected error happens AFTER credit deduction, refund it
+    if (typeof creditResult !== 'undefined' && creditResult.minutesUsed > 0) {
+      const isDev = process.env.NODE_ENV === 'development'
+      if (!isDev) {
+        try {
+          await User.findByIdAndUpdate(req.user._id, {
+            $inc: { 'usage.tts_minutes_used': -creditResult.minutesUsed }
+          })
+        } catch (refundErr) {
+          console.error('[Refund Error]', refundErr)
+        }
+      }
+    }
     res.status(500).json({ message: 'TTS generation failed', detail: err.message })
   }
 }

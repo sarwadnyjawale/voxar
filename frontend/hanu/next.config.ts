@@ -7,13 +7,22 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       // Engine-specific routes (matched first)
-      { source: '/api/v1/generate', destination: `${ENGINE_URL}/api/v1/generate` },
-      { source: '/api/v1/health', destination: `${ENGINE_URL}/api/v1/health` },
+      // Voice previews — try engine first, Node backend also serves as fallback
       { source: '/previews/:path*', destination: `${ENGINE_URL}/previews/:path*` },
       // All other /api/v1/* routes (including /jobs/*) → Node.js backend
       { source: '/api/v1/:path*', destination: `${BACKEND_URL}/api/v1/:path*` },
     ]
-  }
+  },
+  async headers() {
+    return [
+      {
+        source: '/previews/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=604800' },
+        ],
+      },
+    ]
+  },
 };
 
 export default nextConfig;

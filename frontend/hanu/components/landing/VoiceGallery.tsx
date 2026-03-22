@@ -4,18 +4,26 @@ import { useEffect, useRef } from 'react'
 
 /* ── Speaker Data — matches real voice catalog ── */
 const SPEAKERS = [
-  { name: 'Arjun',    c1: [0.0, 1.0, 0.5], c2: [0.5, 0.0, 1.0] },
-  { name: 'Priya',    c1: [0.5, 0.0, 1.0], c2: [1.0, 0.0, 0.5] },
-  { name: 'Vikram',   c1: [0.0, 0.2, 1.0], c2: [0.0, 1.0, 1.0] },
-  { name: 'Ananya',   c1: [1.0, 0.6, 0.5], c2: [1.0, 0.9, 0.8] },
-  { name: 'Maya',     c1: [0.0, 0.9, 1.0], c2: [1.0, 0.6, 0.0] },
-  { name: 'Meera',    c1: [1.0, 0.3, 0.0], c2: [1.0, 0.0, 0.5] },
-  { name: 'Rohan',    c1: [0.0, 1.0, 0.3], c2: [0.0, 0.4, 0.2] },
-  { name: 'Kavya',    c1: [1.0, 0.0, 0.4], c2: [0.2, 0.0, 1.0] },
-  { name: 'Sahil',    c1: [1.0, 0.9, 0.5], c2: [0.2, 0.5, 1.0] },
-  { name: 'Isha',     c1: [0.6, 0.0, 1.0], c2: [0.0, 1.0, 1.0] },
-  { name: 'Kabir',    c1: [0.1, 0.0, 0.4], c2: [0.0, 0.2, 1.0] },
-  { name: 'Diya',     c1: [1.0, 0.4, 0.4], c2: [1.0, 0.8, 0.2] },
+  // Hindi females (4)
+  { name: 'Priya',  id: 'v006', lang: 'Hindi',   c1: [0.5, 0.0, 1.0], c2: [1.0, 0.0, 0.5] },
+  { name: 'Kavya',  id: 'v007', lang: 'Hindi',   c1: [1.0, 0.0, 0.4], c2: [0.2, 0.0, 1.0] },
+  { name: 'Divya',  id: 'v008', lang: 'Hindi',   c1: [0.0, 0.2, 1.0], c2: [0.5, 0.0, 1.0] },
+  { name: 'Neha',   id: 'v009', lang: 'Hindi',   c1: [0.0, 1.0, 1.0], c2: [0.0, 0.4, 1.0] },
+  // Hindi males (4)
+  { name: 'Raj',    id: 'v015', lang: 'Hindi',   c1: [1.0, 0.6, 0.0], c2: [1.0, 0.0, 0.3] },
+  { name: 'Aakash', id: 'v016', lang: 'Hindi',   c1: [0.0, 1.0, 0.3], c2: [0.0, 0.4, 0.2] },
+  { name: 'Dev',    id: 'v017', lang: 'Hindi',   c1: [0.1, 0.0, 0.4], c2: [0.0, 0.2, 1.0] },
+  { name: 'Sahil',  id: 'v018', lang: 'Hindi',   c1: [1.0, 0.9, 0.5], c2: [0.2, 0.5, 1.0] },
+  // English females (5)
+  { name: 'Aisha',  id: 'v001', lang: 'English', c1: [1.0, 0.0, 0.5], c2: [0.5, 0.0, 1.0] },
+  { name: 'Zara',   id: 'v002', lang: 'English', c1: [0.6, 0.0, 1.0], c2: [0.0, 1.0, 1.0] },
+  { name: 'Sophia', id: 'v003', lang: 'English', c1: [1.0, 0.6, 0.5], c2: [1.0, 0.9, 0.8] },
+  { name: 'Maya',   id: 'v004', lang: 'English', c1: [0.0, 0.9, 1.0], c2: [1.0, 0.6, 0.0] },
+  { name: 'Isha',   id: 'v005', lang: 'English', c1: [0.6, 0.0, 1.0], c2: [0.0, 1.0, 1.0] },
+  // Marathi (3)
+  { name: 'Meera',  id: 'v010', lang: 'Marathi', c1: [1.0, 0.3, 0.0], c2: [1.0, 0.0, 0.5] },
+  { name: 'Omkar',  id: 'v019', lang: 'Marathi', c1: [0.0, 1.0, 0.5], c2: [0.5, 0.0, 1.0] },
+  { name: 'Tejas',  id: 'v020', lang: 'Marathi', c1: [1.0, 0.4, 0.4], c2: [1.0, 0.8, 0.2] },
 ]
 
 /* ── Config ── */
@@ -458,7 +466,7 @@ export default function VoiceGallery() {
         <div className="vg-fade l"></div>
         <div className="vg-fade r"></div>
         <div className="vg-ctrl">
-          <div className="vg-speaker" ref={nameRef}>Arjun</div>
+          <div className="vg-speaker" ref={nameRef}>Priya</div>
           <button className="vg-play" ref={playRef}>&#9654;</button>
           <div className="vg-dots" ref={dotsRef}></div>
         </div>

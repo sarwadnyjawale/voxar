@@ -18,6 +18,7 @@ const webhookRoutes = require('./routes/webhooks')
 const marketplaceRoutes = require('./routes/marketplace')
 const transcribeRoutes = require('./routes/transcribe')
 const jobRoutes = require('./routes/jobs')
+const demoRoutes = require('./routes/demo')
 
 const engineBridge = require('./services/engineBridge')
 const { authMiddleware } = require('./middleware/auth')
@@ -103,6 +104,15 @@ app.use(express.urlencoded({ extended: true }))
 // Serve uploaded files (voice samples, generated audio) — authenticated
 app.use('/uploads', authMiddleware, express.static(path.join(__dirname, 'uploads')))
 
+// Serve voice preview WAVs — public (no auth, no credits needed)
+// Fallback for when the Python engine is offline/cold
+app.use('/previews', express.static(path.join(__dirname, '..', 'voices', 'previews'), {
+  maxAge: '7d',
+  setHeaders: (res) => {
+    res.set('Access-Control-Allow-Origin', '*')
+  },
+}))
+
 // ============================================================
 // Routes (with rate limiting)
 // ============================================================
@@ -117,6 +127,7 @@ app.use('/api/v1/billing', generalLimiter, billingRoutes)
 app.use('/api/v1/webhooks', webhookRoutes)  // No rate limit on webhooks (Razorpay)
 app.use('/api/v1/marketplace', generalLimiter, marketplaceRoutes)
 app.use('/api/v1/jobs', generalLimiter, jobRoutes)
+app.use('/api/v1/generate', demoRoutes)
 
 // Health check
 app.get('/health', async (req, res) => {

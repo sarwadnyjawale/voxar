@@ -32,14 +32,14 @@ class Settings:
         self.API_KEYS = [k.strip() for k in keys_str.split(",") if k.strip()]
 
         # Rate limiting
-        self.RATE_LIMIT_PER_MINUTE = int(os.getenv("VOXAR_RATE_LIMIT", "10"))
-        self.RATE_LIMIT_BURST = int(os.getenv("VOXAR_RATE_LIMIT_BURST", "5"))
+        self.RATE_LIMIT_PER_MINUTE = int(os.getenv("VOXAR_RATE_LIMIT", "30"))
+        self.RATE_LIMIT_BURST = int(os.getenv("VOXAR_RATE_LIMIT_BURST", "15"))
 
         # Generation limits
         self.MAX_TEXT_LENGTH = int(os.getenv("VOXAR_MAX_TEXT_LENGTH", "5000"))
         self.MAX_SYNC_TEXT_LENGTH = int(os.getenv("VOXAR_MAX_SYNC_TEXT_LENGTH", "1000"))
-        self.MAX_QUEUE_SIZE = int(os.getenv("VOXAR_MAX_QUEUE_SIZE", "20"))
-        self.JOB_TIMEOUT_SECONDS = int(os.getenv("VOXAR_JOB_TIMEOUT", "120"))
+        self.MAX_QUEUE_SIZE = int(os.getenv("VOXAR_MAX_QUEUE_SIZE", "80"))
+        self.JOB_TIMEOUT_SECONDS = int(os.getenv("VOXAR_JOB_TIMEOUT", "240"))
         self.JOB_RESULT_TTL_SECONDS = int(os.getenv("VOXAR_JOB_TTL", "3600"))
 
         # User Voice Cloning

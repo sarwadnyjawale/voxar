@@ -10,14 +10,14 @@ interface SidebarProps {
   usageTotal?: string
 }
 
-export default function Sidebar({ usagePercent = 34, usageUsed = '34 min', usageTotal = '120 min' }: SidebarProps) {
+export default function Sidebar({ usagePercent = 0, usageUsed = '0 min', usageTotal = '—' }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const logout = useAuthStore(s => s.logout)
 
   const isActive = (path: string) => {
-    if (path === '/dashboard/studio' && (pathname === '/dashboard' || pathname === '/dashboard/studio')) return true
-    if (path !== '/dashboard' && path !== '/dashboard/studio' && pathname?.startsWith(path)) return true
+    if (path === '/dashboard/tts' && (pathname === '/dashboard' || pathname === '/dashboard/tts')) return true
+    if (path !== '/dashboard' && path !== '/dashboard/tts' && pathname?.startsWith(path)) return true
     return false
   }
 
