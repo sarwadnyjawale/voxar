@@ -63,6 +63,7 @@ export const useTTSStore = create<TTSState>((set, get) => ({
     try {
       const result = await api.backendPost<{
         id: string
+        job_id?: string
         audio_url: string
         duration: number
         characters: number
@@ -79,13 +80,32 @@ export const useTTSStore = create<TTSState>((set, get) => ({
         speed: state.speed,
       })
 
-      const mins = Math.floor(result.duration / 60)
-      const secs = Math.round(result.duration % 60)
+      const jobId = result.job_id || result.id
+      
+      let finalJob: any = null
+      while (true) {
+        const job = await api.backendGet<any>(`/api/v1/jobs/${jobId}`)
+        if (job.status === 'completed') {
+          finalJob = job
+          break
+        }
+        if (job.status === 'failed') {
+          throw new Error(job.error || 'Engine job failed')
+        }
+        await new Promise(r => setTimeout(r, 2000))
+      }
+
+      const dur = finalJob.duration || result.duration || 0
+      const mins = Math.floor(dur / 60)
+      const secs = Math.round(dur % 60)
+
+      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || ''
+      const audioUrl = `${baseUrl}/api/v1/jobs/${jobId}/audio`
 
       set({
         isGenerating: false,
         showPlayer: true,
-        audioUrl: result.audio_url,
+        audioUrl,
         duration: `${mins}:${secs.toString().padStart(2, '0')}`,
         minutesUsed: result.minutes_used,
       })
