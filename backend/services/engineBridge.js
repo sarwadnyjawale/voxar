@@ -32,7 +32,7 @@ function engineHeaders() {
  * Poll a job until it completes or fails.
  * Returns the completed job data.
  */
-async function pollJob(jobId, maxWaitMs = 240000, intervalMs = 2000) {
+async function pollJob(jobId, maxWaitMs = 240000, intervalMs = 4000) {
   const endpoint = `${PYTHON_ENGINE_URL}/api/v1/jobs/${jobId}`
   const start = Date.now()
 
