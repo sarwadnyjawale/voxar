@@ -39,7 +39,7 @@ async function pollJob(jobId, maxWaitMs = 240000, intervalMs = 4000) {
   while (Date.now() - start < maxWaitMs) {
     const res = await axios.get(endpoint, {
       headers: engineHeaders(),
-      timeout: 10000,
+      timeout: 60000,
     })
     const data = res.data
 
