@@ -4,6 +4,14 @@ const engineBridge = require('../services/engineBridge')
 
 const { authMiddleware, optionalAuth } = require('../middleware/auth')
 
+// DEBUG LOGGING MIDDLEWARE
+router.get('/:id', (req, res, next) => {
+  if (req.params.id !== 'audio') {
+    console.log('[DEBUG] JOB STATUS REQUEST:', req.params.id)
+  }
+  next()
+})
+
 /**
  * GET /api/v1/jobs/:id
  * Proxy job status from engine (adds API key server-side)
@@ -27,6 +35,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
  * Proxy job audio from engine (streams binary, adds API key server-side)
  */
 router.get('/:id/audio', optionalAuth, async (req, res) => {
+  console.log('[DEBUG] AUDIO REQUEST:', req.params.id)
   try {
     await engineBridge.streamJobAudio(req.params.id, res)
   } catch (err) {
