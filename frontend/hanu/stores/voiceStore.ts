@@ -134,22 +134,31 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
 
     // Fallback: generate via TTS (only if no static preview exists)
     const previewText = 'Welcome to VOXAR. This is a preview of this voice.'
-    api.backendPost<{ audio_url: string }>('/api/v1/tts/generate', {
+    api.backendPost<{ job_id: string }>('/api/v1/generate', {
       text: previewText,
-      voice: id,
-      engine: 'flash',
+      voice_id: id,
+      engine_mode: 'flash',
       language: 'en',
-      format: 'mp3',
-    }).then(result => {
-      if (result.audio_url) {
-        let audio = get()._previewAudio
-        if (!audio) {
-          audio = new Audio()
-          set({ _previewAudio: audio } as any)
-        }
-        audio.src = result.audio_url
-        audio.play().catch(() => {})
+      output_format: 'mp3',
+    }).then(async result => {
+      const jobId = result.job_id
+      if (!jobId) return
+
+      while (true) {
+        const job = await api.backendGet<any>(`/api/v1/jobs/${jobId}?t=${Date.now()}`)
+        if (job.status === 'completed') break
+        if (job.status === 'failed') throw new Error('Preview failed')
+        await new Promise(r => setTimeout(r, 2000))
       }
+
+      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || ''
+      let audio = get()._previewAudio
+      if (!audio) {
+        audio = new Audio()
+        set({ _previewAudio: audio } as any)
+      }
+      audio.src = `${baseUrl}/api/v1/jobs/${jobId}/audio`
+      audio.play().catch(() => {})
     }).catch(err => {
       console.warn('Voice preview failed:', err.message)
     })

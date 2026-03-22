@@ -37,7 +37,8 @@
       "Bash(where railway:*)",
       "Bash(nslookup:*)",
       "Bash(find 'D:/My Projects/VOXAR1' -name *.css)",
-      "Bash(find 'D:/My Projects/VOXAR1/engine' -name *.json)"
+      "Bash(find 'D:/My Projects/VOXAR1/engine' -name *.json)",
+      "Bash(ls:*)"
     ]
   }
 }

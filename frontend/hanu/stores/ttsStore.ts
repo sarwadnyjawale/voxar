@@ -84,7 +84,7 @@ export const useTTSStore = create<TTSState>((set, get) => ({
       
       let finalJob: any = null
       while (true) {
-        const job = await api.backendGet<any>(`/api/v1/jobs/${jobId}`)
+        const job = await api.backendGet<any>(`/api/v1/jobs/${jobId}?t=${Date.now()}`)
         if (job.status === 'completed') {
           finalJob = job
           break
