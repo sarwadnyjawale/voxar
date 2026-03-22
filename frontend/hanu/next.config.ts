@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
-const BACKEND_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001'
+// Hardcode the Railway URL here to guarantee Vercel's Edge Proxy NEVER hits localhost
+const BACKEND_URL = 'https://voxar-production-95a3.up.railway.app'
 const ENGINE_URL = process.env.ENGINE_URL || 'http://localhost:8000'
 
 const nextConfig: NextConfig = {

@@ -318,7 +318,7 @@ export default function LandingPage() {
       }
       const mappedVoiceId = voiceMap[demoVoice] || 'v011'
 
-      const API_BASE = 'https://voxar-production-95a3.up.railway.app'
+      const API_BASE = ''
       const res = await fetch(`${API_BASE}/api/v1/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -427,7 +427,7 @@ export default function LandingPage() {
     const voiceId = voiceMap[firstName] || 'v011'
 
     // Load static preview file from backend (bypassing Vercel proxy 404s)
-    const API_BASE = 'https://voxar-production-95a3.up.railway.app'
+    const API_BASE = ''
     const audioUrl = `${API_BASE}/previews/${voiceId}.wav`
 
     const audio = new Audio(audioUrl)

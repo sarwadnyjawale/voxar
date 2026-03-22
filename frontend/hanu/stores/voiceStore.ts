@@ -121,7 +121,7 @@ export const useVoiceStore = create<VoiceState>((set, get) => ({
 
     // Construct direct static URL to the backend's /previews folder
     // Bypassing Vercel proxy to prevent 404s and directly hit the Express static route
-    const baseUrl = 'https://voxar-production-95a3.up.railway.app'
+    const baseUrl = ''
     const previewUrl = `${baseUrl}/previews/${id}.wav`
 
     let audio = get()._previewAudio

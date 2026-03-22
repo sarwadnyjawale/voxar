@@ -1,8 +1,8 @@
 import type { ApiError } from './types'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
-// Hardcode the fallback so it NEVER hits the Vercel 502 proxy or Engine URL by mistake
-const BACKEND_BASE = 'https://voxar-production-95a3.up.railway.app'
+// Using relative URLs to force Same-Origin requests and bypass mobile CORS/ITP blocks
+const API_BASE = ''
+const BACKEND_BASE = ''
 
 function getAuthToken(): string | null {
   if (typeof window === 'undefined') return null
