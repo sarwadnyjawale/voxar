@@ -108,7 +108,7 @@ app.use('/uploads', authMiddleware, express.static(path.join(__dirname, 'uploads
 
 // Serve voice preview WAVs — public (no auth, no credits needed)
 // Uses existing audio samples to avoid dynamic generation for previews
-app.use('/previews', express.static(path.join(__dirname, '..', 'voices', 'previews'), {
+app.use('/previews', express.static(path.join(__dirname, 'previews'), {
   maxAge: '7d',
   setHeaders: (res) => {
     res.set('Access-Control-Allow-Origin', '*')

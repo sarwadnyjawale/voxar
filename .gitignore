@@ -9,6 +9,7 @@ output/
 logs/
 
 *.wav
+!backend/previews/*.wav
 *.mp3
 
 node_modules/

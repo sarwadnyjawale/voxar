@@ -40,7 +40,8 @@
       "Bash(find 'D:/My Projects/VOXAR1/engine' -name *.json)",
       "Bash(ls:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git add:*)"
     ]
   }
 }
